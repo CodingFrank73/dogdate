@@ -9,7 +9,8 @@ dotenv.config()
 const PORT = process.env.PORT || 9000;
 const app = express();
 
-app.use(cors({ origin: [process.env.FRONTEND_URL], credentials: true }))
+app.use(cors())
+// app.use(cors({ origin: [process.env.FRONTEND_URL], credentials: true }))
 
 // const oneDayInMs = 24 * 60 * 60 * 1000;
 // const isLocalHost = process.env.FRONTEND_URL === 'http://localhost:3000';
