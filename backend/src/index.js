@@ -4,6 +4,9 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const dotenv = require("dotenv");
 
+
+const { find } = require("./db-access/dao-test");
+
 dotenv.config()
 
 const PORT = process.env.PORT || 9000;
@@ -33,7 +36,12 @@ app.get("/", (req, res) => {
     res.send("server works...")
 })
 
+app.get("/justice-league-forever",
+    async (req, res) => {
+        const foundTest = await find();
+        res.json(foundTest)
+    })
+
 app.listen(PORT, () => { console.log("Server listen on Port:", PORT) })
 
 
-// mongodb+srv://dogdate:<password>@cluster0.onqno.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
