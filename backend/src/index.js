@@ -36,4 +36,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => { console.log("Server listen on Port:", PORT) })
 
 
-// mongodb+srv://dogdate:<password>@cluster0.onqno.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
