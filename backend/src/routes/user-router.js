@@ -4,6 +4,7 @@ const multer = require("multer");
 const { body } = require("express-validator");
 
 const { UserService } = require("../use-cases");
+const { UsersDAO } = require("../db-access");
 
 
 const userRouter = express.Router();
@@ -71,11 +72,17 @@ userRouter.post("/register",
     })
 
 userRouter.post("/refreshToken",
+
     async (req, res) => {
         try {
+            const result = await UserService.refreshUserToken({
+                refreshToken: req.session.refreshToken || req.body.refreshToken
+            })
+
+            res.status(200).json(result);
 
         } catch (error) {
-
+            res.status(500).json({ err: { message: error.message } })
         }
     })
 

@@ -21,8 +21,6 @@ async function findByEmail(email) {
     return user
 }
 
-
-
 async function insert(user) {
     const db = await getDB();
     const newUser = await db.collection(collectionName).insertOne(user);
