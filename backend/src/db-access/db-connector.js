@@ -10,6 +10,7 @@ const databaseName = process.env.DB_NAME;
 const url = `mongodb+srv://${user}:${pw}@cluster0.onqno.mongodb.net/${databaseName}?retryWrites=true&w=majority`
 
 const client = new MongoClient(url);
+
 let dbRef;
 
 const getDB = async () => {
