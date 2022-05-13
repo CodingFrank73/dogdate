@@ -1,4 +1,4 @@
-const { UsersDAO } = require("../../db-access");
+const { UserDAO } = require("../../db-access");
 const { makeUser } = require("../../domain/User");
 const hash = require("../../utils/security");
 
@@ -6,7 +6,7 @@ async function loginUser({ email, password }) {
 
     const invalidLoginMessage = "Login failed";
 
-    const result = await UsersDAO.findByEmail(email);
+    const result = await UserDAO.findByEmail(email);
 
     if (!result) {
         throw new Error(invalidLoginMessage);

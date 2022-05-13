@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { UsersDAO } = require("../../db-access");
+const { UserDAO } = require("../../db-access");
 const { makeUser } = require("../../domain/User");
 const { createToken } = require("../../utils/security");
 
@@ -12,7 +12,7 @@ async function refreshUserToken({ refreshToken }) {
 
         const userId = tokenPayload.sub;
 
-        const foundUser = await UsersDAO.findById(userId);
+        const foundUser = await UserDAO.findById(userId);
         if (!foundUser) { throw new Error("Not found") };
 
         const user = makeUser(foundUser);

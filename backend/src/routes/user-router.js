@@ -4,8 +4,6 @@ const multer = require("multer");
 const { body } = require("express-validator");
 
 const { UserService } = require("../use-cases");
-const { UsersDAO } = require("../db-access");
-
 
 const userRouter = express.Router();
 
