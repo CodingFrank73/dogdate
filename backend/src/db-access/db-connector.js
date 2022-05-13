@@ -9,8 +9,6 @@ const databaseName = process.env.DB_NAME;
 
 const url = `mongodb+srv://${user}:${pw}@cluster0.onqno.mongodb.net/${databaseName}?retryWrites=true&w=majority`
 
-// const url = `mongodb+srv://dogdate:DogDate2022@cluster0.onqno.mongodb.net/dogdateDB?retryWrites=true&w=majority`
-
 const client = new MongoClient(url);
 let dbRef;
 
