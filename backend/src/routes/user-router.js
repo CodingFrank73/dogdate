@@ -28,19 +28,30 @@ userRouter.get("/singe/:id",
     })
 
 userRouter.post("/login",
+
     async (req, res) => {
         try {
+            const result = await UserService.loginUser({
+                email: req.body.email,
+                password: req.body.password
+            })
+
+            if (result.refreshToken) {
+                req.session.refreshToken = result.refreshToken;
+            }
+
+            res.status(200).json(result);
 
         } catch (error) {
-
+            console.log(error)
+            res.status(500).json({ err: error.message || "Unknown error while login user." })
         }
     })
 
 userRouter.post("/register",
+
     async (req, res) => {
         try {
-            // const userInfo = req.body;
-
             const user = await UserService.registerUser({
                 email: req.body.email,
                 dogName: req.body.dogName,
