@@ -4,8 +4,7 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const dotenv = require("dotenv");
 
-
-const { find } = require("./db-access/dao-test");
+const { userRouter } = require("./routes/user-router");
 
 dotenv.config()
 
@@ -36,11 +35,8 @@ app.get("/", (req, res) => {
     res.send("server works...")
 })
 
-app.get("/justice-league-forever",
-    async (req, res) => {
-        const foundTest = await find();
-        res.json(foundTest)
-    })
+app.use("/api/users", userRouter)
+
 
 app.listen(PORT, () => { console.log("Server listen on Port:", PORT) })
 
