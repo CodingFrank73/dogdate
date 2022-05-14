@@ -4,10 +4,12 @@ const multer = require("multer");
 const { body } = require("express-validator");
 
 const { UserService } = require("../use-cases");
+const { doAuthMiddleware } = require("../auth/auth-middleware");
 
 const userRouter = express.Router();
 
 userRouter.get("/all",
+    doAuthMiddleware,
     async (req, res) => {
 
         try {
