@@ -4,9 +4,9 @@ const { UserDAO } = require("../../db-access")
 const listAllUsers = async () => {
     const users = await UserDAO.findAll();
     const listOfUsers = users.map(u => ({
-        // _id: u._id,
-        // firstName: u.firstName,
-        // lastName: u.lastName,
+        _id: u._id,
+        dogName: u.dogName,
+        gender: u.gender,
         // isAdmin: u.isAdmin,
         // userEmail: u.userEmail,
         // passwordHash: u.passwordHash,
