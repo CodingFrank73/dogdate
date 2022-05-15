@@ -25,7 +25,7 @@ userRouter.get("/all",
         }
     })
 
-userRouter.get("/singe/:id",
+userRouter.get("/single/:id",
     async (req, res) => {
         try {
 
@@ -34,19 +34,20 @@ userRouter.get("/singe/:id",
         }
     })
 
-userRouter.get("myProfile",
+userRouter.get("/myProfile",
     doAuthMiddleware,
     async (req, res) => {
 
         try {
             const userId = req.userClaims.sub;
+            console.log("USER-ID:", userId);
             const user = await UserService.showMyProfile({ userId })
 
             res.status(200).json(user);
 
         } catch (error) {
-            console.log(err)
-            res.status(500).json({ err: { message: err ? err.message : "Unknown error while loading your profile." } })
+            console.log(error)
+            res.status(500).json({ err: { message: error ? error.message : "Unknown error while loading your profile." } })
         }
     })
 

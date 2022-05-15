@@ -4,6 +4,7 @@ function doAuthMiddleware(req, res, next) {
     const _pleaseLoginFirst = () => res.status(401).json({ message: "Please login..." })
 
     const tokenField = req.headers.token;
+
     if (!tokenField) {
         return _pleaseLoginFirst()
     }
@@ -17,7 +18,7 @@ function doAuthMiddleware(req, res, next) {
     }
 
     const noTokenProvided = !token;
-    if (!noTokenProvided) {
+    if (noTokenProvided) {
         return _pleaseLoginFirst()
     }
 
@@ -29,7 +30,7 @@ function doAuthMiddleware(req, res, next) {
             return _pleaseLoginFirst();
         }
 
-        req.userclaims = tokenPayload;
+        req.userClaims = tokenPayload;
         next();
 
     } catch (error) {

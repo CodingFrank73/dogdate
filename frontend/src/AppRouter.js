@@ -17,6 +17,7 @@ function AppRoutes() {
 
     const loginSuccess = (token) => {
         setToken(token);
+        console.log(token.sub);
         navigate("/home")
     }
 
@@ -25,7 +26,7 @@ function AppRoutes() {
             <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile token={token} />} />
         </Routes>
     );
 }
