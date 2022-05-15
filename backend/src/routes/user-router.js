@@ -18,7 +18,6 @@ userRouter.get("/all",
         try {
             const users = await UserService.listAllUsers();
 
-
             res.status(200).json(users);
 
         } catch (error) {
@@ -75,10 +74,10 @@ userRouter.post("/login",
     })
 
 userRouter.post("/register",
-    // body("email").isEmail(),
-    // body("dogName").isString().isLength({ min: 2, max: 20 }),
-    // body("password").isStrongPassword(),
-    // doValidation,
+    body("email").isEmail(),
+    body("dogName").isString().isLength({ min: 2, max: 20 }),
+    body("password").isStrongPassword(),
+    doValidation,
     pictureUploadMiddleware,
     async (req, res) => {
 
