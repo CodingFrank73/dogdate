@@ -6,8 +6,10 @@ const { body } = require("express-validator");
 const { UserService } = require("../use-cases");
 const { doAuthMiddleware } = require("../auth/auth-middleware");
 const { doValidation } = require("../facade/doValidation");
+const { imageBufferToBase64 } = require("../utils/converter");
 
 const userRouter = express.Router();
+const pictureUploadMiddleware = multer().single("bigImage")
 
 userRouter.get("/all",
     doAuthMiddleware,
@@ -73,24 +75,26 @@ userRouter.post("/login",
     })
 
 userRouter.post("/register",
-    body("email").isEmail(),
-    body("dogName").isString().isLength({ min: 2, max: 20 }),
-    body("password").isStrongPassword(),
-    doValidation,
+    // body("email").isEmail(),
+    // body("dogName").isString().isLength({ min: 2, max: 20 }),
+    // body("password").isStrongPassword(),
+    // doValidation,
+    pictureUploadMiddleware,
     async (req, res) => {
 
         try {
+            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
             const user = await UserService.registerUser({
-                email: req.body.email,
                 dogName: req.body.dogName,
                 password: req.body.password,
+                email: req.body.email,
                 gender: req.body.gender,
                 size: req.body.size,
-                bigImage: req.body.bigImage,
-                dateOfBirth: req.body.dateOfBirth
+                dateOfBirth: req.body.dateOfBirth,
+                bigImage: bigPicBas64
             })
 
-            res.status(200).json(user)
+            res.status(201).json(user)
 
         } catch (error) {
             console.log(error)

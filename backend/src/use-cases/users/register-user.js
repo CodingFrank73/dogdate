@@ -5,7 +5,7 @@ const Sercurity = require("../../utils/security");
 
 async function registerUser({ email, password, dogName, gender, dateOfBirth, size, bigImage }) {
 
-    const foundUser = await UserDAO.findByEmail()
+    const foundUser = await UserDAO.findByEmail(email)
 
     if (foundUser) {
         throw new Error("Account with this Email already exists")
@@ -26,6 +26,10 @@ async function registerUser({ email, password, dogName, gender, dateOfBirth, siz
     if (!isRegSuccessfully) {
         throw new Error("Registration failed")
     }
+
+    const registeredUser = await UserDAO.findById(insertResult.insertedId);
+    return registeredUser
+
 }
 
 module.exports = {
