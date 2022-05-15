@@ -56,6 +56,7 @@ userRouter.post("/login",
     doValidation,
     async (req, res) => {
 
+        console.log(req.headers);
         try {
             const result = await UserService.loginUser({
                 email: req.body.email,
