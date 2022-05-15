@@ -12,10 +12,12 @@ const Login = (props) => {
         // prüfung ob login-felder leer sind
 
         try {
+            let headers = new headers();
+
             const response = await fetch(apiBaseUrl + '/api/users/login', {
                 method: "POST",
                 mode: "cors",
-                headers: { "Content-Type": "application/json" },
+                // headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({ email, password })
             })
