@@ -17,7 +17,6 @@ function AppRoutes() {
 
     const loginSuccess = (token) => {
         setToken(token);
-        console.log(token.sub);
         navigate("/home")
     }
 

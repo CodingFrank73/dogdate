@@ -26,7 +26,7 @@ const Signup = () => {
         try {
             const response = await fetch(apiBaseUrl + '/api/users/register', {
                 method: "POST",
-                body: formData
+                body: formData,
             })
 
             const result = await response.json()

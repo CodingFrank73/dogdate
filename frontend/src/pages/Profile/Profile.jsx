@@ -15,10 +15,6 @@ import pic from '../../assets/img/shittingDogColor.png'
 
 import apiBaseUrl from "../../api"
 
-function valuetext(value: number) {
-    return `${value}°C`;
-}
-
 const Profile = (props) => {
 
     const [age, setAge] = useState([2, 4.5]);

@@ -75,11 +75,11 @@ userRouter.post("/login",
     })
 
 userRouter.post("/register",
-    body("email").isEmail(),
+    pictureUploadMiddleware,
     body("dogName").isString().isLength({ min: 2, max: 20 }),
+    body("email").isEmail(),
     body("password").isStrongPassword(),
     doValidation,
-    pictureUploadMiddleware,
     async (req, res) => {
 
         try {

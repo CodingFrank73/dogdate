@@ -19,12 +19,13 @@ function doValidation(req, res, next) {
     // if (errors.isEmpty()) {
     //     next()
     // } else {
-    //     res.status(400).json({
-    //         err: {
-    //             message: "There was an error with your request.",
-    //             validationErrors: errors.array()
-    //         }
-    //     })
+    //     console.log("hallo"),
+    //         res.status(400).json({
+    //             err: {
+    //                 message: "There was an error with your request.",
+    //                 validationErrors: errors.array()
+    //             }
+    //         })
     // }
 
 }
