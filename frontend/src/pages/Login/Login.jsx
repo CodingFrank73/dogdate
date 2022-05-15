@@ -14,7 +14,7 @@ const Login = (props) => {
         try {
             const response = await fetch(apiBaseUrl + '/api/users/login', {
                 method: "POST",
-                headers: { "content-type": "application/json" },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({ email, password })
             })
