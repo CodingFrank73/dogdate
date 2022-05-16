@@ -143,6 +143,51 @@ userRouter.post("/refreshToken",
         }
     })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ++++++++++++++++++++ Frank ++++++++++++++++++++++++++
+
+userRouter.post("/like",
+    async (req, res) => {
+
+        try {
+            const response = await UserService.likeOne(
+                {
+                    myId: req.body.myId,
+                    likedId: req.body.likedId
+                })
+
+            res.status(201).json(response)
+
+        } catch (error) {
+
+        }
+    })
+
 module.exports = {
     userRouter
 }
