@@ -2,6 +2,8 @@
 import { useState } from "react";
 import apiBaseUrl from "../../api"
 
+import backarrow from '../../assets/icons/arrow-back.svg';
+
 const Signup = () => {
     const [dogName, setDogName] = useState('');
     const [gender, setGender] = useState('');
@@ -11,6 +13,7 @@ const Signup = () => {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [bigImage, setBigImage] = useState();
     const [error, setError] = useState('');
+
 
     const doSignUp = async (e) => {
         e.preventDefault();
@@ -50,8 +53,12 @@ const Signup = () => {
     }
 
     return (
-        <div>
-            <form style={{ display: "flex", flexDirection: "column", width: "400px" }}>
+        <div className="signup">
+            <div className="signup-header">
+                <img className="signup-arrow-back" src={backarrow} alt="back" />
+                <h3>Sign Up</h3>
+            </div>
+            <form className="signup-box">
                 <input type="text" value={dogName} placeholder="Dog Name" onChange={(e) => setDogName(e.target.value)}></input>
                 <input type="text" value={gender} placeholder="Gender" onChange={(e) => setGender(e.target.value)}></input>
                 <input type="date" value={dateOfBirth} placeholder="DD/MM/YYYY" onChange={(e) => setDateOfBirth(e.target.value)}></input>
@@ -59,7 +66,7 @@ const Signup = () => {
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <input type="password" value={passwordConfirm} placeholder="Repeat Password" onChange={(e) => setPasswordConfirm(e.target.value)}></input>
                 <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
-                <button onClick={doSignUp} type="submit">SignUp</button>
+                <button onClick={doSignUp} type="submit">SIGN UP</button>
             </form>
         </div>
     );
