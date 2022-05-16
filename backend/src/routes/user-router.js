@@ -55,10 +55,11 @@ userRouter.get("/myProfile",
 userRouter.post("/myProfile/editAvatar",
     avatarUploadMiddleware,
     async (req, res) => {
+        console.log("Hier ist ein Test:", req.file);
 
         try {
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            console.log(bigPicBase64);
+
             // const user = await UserService.registerUser({
             //     dogName: req.body.dogName,
             //     password: req.body.password,

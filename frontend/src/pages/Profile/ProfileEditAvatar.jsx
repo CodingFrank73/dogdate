@@ -1,40 +1,42 @@
 import { useState } from "react";
+import apiBaseUrl from "../../api"
 const ProfileEditAvatar = (props) => {
 
     const [profileImage, setProfileImage] = useState('');
+    const [error, setError] = useState('');
 
     const doUpload = async (e) => {
 
         e.preventDefault();
 
-        // const formData = new FormData()
+        const formData = new FormData()
 
-        // formData.set("profileImage", profileImage, profileImage.name)
+        formData.set("profileImage", profileImage, profileImage.name)
 
-        // try {
-        //     const response = await fetch(apiBaseUrl + '/api/users/register', {
-        //         method: "POST",
-        //         body: formData,
-        //     })
+        try {
+            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editAvatar', {
+                method: "POST",
+                body: formData,
+            })
 
-        //     const result = await response.json()
+            const result = await response.json()
 
-        //     if (!result.err) {
-        //         console.log("Hat geklappt..........");
-        //         return
-        //     }
+            if (!result.err) {
+                console.log("Hat geklappt..........");
+                return
+            }
 
-        //     if (result.err.validationErrors) {
-        //         const firstError = result.err.validationErrors[0];
-        //         setError(firstError.msg + ":" + firstError.param);
-        //         return
-        //     }
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0];
+                setError(firstError.msg + ":" + firstError.param);
+                return
+            }
 
-        //     setError(result.err.message);
+            setError(result.err.message);
 
-        // } catch (error) {
-        //     console.log("error..............");
-        // }
+        } catch (error) {
+            console.log("error..............");
+        }
 
     }
 
