@@ -1,6 +1,10 @@
 import { useState } from "react";
 import apiBaseUrl from "../../api"
+import { useNavigate } from "react-router-dom";
+
 const ProfileEditAvatar = (props) => {
+
+    const navigate = {useNavigate}
 
     const [profileImage, setProfileImage] = useState('');
     const [error, setError] = useState('');
@@ -8,21 +12,26 @@ const ProfileEditAvatar = (props) => {
     const doUpload = async (e) => {
 
         e.preventDefault();
+        console.log(props)
 
         const formData = new FormData()
-
         formData.set("profileImage", profileImage, profileImage.name)
 
         try {
             const response = await fetch(apiBaseUrl + '/api/users/myProfile/editAvatar', {
                 method: "POST",
-                body: formData,
+                 headers: {
+                    token: "JWT " + props.token
+                },
+                body: formData
             })
 
             const result = await response.json()
 
             if (!result.err) {
                 console.log("Hat geklappt..........");
+              //  navigate("/profile")
+
                 return
             }
 
