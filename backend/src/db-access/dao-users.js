@@ -52,6 +52,43 @@ async function updateAvatar({userId, profileImage}) {
      return updatedUser
 }
 
+async function findMatches({ myId, likedId }) {
+    console.log("Suche Match...");
+    const db = await getDB();
+    const foundLike = await db.collection("likeStatus").findOne(
+        {
+            idSecondary: myId,
+            idPrimary: likedId
+        }
+    );
+
+    return foundLike
+}
+
+async function insertLike({ myId, likedId }) {
+    console.log("Insert like......");
+    const db = await getDB();
+    const like = await db.collection("likeStatus").insertOne(
+        {
+            idSecondary: myId,
+            idPrimary: likedId,
+            match: false,
+            notification: false
+        });
+    return like
+}
+
+async function updateLikeToMatch(likeId) {
+    console.log("Update like mit der ID: " + likeId + " to match.......");
+    const db = await getDB();
+    const like = await db.collection("likeStatus").updateOne(
+        { _id: likeId },
+        { $set: { match: true } }
+    );
+
+    return like
+}
+
 
 module.exports = {
     findAll,
@@ -59,5 +96,8 @@ module.exports = {
     findByEmail,
     insert,
     update,
-    updateAvatar
+    updateAvatar,
+    findMatches,
+    insertLike,
+    updateLikeToMatch
 }

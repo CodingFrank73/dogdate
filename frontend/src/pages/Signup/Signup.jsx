@@ -24,7 +24,7 @@ const Signup = () => {
         formData.set("bigImage", bigImage, bigImage.name)
 
         try {
-            const response = await fetch(apiBaseUrl + '/api/users/register', {
+            const response = await fetch(apiBaseUrl + '/api/users/', {
                 method: "POST",
                 body: formData,
             })
