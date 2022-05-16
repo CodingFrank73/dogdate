@@ -1,4 +1,11 @@
 const Navbar = () => {
+
+
+
+
+
+
+
     return (
         <div>Hallo Dog</div>
     );

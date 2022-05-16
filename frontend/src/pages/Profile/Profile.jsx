@@ -33,7 +33,20 @@ const Profile = (props) => {
     const [profileImage, setProfileImage] = useState('');
 
 
-    // const profileInfo = useProfileInfo(props.token)
+    const languages = [
+
+        { value: "English" },
+        { value: "French" },
+        { value: "Spanish" },
+        { value: "Chinese" },
+        { value: "Arabic" },
+        { value: "Portuguese" },
+        { value: "Japanese" },
+        { value: "German" },
+    ]
+
+
+
 
     console.log(props);
 
@@ -66,8 +79,6 @@ const Profile = (props) => {
             setPlan(result.plan)
             setAge([result.ageRangeMin, result.ageRangeMax])
 
-            console.log(result);
-            // setCustomer(result)
         } catch (error) {
 
         }
@@ -81,6 +92,10 @@ const Profile = (props) => {
     const handleChangeDistance = (event, newValueDistance) => {
         setMaxDistance(newValueDistance);
     };
+
+    const changeLanguage = (e) => {
+        setLanguage(e.target.value)
+    }
 
     return (
         <div>
@@ -109,10 +124,18 @@ const Profile = (props) => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={language}
-                label="Age"
-            // onChange={handleChange}
+                label="PreferredLanguage"
+                onChange={changeLanguage}
             >
+                <MenuItem value="German">German</MenuItem>
+                <MenuItem value="English">English</MenuItem>
+                <MenuItem value="French">French</MenuItem>
+                <MenuItem value="Arabic">Arabic</MenuItem>
+                <MenuItem value="Spanish">Spanish</MenuItem>
+                <MenuItem value="Chinese">Chinese</MenuItem>
+                <MenuItem value="Polish">Polish</MenuItem>
             </Select>
+
 
             <p>Show Me <span>{filterGender}</span></p>
             <p>Size <span>{filterSize}</span></p>
@@ -147,9 +170,6 @@ const Profile = (props) => {
             <button>
                 Delete Account
             </button>
-
-
-
 
 
         </div >
