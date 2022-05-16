@@ -28,12 +28,28 @@ async function insert(user) {
 }
 
 async function update(userId, updateInfo) {
+   
+   console.log("userId aus DAO", userId)
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: userId },
+        { $set: {profileImage: updateInfo} } 
+    )
+   
+     return updatedUser
+}
+
+async function updateAvatar({userId, profileImage}) {
+   console.log("profile image aus DAO", profileImage)
+   console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
-        { $set: updateInfo }
+        { $set: {profileImage: profileImage} } 
     )
-    return updatedUser
+    console.log("TEST DAO")
+    console.log("IDtest", userId)
+     return updatedUser
 }
 
 async function findMatches({ myId, likedId }) {
@@ -80,6 +96,7 @@ module.exports = {
     findByEmail,
     insert,
     update,
+    updateAvatar,
     findMatches,
     insertLike,
     updateLikeToMatch
