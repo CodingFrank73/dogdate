@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import { image } from 'react';
 import apiBaseUrl from '../../api';
+
+
+import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
     const [email, setEmail] = useState('balto@gmx.de');
@@ -44,10 +48,14 @@ const Login = (props) => {
 
 
     return (
-        <div>
-            <form style={{ display: "flex", flexDirection: "column", width: "400px", margin: "50px auto" }}>
+        <div className="signup">
+            <div className="signup-header">
+                <img className="signup-arrow-back" src={backarrow} alt="back" />
+                <h3>Login</h3>
+            </div>
+            <form className='signup-box'>
                 <input type="text" name="email" id='' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="text" name="password" id="" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" name="password" id="" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>
