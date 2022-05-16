@@ -101,7 +101,9 @@ const Profile = (props) => {
         <div>
             <div>arrow Back</div>
             <h1>Profile</h1>
-            <button>Stift</button>
+
+            <Link to="/profileEditAvatar" >Stift</Link>
+
             <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
             <h2>Account Settings</h2>
             <button>Edit</button>

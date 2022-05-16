@@ -10,6 +10,7 @@ const { imageBufferToBase64 } = require("../utils/converter");
 
 const userRouter = express.Router();
 const pictureUploadMiddleware = multer().single("bigImage")
+const avatarUploadMiddleware = multer().single("profileImage")
 
 userRouter.get("/all",
     doAuthMiddleware,
@@ -48,6 +49,29 @@ userRouter.get("/myProfile",
         } catch (error) {
             console.log(error)
             res.status(500).json({ err: { message: error ? error.message : "Unknown error while loading your profile." } })
+        }
+    })
+
+userRouter.post("/myProfile/editAvatar",
+    avatarUploadMiddleware,
+    async (req, res) => {
+
+        try {
+            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            console.log(bigPicBase64);
+            // const user = await UserService.registerUser({
+            //     dogName: req.body.dogName,
+            //     password: req.body.password,
+            //     email: req.body.email,
+            //     gender: req.body.gender,
+            //     size: req.body.size,
+            //     dateOfBirth: req.body.dateOfBirth,
+            //     bigImage: bigPicBas64
+            // })
+
+            // res.status(201).json(user)
+        } catch (error) {
+
         }
     })
 
