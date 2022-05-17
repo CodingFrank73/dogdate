@@ -1,0 +1,33 @@
+@font-face{
+    font-family: "Poppins";
+    src: url(../fonts/Poppins/Poppins-Regular.ttf);
+}
+@font-face{
+    font-family: "PoppinsBold";
+    src: url(../fonts/Poppins/Poppins-Bold.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    background: #DEDEDE;
+    color: #303030;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 100%;
+}
+
+h3{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 33px;
+    color: #303030;
+}
