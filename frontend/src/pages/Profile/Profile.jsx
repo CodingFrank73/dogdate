@@ -102,7 +102,7 @@ const Profile = (props) => {
             <div>arrow Back</div>
             <h1>Profile</h1>
 
-            <Link to="/profileEditAvatar" >Stift</Link>
+            <Link to="/profile/profileEditAvatar" >Stift</Link>
 
             <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
             <h2>Account Settings</h2>
@@ -123,6 +123,7 @@ const Profile = (props) => {
 
             <InputLabel id="labelLanguage"> Preferred Language</InputLabel>
             <Select
+                variant='standard'
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={language}

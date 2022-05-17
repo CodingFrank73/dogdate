@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
 
 //pages and componentes
+import AuthRequired from './components/AuthRequired/AuthRequired';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
@@ -25,9 +26,25 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/profile" element={<Profile token={token} />} />
-            <Route path="/profileEditAvatar" element={<ProfileEditAvatar token={token} />} />
+
+            <Route path="/home" element={
+                <AuthRequired token={token} setToken={setToken}>
+                    <Home token={token} />
+                </AuthRequired>}
+            />
+
+            <Route path="/profile" element={
+                <AuthRequired token={token} setToken={setToken}>
+                    <Profile token={token} />
+                </AuthRequired>}
+            />
+
+            <Route path="/profile/profileEditAvatar" element={
+                <AuthRequired token={token} setToken={setToken}>
+                    <ProfileEditAvatar token={token} />
+                </AuthRequired>}
+            />
+
         </Routes>
     );
 }
