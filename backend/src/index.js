@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const dotenv = require("dotenv");
 
 const { userRouter } = require("./routes/user-router");
+// const { proposalRouter } = require("./routes/proposal-router");
 
 dotenv.config()
 
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/users", userRouter)
+// app.use("/api/proposals", proposalRouter)
 
 
 app.listen(PORT, () => { console.log("Server listen on Port:", PORT) })

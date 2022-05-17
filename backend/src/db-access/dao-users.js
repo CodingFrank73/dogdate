@@ -28,23 +28,24 @@ async function insert(user) {
 }
 
 async function update(userId, updateInfo) {
-   
-   console.log("userId aus DAO", userId)
+
+    console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: userId },
-        { $set: {profileImage: updateInfo} } 
+        { $set: { profileImage: updateInfo } }
     )
-   
-     return updatedUser
+
+    return updatedUser
 }
+
 
 async function updateAvatar({userId, profileImage}) {  
    console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
-        { $set: {profileImage: profileImage} } 
+        { $set: { profileImage: profileImage } }
     )
      console.log("IDtest", userId)
      console.log("updated user aus DAO", updatedUser)
@@ -56,8 +57,10 @@ async function findMatches({ myId, likedId }) {
     const db = await getDB();
     const foundLike = await db.collection("likeStatus").findOne(
         {
-            idSecondary: myId,
-            idPrimary: likedId
+            // myId: myId,
+            // idILiked: likedId
+            idILiked: myId,
+            myId: likedId
         }
     );
 
@@ -69,8 +72,8 @@ async function insertLike({ myId, likedId }) {
     const db = await getDB();
     const like = await db.collection("likeStatus").insertOne(
         {
-            idSecondary: myId,
-            idPrimary: likedId,
+            myId: myId,
+            idILiked: likedId,
             match: false,
             notification: false
         });

@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 const ProfileEditAvatar = (props) => {
 
     const navigate = useNavigate()
-
+    
     const [profileImage, setProfileImage] = useState('');
     const [error, setError] = useState('Error uploading avatar');
 
     const doUpload = async (e) => {
 
         e.preventDefault();
-        console.log(props)
 
         const formData = new FormData()
         formData.set("profileImage", profileImage, profileImage.name)
@@ -20,7 +19,7 @@ const ProfileEditAvatar = (props) => {
         try {
             const response = await fetch(apiBaseUrl + '/api/users/myProfile/editAvatar', {
                 method: "POST",
-                 headers: {
+                headers: {
                     token: "JWT " + props.token
                 },
                 body: formData
@@ -33,8 +32,13 @@ const ProfileEditAvatar = (props) => {
                 return
             }
 
-                       
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0];
+                setError(firstError.msg + ":" + firstError.param);
+                return
+            }
 
+                   
         } catch (error) {
             console.log("error..............");
         }

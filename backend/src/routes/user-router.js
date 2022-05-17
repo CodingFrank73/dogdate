@@ -61,15 +61,15 @@ userRouter.post("/myProfile/editAvatar",
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-             console.log("userId aus route", userId) //klappt
-             
+            console.log("userId aus route", userId) //klappt
+
             const user = await UserService.editAvatar({
-            userId: userId, 
-            profileImage: bigPicBas64
+                userId: userId,
+                profileImage: bigPicBas64
             })
-           
-            res.status(201).json(user)           
-            
+
+            res.status(201).json(user)
+
         } catch (error) {
             console.log(error)
             res.status(500).json({ err: error.message || "Error Updating Avatar." })
@@ -100,7 +100,7 @@ userRouter.post("/login",
         }
     })
 
-    ///####////
+///####////
 
 userRouter.post("/register",
     pictureUploadMiddleware,
@@ -179,6 +179,7 @@ userRouter.post("/like",
         try {
             const response = await UserService.likeOne(
                 {
+                    // myId: req.userClaims.sub,
                     myId: req.body.myId,
                     likedId: req.body.likedId
                 })
@@ -194,4 +195,3 @@ module.exports = {
     userRouter
 }
 
-    // userRouter.was auch immer für einen like/match funktion
