@@ -28,12 +28,67 @@ async function insert(user) {
 }
 
 async function update(userId, updateInfo) {
+
+    console.log("userId aus DAO", userId)
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: userId },
+        { $set: { profileImage: updateInfo } }
+    )
+
+    return updatedUser
+}
+
+
+async function updateAvatar({userId, profileImage}) {  
+   console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
-        { $set: updateInfo }
+        { $set: { profileImage: profileImage } }
     )
-    return updatedUser
+     console.log("IDtest", userId)
+     console.log("updated user aus DAO", updatedUser)
+     return updatedUser
+}
+
+async function findMatches({ myId, likedId }) {
+    console.log("Suche Match...");
+    const db = await getDB();
+    const foundLike = await db.collection("likeStatus").findOne(
+        {
+            // myId: myId,
+            // idILiked: likedId
+            idILiked: myId,
+            myId: likedId
+        }
+    );
+
+    return foundLike
+}
+
+async function insertLike({ myId, likedId }) {
+    console.log("Insert like......");
+    const db = await getDB();
+    const like = await db.collection("likeStatus").insertOne(
+        {
+            myId: myId,
+            idILiked: likedId,
+            match: false,
+            notification: false
+        });
+    return like
+}
+
+async function updateLikeToMatch(likeId) {
+    console.log("Update like mit der ID: " + likeId + " to match.......");
+    const db = await getDB();
+    const like = await db.collection("likeStatus").updateOne(
+        { _id: likeId },
+        { $set: { match: true } }
+    );
+
+    return like
 }
 
 
@@ -42,5 +97,9 @@ module.exports = {
     findById,
     findByEmail,
     insert,
-    update
+    update,
+    updateAvatar,
+    findMatches,
+    insertLike,
+    updateLikeToMatch
 }

@@ -54,28 +54,28 @@ userRouter.get("/myProfile",
 
 userRouter.post("/myProfile/editAvatar",
     avatarUploadMiddleware,
+    doAuthMiddleware,
     async (req, res) => {
         console.log("Hier ist ein Test:", req.file);
 
         try {
+            const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            console.log("userId aus route", userId) //klappt
 
-            // const user = await UserService.registerUser({
-            //     dogName: req.body.dogName,
-            //     password: req.body.password,
-            //     email: req.body.email,
-            //     gender: req.body.gender,
-            //     size: req.body.size,
-            //     dateOfBirth: req.body.dateOfBirth,
-            //     bigImage: bigPicBas64
-            // })
+            const user = await UserService.editAvatar({
+                userId: userId,
+                profileImage: bigPicBas64
+            })
 
-            // res.status(201).json(user)
+            res.status(201).json(user)
+
         } catch (error) {
-
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Updating Avatar." })
         }
     })
-
+///#####////
 userRouter.post("/login",
     body("email").isEmail(),
     doValidation,
@@ -99,6 +99,8 @@ userRouter.post("/login",
             res.status(500).json({ err: error.message || "Unknown error while login user." })
         }
     })
+
+///####////
 
 userRouter.post("/register",
     pictureUploadMiddleware,
@@ -143,8 +145,53 @@ userRouter.post("/refreshToken",
         }
     })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ++++++++++++++++++++ Frank ++++++++++++++++++++++++++
+
+userRouter.post("/like",
+    async (req, res) => {
+
+        try {
+            const response = await UserService.likeOne(
+                {
+                    // myId: req.userClaims.sub,
+                    myId: req.body.myId,
+                    likedId: req.body.likedId
+                })
+
+            res.status(201).json(response)
+
+        } catch (error) {
+
+        }
+    })
+
 module.exports = {
     userRouter
 }
 
-    // userRouter.was auch immer für einen like/match funktion
