@@ -130,7 +130,7 @@ userRouter.post("/register",
         }
     })
 
-userRouter.post("/refreshToken",
+userRouter.post("/refreshtoken",
     async (req, res) => {
 
         try {

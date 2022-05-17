@@ -15,7 +15,7 @@ import iconLike from '../../assets/icons/like.svg';
 import iconChat from '../../assets/icons/chat.svg';
 import iconProfilaktiv from '../../assets/icons/profil-aktiv.svg';
 
-import AccountSetting from "../../components/AccountSetting/AccountSetting";
+
 
 import pic from '../../assets/img/shittingDogColor.png'
 
@@ -33,14 +33,12 @@ const Profile = (props) => {
     const [email, setEmail] = useState('');
     const [plan, setPlan] = useState('');
     const [location, setLocation] = useState('');
-    const [language, setLanguage] = useState('');
+    const [language, setLanguage] = useState('English');
     const [filterGender, setFilterGender] = useState('');
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
 
-
     const languages = [
-
         { value: "English" },
         { value: "French" },
         { value: "Spanish" },
@@ -50,12 +48,6 @@ const Profile = (props) => {
         { value: "Japanese" },
         { value: "German" },
     ]
-
-
-
-
-    console.log(props);
-
 
     useEffect(() => {
         fetchData()
@@ -110,10 +102,11 @@ const Profile = (props) => {
                 <h3>Profil</h3>
             </div>
             <div className="profilBody">
-                <Link to="/profileEditAvatar" >Stift</Link>
+                {/* <Link to="/profileEditAvatar" >Stift</Link> */}
                 <div className="profilPic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
                 </div>
+                <Link to="/profile/profileEditAvatar" >Stift</Link>
                 <h2>Account Settings</h2>
                 <button>Edit</button>
 

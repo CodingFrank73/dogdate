@@ -19,7 +19,7 @@ const AuthRequired = (props) => {
     async function fetchData() {
         try {
             const response =
-                await fetch(apiBaseUrl + `/api/user/refreshtoken`, {
+                await fetch(apiBaseUrl + `/api/users/refreshtoken`, {
                     method: "POST",
                     mode: "cors",
                     headers: { "Content-Type": "application/json" },

@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url(assets/fonts/Poppins/Poppins-Regular.ttf)
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+body {
+    font-family: 'Poppins';
+    color: black;
+}
+
+
+@font-face {
+    font-family: "Poppins";
+    src: url(assets/fonts/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: "PoppinsBold";
+    src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
+}
