@@ -6,6 +6,10 @@ const { showMyProfile } = require("./users/show-profile");
 const { editAvatar } = require("./users/edit-avatar")
 const { likeOne } = require("./users/like-one");
 
+
+const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
+const { listByFilter } = require("./suggestions/list-by-filter");
+
 const UserService = {
     listAllUsers,
     registerUser,
@@ -16,6 +20,12 @@ const UserService = {
     likeOne
 }
 
+const SuggestionService = {
+    listAllSuggestion,
+    listByFilter
+}
+
 module.exports = {
-    UserService
+    UserService,
+    SuggestionService
 }
