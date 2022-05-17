@@ -75,7 +75,7 @@ userRouter.post("/myProfile/editAvatar",
             res.status(500).json({ err: error.message || "Error Updating Avatar." })
         }
     })
-///#####////
+
 userRouter.post("/login",
     body("email").isEmail(),
     doValidation,
@@ -100,7 +100,6 @@ userRouter.post("/login",
         }
     })
 
-///####////
 
 userRouter.post("/register",
     pictureUploadMiddleware,
@@ -142,6 +141,28 @@ userRouter.post("/refreshtoken",
 
         } catch (error) {
             res.status(500).json({ err: { message: error.message } })
+        }
+    })
+
+
+
+userRouter.put("/myProfile/profileEditSettings",
+    doAuthMiddleware,
+    async (req, res) => {
+        
+        try {
+             const userId = req.userClaims.sub;
+          //  const userId = req.body._id - ohne Middleware und damit OK in ThunderClient
+            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body)
+
+            const user = await UserService.editProfileSettings(req.body)  
+
+            res.status(200).json({user})
+            console.log("res.json aus route: ", {user})
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Editing Profile Settings." })
         }
     })
 

@@ -5,6 +5,7 @@ const { refreshUserToken } = require("./users/refresh-user-token");
 const { showMyProfile } = require("./users/show-profile");
 const { editAvatar } = require("./users/edit-avatar")
 const { likeOne } = require("./users/like-one");
+const { editProfileSettings } = require("./users/edit-profile-settings");
 
 const UserService = {
     listAllUsers,
@@ -13,7 +14,8 @@ const UserService = {
     refreshUserToken,
     showMyProfile,
     editAvatar,
-    likeOne
+    likeOne,
+    editProfileSettings
 }
 
 module.exports = {
