@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile';
 import Splash from './pages/Start/Splash';
 import SplashStart from './pages/Start/SplashStart';
 import ProfileEditAvatar from './pages/Profile/ProfileEditAvatar';
+import ProfileEditSettings from "./pages/Profile/ProfileEditSettings"
 
 function AppRoutes() {
     const [token, setToken] = useState(null);
@@ -26,6 +27,11 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
+
+           
+           
+            <Route path="/profileEditSettings" element={<ProfileEditSettings token={token} />} />
+
 
             <Route path="/home" element={
                 <AuthRequired token={token} setToken={setToken}>
@@ -44,6 +50,7 @@ function AppRoutes() {
                     <ProfileEditAvatar token={token} />
                 </AuthRequired>}
             />
+
 
         </Routes>
     );

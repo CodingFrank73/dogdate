@@ -39,17 +39,17 @@ async function update(userId, updateInfo) {
     return updatedUser
 }
 
-async function updateAvatar({ userId, profileImage }) {
-    console.log("profile image aus DAO", profileImage)
-    console.log("userId aus DAO", userId)
+
+async function updateAvatar({userId, profileImage}) {  
+   console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
     )
-    console.log("TEST DAO")
-    console.log("IDtest", userId)
-    return updatedUser
+     console.log("IDtest", userId)
+     console.log("updated user aus DAO", updatedUser)
+     return updatedUser
 }
 
 async function findMatches({ myId, likedId }) {
