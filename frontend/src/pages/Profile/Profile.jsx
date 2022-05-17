@@ -8,6 +8,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+//  BILDER-IMPORT
+import backarrow from '../../assets/icons/arrow-back.svg';
+import iconHome from '../../assets/icons/home.svg';
+import iconLike from '../../assets/icons/like.svg';
+import iconChat from '../../assets/icons/chat.svg';
+import iconProfilaktiv from '../../assets/icons/profil-aktiv.svg';
 
 import AccountSetting from "../../components/AccountSetting/AccountSetting";
 
@@ -98,81 +104,92 @@ const Profile = (props) => {
     }
 
     return (
-        <div>
-            <div>arrow Back</div>
-            <h1>Profile</h1>
+        <div className="profil">
+            <div className="profil-header">
+                <img className="profil-arrow-back" src={backarrow} alt="back" />
+                <h3>Profil</h3>
+            </div>
+            <div className="profilBody">
+                <Link to="/profileEditAvatar" >Stift</Link>
+                <div className="profilPic">
+                    <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
+                </div>
+                <h2>Account Settings</h2>
+                <button>Edit</button>
 
-            <Link to="/profile/profileEditAvatar" >Stift</Link>
+                <p>Name <span>{dogname}</span></p>
+                <p>Gender <span>{gender}</span></p>
+                <p>DateOfBirth <span>{dateOfBirth}</span></p>
+                <p>Size <span>{size}</span></p>
+                <p>Email <span>{email}</span></p>
+                <p>Phone number <span>{phone}</span></p>
 
-            <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
-            <h2>Account Settings</h2>
-           <Link to="/ProfileEditSettings"> <button>Edit</button></Link>
+                <h2>Plan Settings</h2>
+                <p>CurrentPlan <span>{plan}</span></p>
 
-            <p>Name <span>{dogname}</span></p>
-            <p>Gender <span>{gender}</span></p>
-            <p>DateOfBirth <span>{dateOfBirth}</span></p>
-            <p>Size <span>{size}</span></p>
-            <p>Email <span>{email}</span></p>
-            <p>Phone number <span>{phone}</span></p>
+                <h2>Discovery Settings</h2>
+                <p>Location <Link to="">My Current Location</Link></p>
 
-            <h2>Plan Settings</h2>
-            <p>CurrentPlan <span>{plan}</span></p>
-
-            <h2>Discovery Settings</h2>
-            <p>Location <Link to="">My Current Location</Link></p>
-
-            <InputLabel id="labelLanguage"> Preferred Language</InputLabel>
-            <Select
-                variant='standard'
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={language}
-                label="PreferredLanguage"
-                onChange={changeLanguage}
-            >
-                <MenuItem value="German">German</MenuItem>
-                <MenuItem value="English">English</MenuItem>
-                <MenuItem value="French">French</MenuItem>
-                <MenuItem value="Arabic">Arabic</MenuItem>
-                <MenuItem value="Spanish">Spanish</MenuItem>
-                <MenuItem value="Chinese">Chinese</MenuItem>
-                <MenuItem value="Polish">Polish</MenuItem>
-            </Select>
-
-
-            <p>Show Me <span>{filterGender}</span></p>
-            <p>Size <span>{filterSize}</span></p>
+                <InputLabel id="labelLanguage"> Preferred Language</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={language}
+                    label="PreferredLanguage"
+                    onChange={changeLanguage}
+                >
+                    <MenuItem value="German">German</MenuItem>
+                    <MenuItem value="English">English</MenuItem>
+                    <MenuItem value="French">French</MenuItem>
+                    <MenuItem value="Arabic">Arabic</MenuItem>
+                    <MenuItem value="Spanish">Spanish</MenuItem>
+                    <MenuItem value="Chinese">Chinese</MenuItem>
+                    <MenuItem value="Polish">Polish</MenuItem>
+                </Select>
 
 
-            <Box sx={{ width: 300 }}>
-                <p>Age Range</p>
-                <Slider
-                    value={age}
-                    onChange={handleChange}
-                    valueLabelDisplay="on"
-                    min={0}
-                    max={20}
-                    step={.5}
-                />
+                <p>Show Me <span>{filterGender}</span></p>
+                <p>Size <span>{filterSize}</span></p>
 
-                <p>Maximum Distance</p>
-                <Slider
-                    value={maxDistance}
-                    onChange={handleChangeDistance}
-                    valueLabelDisplay="on"
-                    min={0}
-                    max={200}
-                    step={5}
-                />
-            </Box>
 
-            <button>
-                Logout
-            </button>
+                <Box sx={{ width: 300 }}>
+                    <p>Age Range</p>
+                    <Slider
+                        value={age}
+                        onChange={handleChange}
+                        valueLabelDisplay="on"
+                        min={0}
+                        max={20}
+                        step={.5}
+                    />
 
-            <button>
-                Delete Account
-            </button>
+                    <p>Maximum Distance</p>
+                    <Slider
+                        value={maxDistance}
+                        onChange={handleChangeDistance}
+                        valueLabelDisplay="on"
+                        min={0}
+                        max={200}
+                        step={5}
+                    />
+                </Box>
+
+                <button>
+                    Logout
+                </button>
+
+                <button>
+                    Delete Account
+                </button>
+            </div>
+            <footer>
+                <div className="nav">
+                    <div><img src={iconHome} alt="home" /></div>
+                    <div><img src={iconLike} alt="like" /></div>
+                    <div><img src={iconChat} alt="chat" /></div>
+                    <div><img src={iconProfilaktiv} alt="profil" /></div>
+                </div>
+            </footer>
 
 
         </div >
