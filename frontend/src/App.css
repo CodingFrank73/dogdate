@@ -27,14 +27,15 @@ body {
   src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ---------
+    N E U
+-------- */
+
 
 body {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
+  background: #DEDEDE;
+  color: #303030;
 }
 
 a {
@@ -139,22 +140,20 @@ h3 {
 }
 
 .signup {
-  background: #e5e5e5;
-  height: 100vh;
+  background: #a86868;
 }
 .signup .signup-header {
-  position: absolute;
   position: fixed;
   top: 0;
-  padding-top: 54px;
+  padding-top: 6px;
   width: 100%;
-  padding-bottom: 12px;
+  padding-bottom: 0px;
   display: flex;
   background: #e5e5e5;
   z-index: 2;
 }
 .signup .signup-header .signup-arrow-back {
-  width: 58px;
+  width: 36px;
   padding: 0 12px 0 18px;
 }
 .signup .signup-box {
@@ -190,6 +189,33 @@ h3 {
   background: #5A1AED;
   border: 0;
   border-radius: 24px;
+}
+
+.profil .profil-header {
+  position: fixed;
+  top: 0;
+  padding-top: 6px;
+  width: 100%;
+  padding-bottom: 0px;
+  display: flex;
+  background: #fff;
+  z-index: 2;
+}
+.profil .profil-header .profil-arrow-back {
+  width: 36px;
+  padding: 0 12px 0 18px;
+}
+.profil .profilBody {
+  width: 90%;
+  margin: 0 5% 0 5%;
+}
+.profil .profilBody .profilPic {
+  width: 50%;
+  margin: 114px 25% 0 25%;
+  border-radius: 50%;
+}
+.profil .profilBody .profilPic img {
+  border-radius: 50%;
 }
 
 .home {
@@ -249,7 +275,8 @@ h3 {
   border-radius: 50%;
   padding: 15px;
 }
-.home footer {
+
+footer {
   position: absolute;
   position: fixed;
   bottom: 0px;
@@ -257,7 +284,7 @@ h3 {
   height: 58px;
   background: #fff;
 }
-.home footer .nav {
+footer .nav {
   width: 90%;
   margin: 0 auto;
   display: grid;
@@ -266,11 +293,11 @@ h3 {
   justify-content: space-between;
   gap: 0.5rem;
 }
-.home footer .nav div {
+footer .nav div {
   width: 42px;
   padding: 12px 8px;
 }
-.home footer .nav div img {
+footer .nav div img {
   height: 34px;
   width: 34px;
-}
+}/*# sourceMappingURL=main.css.map */
