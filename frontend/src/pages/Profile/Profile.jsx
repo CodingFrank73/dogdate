@@ -14,6 +14,7 @@ import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
 import iconChat from '../../assets/icons/chat.svg';
 import iconProfilaktiv from '../../assets/icons/profil-aktiv.svg';
+import iconpen from '../../assets/icons/pen.svg';
 
 
 
@@ -96,85 +97,129 @@ const Profile = (props) => {
     }
 
     return (
-        <div className="profil">
-            <div className="profil-header">
-                <img className="profil-arrow-back" src={backarrow} alt="back" />
-                <h3>Profil</h3>
+        <div className="profile">
+            <div className="profile-header">
+                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <h2>Profile</h2>
             </div>
-            <div className="profilBody">
+            <div className="profileBody">
                 {/* <Link to="/profileEditAvatar" >Stift</Link> */}
-                <div className="profilPic">
+                <div className="profilePic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
+                    <div className="editProfilepic">
+                        <Link to="/profile/profileEditAvatar" >
+                            <img src={iconpen} alt="home" />
+                        </Link>
+                    </div>
                 </div>
-                <Link to="/profile/profileEditAvatar" >Stift</Link>
-                <h2>Account Settings</h2>
-                <Link to="/profile/profileEditSettings"><button>Edit</button></Link>
 
-                <p>Name <span>{dogname}</span></p>
-                <p>Gender <span>{gender}</span></p>
-                <p>DateOfBirth <span>{dateOfBirth}</span></p>
-                <p>Size <span>{size}</span></p>
-                <p>Email <span>{email}</span></p>
-                <p>Phone number <span>{phone}</span></p>
-
-                <h2>Plan Settings</h2>
-                <p>CurrentPlan <span>{plan}</span></p>
-
-                <h2>Discovery Settings</h2>
-                <p>Location <Link to="">My Current Location</Link></p>
-
-                <InputLabel id="labelLanguage"> Preferred Language</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={language}
-                    label="PreferredLanguage"
-                    onChange={changeLanguage}
-                >
-                    <MenuItem value="German">German</MenuItem>
-                    <MenuItem value="English">English</MenuItem>
-                    <MenuItem value="French">French</MenuItem>
-                    <MenuItem value="Arabic">Arabic</MenuItem>
-                    <MenuItem value="Spanish">Spanish</MenuItem>
-                    <MenuItem value="Chinese">Chinese</MenuItem>
-                    <MenuItem value="Polish">Polish</MenuItem>
-                </Select>
+                <div className="headlineFrame">
+                    <h3>Account Settings</h3>
+                    <button className='headlineButton'>Edit</button>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Name </div>
+                    <div className="dataData">{dogname}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Gender </div>
+                    <div className="dataData">{gender}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Date Of Birth </div>
+                    <div className="dataData">{dateOfBirth}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Size</div>
+                    <div className="dataData">{size}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Email</div>
+                    <div className="dataData">{email}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Phone number</div>
+                    <div className="dataData">{phone}</div>
+                </div>
 
 
-                <p>Show Me <span>{filterGender}</span></p>
-                <p>Size <span>{filterSize}</span></p>
+                <h3>Plan Settings</h3>
+                <div className="dataFrame">
+                    <div className="dataLable">Current Planr</div>
+                    <div className="dataData colorHighlight">{plan}</div>
+                </div>
+                <h3>Discovery Settings</h3>
+                <div className="dataFrame">
+                    <div className="dataLable">Location</div>
+                    <div className="dataData colorHighlight"><Link to="">My Current Location</Link></div>
+                </div>
 
+                <div className="dataFrame">
+                    <div className="dataLable">
+                        <InputLabel id="labelLanguage"> Preferred Language</InputLabel></div>
+                    <div className="dataData">
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={language}
+                            label="PreferredLanguage"
+                            onChange={changeLanguage}
+                        >
+                            <MenuItem value="German">German</MenuItem>
+                            <MenuItem value="English">English</MenuItem>
+                            <MenuItem value="French">French</MenuItem>
+                            <MenuItem value="Arabic">Arabic</MenuItem>
+                            <MenuItem value="Spanish">Spanish</MenuItem>
+                            <MenuItem value="Chinese">Chinese</MenuItem>
+                            <MenuItem value="Polish">Polish</MenuItem>
+                        </Select>
+                    </div>
+                </div>
 
-                <Box sx={{ width: 300 }}>
-                    <p>Age Range</p>
-                    <Slider
-                        value={age}
-                        onChange={handleChange}
-                        valueLabelDisplay="on"
-                        min={0}
-                        max={20}
-                        step={.5}
-                    />
+                <div className="dataFrame">
+                    <div className="dataLable">Show me</div>
+                    <div className="dataData">{filterGender}</div>
+                </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Size</div>
+                    <div className="dataData">{filterSize}</div>
+                </div>
 
-                    <p>Maximum Distance</p>
-                    <Slider
-                        value={maxDistance}
-                        onChange={handleChangeDistance}
-                        valueLabelDisplay="on"
-                        min={0}
-                        max={200}
-                        step={5}
-                    />
+                <Box >
+                    <div className="dataFrame">
+                        <p>Age Range</p>
+                        <Slider
+                            value={age}
+                            onChange={handleChange}
+                            valueLabelDisplay="on"
+                            min={0}
+                            max={20}
+                            step={.5}
+                        />
+                    </div>
+
+                    <div className="dataFrame">
+                        <p>Maximum Distance</p>
+                        <Slider
+                            value={maxDistance}
+                            onChange={handleChangeDistance}
+                            valueLabelDisplay="on"
+                            min={0}
+                            max={200}
+                            step={5}
+                        />
+                    </div>
                 </Box>
 
-                <button>
+                <button className="buttonLogout">
                     Logout
                 </button>
-
-                <button>
+                <button className="buttonDeleteAccount">
                     Delete Account
                 </button>
-            </div>
+
+            </div >
+
             <footer>
                 <div className="nav">
                     <div><img src={iconHome} alt="home" /></div>

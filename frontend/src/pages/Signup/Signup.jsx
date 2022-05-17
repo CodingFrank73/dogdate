@@ -53,10 +53,11 @@ const Signup = () => {
     }
 
     return (
-        <div className="signup">
-            <div className="signup-header">
-                <img className="signup-arrow-back" src={backarrow} alt="back" />
-                <h3>Edit</h3>
+        <div className="profile">
+            <div className="profile-header">
+                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <h2>Sign Up</h2>
+
             </div>
             <form className="signup-box">
                 <input type="text" value={dogName} placeholder="Dog Name" onChange={(e) => setDogName(e.target.value)}></input>
