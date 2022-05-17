@@ -112,6 +112,7 @@ const Profile = (props) => {
                         </Link>
                     </div>
                 </div>
+
                 <div className="headlineFrame">
                     <h3>Account Settings</h3>
                     <button className='headlineButton'>Edit</button>

@@ -12,8 +12,8 @@ async function editAvatar( {userId, profileImage} ) {
     console.log("use case, user", user.dogName)
    
     const insertResult = await UserDAO.updateAvatar({userId, profileImage}); ///#####////
-    const wasSuccessFul = insertResult.acknowledged === true && insertResult.modifiedCount
-    if(!wasSuccessFul) {
+    const wasSuccessful = insertResult.acknowledged === true && insertResult.modifiedCount
+    if(!wasSuccessful) {
         throw new Error("Updating Avatar failed, please try again.")
     }
     console.log("insertResult aus usecase", insertResult);
@@ -22,21 +22,6 @@ async function editAvatar( {userId, profileImage} ) {
     return user
 }
 
-// async function editAvatar( {userId, profileImage} ) {
-//     console.log("UserId from usecase", userId)
-
-//     const newUser = makeUser({userId, profileImage})
-   
-//     const insertResult = await UserDAO.updateAvatar({userId, profileImage}); ///#####////
-//     const wasSuccessFul = insertResult.acknowledged === true && insertResult.insertedId
-//     if(!wasSuccessFul) {
-//         throw new Error("Updating Avatar failed, please try again.")
-//     }
-//     console.log("Updated user aus usecase", updatedUser);
-//     const user = makeUser(updatedUser);
-
-//     return user
-// }
 
 module.exports = {
     editAvatar

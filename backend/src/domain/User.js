@@ -14,13 +14,14 @@ function makeUser({
     sixDigitVerificationCode,
     plan,
     location,
+    postalCode,
     language,
     filterGender,
     filterSize,
     ageRangeMin,
     ageRangeMax,
     maxDistance,
-    likes = []
+    km
 }) {
 
     if (typeof dogName !== "string" || dogName.trim().length === 0) {
@@ -50,13 +51,14 @@ function makeUser({
         sixDigitVerificationCode,
         plan,
         location,
+        postalCode,
         language,
         filterGender,
         filterSize,
         ageRangeMin,
         ageRangeMax,
         maxDistance,
-        likes
+        km
     }
 }
 
