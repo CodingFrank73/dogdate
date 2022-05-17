@@ -106,7 +106,7 @@ const Profile = (props) => {
 
             <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
             <h2>Account Settings</h2>
-            <button>Edit</button>
+           <Link to="/ProfileEditSettings"> <button>Edit</button></Link>
 
             <p>Name <span>{dogname}</span></p>
             <p>Gender <span>{gender}</span></p>

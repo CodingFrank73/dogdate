@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileEditAvatar = (props) => {
 
-    const navigate = {useNavigate}
+    const navigate = useNavigate()
 
     const [profileImage, setProfileImage] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState('Error uploading avatar');
 
     const doUpload = async (e) => {
 
@@ -25,27 +25,20 @@ const ProfileEditAvatar = (props) => {
                 },
                 body: formData
             })
-
             const result = await response.json()
 
             if (!result.err) {
                 console.log("Hat geklappt..........");
-              //  navigate("/profile")
-
+                navigate(-1) 
                 return
             }
 
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0];
-                setError(firstError.msg + ":" + firstError.param);
-                return
-            }
-
-            setError(result.err.message);
+                       
 
         } catch (error) {
             console.log("error..............");
         }
+        
 
     }
 
@@ -55,6 +48,8 @@ const ProfileEditAvatar = (props) => {
                 <input type="file" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
                 <button onClick={doUpload} type="submit">Upload</button>
             </form>
+            {error && 
+            <div><p>{error}</p></div>}
         </div>
     );
 }
