@@ -1,6 +1,7 @@
 import { useState } from "react";
 import apiBaseUrl from "../../api"
 import { useNavigate } from "react-router-dom";
+import backarrow from '../../assets/icons/arrow-back.svg';
 
 const ProfileEditAvatar = (props) => {
 
@@ -47,7 +48,11 @@ const ProfileEditAvatar = (props) => {
     }
 
     return (
-        <div>
+               <div className="signup">
+      <div className="signup-header">
+                <img className="signup-arrow-back" src={backarrow} alt="back" />
+                <h3>Upload Avatar</h3>
+            </div>
             <form style={{ display: "flex", flexDirection: "column", width: "400px" }}>
                 <input type="file" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
                 <button onClick={doUpload} type="submit">Upload</button>

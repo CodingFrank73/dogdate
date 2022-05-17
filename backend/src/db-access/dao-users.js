@@ -27,16 +27,16 @@ async function insert(user) {
     return newUser
 }
 
-async function update(userId, updateInfo) {
-
-    console.log("userId aus DAO", userId)
+async function update(userId, updatedInfo) {
     const db = await getDB();
-    const updatedUser = await db.collection(collectionName).updateOne(
+    const result = await db.collection(collectionName).updateOne(
         { _id: userId },
-        { $set: { profileImage: updateInfo } }
+        { $set: updatedInfo }        
     )
+     console.log("updatedInfo from DAO:", updatedInfo, userId)
+     console.log("result from DAO", result)
 
-    return updatedUser
+    return result
 }
 
 

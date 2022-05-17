@@ -108,7 +108,7 @@ const Profile = (props) => {
                 </div>
                 <Link to="/profile/profileEditAvatar" >Stift</Link>
                 <h2>Account Settings</h2>
-                <button>Edit</button>
+                <Link to="/profile/profileEditSettings"><button>Edit</button></Link>
 
                 <p>Name <span>{dogname}</span></p>
                 <p>Gender <span>{gender}</span></p>

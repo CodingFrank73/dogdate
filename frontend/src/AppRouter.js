@@ -28,8 +28,7 @@ function AppRoutes() {
             <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
 
-            <Route path="/profileEditSettings" element={<ProfileEditSettings token={token} />} />
-
+          
             <Route path="/home" element={
                 <AuthRequired token={token} setToken={setToken}>
                     <Home token={token} />
@@ -47,6 +46,13 @@ function AppRoutes() {
                     <ProfileEditAvatar token={token} />
                 </AuthRequired>}
             />
+            <Route path="/profile/profileEditSettings" element={
+                <AuthRequired token={token} setToken={setToken}>
+                    <ProfileEditSettings token={token} />
+                </AuthRequired>}
+            />
+
+             {/* <Route path="/profile/profileEditSettings" element={<ProfileEditSettings token={token} />} /> */}
 
 
         </Routes>
