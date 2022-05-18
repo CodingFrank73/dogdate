@@ -109,6 +109,9 @@ userRouter.post("/register",
     doValidation,
     async (req, res) => {
 
+        console.log("Datum: ", req.body.dateOfBirth,);
+        // const realDate = new Date(req.body.dateOfBirth)
+
         try {
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
             const user = await UserService.registerUser({
@@ -149,16 +152,16 @@ userRouter.post("/refreshtoken",
 userRouter.put("/myProfile/profileEditSettings",
     doAuthMiddleware,
     async (req, res) => {
-        
+
         try {
-             const userId = req.userClaims.sub;
-          //  const userId = req.body._id - ohne Middleware und damit OK in ThunderClient
+            const userId = req.userClaims.sub;
+            //  const userId = req.body._id - ohne Middleware und damit OK in ThunderClient
             console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body)
 
-            const user = await UserService.editProfileSettings(req.body)  
+            const user = await UserService.editProfileSettings(req.body)
 
-            res.status(200).json({user})
-            console.log("res.json aus route: ", {user})
+            res.status(200).json({ user })
+            console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
