@@ -91,6 +91,28 @@ async function updateLikeToMatch(likeId) {
     return like
 }
 
+async function updateLanguage({userId, language}) {  
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: { language: language } }
+    )
+     console.log("IDtest", userId)
+     return updatedUser
+}
+
+async function updateMaxDistance({userId, maxDistance}) {  
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: { maxDistance: maxDistance } }
+    )
+     console.log("IDtest", userId)
+     return updatedUser
+}
+
+
+
 
 module.exports = {
     findAll,
@@ -101,5 +123,7 @@ module.exports = {
     updateAvatar,
     findMatches,
     insertLike,
-    updateLikeToMatch
+    updateLikeToMatch,
+    updateLanguage,
+    updateMaxDistance
 }
