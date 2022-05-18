@@ -68,7 +68,7 @@ const Profile = (props) => {
             setDogname(result.dogName)
             setGender(result.gender);
             setEmail(result.email)
-            setDateOfBirth(result.dateOfBirth)
+            setDateOfBirth(new Date(result.dateOfBirth).toLocaleDateString('en-CA'))
             setSize(result.size)
             setPhone(result.phone)
             setLocation(result.location);

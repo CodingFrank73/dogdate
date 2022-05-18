@@ -23,7 +23,6 @@ const ProfileEditSettings = (props) => {
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("")
-  
 
   const navigate = useNavigate()
 
@@ -43,54 +42,51 @@ const ProfileEditSettings = (props) => {
 
       setDogName(result.dogName)
       setGender(result.gender)
-      setDateOfBirth(result.dateOfBirth)
+      setDateOfBirth(new Date(result.dateOfBirth).toLocaleDateString('en-CA'))
       setSize(result.size)
       setEmail(result.email)
       setPhone(result.phone)
       setUserId(result._id)
-
-      console.log(result)
-
 
     } catch (error) {
       console.log("error from catch", error)
       setError("Problem fetching user data - try again")
     }
   }
-      const doUpdate = async (e) => {
-        e.preventDefault();
-        console.log(props.token)
+  const doUpdate = async (e) => {
+    e.preventDefault();
+    console.log(props.token)
 
-       const dataToUpdate = {userId, dogName, gender, dateOfBirth, size, email, phone}
+    const dataToUpdate = { userId, dogName, gender, dateOfBirth, size, email, phone }
 
-        try {
-            const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
-            method: "PUT",
-            headers: {
-                token: "JWT " + props.token,
-                "Content-Type": "application/json" 
-            },
-            body: JSON.stringify(dataToUpdate)
-        })
-        console.log("data from Json.stringify -", dataToUpdate) //wo zum Henker ist die ID????
-        
-        const result = await response.json()
-        
-        if(!result.err) {
-                console.log("success!!")
-                navigate(-1) 
-                return
-            }
+    try {
+      const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
+        method: "PUT",
+        headers: {
+          token: "JWT " + props.token,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataToUpdate)
+      })
+      console.log("data from Json.stringify -", dataToUpdate) //wo zum Henker ist die ID????
 
-        if(result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
+      const result = await response.json()
 
-        } catch (error) {
-            console.log("show me an error !!!!")
-        } 
+      if (!result.err) {
+        console.log("success!!")
+        navigate(-1)
+        return
+      }
+
+      if (result.err.validationErrors) {
+        const firstError = result.err.validationErrors[0]
+        setError(firstError.msg + ": " + firstError.param)
+        return
+      }
+
+    } catch (error) {
+      console.log("show me an error !!!!")
+    }
   }
 
   return (

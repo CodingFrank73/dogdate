@@ -30,6 +30,8 @@ suggestionRouter.get("/allwithfilter",
     // doAuthMiddleware,
     async (req, res) => {
 
+
+
         try {
             const users = await SuggestionService.listByFilter({
                 maxDistance: req.body.maxDistance,
