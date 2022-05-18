@@ -38,7 +38,7 @@ function AppRoutes() {
 
             <Route path="/profile" element={
                 <AuthRequired token={token} setToken={setToken}>
-                    <Profile token={token} />
+                    <Profile token={token} setToken={setToken} />
                 </AuthRequired>}
             />
 

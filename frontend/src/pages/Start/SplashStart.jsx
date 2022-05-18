@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 //  BILDER-IMPORT
 import ddLogo from '../../assets/icons/logo.svg';
 import googleLogo from '../../assets/icons/google-logo.svg';
@@ -20,17 +22,18 @@ const SplashStart = () => {
                 </button>
 
 
+              <Link to={"/login"}>
                 <button>
                     <div className="wbLogoAT"><img src={klammerAffe} alt="Klammeraffe" /></div>
                     <div className="wbText">LOGIN WITH EMAIL</div>
                 </button>
-
+            </Link>
 
                 <p className="wText">By clicking Log In, you agree with our <a href="#">Terms</a>.
                     Learn how we process your data in our <a href="#">Privacy
                         Policy</a> and <a href="#">Cookies Policy</a>.</p>
                 <div className='signUpfooter'>
-                    <p>Don't have account? <a href="signup.html">Signup</a></p>
+                    <p>Don't have account?  <Link to={"/signup"}><a href="signup.html">Signup</a></Link></p>
                 </div>
                 <div className='splashFooter'>
                     <div><img className="iconDog" src={dog} alt="dog" /> &copy; 2022 by MFG</div>

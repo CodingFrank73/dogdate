@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 //  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
@@ -20,7 +23,7 @@ const ProfileEditSettings = (props) => {
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("")
-  const [error, setError] = useState('');
+  
 
   const navigate = useNavigate()
 
@@ -103,9 +106,43 @@ const ProfileEditSettings = (props) => {
       <form className="signup-box">
         <h3>Account Settings</h3>
         <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
-        <input type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+         <div className="dataFrame">
+                    <div className="dataLable">
+                        <InputLabel id="labelLanguage"> Gender</InputLabel></div>   
+                    <div className="dataData">
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={gender}
+                            label="Gender" 
+                            onChange={(e) => {setGender(e.target.value)} }
+                        >
+                            <MenuItem value="m">Male</MenuItem>
+                            <MenuItem value="f">Female</MenuItem>
+                        </Select>
+                   </div>
+                </div>
+                 
         <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
-        <input type="text" name="size" value={size} placeholder="Size" onChange={(e) => setSize(e.target.value)} />
+         
+         <div className="dataFrame">
+                    <div className="dataLable">
+                        <InputLabel id="labelLanguage"> Size</InputLabel></div>
+                    <div className="dataData">
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={size}
+                            label="Size" 
+                            onChange={(e) => {setSize(e.target.value)} }
+                        >
+                            <MenuItem value="s">Small</MenuItem>
+                            <MenuItem value="m">Medium</MenuItem>
+                            <MenuItem value="l">Large</MenuItem>
+                        </Select>
+                    </div>
+                    </div>
+                
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
         <button onClick={doUpdate} type="submit">SAVE</button>
