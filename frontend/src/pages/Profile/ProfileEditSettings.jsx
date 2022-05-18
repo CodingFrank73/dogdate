@@ -8,13 +8,14 @@ const ProfileEditSettings = (props) => {
   const [dogName, setDogName] = useState('');
   const [gender, setGender] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');  
   
-  const [error, setError] = useState('');
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
 
   const [userId, setUserId] = useState("")
+
+  const [error, setError] = useState('');
 
   const navigate = useNavigate()
 
@@ -60,17 +61,17 @@ const ProfileEditSettings = (props) => {
             method: "PUT",
             headers: {
                 token: "JWT " + props.token,
-                 "Content-Type": "application/json" 
+                "Content-Type": "application/json" 
             },
             body: JSON.stringify(dataToUpdate)
         })
-        console.log("data from Json.stringify -", dataToUpdate) //wo ist die ID????
+        console.log("data from Json.stringify -", dataToUpdate) //wo zum Henker ist die ID????
         
         const result = await response.json()
         
         if(!result.err) {
                 console.log("success!!")
-                //navigate(-1) 
+                navigate(-1) 
                 return
             }
 
