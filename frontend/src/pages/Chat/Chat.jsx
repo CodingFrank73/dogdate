@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //  BILDER-IMPORT
-import dogImage from '../../assets/img/dimka.png';
+
 import ddLogo from '../../assets/icons/logo.svg';
 import filter from '../../assets/icons/filter.svg';
 import buttonDislike from '../../assets/icons/dislike-white.svg';
 import buttonLike from '../../assets/icons/like-white.svg';
 import backarrow from '../../assets/icons/arrow-back.svg';
-import iconHomeaktiv from '../../assets/icons/home-aktiv.svg';
+import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
-import iconChat from '../../assets/icons/chat.svg';
+import iconChataktiv from '../../assets/icons/chat-aktiv.svg';
 import iconProfile from '../../assets/icons/profile.svg';
 
 const Home = () => {
@@ -30,23 +30,14 @@ const Home = () => {
                     <img className="home-filter" src={filter} alt="filter" />
                 </div>
 
-                <div className="home-doggy-bigpic">
-                    <img src={dogImage} alt="dog pic" />
-                    <div className="dogName">Henry, 5</div>
-                    <div className="distanceKM">4 km</div>
-                </div>
+                <h1>Chat</h1>
 
-                <div className="home-like-wrapper">
-                    <div className="home-like-buttons">
-                        <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
-                        <div className="home-like"><img src={buttonLike} alt="like" /></div>
-                    </div>
-                </div>
+
                 <footer>
                     <div className="nav">
-                        <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
+                        <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
                         <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
-                        <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+                        <div><Link to="/chat" ><img src={iconChataktiv} alt="chat" /></Link></div>
                         <div><Link to="/profile" ><img src={iconProfile} alt="profile" /></Link></div>
                     </div>
                 </footer>
