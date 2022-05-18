@@ -16,12 +16,11 @@ const ProfileEditSettings = (props) => {
   const [gender, setGender] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [email, setEmail] = useState('');
-
   const [error, setError] = useState('');
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
-
   const [userId, setUserId] = useState("")
+  const [error, setError] = useState('');
 
   const navigate = useNavigate()
 
@@ -53,46 +52,43 @@ const ProfileEditSettings = (props) => {
     } catch (error) {
       console.log("error from catch", error)
       setError("Problem fetching user data - try again")
-
     }
   }
-  const doUpdate = async (e) => {
-    e.preventDefault();
-    console.log(props.token)
+      const doUpdate = async (e) => {
+        e.preventDefault();
+        console.log(props.token)
 
-    const dataToUpdate = { userId, dogName, gender, dateOfBirth, size, email, phone }
+       const dataToUpdate = {userId, dogName, gender, dateOfBirth, size, email, phone}
 
-    try {
-      const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
-        method: "PUT",
-        headers: {
-          token: "JWT " + props.token,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dataToUpdate)
-      })
-      console.log("data from Json.stringify -", dataToUpdate) //wo ist die ID????
+        try {
+            const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
+            method: "PUT",
+            headers: {
+                token: "JWT " + props.token,
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify(dataToUpdate)
+        })
+        console.log("data from Json.stringify -", dataToUpdate) //wo zum Henker ist die ID????
+        
+        const result = await response.json()
+        
+        if(!result.err) {
+                console.log("success!!")
+                navigate(-1) 
+                return
+            }
 
-      const result = await response.json()
+        if(result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
 
-      if (!result.err) {
-        console.log("success!!")
-        //navigate(-1) 
-        return
-      }
-
-      if (result.err.validationErrors) {
-        const firstError = result.err.validationErrors[0]
-        setError(firstError.msg + ": " + firstError.param)
-        return
-      }
-
-    } catch (error) {
-      console.log("show me an error !!!!")
-    }
-
+        } catch (error) {
+            console.log("show me an error !!!!")
+        } 
   }
-
 
   return (
 

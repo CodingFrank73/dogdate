@@ -1,18 +1,20 @@
 const { SuggestionDAO } = require("../../db-access")
 
-const listByFilter = async () => {
+const listByFilter = async ({ maxDistance, gender, minAge, maxAge }) => {
 
+    const minAgeAsDate = subtractYears(minAge)
+    const maxAgeAsDate = subtractYears(maxAge)
 
-    const minAge = subtractYears(2)
-    const maxAge = subtractYears(10)
+    const users = await SuggestionDAO.findAllByFilter({ maxDistance, gender, minAgeAsDate, maxAgeAsDate })
 
-    const users = await SuggestionDAO.findAllByFilter(2, minAge, maxAge, "m")
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
+        gender: u.gender,
         // bigImage: u.bigImage,
-        age: getAge(u.dateOfBirth),
-        km: u.km
+        age: getAgeByYear(u.dateOfBirth),
+        dateOfBirth: u.dateOfBirth,
+        maxDistance: u.maxDistance
     }))
 
     return listOfUsers
@@ -20,36 +22,14 @@ const listByFilter = async () => {
 
 function subtractYears(numOfYears, date = new Date()) {
     date.setFullYear(date.getFullYear() - numOfYears);
-
-    console.log(date);
     return date;
 }
 
-// return ({ minAge, maxAge })
-
-
-
-
-
-//     const users = await SuggestionDAO.findAllExcept(id)
-//     const listOfUsers = users.map(u => ({
-//         _id: u._id,
-//         dogName: u.dogName,
-//         // bigImage: u.bigImage,
-//         age: getAge(u.dateOfBirth),
-//         km: u.km
-//     }))
-
-//     return listOfUsers
-// }
-
-function getAge(dateOfBirth) {
-    const ageDiffinMS = Date.now() - new Date(dateOfBirth).getTime();
-    const ageDate = new Date(ageDiffinMS);
-
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
+const getAgeByYear = (dateOfBirth) => {
+    const currentYear = new Date().getFullYear();
+    const birthYear = new Date(dateOfBirth).getFullYear();
+    return (currentYear - birthYear)
 }
-
 
 module.exports = {
     listByFilter
