@@ -53,6 +53,7 @@ function AppRoutes() {
                 </AuthRequired>}
             />
 
+
         </Routes>
     );
 }

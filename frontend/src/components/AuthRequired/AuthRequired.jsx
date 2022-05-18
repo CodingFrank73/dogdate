@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import apiBaseUrl from "../../api";
 
+//  BILDER-IMPORT
+import loadingIndicator from '../../assets/img/runningDog.gif';
+
 const AuthRequired = (props) => {
     const [loading, setLoading] = useState(true);
 
@@ -37,7 +40,9 @@ const AuthRequired = (props) => {
 
     // Loading indicator
     if (loading) {
-        return <p>Loading...</p>
+        return <div className="loadingIndicator">
+            <img src={loadingIndicator} alt="Loading..." />
+        </div>
     }
 
     // Wenn kein gültiger Token vorhanden ist

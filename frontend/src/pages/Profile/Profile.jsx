@@ -13,7 +13,7 @@ import backarrow from '../../assets/icons/arrow-back.svg';
 import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
 import iconChat from '../../assets/icons/chat.svg';
-import iconProfilaktiv from '../../assets/icons/profil-aktiv.svg';
+import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
 import iconpen from '../../assets/icons/pen.svg';
 
 
@@ -225,7 +225,7 @@ const Profile = (props) => {
                     <div><img src={iconHome} alt="home" /></div>
                     <div><img src={iconLike} alt="like" /></div>
                     <div><img src={iconChat} alt="chat" /></div>
-                    <div><img src={iconProfilaktiv} alt="profil" /></div>
+                    <div><img src={iconProfileaktiv} alt="profile" /></div>
                 </div>
             </footer>
 

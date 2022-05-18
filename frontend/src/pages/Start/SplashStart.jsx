@@ -2,6 +2,9 @@
 import ddLogo from '../../assets/icons/logo.svg';
 import googleLogo from '../../assets/icons/google-logo.svg';
 import klammerAffe from '../../assets/icons/klammeraffe.svg';
+import dog from '../../assets/img/icon-dog.png';
+import heart from '../../assets/icons/like-white.svg';
+import vegan from '../../assets/img/icon-vegan.png';
 
 const SplashStart = () => {
     return (
@@ -26,9 +29,14 @@ const SplashStart = () => {
                 <p className="wText">By clicking Log In, you agree with our <a href="#">Terms</a>.
                     Learn how we process your data in our <a href="#">Privacy
                         Policy</a> and <a href="#">Cookies Policy</a>.</p>
-                <footer>
+                <div className='signUpfooter'>
                     <p>Don't have account? <a href="signup.html">Signup</a></p>
-                </footer>
+                </div>
+                <div className='splashFooter'>
+                    <div><img className="iconDog" src={dog} alt="dog" /> &copy; 2022 by MFG</div>
+                    <div><img className="iconVegan" src={heart} alt="love" /> Created with Love</div>
+                    <div><img className="iconVegan" src={vegan} alt="vegan" /> 1oo% vegan</div>
+                </div>
             </div>
         </div>
     );

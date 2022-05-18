@@ -38,6 +38,17 @@ h2{
     color: #000;
 }
 
+.loadingIndicator{
+    
+    height: 100vh;
+    overflow: hidden;
+    
+    img{
+        margin-top: 50%;
+      
+    }
+}
+
 // ================================================
 // SPLASH
 // ================================================
@@ -111,9 +122,9 @@ h2{
         }
     }
 
-    footer{
+    .signUpfooter{
         position: absolute;
-        bottom: 1rem;
+        bottom: 2rem;
         width: 100%;
         p{
             color: #fff;
@@ -128,6 +139,23 @@ h2{
             a:hover{
                 text-decoration: underline;
             }
+        }
+    }
+        .splashFooter {
+        position: fixed;
+        bottom: 2px;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 10px;
+        color: #fff;
+        display: flex;
+        justify-content: space-evenly;
+
+        .iconDog{
+            width: 11px;
+        }
+        .iconVegan{
+            width: 8px;
         }
     }
 }
@@ -252,6 +280,13 @@ h2{
             border: 0;
             border-radius: 24px;
         }
+    }
+
+
+    //  PROFILE PAGE :: Edit Avatar
+    // ---------------------------------
+    .editAvatarBody{
+        margin: 130px 5% 0 5%;
     }
 
     //  PROFILE PAGE

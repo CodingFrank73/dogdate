@@ -1,55 +1,59 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
+
+//  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
+import iconHome from '../../assets/icons/home.svg';
+import iconLike from '../../assets/icons/like.svg';
+import iconChat from '../../assets/icons/chat.svg';
+import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
+import iconpen from '../../assets/icons/pen.svg';
 
 
 const ProfileEditSettings = (props) => {
   const [dogName, setDogName] = useState('');
   const [gender, setGender] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [email, setEmail] = useState('');  
-  
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
-
   const [userId, setUserId] = useState("")
-
   const [error, setError] = useState('');
 
   const navigate = useNavigate()
 
-     useEffect(() => {
-        fetchData()
-            .then(console.log())
-    }, []);
+  useEffect(() => {
+    fetchData()
+      .then(console.log())
+  }, []);
 
-     const fetchData = async () => {
-        try {
-            const response = await fetch(apiBaseUrl + "/api/users/myProfile", {
-                headers: {
-                    token: "JWT " + props.token
-                }
-            })
-            const result = await response.json()
-
-            setDogName(result.dogName)
-            setGender(result.gender)           
-            setDateOfBirth(result.dateOfBirth)
-            setSize(result.size)
-            setEmail(result.email)   
-            setPhone(result.phone)
-            setUserId(result._id)
-            
-            console.log(result)
-            
-
-        } catch (error) {
-            console.log("error from catch", error)
-            setError("Problem fetching user data - try again")
-
+  const fetchData = async () => {
+    try {
+      const response = await fetch(apiBaseUrl + "/api/users/myProfile", {
+        headers: {
+          token: "JWT " + props.token
         }
+      })
+      const result = await response.json()
+
+      setDogName(result.dogName)
+      setGender(result.gender)
+      setDateOfBirth(result.dateOfBirth)
+      setSize(result.size)
+      setEmail(result.email)
+      setPhone(result.phone)
+      setUserId(result._id)
+
+      console.log(result)
+
+
+    } catch (error) {
+      console.log("error from catch", error)
+      setError("Problem fetching user data - try again")
     }
+  }
       const doUpdate = async (e) => {
         e.preventDefault();
         console.log(props.token)
@@ -84,29 +88,37 @@ const ProfileEditSettings = (props) => {
         } catch (error) {
             console.log("show me an error !!!!")
         } 
+  }
 
-      }
-
- 
   return (
-    <div className="signup">
-      <div className="signup-header">
-                <img className="signup-arrow-back" src={backarrow} alt="back" />
-                <h3>Edit</h3>
-                <h2>Account Settings</h2>
-            </div>
+
+    <div className="profile">
+      <div className="profile-header">
+        <img className="profile-arrow-back" src={backarrow} alt="back" />
+        <h2>Edit</h2>
+
+      </div>
+
 
       <form className="signup-box">
-        <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value) } />
-        <input type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value) } />        
-        <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value) } />
-        <input type="text" name="size" value={size} placeholder="Size" onChange={(e) => setSize(e.target.value) } />      
-        <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value) } />
-        <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value) } />
-          <button onClick={doUpdate} type="submit">SAVE</button>
+        <h3>Account Settings</h3>
+        <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
+        <input type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} />
+        <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+        <input type="text" name="size" value={size} placeholder="Size" onChange={(e) => setSize(e.target.value)} />
+        <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <button onClick={doUpdate} type="submit">SAVE</button>
       </form>
 
-
+      <footer>
+        <div className="nav">
+          <div><img src={iconHome} alt="home" /></div>
+          <div><img src={iconLike} alt="like" /></div>
+          <div><img src={iconChat} alt="chat" /></div>
+          <div><img src={iconProfileaktiv} alt="profile" /></div>
+        </div>
+      </footer>
 
     </div>
   );
