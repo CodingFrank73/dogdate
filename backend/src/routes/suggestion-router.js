@@ -31,7 +31,12 @@ suggestionRouter.get("/allwithfilter",
     async (req, res) => {
 
         try {
-            const users = await SuggestionService.listByFilter()
+            const users = await SuggestionService.listByFilter({
+                maxDistance: req.body.maxDistance,
+                gender: req.body.gender,
+                minAge: req.body.minAge,
+                maxAge: req.body.maxAge
+            })
 
             res.status(200).json(users);
 
