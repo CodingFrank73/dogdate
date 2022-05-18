@@ -32,6 +32,8 @@ const Home = () => {
 
                 <div className="home-doggy-bigpic">
                     <img src={dogImage} alt="dog pic" />
+                    <div className="dogName">Henry, 5</div>
+                    <div className="distanceKM">4 km</div>
                 </div>
 
                 <div className="home-like-wrapper">
