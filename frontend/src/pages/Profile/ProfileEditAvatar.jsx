@@ -1,12 +1,19 @@
 import { useState } from "react";
 import apiBaseUrl from "../../api"
 import { useNavigate } from "react-router-dom";
+
+//  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
+import iconHome from '../../assets/icons/home.svg';
+import iconLike from '../../assets/icons/like.svg';
+import iconChat from '../../assets/icons/chat.svg';
+import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
+import iconpen from '../../assets/icons/pen.svg';
 
 const ProfileEditAvatar = (props) => {
 
     const navigate = useNavigate()
-    
+
     const [profileImage, setProfileImage] = useState('');
     const [error, setError] = useState('Error uploading avatar');
 
@@ -29,7 +36,7 @@ const ProfileEditAvatar = (props) => {
 
             if (!result.err) {
                 console.log("Hat geklappt..........");
-                navigate(-1) 
+                navigate(-1)
                 return
             }
 
@@ -39,26 +46,37 @@ const ProfileEditAvatar = (props) => {
                 return
             }
 
-                   
+
         } catch (error) {
             console.log("error..............");
         }
-        
+
 
     }
 
     return (
-               <div className="signup">
-      <div className="signup-header">
-                <img className="signup-arrow-back" src={backarrow} alt="back" />
-                <h3>Upload Avatar</h3>
+        <div className="profile">
+            <div className="profile-header">
+                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <h2>Upload Avatar</h2>
             </div>
-            <form style={{ display: "flex", flexDirection: "column", width: "400px" }}>
-                <input type="file" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
-                <button onClick={doUpload} type="submit">Upload</button>
-            </form>
-            {error && 
-            <div><p>{error}</p></div>}
+            <div className="editAvatarBody">
+                <form className="editAvatar">
+                    <input type="file" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
+                    <button onClick={doUpload} type="submit">Upload</button>
+                </form>
+
+                {error &&
+                    <div><p>{error}</p></div>}
+            </div>
+            <footer>
+                <div className="nav">
+                    <div><img src={iconHome} alt="home" /></div>
+                    <div><img src={iconLike} alt="like" /></div>
+                    <div><img src={iconChat} alt="chat" /></div>
+                    <div><img src={iconProfileaktiv} alt="profile" /></div>
+                </div>
+            </footer>
         </div>
     );
 }
