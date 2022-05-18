@@ -68,7 +68,7 @@ const Profile = (props) => {
             setDogname(result.dogName)
             setGender(result.gender);
             setEmail(result.email)
-            setDateOfBirth(result.dateOfBirth)
+            setDateOfBirth(new Date(result.dateOfBirth).toLocaleDateString('en-CA'))
             setSize(result.size)
             setPhone(result.phone)
             setLocation(result.location);
@@ -96,6 +96,11 @@ const Profile = (props) => {
         setLanguage(e.target.value)
     }
 
+    const logout = () => {
+        props.setToken(null)
+        console.log("You are logged out")
+    }
+
     return (
         <div className="profile">
             <div className="profile-header">
@@ -103,8 +108,7 @@ const Profile = (props) => {
                 <h2>Profile</h2>
             </div>
             <div className="profileBody">
-                {/* <Link to="/profileEditAvatar" >Stift</Link> */}
-                <div className="profilePic">
+                 <div className="profilePic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
                     <div className="editProfilepic">
                         <Link to="/profile/profileEditAvatar" >
@@ -115,7 +119,7 @@ const Profile = (props) => {
 
                 <div className="headlineFrame">
                     <h3>Account Settings</h3>
-                    <button className='headlineButton'>Edit</button>
+                   <Link to="/profile/profileEditSettings"><button className='headlineButton'>Edit</button></Link> 
                 </div>
                 <div className="dataFrame">
                     <div className="dataLable">Name </div>
@@ -145,7 +149,7 @@ const Profile = (props) => {
 
                 <h3>Plan Settings</h3>
                 <div className="dataFrame">
-                    <div className="dataLable">Current Planr</div>
+                    <div className="dataLable">Current Plan</div>
                     <div className="dataData colorHighlight">{plan}</div>
                 </div>
                 <h3>Discovery Settings</h3>
@@ -211,7 +215,7 @@ const Profile = (props) => {
                     </div>
                 </Box>
 
-                <button className="buttonLogout">
+                <button onClick={logout} className="buttonLogout">
                     Logout
                 </button>
                 <button className="buttonDeleteAccount">

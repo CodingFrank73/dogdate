@@ -13,14 +13,31 @@ async function findAllExcept(id) {
 async function findAllByFilter({ maxDistance, gender, minAgeAsDate, maxAgeAsDate }) {
     const db = await getDB();
 
-    const users = await db.collection("users").find(
-        {
-            dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
-            gender: gender,
-            maxDistance: { $lte: maxDistance }
-        }).toArray();
+    if (gender === "all") {
+        const users = await db.collection("users").find(
+            {
+                dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
+                maxDistance: { $lte: maxDistance }
+            }).toArray();
 
-    return users
+        return users
+
+    } else {
+        const users = await db.collection("users").find(
+            {
+                dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
+                gender: gender,
+                maxDistance: { $lte: maxDistance }
+            }).toArray();
+
+        return users
+    }
+
+
+
+
+
+
 }
 
 module.exports = {

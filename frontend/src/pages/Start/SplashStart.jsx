@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 //  BILDER-IMPORT
 import ddLogo from '../../assets/icons/logo.svg';
 import googleLogo from '../../assets/icons/google-logo.svg';
