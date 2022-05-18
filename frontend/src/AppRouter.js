@@ -27,10 +27,10 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/splashstart" element={<SplashStart />} />
-            <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
+            <Route path="/login" element={<Login loginSuccess={loginSuccess} />} />
             <Route path="/signup" element={<Signup />} />
 
-          
+
             <Route path="/home" element={
                 <AuthRequired token={token} setToken={setToken}>
                     <Home token={token} />
@@ -54,7 +54,7 @@ function AppRoutes() {
                 </AuthRequired>}
             />
 
-             {/* <Route path="/profile/profileEditSettings" element={<ProfileEditSettings token={token} />} /> */}
+            {/* <Route path="/profile/profileEditSettings" element={<ProfileEditSettings token={token} />} /> */}
 
 
         </Routes>

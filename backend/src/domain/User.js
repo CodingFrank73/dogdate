@@ -4,24 +4,23 @@ function makeUser({
     profileImage,
     bigImage,
     dogName,
-    gender,
+    gender = "",
     dateOfBirth,
-    size,
+    size = "",
     email,
     phone,
     pwHash,
     salt,
     sixDigitVerificationCode,
-    plan,
+    plan = "free",
     location,
     postalCode,
-    language,
-    filterGender,
-    filterSize,
-    ageRangeMin,
-    ageRangeMax,
-    maxDistance,
-    km
+    language = "Deutsch",
+    filterGender = "",
+    filterSize = "",
+    ageMin = 1,
+    ageMax = 4,
+    maxDistance = 5,
 }) {
 
     if (typeof dogName !== "string" || dogName.trim().length === 0) {
@@ -55,10 +54,9 @@ function makeUser({
         language,
         filterGender,
         filterSize,
-        ageRangeMin,
-        ageRangeMax,
+        ageMin,
+        ageMax,
         maxDistance,
-        km
     }
 }
 
