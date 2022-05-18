@@ -54,8 +54,8 @@ const Login = (props) => {
                 <h2>Login</h2>
             </div>
             <form className='signup-box'>
-                <input type="text" name="email" id='' placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" name="password" id="" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" name="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>
