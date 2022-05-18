@@ -39,6 +39,8 @@ const Profile = (props) => {
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
 
+    const [error, setError] = useState("")
+
     const languages = [
         { value: "English" },
         { value: "French" },
@@ -77,6 +79,7 @@ const Profile = (props) => {
             setFilterSize(result.filterSize);
             setPlan(result.plan)
             setAge([result.ageRangeMin, result.ageRangeMax])
+            setMaxDistance(result.maxDistance)
 
         } catch (error) {
 
@@ -88,13 +91,75 @@ const Profile = (props) => {
         setAge(newValueAge);
     };
 
-    const handleChangeDistance = (event, newValueDistance) => {
-        setMaxDistance(newValueDistance);
-    };
+    const handleChangeDistance = async (event, newValueDistance) => {
+        const maxDistance = newValueDistance
+        console.log(maxDistance)
+        setMaxDistance(newValueDistance)
 
-    const changeLanguage = (e) => {
-        setLanguage(e.target.value)
+        try {
+            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editMaxDistance', {
+                method: "PUT",
+                headers: {
+                token: "JWT " + props.token,
+                "Content-Type": "application/json"
+            },
+                body: JSON.stringify({maxDistance: maxDistance})
+            })
+     
+      const result = await response.json()
+
+      if (!result.err) {
+        console.log("success!!")
+       
+        return
+      }
+
+      if (result.err.validationErrors) {
+        const firstError = result.err.validationErrors[0]
+        setError(firstError.msg + ": " + firstError.param)
+        return
+      }
+
+    } catch (error) {
+      console.log("show me an error !!!!")
     }
+  }
+   
+    
+
+    const changeLanguage = async (e) => {
+        const updatedLanguage = e.target.value
+
+         try {
+            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editLanguage', {
+                method: "PUT",
+                headers: {
+                token: "JWT " + props.token,
+                "Content-Type": "application/json"
+            },
+                body: JSON.stringify({language: updatedLanguage})
+            })
+      //console.log("data from Json.stringify -", updatedLanguage)
+
+      const result = await response.json()
+
+      if (!result.err) {
+        console.log("success!!")
+       
+        return
+      }
+
+      if (result.err.validationErrors) {
+        const firstError = result.err.validationErrors[0]
+        setError(firstError.msg + ": " + firstError.param)
+        return
+      }
+
+    } catch (error) {
+      console.log("show me an error !!!!")
+    }
+  }
+
 
     const logout = () => {
         props.setToken(null)

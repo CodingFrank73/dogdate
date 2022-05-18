@@ -15,7 +15,7 @@ function makeUser({
     plan = "free",
     location,
     postalCode,
-    language = "Deutsch",
+    language = "German",
     filterGender = "",
     filterSize = "",
     ageMin = 1,

@@ -6,6 +6,8 @@ const { showMyProfile } = require("./users/show-profile");
 const { editAvatar } = require("./users/edit-avatar")
 const { likeOne } = require("./users/like-one");
 const { editProfileSettings } = require("./users/edit-profile-settings");
+const { editLanguage } = require("./users/edit-language")
+const { editMaxDistance } = require("./users/edit-max-distance")
 
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
@@ -19,7 +21,9 @@ const UserService = {
     showMyProfile,
     editAvatar,
     likeOne,
-    editProfileSettings
+    editProfileSettings,
+    editLanguage,
+    editMaxDistance
 }
 
 const SuggestionService = {

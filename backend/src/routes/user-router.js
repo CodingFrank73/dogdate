@@ -169,7 +169,43 @@ userRouter.put("/myProfile/profileEditSettings",
         }
     })
 
+userRouter.put("/myProfile/editLanguage",
+    doAuthMiddleware,
+    async (req, res) => {
 
+        try {
+            const userId = req.userClaims.sub;
+            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.language)
+
+            const user = await UserService.editLanguage(userId, req.body.language)
+            
+            res.status(200).json({ user })
+            console.log("res.json aus route: ", { user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error editing language." })
+        }
+    })
+
+userRouter.put("/myProfile/editMaxDistance",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.maxDistance)
+
+            const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
+            
+            res.status(200).json({ user })
+            console.log("res.json aus route: ", { user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error editing max distance." })
+        }
+    })
 
 
 
