@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { image } from 'react';
 import apiBaseUrl from '../../api';
@@ -50,7 +51,7 @@ const Login = (props) => {
     return (
         <div className="profile">
             <div className="profile-header">
-                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
                 <h2>Login</h2>
             </div>
             <form className='signup-box'>

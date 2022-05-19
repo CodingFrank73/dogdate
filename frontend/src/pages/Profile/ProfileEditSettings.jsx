@@ -12,7 +12,6 @@ import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
 import iconChat from '../../assets/icons/chat.svg';
 import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
-import iconpen from '../../assets/icons/pen.svg';
 
 
 const ProfileEditSettings = (props) => {
