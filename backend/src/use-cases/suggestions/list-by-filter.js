@@ -1,16 +1,17 @@
 const { SuggestionDAO } = require("../../db-access")
 
-const listByFilter = async ({ maxDistance, gender, minAge, maxAge }) => {
+const listByFilter = async ({ maxDistance, filterGender, filterSize, age }) => {
 
-    const minAgeAsDate = subtractYears(minAge)
-    const maxAgeAsDate = subtractYears(maxAge)
+    const minAgeAsDate = subtractYears(age[0])
+    const maxAgeAsDate = subtractYears(age[1])
 
-    const users = await SuggestionDAO.findAllByFilter({ maxDistance, gender, minAgeAsDate, maxAgeAsDate })
+    const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
         gender: u.gender,
+        size: u.size,
         // bigImage: u.bigImage,
         age: getAgeByYear(u.dateOfBirth),
         dateOfBirth: u.dateOfBirth,

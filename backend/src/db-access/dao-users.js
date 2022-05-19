@@ -31,25 +31,25 @@ async function update(userId, updatedInfo) {
     const db = await getDB();
     const result = await db.collection(collectionName).updateOne(
         { _id: userId },
-        { $set: updatedInfo }        
+        { $set: updatedInfo }
     )
-     console.log("updatedInfo from DAO:", updatedInfo, userId)
-     console.log("result from DAO", result)
+    console.log("updatedInfo from DAO:", updatedInfo, userId)
+    console.log("result from DAO", result)
 
     return result
 }
 
 
-async function updateAvatar({userId, profileImage}) {  
-   console.log("userId aus DAO", userId)
+async function updateAvatar({ userId, profileImage }) {
+    console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
     )
-     console.log("IDtest", userId)
-     console.log("updated user aus DAO", updatedUser)
-     return updatedUser
+    console.log("IDtest", userId)
+    console.log("updated user aus DAO", updatedUser)
+    return updatedUser
 }
 
 async function findMatches({ myId, likedId }) {
@@ -91,24 +91,24 @@ async function updateLikeToMatch(likeId) {
     return like
 }
 
-async function updateLanguage({userId, language}) {  
+async function updateLanguage({ userId, language }) {
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { language: language } }
     )
-     console.log("IDtest", userId)
-     return updatedUser
+    console.log("IDtest", userId)
+    return updatedUser
 }
 
-async function updateMaxDistance({userId, maxDistance}) {  
+async function updateMaxDistance({ userId, maxDistance }) {
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { maxDistance: maxDistance } }
     )
-     console.log("IDtest", userId)
-     return updatedUser
+    console.log("IDtest", userId)
+    return updatedUser
 }
 
 
