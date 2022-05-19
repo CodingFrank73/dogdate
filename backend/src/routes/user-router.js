@@ -199,7 +199,7 @@ userRouter.put("/myProfile/editMaxDistance",
             const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
 
             res.status(200).json({ user })
-            console.log("res.json aus route: ", { user })
+           // console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -213,17 +213,16 @@ userRouter.put("/myProfile/ageRange",
 
         try {
             const userId = req.userClaims.sub;
+            const ageRangeArr = req.body;
+            console.log("TEST AgeRangeArr in Route ", ageRangeArr);
+            const user = await UserService.editAgeRange(userId, ageRangeArr) 
 
-            const ageRangeMin = req.body;
-            console.log(ageRangeMin);
-            // const user = await UserService.editMaxDistance(userId, req.body.maxDistance) 
-
-            // res.status(200).json({ user })
-            // console.log("res.json aus route: ", { user })
+            res.status(200).json({ user })
+            //console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
-            res.status(500).json({ err: error.message || "Error editing max distance." })
+            res.status(500).json({ err: error.message || "Error editing age range." })
         }
     })
 
