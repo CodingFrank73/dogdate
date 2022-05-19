@@ -16,8 +16,6 @@ import iconChat from '../../assets/icons/chat.svg';
 import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
 import iconpen from '../../assets/icons/pen.svg';
 
-
-
 import pic from '../../assets/img/shittingDogColor.png'
 
 import apiBaseUrl from "../../api"
@@ -150,7 +148,6 @@ const Profile = (props) => {
             console.log("show me an error !!!!")
         }
     }
-
 
 
     const changeLanguage = async (e) => {
@@ -317,10 +314,10 @@ const Profile = (props) => {
 
             <footer>
                 <div className="nav">
-                    <div><img src={iconHome} alt="home" /></div>
-                    <div><img src={iconLike} alt="like" /></div>
-                    <div><img src={iconChat} alt="chat" /></div>
-                    <div><img src={iconProfileaktiv} alt="profile" /></div>
+                    <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
+                    <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
+                    <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+                    <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
                 </div>
             </footer>
 

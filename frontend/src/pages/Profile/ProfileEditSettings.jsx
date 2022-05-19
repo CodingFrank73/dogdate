@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
@@ -93,7 +94,7 @@ const ProfileEditSettings = (props) => {
 
     <div className="profile">
       <div className="profile-header">
-        <img className="profile-arrow-back" src={backarrow} alt="back" />
+        <Link to="/profile" ><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
         <h2>Edit</h2>
 
       </div>
@@ -146,10 +147,10 @@ const ProfileEditSettings = (props) => {
 
       <footer>
         <div className="nav">
-          <div><img src={iconHome} alt="home" /></div>
-          <div><img src={iconLike} alt="like" /></div>
-          <div><img src={iconChat} alt="chat" /></div>
-          <div><img src={iconProfileaktiv} alt="profile" /></div>
+          <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
+          <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
+          <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+          <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
         </div>
       </footer>
 
