@@ -16,12 +16,10 @@ function makeUser({
     location,
     postalCode,
     language = "German",
-    filterGender = "",
-    filterSize = "",
-    ageRange = [1, 4],
-    ageMin = 1,
-    ageMax = 4,
-    maxDistance = 5,
+    filterGender = ["f", "m"],
+    filterSize = ["s", "m", "l"],
+    ageRange = [0, 20],
+    maxDistance = 200,
 }) {
 
     if (typeof dogName !== "string" || dogName.trim().length === 0) {
@@ -56,8 +54,6 @@ function makeUser({
         filterGender,
         filterSize,
         ageRange,
-        ageMin,
-        ageMax,
         maxDistance,
     }
 }
