@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
 
 import backarrow from '../../assets/icons/arrow-back.svg';
@@ -13,7 +15,7 @@ const Signup = () => {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [bigImage, setBigImage] = useState();
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
 
     const doSignUp = async (e) => {
         e.preventDefault();
@@ -36,6 +38,8 @@ const Signup = () => {
 
             if (!result.err) {
                 console.log("Hat geklappt..........");
+
+                navigate("/login")
                 return
             }
 
@@ -55,7 +59,9 @@ const Signup = () => {
     return (
         <div className="profile">
             <div className="profile-header">
-                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <Link to={-1}>
+                    <img className="profile-arrow-back" src={backarrow} alt="back" />
+                </Link>
                 <h2>Sign Up</h2>
 
             </div>

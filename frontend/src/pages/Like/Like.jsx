@@ -23,14 +23,13 @@ const Home = () => {
     return (
         <div>
 
-            <div className="home">
-                <div className="home-header">
-                    <img className="home-dd-logo" src={ddLogo} alt="dogdate logo" />
-                    <h2>dogdate</h2>
-                    <img className="home-filter" src={filter} alt="filter" />
+            <div className="profile">
+                <div className="profile-header">
+                    <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
+                    <h2>Likes</h2>
                 </div>
 
-                <h1>Like</h1>
+                <h3>5 Likes</h3>
 
 
                 <footer>

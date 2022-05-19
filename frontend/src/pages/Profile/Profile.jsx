@@ -192,7 +192,7 @@ const Profile = (props) => {
     return (
         <div className="profile">
             <div className="profile-header">
-                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
                 <h2>Profile</h2>
             </div>
             <div className="profileBody">
