@@ -85,6 +85,9 @@ const Profile = (props) => {
 
 
     const handleChange = async (event, newValueAge) => {
+        if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
+            return
+        }
         setAgeRange(newValueAge);
 
         try {
@@ -94,7 +97,7 @@ const Profile = (props) => {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify([ageRange[0], ageRange[1]])
+                body: JSON.stringify([newValueAge[0], newValueAge[1]])
             })
 
             const result = await response.json()
@@ -117,7 +120,9 @@ const Profile = (props) => {
     };
 
     const handleChangeDistance = async (event, newValueDistance) => {
-        const maxDistance = newValueDistance
+        if(newValueDistance === maxDistance) {
+            return  //value not changed -> cancel
+        }
         setMaxDistance(newValueDistance)
 
         try {
@@ -127,7 +132,7 @@ const Profile = (props) => {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ maxDistance: maxDistance })
+                body: JSON.stringify({ maxDistance: newValueDistance })
             })
 
             const result = await response.json()
@@ -282,7 +287,7 @@ const Profile = (props) => {
                         <p>Age Range</p>
                         <Slider
                             value={ageRange}
-                            onChange={handleChange}
+                            onChangeCommitted={handleChange}
                             valueLabelDisplay="on"
                             min={0}
                             max={20}
@@ -294,7 +299,7 @@ const Profile = (props) => {
                         <p>Maximum Distance</p>
                         <Slider
                             value={maxDistance}
-                            onChange={handleChangeDistance}
+                            onChangeCommitted={handleChangeDistance}
                             valueLabelDisplay="on"
                             min={0}
                             max={200}

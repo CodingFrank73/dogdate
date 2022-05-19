@@ -8,6 +8,7 @@ const { likeOne } = require("./users/like-one");
 const { editProfileSettings } = require("./users/edit-profile-settings");
 const { editLanguage } = require("./users/edit-language")
 const { editMaxDistance } = require("./users/edit-max-distance")
+const { editAgeRange } = require("./users/edit-age-range")
 
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
@@ -23,7 +24,8 @@ const UserService = {
     likeOne,
     editProfileSettings,
     editLanguage,
-    editMaxDistance
+    editMaxDistance,
+    editAgeRange
 }
 
 const SuggestionService = {

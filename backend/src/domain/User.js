@@ -15,7 +15,7 @@ function makeUser({
     plan = "free",
     location,
     postalCode,
-    language = "German",
+    language = "English",
     filterGender = ["f", "m"],
     filterSize = ["s", "m", "l"],
     ageRange = [0, 20],

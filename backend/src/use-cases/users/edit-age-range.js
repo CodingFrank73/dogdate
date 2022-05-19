@@ -1,8 +1,8 @@
 const { UserDAO } = require("../../db-access");
 const { makeUser } = require("../../domain/User");
 
-async function editMaxDistance( userId, maxDistance ) {
-    console.log("UserId, maxDistance from usecase", userId, maxDistance)
+async function editAgeRange( userId, ageRange ) {
+    console.log("UserId from usecase", userId, ageRange)
 
     const foundUser = await UserDAO.findById(userId)
     if (!foundUser) {
@@ -11,18 +11,17 @@ async function editMaxDistance( userId, maxDistance ) {
     const user = makeUser(foundUser)
     console.log("use case, user:", user.dogName)
    
-    const insertResult = await UserDAO.updateMaxDistance({userId, maxDistance}); //##
-     console.log("insertResult aus usecase", insertResult);
+    const insertResult = await UserDAO.updateAgeRange({userId, ageRange}); //##
     const wasSuccessful = insertResult.acknowledged === true && insertResult.modifiedCount === 1
     if(!wasSuccessful) {
-        throw new Error("Updating maxDistance failed, please try again.")
+        throw new Error("Updating ageRange failed, please try again.")
     }
-   
+    console.log("insertResult aus usecase", insertResult);
    
     return user
 }
 
 
 module.exports = {
-    editMaxDistance
+    editAgeRange
 }
