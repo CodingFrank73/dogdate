@@ -23,18 +23,6 @@ async function editProfileSettings( {userId, ...updatedInfo} ) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = {
     editProfileSettings
 }

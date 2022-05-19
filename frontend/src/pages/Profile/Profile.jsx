@@ -22,7 +22,7 @@ import apiBaseUrl from "../../api"
 
 const Profile = (props) => {
 
-    const [age, setAge] = useState([2, 4.5]);
+    const [ageRange, setAgeRange] = useState([2, 4.5]);
     const [maxDistance, setMaxDistance] = useState(100);
     const [dogname, setDogname] = useState('');
     const [gender, setGender] = useState('');
@@ -76,22 +76,48 @@ const Profile = (props) => {
             setFilterGender(result.filterGender);
             setFilterSize(result.filterSize);
             setPlan(result.plan)
-            setAge([result.ageRangeMin, result.ageRangeMax])
+            setAgeRange([result.ageRange[0], result.ageRange[1]])
             setMaxDistance(result.maxDistance)
-
         } catch (error) {
 
         }
     }
 
 
-    const handleChange = (event, newValueAge) => {
-        setAge(newValueAge);
+    const handleChange = async (event, newValueAge) => {
+        setAgeRange(newValueAge);
+
+        try {
+            const response = await fetch(apiBaseUrl + '/api/users/myProfile/ageRange', {
+                method: "PUT",
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify([ageRange[0], ageRange[1]])
+            })
+
+            const result = await response.json()
+
+            if (!result.err) {
+                console.log("success!!")
+
+                return
+            }
+
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
+
+        } catch (error) {
+            console.log("show me an error !!!!")
+        }
     };
 
     const handleChangeDistance = async (event, newValueDistance) => {
         const maxDistance = newValueDistance
-        console.log(maxDistance)
         setMaxDistance(newValueDistance)
 
         try {
@@ -255,12 +281,12 @@ const Profile = (props) => {
                     <div className="dataFrame">
                         <p>Age Range</p>
                         <Slider
-                            value={age}
+                            value={ageRange}
                             onChange={handleChange}
                             valueLabelDisplay="on"
                             min={0}
                             max={20}
-                            step={.5}
+                            step={1}
                         />
                     </div>
 
