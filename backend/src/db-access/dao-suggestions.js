@@ -13,17 +13,6 @@ async function findAllExcept(id) {
 async function findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate }) {
     const db = await getDB();
 
-    // if (gender === "all") {
-    //     const users = await db.collection("users").find(
-    //         {
-    //             dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
-    //             maxDistance: { $lte: maxDistance }
-    //         }).toArray();
-
-    //     return users
-
-    // } else {
-    console.log("Hallo DAO")
     const users = await db.collection("users").find(
         {
             dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
@@ -32,14 +21,8 @@ async function findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAs
             maxDistance: { $lte: maxDistance }
         }).toArray();
 
+    console.log("user in dao", users);
     return users
-    // }
-
-
-
-
-
-
 }
 
 module.exports = {

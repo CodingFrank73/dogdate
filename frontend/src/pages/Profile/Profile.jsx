@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -38,6 +38,8 @@ const Profile = (props) => {
     const [profileImage, setProfileImage] = useState('');
 
     const [error, setError] = useState("")
+
+    const navigate = useNavigate()
 
     const languages = [
         { value: "English" },
@@ -192,7 +194,9 @@ const Profile = (props) => {
     return (
         <div className="profile">
             <div className="profile-header">
-                <img className="profile-arrow-back" src={backarrow} alt="back" />
+                <Link to={-1}>
+                    <img className="profile-arrow-back" src={backarrow} alt="back" />
+                </Link>
                 <h2>Profile</h2>
             </div>
             <div className="profileBody">
