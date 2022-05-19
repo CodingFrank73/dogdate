@@ -103,12 +103,23 @@ async function updateLanguage({ userId, language }) {
 
 async function updateMaxDistance({ userId, maxDistance }) {
     const db = await getDB();
-    const updatedUser = await db.collection(collectionName).updateOne(
+    const insertResult = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { maxDistance: maxDistance } }
     )
     console.log("IDtest", userId)
-    return updatedUser
+    return insertResult
+}
+
+async function updateAgeRange({ userId, ageRange }) {
+    const db = await getDB();
+    console.log("id, ageRange from DAO ", userId, ageRange)
+    const insertResult = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: { ageRange: ageRange } }
+    )
+    console.log("IDtest", userId)
+    return insertResult
 }
 
 
@@ -125,5 +136,6 @@ module.exports = {
     insertLike,
     updateLikeToMatch,
     updateLanguage,
-    updateMaxDistance
+    updateMaxDistance,
+    updateAgeRange
 }

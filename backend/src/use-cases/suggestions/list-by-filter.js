@@ -1,20 +1,30 @@
-const { SuggestionDAO } = require("../../db-access")
 
-const listByFilter = async ({ maxDistance, filterGender, filterSize, age }) => {
+const { SuggestionDAO, UserDAO } = require("../../db-access")
+const { makeUser } = require("../../domain/User")
 
-    const minAgeAsDate = subtractYears(age[0])
-    const maxAgeAsDate = subtractYears(age[1])
+const listByFilter = async ({ userId }) => {
+
+    const foundUser = await UserDAO.findById(userId)
+
+    if (!foundUser) {
+        throw new Error("User doas not exists")
+    }
+
+    const user = makeUser(foundUser)
+
+    const { maxDistance, filterGender, ageRange, filterSize } = user
+
+
+
+    const minAgeAsDate = subtractYears(ageRange[0])
+    const maxAgeAsDate = subtractYears(ageRange[1])
 
     const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
-        dogName: u.dogName,
-        gender: u.gender,
-        size: u.size,
-        // bigImage: u.bigImage,
+        bigImage: u.bigImage,
         age: getAgeByYear(u.dateOfBirth),
-        dateOfBirth: u.dateOfBirth,
         maxDistance: u.maxDistance
     }))
 

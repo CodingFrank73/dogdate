@@ -17,11 +17,38 @@ import iconLike from '../../assets/icons/like.svg';
 import iconChat from '../../assets/icons/chat.svg';
 import iconProfile from '../../assets/icons/profile.svg';
 
-const Home = () => {
+import apiBaseUrl from "../../api"
+
+const Home = (props) => {
+
+    const [error, setError] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+
 
     useEffect(() => {
+        fetchSuggestions()
 
-    }, []);
+    }, [])
+
+    const fetchSuggestions = async () => {
+        try {
+            const response = await fetch(apiBaseUrl + `/api/suggestion/allwithfilter`, {
+                headers: {
+                    token: "JWT " + props.token
+                }
+            })
+
+            const data = await response.json()
+            console.log(data);
+            setSuggestions(data)
+
+
+        } catch (error) {
+
+        }
+    }
+
+    console.log(suggestions);
 
     return (
         <div>

@@ -27,18 +27,15 @@ suggestionRouter.get("/all",
     })
 
 suggestionRouter.get("/allwithfilter",
-    // doAuthMiddleware,
+    doAuthMiddleware,
     async (req, res) => {
 
         try {
-            const users = await SuggestionService.listByFilter({
-                maxDistance: req.body.maxDistance,
-                filterGender: req.body.filterGender,
-                filterSize: req.body.filterSize,
-                age: req.body.age
+            const suggestions = await SuggestionService.listByFilter({
+                userId: req.userClaims.sub
             })
 
-            res.status(200).json(users);
+            res.status(200).json(suggestions);
 
         } catch (error) {
             res.status(500).json({ err: error.message || "Unknown error while reading users" })
