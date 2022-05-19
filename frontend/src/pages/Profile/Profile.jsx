@@ -16,8 +16,6 @@ import iconChat from '../../assets/icons/chat.svg';
 import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
 import iconpen from '../../assets/icons/pen.svg';
 
-
-
 import pic from '../../assets/img/shittingDogColor.png'
 
 import apiBaseUrl from "../../api"
@@ -100,65 +98,64 @@ const Profile = (props) => {
             const response = await fetch(apiBaseUrl + '/api/users/myProfile/editMaxDistance', {
                 method: "PUT",
                 headers: {
-                token: "JWT " + props.token,
-                "Content-Type": "application/json"
-            },
-                body: JSON.stringify({maxDistance: maxDistance})
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ maxDistance: maxDistance })
             })
-     
-      const result = await response.json()
 
-      if (!result.err) {
-        console.log("success!!")
-       
-        return
-      }
+            const result = await response.json()
 
-      if (result.err.validationErrors) {
-        const firstError = result.err.validationErrors[0]
-        setError(firstError.msg + ": " + firstError.param)
-        return
-      }
+            if (!result.err) {
+                console.log("success!!")
 
-    } catch (error) {
-      console.log("show me an error !!!!")
+                return
+            }
+
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
+
+        } catch (error) {
+            console.log("show me an error !!!!")
+        }
     }
-  }
-   
-    
+
 
     const changeLanguage = async (e) => {
         const updatedLanguage = e.target.value
 
-         try {
+        try {
             const response = await fetch(apiBaseUrl + '/api/users/myProfile/editLanguage', {
                 method: "PUT",
                 headers: {
-                token: "JWT " + props.token,
-                "Content-Type": "application/json"
-            },
-                body: JSON.stringify({language: updatedLanguage})
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ language: updatedLanguage })
             })
-      //console.log("data from Json.stringify -", updatedLanguage)
+            //console.log("data from Json.stringify -", updatedLanguage)
 
-      const result = await response.json()
+            const result = await response.json()
 
-      if (!result.err) {
-        console.log("success!!")
-       
-        return
-      }
+            if (!result.err) {
+                console.log("success!!")
 
-      if (result.err.validationErrors) {
-        const firstError = result.err.validationErrors[0]
-        setError(firstError.msg + ": " + firstError.param)
-        return
-      }
+                return
+            }
 
-    } catch (error) {
-      console.log("show me an error !!!!")
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
+
+        } catch (error) {
+            console.log("show me an error !!!!")
+        }
     }
-  }
 
 
     const logout = () => {
@@ -173,7 +170,7 @@ const Profile = (props) => {
                 <h2>Profile</h2>
             </div>
             <div className="profileBody">
-                 <div className="profilePic">
+                <div className="profilePic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
                     <div className="editProfilepic">
                         <Link to="/profile/profileEditAvatar" >
@@ -184,7 +181,7 @@ const Profile = (props) => {
 
                 <div className="headlineFrame">
                     <h3>Account Settings</h3>
-                   <Link to="/profile/profileEditSettings"><button className='headlineButton'>Edit</button></Link> 
+                    <Link to="/profile/profileEditSettings"><button className='headlineButton'>Edit</button></Link>
                 </div>
                 <div className="dataFrame">
                     <div className="dataLable">Name </div>
@@ -291,10 +288,10 @@ const Profile = (props) => {
 
             <footer>
                 <div className="nav">
-                    <div><img src={iconHome} alt="home" /></div>
-                    <div><img src={iconLike} alt="like" /></div>
-                    <div><img src={iconChat} alt="chat" /></div>
-                    <div><img src={iconProfileaktiv} alt="profile" /></div>
+                    <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
+                    <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
+                    <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+                    <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
                 </div>
             </footer>
 

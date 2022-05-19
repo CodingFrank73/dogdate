@@ -39,13 +39,11 @@ h2{
 }
 
 .loadingIndicator{
-    
     height: 100vh;
     overflow: hidden;
     
     img{
         margin-top: 50%;
-      
     }
 }
 
@@ -85,6 +83,7 @@ h2{
         background: #fff;
         border: 1px solid #fff;
         border-radius: 22px;
+        cursor: pointer;
         .wbLogo{
             position: absolute;
             left: 18px; 
@@ -160,66 +159,8 @@ h2{
     }
 }
 
-// ================================================
-// SignUp -- LogIn
-// ================================================
 
-// .signup{
-//     background: #a86868;
-    
 
-//     .signup-header{
-//         position: fixed;
-//         top: 0;
-//         padding-top: 6px;
-//         width: 100%;
-//         padding-bottom: 0px;
-//         display: flex;
-//         background: #e5e5e5;
-//         z-index: 2;
-//         .signup-arrow-back{
-//             width: 36px;
-//             padding: 0 12px 0 18px;
-//         }
-//     }
-//     .signup-box{
-//         width: 90%;
-//         padding-top: 140px;
-//         margin: 0px 5% 0px 5%;
-
-//         input, select{
-//             width: 100%;
-//             border: none;
-//             border-bottom: 1px solid #8e8e8e;
-//             background: #e5e5e5;
-//             padding: 2px 2px 4px 2px;
-//             font-family: "Poppins", Arial, Helvetica, sans-serif;
-//             margin-bottom: 12px;
-//         }
-//         input:focus,  select:focus,{
-//             border: none;
-//             border: 0;
-//             outline: none;
-//             border-bottom: 1px solid #555;
-//         }
-//         option{
-//             font-family: "Poppins", Arial, Helvetica, sans-serif;
-//         }
-
-//         button{
-//             font-family: "Poppins", Arial, Helvetica, sans-serif;
-//             color: #fff;
-//             text-align: center;
-//             padding: 15px 0;
-//             margin: 34px 10% 0 10%;
-//             width: 80%;
-//             background: #5A1AED;
-//             border: 0;
-//             border-radius: 24px;
-//         }
-
-//     }
-// }
 // ================================================
 // PROFILE -- SignUp -- LogIn
 // ================================================
@@ -240,6 +181,7 @@ h2{
             top: 57px;
             left: 16px;
             width: 26px;
+            cursor:pointer;
         }
     }
 
@@ -279,6 +221,7 @@ h2{
             background: #5A1AED;
             border: 0;
             border-radius: 24px;
+            cursor:pointer;
         }
     }
 
@@ -307,7 +250,7 @@ h2{
             }
             .editProfilepic{
                 position: absolute;
-                top:3px;
+                bottom:3px;
                 right:3px;
                 width: 36px;
                 height: 36px;
@@ -315,7 +258,7 @@ h2{
                 border-radius: 50%;
                 padding: 6px;
                 box-shadow: 0 0 4px #666;
-
+                cursor:pointer;
             }
         }
         .headlineFrame{
@@ -338,6 +281,7 @@ h2{
                 justify-content: flex-end;
                 color: #ff5870;
                 border: 0;
+                cursor: pointer;
             }
         }
         .dataFrame{
@@ -377,6 +321,7 @@ h2{
             padding: 15px 0;
             border: 1px solid #ccc;
             border-radius: 24px;
+            cursor:pointer;
         }
         .buttonDeleteAccount{
             width: 100%;
@@ -388,6 +333,7 @@ h2{
             padding: 15px 0;
             border: 0;
             border-radius: 24px;
+            cursor:pointer;
         }
     }
 }
@@ -418,34 +364,115 @@ h2{
             right: 12px;
             width: 28px;
             padding-top: 11px;
+            cursor: pointer;
         }
     }
     .home-doggy-bigpic{
         position: relative;
         top: 120px;
-        
         width: 90%;
         margin: 0% 5%;
         line-height: 0;
         border-radius: 28px;
         box-shadow: 0px 4px 8px 4px #ccc;
         overflow: hidden;
+        .dog-wrapper01{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            // height: 120px;
+            line-height: 0;
+            z-index: 11;
 
-        .dogName{
-            position: absolute;
-            bottom: 50px;
-            left: 16px;
-            font-size: 36px;
-            color: #fff;
-            text-shadow: 0 0 1px #333;
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
         }
-        .distanceKM{
+        .dog-wrapper02{
+            // position: absolute;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 12;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        .dog-wrapper03{
             position: absolute;
-            bottom: 24px;
-            left: 16px;
-            font-size: 18px;
-            color: #fff;
-            text-shadow: 0 0 1px #333;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 13;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        .dog-wrapper04{
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 14;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
         }
     }
     .home-like-wrapper{
@@ -462,13 +489,28 @@ h2{
             justify-items: center;
             justify-content: center;
             align-content: center;
+            cursor: pointer;
             
-            .home-dislike, .home-like{
+            .home-dislike{
+                width: 66px;
+                height: 66px;
+                background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+                border-radius: 50%;
+                padding: 17px;
+            }
+            .home-like{
                 width: 66px;
                 height: 66px;
                 background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
                 border-radius: 50%;
                 padding: 15px;
+            }
+            .home-dislike img{
+                width: 32px;
+                height: 32px;
+            }
+            .home-like img{
+                margin-top: 2px;
             }
         }
     }

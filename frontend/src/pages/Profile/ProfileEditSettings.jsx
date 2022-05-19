@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
@@ -93,7 +94,7 @@ const ProfileEditSettings = (props) => {
 
     <div className="profile">
       <div className="profile-header">
-        <img className="profile-arrow-back" src={backarrow} alt="back" />
+        <Link to="/profile" ><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
         <h2>Edit</h2>
 
       </div>
@@ -102,43 +103,43 @@ const ProfileEditSettings = (props) => {
       <form className="signup-box">
         <h3>Account Settings</h3>
         <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
-         <div className="dataFrame">
-                    <div className="dataLable">
-                        <InputLabel id="labelLanguage"> Gender</InputLabel></div>   
-                    <div className="dataData">
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={gender}
-                            label="Gender" 
-                            onChange={(e) => {setGender(e.target.value)} }
-                        >
-                            <MenuItem value="m">Male</MenuItem>
-                            <MenuItem value="f">Female</MenuItem>
-                        </Select>
-                   </div>
-                </div>
-                 
+        <div className="dataFrame">
+          <div className="dataLable">
+            <InputLabel id="labelLanguage"> Gender</InputLabel></div>
+          <div className="dataData">
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={gender}
+              label="Gender"
+              onChange={(e) => { setGender(e.target.value) }}
+            >
+              <MenuItem value="m">Male</MenuItem>
+              <MenuItem value="f">Female</MenuItem>
+            </Select>
+          </div>
+        </div>
+
         <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
-         
-         <div className="dataFrame">
-                    <div className="dataLable">
-                        <InputLabel id="labelLanguage"> Size</InputLabel></div>
-                    <div className="dataData">
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={size}
-                            label="Size" 
-                            onChange={(e) => {setSize(e.target.value)} }
-                        >
-                            <MenuItem value="s">Small</MenuItem>
-                            <MenuItem value="m">Medium</MenuItem>
-                            <MenuItem value="l">Large</MenuItem>
-                        </Select>
-                    </div>
-                    </div>
-                
+
+        <div className="dataFrame">
+          <div className="dataLable">
+            <InputLabel id="labelLanguage"> Size</InputLabel></div>
+          <div className="dataData">
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={size}
+              label="Size"
+              onChange={(e) => { setSize(e.target.value) }}
+            >
+              <MenuItem value="s">Small</MenuItem>
+              <MenuItem value="m">Medium</MenuItem>
+              <MenuItem value="l">Large</MenuItem>
+            </Select>
+          </div>
+        </div>
+
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
         <button onClick={doUpdate} type="submit">SAVE</button>
@@ -146,10 +147,10 @@ const ProfileEditSettings = (props) => {
 
       <footer>
         <div className="nav">
-          <div><img src={iconHome} alt="home" /></div>
-          <div><img src={iconLike} alt="like" /></div>
-          <div><img src={iconChat} alt="chat" /></div>
-          <div><img src={iconProfileaktiv} alt="profile" /></div>
+          <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
+          <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
+          <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+          <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
         </div>
       </footer>
 
