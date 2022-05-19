@@ -68,7 +68,7 @@ const ProfileEditSettings = (props) => {
         },
         body: JSON.stringify(dataToUpdate)
       })
-      console.log("data from Json.stringify -", dataToUpdate) //wo zum Henker ist die ID????
+      console.log("data from Json.stringify -", dataToUpdate)
 
       const result = await response.json()
 
