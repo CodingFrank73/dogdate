@@ -188,9 +188,9 @@ const Home = (props) => {
                     <div className="dataFrame">
                         <p>Size</p>
                         <div className="sizeBox">
-                            <div>S</div>
-                            <div>M</div>
-                            <div>L</div>
+                            <div className="sizeSmall-aktiv">S</div>
+                            <div className="sizeMiddle">M</div>
+                            <div className="sizeLarge">L</div>
                         </div>
                     </div>
 
