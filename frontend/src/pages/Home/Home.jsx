@@ -139,10 +139,6 @@ const Home = (props) => {
                     {/* <Button onClick={handleOpen}>Open modal</Button> */}
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
-
-
-
-
                 <footer>
                     <div className="nav">
                         <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
