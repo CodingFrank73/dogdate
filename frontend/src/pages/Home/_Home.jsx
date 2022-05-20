@@ -76,7 +76,7 @@ const Home = (props) => {
     }
 
     const handleChangeSize = async (event, newValueSize) => {
-        console.log(newValueSize);
+        console.log(event);
     }
 
 
@@ -159,6 +159,7 @@ const Home = (props) => {
                         <div className="dogName">Sandy, 2</div>
                         <div className="distanceKM">8 km</div>
                     </div>
+
                 </div>
 
                 <div className="home-like-wrapper">
@@ -224,8 +225,6 @@ const Home = (props) => {
                     </Typography> */}
                 </Box>
             </Modal>
-
-
         </div>
 
     );

@@ -76,6 +76,31 @@ userRouter.post("/myProfile/editAvatar",
         }
     })
 
+userRouter.post("/myProfile/editBigImage",
+    pictureUploadMiddleware,
+    doAuthMiddleware,
+    async (req, res) => {
+        console.log("Route, req.file should be here:", req.file);
+
+        try {
+            const userId = req.userClaims.sub;
+            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            console.log("userId aus route", userId) 
+           // console.log("bigPic", bigPicBas64)
+
+            const user = await UserService.editBigImage({
+                userId: userId,
+                bigImage: bigPicBas64
+            })
+
+            res.status(201).json(user)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Updating Big Image." })
+        }
+    })    
+
 userRouter.post("/login",
     body("email").isEmail(),
     doValidation,

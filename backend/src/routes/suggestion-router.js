@@ -31,6 +31,7 @@ suggestionRouter.get("/allwithfilter",
     async (req, res) => {
 
         try {
+            console.log("userId: ", req.userClaims.sub)
             const suggestions = await SuggestionService.listByFilter({
                 userId: req.userClaims.sub
             })

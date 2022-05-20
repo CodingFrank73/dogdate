@@ -10,10 +10,18 @@ async function findAll() {
 }
 
 async function findById(id) {
+    console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
+    console.log("User in DOUser: ", user);
     return user
 }
+
+// async function findByEmailWithoutImage(email) {
+//     const db = await getDB();
+//     const user = await db.collection(collectionName).findOne({ email: email }, { dogName: 1, dateOfBirth: 1, pwHash: 1, salt: 1, email: 1 });
+//     return user
+// }
 
 async function findByEmail(email) {
     const db = await getDB();
@@ -46,6 +54,18 @@ async function updateAvatar({ userId, profileImage }) {
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
+    )
+    console.log("IDtest", userId)
+    console.log("updated user aus DAO", updatedUser)
+    return updatedUser
+}
+
+async function updateBigImage({ userId, bigImage }) {
+    console.log("userId aus DAO bigImage", userId)
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: { bigImage: bigImage } }
     )
     console.log("IDtest", userId)
     console.log("updated user aus DAO", updatedUser)
@@ -150,5 +170,6 @@ module.exports = {
     updateLanguage,
     updateMaxDistance,
     updateAgeRange,
-    deleteUser
+    deleteUser,
+    updateBigImage
 }
