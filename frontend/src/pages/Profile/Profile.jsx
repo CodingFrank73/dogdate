@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import AlertDialog from './AlertDelete';
 
 //  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
@@ -36,7 +37,7 @@ const Profile = (props) => {
     const [filterGender, setFilterGender] = useState('');
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
-
+    
     const [error, setError] = useState("")
 
     const navigate = useNavigate()
@@ -80,14 +81,15 @@ const Profile = (props) => {
             setPlan(result.plan)
             setAgeRange([result.ageRange[0], result.ageRange[1]])
             setMaxDistance(result.maxDistance)
+           
         } catch (error) {
 
         }
     }
 
 
-    const handleChange = async (event, newValueAge) => {
-        if (newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
+    const handleChange = async (newValueAge) => {
+        if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
             return
         }
         setAgeRange(newValueAge);
@@ -121,8 +123,9 @@ const Profile = (props) => {
         }
     };
 
-    const handleChangeDistance = async (event, newValueDistance) => {
-        if (newValueDistance === maxDistance) {
+
+    const handleChangeDistance = async (newValueDistance) => {
+        if(newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
         setMaxDistance(newValueDistance)
@@ -159,6 +162,7 @@ const Profile = (props) => {
 
     const changeLanguage = async (e) => {
         const updatedLanguage = e.target.value
+        setLanguage(updatedLanguage)
 
         try {
             const response = await fetch(apiBaseUrl + '/api/users/myProfile/editLanguage', {
@@ -169,8 +173,7 @@ const Profile = (props) => {
                 },
                 body: JSON.stringify({ language: updatedLanguage })
             })
-            //console.log("data from Json.stringify -", updatedLanguage)
-
+           
             const result = await response.json()
 
             if (!result.err) {
@@ -194,6 +197,35 @@ const Profile = (props) => {
     const logout = () => {
         props.setToken(null)
         console.log("You are logged out")
+    }
+
+    const handleDelete = async (e) => {
+        console.log("token", props.token )
+        try {
+            const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
+                method: "DELETE", 
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },           
+            })
+            
+            const result = await response.json()
+
+            if (!result.err) {
+                console.log("successfully deleted!!")
+                return
+            }
+
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
+
+        } catch (error) {
+            console.log("show me an error !!!!")
+        }
     }
 
     return (
@@ -265,6 +297,7 @@ const Profile = (props) => {
                             id="demo-simple-select"
                             value={language}
                             label="PreferredLanguage"
+                            defaultValue={"English"}
                             onChange={changeLanguage}
                         >
                             <MenuItem value="German">German</MenuItem>
@@ -316,9 +349,12 @@ const Profile = (props) => {
                 <button onClick={logout} className="buttonLogout">
                     Logout
                 </button>
-                <button className="buttonDeleteAccount">
+                 <AlertDialog  token={props.token}/> 
+                <button className="buttonDeleteAccount" onClick={handleDelete}>
                     Delete Account
                 </button>
+
+                
 
             </div >
 

@@ -226,6 +226,25 @@ userRouter.put("/myProfile/ageRange",
         }
     })
 
+userRouter.delete("/myProfile/deleteAccount",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+           
+            console.log("TEST deleteAcc in Route ", userId, {userId});
+            const user = await UserService.deleteAccountUser(userId) 
+
+            res.status(200).json({ user })
+            //console.log("res.json aus route: ", { user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error deleting user account." })
+        }
+    })
+
 
 
 

@@ -122,6 +122,18 @@ async function updateAgeRange({ userId, ageRange }) {
     return insertResult
 }
 
+async function deleteUser(userId) {
+    const db = await getDB();
+    console.log("id, ageRange from DAO ", userId)
+    const insertResult = await db.collection(collectionName).deleteOne(
+        { _id: new ObjectId(userId) },
+    )
+    console.log("IDtest", userId)
+    return insertResult
+}
+
+
+
 
 
 
@@ -137,5 +149,6 @@ module.exports = {
     updateLikeToMatch,
     updateLanguage,
     updateMaxDistance,
-    updateAgeRange
+    updateAgeRange,
+    deleteUser
 }
