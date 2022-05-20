@@ -22,7 +22,9 @@ const ProfileEditSettings = (props) => {
   const [error, setError] = useState('');
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
-  const [userId, setUserId] = useState("")
+  const [userId, setUserId] = useState("");
+  const [bigImage, setBigImage] = useState(null)
+  
 
   const navigate = useNavigate()
 
@@ -47,6 +49,7 @@ const ProfileEditSettings = (props) => {
       setEmail(result.email)
       setPhone(result.phone)
       setUserId(result._id)
+      setBigImage(result.bigImage)
 
     } catch (error) {
       console.log("error from catch", error)
@@ -138,9 +141,10 @@ const ProfileEditSettings = (props) => {
             </Select>
           </div>
         </div>
-
+        
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <div><img src={bigImage} alt="BigImage" /></div>
         <button onClick={doUpdate} type="submit">SAVE</button>
       </form>
 
