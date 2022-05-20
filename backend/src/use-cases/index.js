@@ -9,6 +9,7 @@ const { editProfileSettings } = require("./users/edit-profile-settings");
 const { editLanguage } = require("./users/edit-language")
 const { editMaxDistance } = require("./users/edit-max-distance")
 const { editAgeRange } = require("./users/edit-age-range")
+const { deleteAccountUser } = require("./users/delete-account")
 
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
@@ -25,7 +26,8 @@ const UserService = {
     editProfileSettings,
     editLanguage,
     editMaxDistance,
-    editAgeRange
+    editAgeRange,
+    deleteAccountUser
 }
 
 const SuggestionService = {
