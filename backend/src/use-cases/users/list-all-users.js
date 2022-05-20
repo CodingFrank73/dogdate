@@ -6,14 +6,22 @@ const listAllUsers = async () => {
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
-        gender: u.gender,
-        // isAdmin: u.isAdmin,
-        // userEmail: u.userEmail,
-        // passwordHash: u.passwordHash,
-        // passwordSalt: u.passwordSalt,
-        // status: u.status,
-        // addDate: u.addDate,
-        // modifiedDate: u.modifiedDate
+        gender: u.gender
+        // email: u.email,
+        // phone: u.phone,
+        // size: u.size,
+        // pwHash: u.pwHash,
+        // salt: u.salt,
+        // plan: u.plan,
+        // location: u.location,
+        // language: u.language,
+        // filterGender: u.filterGender,
+        // filterSize: u.filterSize,
+        // postalCode: u.postalCode,
+        // dateOfBirth: u.dateOfBirth,
+        // ageRange: u.ageRange,
+        // maxDistance: u.maxDistance
+
     }))
 
     return listOfUsers
