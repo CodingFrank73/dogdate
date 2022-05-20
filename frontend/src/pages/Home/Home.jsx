@@ -31,7 +31,7 @@ const style = {
     // transform: 'translate(-50%, -50%)',
     width: '100%',
     bgcolor: 'background.paper',
-    borderRadius: '2%',
+    // borderRadius: '12px',
     // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -173,7 +173,7 @@ const Home = (props) => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
 
                     <div className="dataFrame">
-                        <p>Maximum Distance</p>
+                        <p>Distance (in km)</p>
                         <Slider
                             value={filteredMaxDistance}
                             onChangeCommitted={handleChangeDistance}
@@ -182,6 +182,14 @@ const Home = (props) => {
                             max={200}
                             step={5}
                         />
+                    </div>
+                    <div className="dataFrame">
+                        <p>Size</p>
+                        <div className="sizeBox">
+                            <div>S</div>
+                            <div>M</div>
+                            <div>L</div>
+                        </div>
                     </div>
 
                     <div className="dataFrame">
@@ -197,9 +205,9 @@ const Home = (props) => {
                     </div>
 
 
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+                    </Typography> */}
                 </Box>
             </Modal>
 
