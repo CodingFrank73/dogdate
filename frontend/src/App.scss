@@ -363,13 +363,21 @@ h3{
         width: 100%;
         font-family: "PoppinsBold";
         font-size: 20px;
-        .sizeSmall-aktiv{
+        .sizeSmall{
             width: 33%;
             border: 1px solid #CACACA;
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
             text-align: center;
-        
+            color: #CACACA;
+            padding: 4px 0;
+        } 
+        .sizeSmall:hover, .sizeSmall-aktiv{
+            width: 33%;
+            border: 1px solid #CACACA;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            text-align: center;
             color: #fff;
             background: #1769aa;
             padding: 4px 0;
@@ -380,7 +388,14 @@ h3{
             color: #CACACA;
             text-align: center;
             padding: 4px 0;
-           
+        } 
+        .sizeMiddle:hover, .sizeMiddle-aktiv{
+            width: 34%;
+            border: 1px solid #CACACA;
+            color: #fff;
+            background: #1769aa;
+            text-align: center;
+            padding: 4px 0;
         } 
         .sizeLarge{
             width: 33%;
@@ -390,7 +405,16 @@ h3{
             border-bottom-right-radius: 12px;
             text-align: center;
             padding: 4px 0;
-           
+        } 
+        .sizeLarge:hover, .sizeLarge-aktiv{
+            width: 33%;
+            border: 1px solid #CACACA;
+            color: #fff;
+            background: #1769aa;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            text-align: center;
+            padding: 4px 0;
         } 
     }
 }

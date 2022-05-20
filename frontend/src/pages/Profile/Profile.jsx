@@ -128,7 +128,7 @@ const Profile = (props) => {
         if (newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
-      
+
         setMaxDistance(newValueDistance)
 
         try {
@@ -351,7 +351,9 @@ const Profile = (props) => {
                     Logout
                 </button>
 
-                 <AlertDialog  token={props.token}/> 
+
+                <AlertDialog token={props.token} />
+
                 {/* <button className="buttonDeleteAccount" onClick={handleDelete}>
                     Delete Account
                 </button> */}
