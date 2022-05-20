@@ -6,7 +6,7 @@ const listAllUsers = async () => {
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
-        gender: u.gender
+        gender: u.gender,
         email: u.email,
         // phone: u.phone,
         // size: u.size,
