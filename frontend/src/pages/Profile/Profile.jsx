@@ -37,7 +37,7 @@ const Profile = (props) => {
     const [filterGender, setFilterGender] = useState('');
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
-    
+
     const [error, setError] = useState("")
 
     const navigate = useNavigate()
@@ -81,15 +81,15 @@ const Profile = (props) => {
             setPlan(result.plan)
             setAgeRange([result.ageRange[0], result.ageRange[1]])
             setMaxDistance(result.maxDistance)
-           
+
         } catch (error) {
 
         }
     }
 
 
-    const handleChange = async (newValueAge) => {
-        if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
+    const handleChange = async (event, newValueAge) => {
+        if (newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
             return
         }
         setAgeRange(newValueAge);
@@ -124,8 +124,8 @@ const Profile = (props) => {
     };
 
 
-    const handleChangeDistance = async (newValueDistance) => {
-        if(newValueDistance === maxDistance) {
+    const handleChangeDistance = async (event, newValueDistance) => {
+        if (newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
         setMaxDistance(newValueDistance)
@@ -173,7 +173,7 @@ const Profile = (props) => {
                 },
                 body: JSON.stringify({ language: updatedLanguage })
             })
-           
+
             const result = await response.json()
 
             if (!result.err) {
@@ -200,16 +200,16 @@ const Profile = (props) => {
     }
 
     const handleDelete = async (e) => {
-        console.log("token", props.token )
+        console.log("token", props.token)
         try {
             const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
-                method: "DELETE", 
+                method: "DELETE",
                 headers: {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
-                },           
+                },
             })
-            
+
             const result = await response.json()
 
             if (!result.err) {
@@ -349,12 +349,12 @@ const Profile = (props) => {
                 <button onClick={logout} className="buttonLogout">
                     Logout
                 </button>
-                 <AlertDialog  token={props.token}/> 
+                <AlertDialog token={props.token} />
                 <button className="buttonDeleteAccount" onClick={handleDelete}>
                     Delete Account
                 </button>
 
-                
+
 
             </div >
 
