@@ -42,11 +42,11 @@ suggestionRouter.get("/allwithfilter",
         }
     })
 
-suggestionRouter.put("/withTempFilter",
+suggestionRouter.post("/withTempFilter",
     doAuthMiddleware,
     async (req, res) => {
         try {
-            console.log(req.body);
+            console.log("BodyValue: ", req.body);
 
             const suggestions = await SuggestionService.listSuggestionByTempFilter({
                 ageRange: req.body,

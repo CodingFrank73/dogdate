@@ -31,7 +31,9 @@ const style = {
     // transform: 'translate(-50%, -50%)',
     width: '100%',
     bgcolor: 'background.paper',
+
     // borderRadius: '12px',
+
     // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -96,14 +98,14 @@ const Home = (props) => {
             console.log("filtered Value im MaxDistance:", filteredMaxDistance);
             console.log("filtered Value im AgeRang:", filteredAgeRange);
 
+            // const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
+            //     method: "POST",
+            //     headers: { token: "JWT " + props.token },
+            //     body: JSON.stringify({ filteredAgeRange })
+            // })
 
-            const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
-                headers: { token: "JWT " + props.token },
-                body: JSON.stringify([filteredAgeRange[0], filteredAgeRange[1]])
-            })
-
-            const data = await response.json()
-            console.log("suggestions with Temp Filter: ", data);
+            // const data = await response.json()
+            // console.log("suggestions with Temp Filter: ", data);
             // setSuggestions(data)
 
 

@@ -16,7 +16,7 @@ const ProfileEditAvatar = (props) => {
     const navigate = useNavigate()
 
     const [profileImage, setProfileImage] = useState('');
-    const [error, setError] = useState('Error uploading avatar');
+    const [error, setError] = useState('');
 
     const doUpload = async (e) => {
 
