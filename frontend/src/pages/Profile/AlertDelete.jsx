@@ -7,16 +7,16 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from "react-router-dom";
 
-import {useState} from "react"
+import { useState } from "react"
 
 import apiBaseUrl from "../../api"
 
 export default function AlertDialog(props) {
-    const [open, setOpen] = useState(false);
-    const [error, setError] = useState("")
-    const navigate = useNavigate()
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
 
-    const handleClickOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -25,38 +25,38 @@ export default function AlertDialog(props) {
   };
 
   const handleDelete = async (e) => {
-        console.log("token", props.token )
-        try {
-            const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
-                method: "DELETE", 
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },           
-            })
-            
-            const result = await response.json()
+    console.log("token", props.token)
+    try {
+      const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
+        method: "DELETE",
+        headers: {
+          token: "JWT " + props.token,
+          "Content-Type": "application/json"
+        },
+      })
 
-            if (!result.err) {
-                console.log("successfully deleted!!")
-                navigate("/signup")
-                return
-            }
+      const result = await response.json()
 
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
+      if (!result.err) {
+        console.log("successfully deleted!!")
+        navigate("/signup")
+        return
+      }
 
-        } catch (error) {
-            console.log("show me an error !!!!")
-        }
+      if (result.err.validationErrors) {
+        const firstError = result.err.validationErrors[0]
+        setError(firstError.msg + ": " + firstError.param)
+        return
+      }
+
+    } catch (error) {
+      console.log("show me an error !!!!")
     }
+  }
 
   return (
     <div>
-      <Button  className="buttonDeleteAccount" variant="outlined" onClick={handleClickOpen}>
+      <Button className="buttonDeleteAccount" onClick={handleClickOpen}>
         Delete Account
       </Button>
       <Dialog
@@ -70,13 +70,13 @@ export default function AlertDialog(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This action cannot be undone. 
+            This action cannot be undone.
             If you want to continue using this app you'll need to sign up again.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>No, go back</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button onClick={handleDelete} autoFocus className='killDog'>
             Yes, delete account
           </Button>
         </DialogActions>
