@@ -139,20 +139,6 @@ const Home = (props) => {
                     {/* <Button onClick={handleOpen}>Open modal</Button> */}
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
-
-                {/* {suggestions && suggestions.map((suggest, i) => {
-
-                    return (
-                        <div className="dog-wrapper01" key={i}>
-                            <img src={suggest.bigImage} alt="dog pic" />
-                            <div className="dogName">{suggest.dogName}, {suggest.age}</div>
-                            <div className="distanceKM">{suggest.maxDistance}</div>
-
-                        </div>
-                    )
-                })} */}
-
-
                 <footer>
                     <div className="nav">
                         <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
