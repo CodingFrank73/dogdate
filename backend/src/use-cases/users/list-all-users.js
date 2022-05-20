@@ -7,7 +7,7 @@ const listAllUsers = async () => {
         _id: u._id,
         dogName: u.dogName,
         gender: u.gender
-        // email: u.email,
+        email: u.email,
         // phone: u.phone,
         // size: u.size,
         // pwHash: u.pwHash,
