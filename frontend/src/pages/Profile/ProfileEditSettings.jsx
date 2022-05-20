@@ -23,7 +23,7 @@ const ProfileEditSettings = (props) => {
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("");
-  const [bigImage, setBigImage] = useState(null)
+  const [bigImage, setBigImage] = useState("")
   
 
   const navigate = useNavigate()
@@ -92,6 +92,45 @@ const ProfileEditSettings = (props) => {
     }
   }
 
+ const doUpload = async (e) => {
+        e.preventDefault();
+        console.log("TEST", bigImage)
+        
+        const formData = new FormData()        
+        formData.set("bigImage", bigImage) ///kommt ich hier an???
+        
+        console.log("TEST2", formData.entries())
+
+        try {
+            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editBigImage', {
+                method: "POST",
+                headers: {
+                    token: "JWT " + props.token
+                },
+                body: formData
+            })
+            const result = await response.json()
+
+            if (!result.err) {
+                console.log("Hat geklappt..........");
+               
+                return
+            }
+
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0];
+                setError(firstError.msg + ":" + firstError.param);
+                return
+            }
+
+
+        } catch (error) {
+            console.log("error..............");
+        }
+
+
+    }
+
   return (
 
     <div className="profile">
@@ -105,6 +144,12 @@ const ProfileEditSettings = (props) => {
       <form className="signup-box">
         <h3>Account Settings</h3>
         <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
+        
+        <div><img src={bigImage} alt="BigImage" /></div>
+                    <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
+                   <button onClick={doUpload} type="submit">Upload</button>
+         
+
         <div className="dataFrame">
           <div className="dataLable">
             <InputLabel id="labelLanguage"> Gender</InputLabel></div>
@@ -123,7 +168,7 @@ const ProfileEditSettings = (props) => {
         </div>
 
         <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
-
+     
         <div className="dataFrame">
           <div className="dataLable">
             <InputLabel id="labelLanguage"> Size</InputLabel></div>
@@ -144,7 +189,7 @@ const ProfileEditSettings = (props) => {
         
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
-        <div><img src={bigImage} alt="BigImage" /></div>
+        
         <button onClick={doUpdate} type="submit">SAVE</button>
       </form>
 

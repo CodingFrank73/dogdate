@@ -75,6 +75,7 @@ const Signup = () => {
                 <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
                 <button onClick={doSignUp} type="submit">SIGN UP</button>
             </form>
+            {error && <p>{error}</p>  }
         </div>
     );
 }

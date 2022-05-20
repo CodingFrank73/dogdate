@@ -52,6 +52,18 @@ async function updateAvatar({ userId, profileImage }) {
     return updatedUser
 }
 
+async function updateBigImage({ userId, bigImage }) {
+    console.log("userId aus DAO bigImage", userId)
+    const db = await getDB();
+    const updatedUser = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: { bigImage: bigImage } }
+    )
+    console.log("IDtest", userId)
+    console.log("updated user aus DAO", updatedUser)
+    return updatedUser
+}
+
 async function findMatches({ myId, likedId }) {
     console.log("Suche Match...");
     const db = await getDB();
@@ -150,5 +162,6 @@ module.exports = {
     updateLanguage,
     updateMaxDistance,
     updateAgeRange,
-    deleteUser
+    deleteUser,
+    updateBigImage
 }

@@ -350,12 +350,7 @@ const Profile = (props) => {
                     Logout
                 </button>
                  <AlertDialog  token={props.token}/> 
-                {/* <button className="buttonDeleteAccount" onClick={handleDelete}>
-                    Delete Account
-                </button> */}
-
-                
-
+               
             </div >
 
             <footer>
