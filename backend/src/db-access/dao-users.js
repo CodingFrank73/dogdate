@@ -10,10 +10,18 @@ async function findAll() {
 }
 
 async function findById(id) {
+    console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
+    console.log("User in DOUser: ", user);
     return user
 }
+
+// async function findByEmailWithoutImage(email) {
+//     const db = await getDB();
+//     const user = await db.collection(collectionName).findOne({ email: email }, { dogName: 1, dateOfBirth: 1, pwHash: 1, salt: 1, email: 1 });
+//     return user
+// }
 
 async function findByEmail(email) {
     const db = await getDB();

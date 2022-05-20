@@ -23,8 +23,13 @@ const ProfileEditSettings = (props) => {
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("");
+<<<<<<< HEAD
   const [bigImage, setBigImage] = useState("")
   
+=======
+  const [bigImage, setBigImage] = useState(null)
+
+>>>>>>> 7252b32979a3cf2e69b35d45cdc13ebaab4b4d30
 
   const navigate = useNavigate()
 
@@ -186,7 +191,7 @@ const ProfileEditSettings = (props) => {
             </Select>
           </div>
         </div>
-        
+
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
         

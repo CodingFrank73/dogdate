@@ -37,7 +37,7 @@ const Profile = (props) => {
     const [filterGender, setFilterGender] = useState('');
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
-    
+
     const [error, setError] = useState("")
 
     const navigate = useNavigate()
@@ -81,7 +81,7 @@ const Profile = (props) => {
             setPlan(result.plan)
             setAgeRange([result.ageRange[0], result.ageRange[1]])
             setMaxDistance(result.maxDistance)
-           
+
         } catch (error) {
 
         }
@@ -89,7 +89,7 @@ const Profile = (props) => {
 
 
     const handleChange = async (event, newValueAge) => {
-        if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
+        if (newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
             return
         }
         setAgeRange(newValueAge);
@@ -125,9 +125,10 @@ const Profile = (props) => {
 
 
     const handleChangeDistance = async (event, newValueDistance) => {
-        if(newValueDistance === maxDistance) {
+        if (newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
+      
         setMaxDistance(newValueDistance)
 
         try {
@@ -173,7 +174,7 @@ const Profile = (props) => {
                 },
                 body: JSON.stringify({ language: updatedLanguage })
             })
-           
+
             const result = await response.json()
 
             if (!result.err) {
@@ -200,16 +201,16 @@ const Profile = (props) => {
     }
 
     const handleDelete = async (e) => {
-        console.log("token", props.token )
+        console.log("token", props.token)
         try {
             const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
-                method: "DELETE", 
+                method: "DELETE",
                 headers: {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
-                },           
+                },
             })
-            
+
             const result = await response.json()
 
             if (!result.err) {
@@ -349,8 +350,18 @@ const Profile = (props) => {
                 <button onClick={logout} className="buttonLogout">
                     Logout
                 </button>
+
                  <AlertDialog  token={props.token}/> 
+<<<<<<< HEAD
                
+=======
+                {/* <button className="buttonDeleteAccount" onClick={handleDelete}>
+                    Delete Account
+                </button> */}
+
+
+
+>>>>>>> 7252b32979a3cf2e69b35d45cdc13ebaab4b4d30
             </div >
 
             <footer>

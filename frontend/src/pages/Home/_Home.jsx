@@ -39,7 +39,6 @@ const style = {
     p: 4,
 };
 
-
 const Home = (props) => {
     const [suggestions, setSuggestions] = useState([]);
     const [filteredAgeRange, setFilteredAgeRange] = useState([2, 4]);
@@ -79,7 +78,6 @@ const Home = (props) => {
     const handleChangeSize = async (event, newValueSize) => {
         console.log(event);
     }
-
 
 
     useEffect(() => {
@@ -140,19 +138,50 @@ const Home = (props) => {
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
 
-                {/* {suggestions && suggestions.map((suggest, i) => {
+                <div className="home-doggy-bigpic">
 
-                    return (
-                        <div className="dog-wrapper01" key={i}>
-                            <img src={suggest.bigImage} alt="dog pic" />
-                            <div className="dogName">{suggest.dogName}, {suggest.age}</div>
-                            <div className="distanceKM">{suggest.maxDistance}</div>
+                    {suggestions && (suggestions.map((suggest, i) => {
 
-                        </div>
-                    )
-                })} */}
+                        return (
+                            <div className="dog-wrapper01">
+                                {/* <div>{console.log("suggest-1: " + suggest + " - " + i)}</div> */}
 
+                                <img src={suggest.bigImage} alt="dog pic" />
+                                <div className="dogName">{suggest.dogName}, 5</div>
+                                <div className="distanceKM">4 km</div>
 
+                            </div>
+                        )
+                    }))}
+
+                    {/* <div className="dog-wrapper01">
+                        <img src={dogImage01} alt="dog pic" />
+                        <div className="dogName">{suggestions.dogName}, 5</div>
+                        <div className="distanceKM">4 km</div>
+                    </div>
+                    <div className="dog-wrapper02">
+                        <img src={dogImage02} alt="dog pic" />
+                        <div className="dogName">{suggestions.dogName}, 8</div>
+                        <div className="distanceKM">15 km</div>
+                    </div>
+                    <div className="dog-wrapper03">
+                        <img src={dogImage03} alt="dog pic" />
+                        <div className="dogName">{suggestions.dogName}, 12</div>
+                        <div className="distanceKM">1 km</div>
+                    </div>
+                    <div className="dog-wrapper04">
+                        <img src={dogImage04} alt="dog pic" />
+                        <div className="dogName">{suggestions.dogName}, 2</div>
+                        <div className="distanceKM">8 km</div>
+                    </div> */}
+                </div>
+
+                <div className="home-like-wrapper">
+                    <div className="home-like-buttons">
+                        <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
+                        <div className="home-like"><img src={buttonLike} alt="like" /></div>
+                    </div>
+                </div>
                 <footer>
                     <div className="nav">
                         <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
@@ -217,18 +246,4 @@ const Home = (props) => {
     );
 }
 
-// function Item(props) {
-//     return (
-//         <Paper>
-//             <h2>{props.item.name}</h2>
-//             <p>{props.item.description}</p>
-
-//             <Button className="CheckButton">
-//                 Check it out!
-//             </Button>
-//         </Paper>
-//     )
-// }
-
 export default Home;
-
