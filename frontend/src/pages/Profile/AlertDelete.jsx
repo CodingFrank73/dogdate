@@ -5,11 +5,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from "react-router-dom";
 
-export default function AlertDialog() {
-  const [open, setOpen] = React.useState(false);
+import {useState} from "react"
 
-  const handleClickOpen = () => {
+import apiBaseUrl from "../../api"
+
+export default function AlertDialog(props) {
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState("")
+    const navigate = useNavigate()
+
+    const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -17,10 +24,40 @@ export default function AlertDialog() {
     setOpen(false);
   };
 
+  const handleDelete = async (e) => {
+        console.log("token", props.token )
+        try {
+            const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
+                method: "DELETE", 
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },           
+            })
+            
+            const result = await response.json()
+
+            if (!result.err) {
+                console.log("successfully deleted!!")
+                navigate("/signup")
+                return
+            }
+
+            if (result.err.validationErrors) {
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + firstError.param)
+                return
+            }
+
+        } catch (error) {
+            console.log("show me an error !!!!")
+        }
+    }
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
+      <Button  className="buttonDeleteAccount" variant="outlined" onClick={handleClickOpen}>
+        Delete Account
       </Button>
       <Dialog
         open={open}
@@ -38,8 +75,8 @@ export default function AlertDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>No, don't delete</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleClose}>No, go back</Button>
+          <Button onClick={handleDelete} autoFocus>
             Yes, delete account
           </Button>
         </DialogActions>

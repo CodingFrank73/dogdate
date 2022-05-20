@@ -88,7 +88,7 @@ const Profile = (props) => {
     }
 
 
-    const handleChange = async (newValueAge) => {
+    const handleChange = async (event, newValueAge) => {
         if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
             return
         }
@@ -124,7 +124,7 @@ const Profile = (props) => {
     };
 
 
-    const handleChangeDistance = async (newValueDistance) => {
+    const handleChangeDistance = async (event, newValueDistance) => {
         if(newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
@@ -350,9 +350,9 @@ const Profile = (props) => {
                     Logout
                 </button>
                  <AlertDialog  token={props.token}/> 
-                <button className="buttonDeleteAccount" onClick={handleDelete}>
+                {/* <button className="buttonDeleteAccount" onClick={handleDelete}>
                     Delete Account
-                </button>
+                </button> */}
 
                 
 
