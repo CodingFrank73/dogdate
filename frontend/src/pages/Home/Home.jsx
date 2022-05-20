@@ -43,6 +43,7 @@ const Home = (props) => {
     const [suggestions, setSuggestions] = useState([]);
     const [filteredAgeRange, setFilteredAgeRange] = useState([2, 4]);
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
+    const [filteredSize, setFilteredSize] = useState([]);
     const [filteredGender, setFilteredGender] = useState(["f", "m"]);
 
     const [error, setError] = useState('');
@@ -68,6 +69,14 @@ const Home = (props) => {
             return
         }
         setFilteredMaxDistance(newValueDistance)
+    }
+
+    const handleChangeGender = async (event, newValueGender) => {
+
+    }
+
+    const handleChangeSize = async (event, newValueSize) => {
+        console.log(newValueSize);
     }
 
 
@@ -98,15 +107,18 @@ const Home = (props) => {
             console.log("filtered Value im MaxDistance:", filteredMaxDistance);
             console.log("filtered Value im AgeRang:", filteredAgeRange);
 
-            // const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
-            //     method: "POST",
-            //     headers: { token: "JWT " + props.token },
-            //     body: JSON.stringify({ filteredAgeRange })
-            // })
+            const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
+                method: "POST",
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance })
+            })
 
-            // const data = await response.json()
-            // console.log("suggestions with Temp Filter: ", data);
-            // setSuggestions(data)
+            const data = await response.json()
+            console.log("suggestions with Temp Filter: ", data);
+            setSuggestions(data)
 
 
         } catch (error) {

@@ -49,8 +49,8 @@ suggestionRouter.post("/withTempFilter",
             console.log("BodyValue: ", req.body);
 
             const suggestions = await SuggestionService.listSuggestionByTempFilter({
-                ageRange: req.body,
-                maxDistance: 200,
+                ageRange: req.body.ageRange,
+                maxDistance: req.boby.maxDistance,
                 filterGender: ["m", "f"],
                 filterSize: ["s", "m", "l"]
             })

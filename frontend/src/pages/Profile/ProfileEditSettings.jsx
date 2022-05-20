@@ -24,7 +24,7 @@ const ProfileEditSettings = (props) => {
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("");
   const [bigImage, setBigImage] = useState(null)
-  
+
 
   const navigate = useNavigate()
 
@@ -141,7 +141,7 @@ const ProfileEditSettings = (props) => {
             </Select>
           </div>
         </div>
-        
+
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
         <div><img src={bigImage} alt="BigImage" /></div>
