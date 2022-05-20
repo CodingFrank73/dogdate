@@ -22,7 +22,7 @@ import apiBaseUrl from "../../api"
 
 const Profile = (props) => {
 
-    const [ageRange, setAgeRange] = useState([2, 4.5]);
+    const [ageRange, setAgeRange] = useState([2, 4]);
     const [maxDistance, setMaxDistance] = useState(100);
     const [dogname, setDogname] = useState('');
     const [gender, setGender] = useState('');
@@ -87,7 +87,7 @@ const Profile = (props) => {
 
 
     const handleChange = async (event, newValueAge) => {
-        if(newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
+        if (newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
             return
         }
         setAgeRange(newValueAge);
@@ -122,7 +122,7 @@ const Profile = (props) => {
     };
 
     const handleChangeDistance = async (event, newValueDistance) => {
-        if(newValueDistance === maxDistance) {
+        if (newValueDistance === maxDistance) {
             return  //value not changed -> cancel
         }
         setMaxDistance(newValueDistance)

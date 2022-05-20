@@ -1,19 +1,8 @@
 
-const { SuggestionDAO, UserDAO } = require("../../db-access")
-const { makeUser } = require("../../domain/User")
+const { SuggestionDAO } = require("../../db-access")
 const AgeCalc = require("../../utils/ageCalc");
 
-const listByFilter = async ({ userId }) => {
-
-    const foundUser = await UserDAO.findById(userId)
-
-    if (!foundUser) {
-        throw new Error("User doas not exists")
-    }
-
-    const user = makeUser(foundUser)
-
-    const { maxDistance, filterGender, ageRange, filterSize } = user
+const listSuggestionByTempFilter = async ({ maxDistance, filterGender, ageRange, filterSize }) => {
 
     const minAgeAsDate = AgeCalc.subtractYears(ageRange[0])
     const maxAgeAsDate = AgeCalc.subtractYears(ageRange[1])
@@ -30,6 +19,7 @@ const listByFilter = async ({ userId }) => {
     return listOfUsers
 }
 
+
 module.exports = {
-    listByFilter
+    listSuggestionByTempFilter
 }

@@ -13,6 +13,7 @@ const { editAgeRange } = require("./users/edit-age-range")
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
 const { listByFilter } = require("./suggestions/list-by-filter");
+const { listSuggestionByTempFilter } = require("./suggestions/list-suggestion-by-temp-filter");
 
 const UserService = {
     listAllUsers,
@@ -30,7 +31,8 @@ const UserService = {
 
 const SuggestionService = {
     listAllSuggestion,
-    listByFilter
+    listByFilter,
+    listSuggestionByTempFilter
 }
 
 module.exports = {
