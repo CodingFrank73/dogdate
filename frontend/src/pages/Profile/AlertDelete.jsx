@@ -56,11 +56,7 @@ export default function AlertDialog(props) {
 
   return (
     <div>
-<<<<<<< HEAD
-      <Button className="buttonDeleteAccount" variant="outlined" onClick={handleClickOpen}>
-=======
       <Button className="buttonDeleteAccount" onClick={handleClickOpen}>
->>>>>>> 7252b32979a3cf2e69b35d45cdc13ebaab4b4d30
         Delete Account
       </Button>
       <Dialog

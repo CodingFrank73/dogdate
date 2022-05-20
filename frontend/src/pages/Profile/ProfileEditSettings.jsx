@@ -23,13 +23,8 @@ const ProfileEditSettings = (props) => {
   const [size, setSize] = useState('');
   const [phone, setPhone] = useState('');
   const [userId, setUserId] = useState("");
-<<<<<<< HEAD
-  const [bigImage, setBigImage] = useState("")
-  
-=======
   const [bigImage, setBigImage] = useState(null)
 
->>>>>>> 7252b32979a3cf2e69b35d45cdc13ebaab4b4d30
 
   const navigate = useNavigate()
 
