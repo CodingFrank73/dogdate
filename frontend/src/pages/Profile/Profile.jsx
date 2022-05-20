@@ -23,7 +23,7 @@ import apiBaseUrl from "../../api"
 
 const Profile = (props) => {
 
-    const [ageRange, setAgeRange] = useState([2, 4.5]);
+    const [ageRange, setAgeRange] = useState([2, 4]);
     const [maxDistance, setMaxDistance] = useState(100);
     const [dogname, setDogname] = useState('');
     const [gender, setGender] = useState('');
@@ -122,6 +122,7 @@ const Profile = (props) => {
             console.log("show me an error !!!!")
         }
     };
+
 
     const handleChangeDistance = async (newValueDistance) => {
         if(newValueDistance === maxDistance) {

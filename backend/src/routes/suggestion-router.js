@@ -38,7 +38,27 @@ suggestionRouter.get("/allwithfilter",
             res.status(200).json(suggestions);
 
         } catch (error) {
-            res.status(500).json({ err: error.message || "Unknown error while reading users" })
+            res.status(500).json({ err: error.message || "Unknown error while reading suggestions" })
+        }
+    })
+
+suggestionRouter.put("/withTempFilter",
+    doAuthMiddleware,
+    async (req, res) => {
+        try {
+            console.log(req.body);
+
+            const suggestions = await SuggestionService.listSuggestionByTempFilter({
+                ageRange: req.body,
+                maxDistance: 200,
+                filterGender: ["m", "f"],
+                filterSize: ["s", "m", "l"]
+            })
+
+            res.status(200).json(suggestions);
+
+        } catch (error) {
+            res.status(500).json({ err: error.message || "Unknown error while reading suggestions" })
         }
     })
 
