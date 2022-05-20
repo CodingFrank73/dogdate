@@ -353,7 +353,6 @@ const Profile = (props) => {
 
                 <AlertDialog token={props.token} />
 
-               
             </div >
 
             <footer>
