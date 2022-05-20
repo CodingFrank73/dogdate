@@ -76,7 +76,7 @@ const Home = (props) => {
     }
 
     const handleChangeSize = async (event, newValueSize) => {
-        console.log(event);
+        console.log(newValueSize);
     }
 
 
@@ -159,7 +159,6 @@ const Home = (props) => {
                         <div className="dogName">Sandy, 2</div>
                         <div className="distanceKM">8 km</div>
                     </div>
-
                 </div>
 
                 <div className="home-like-wrapper">
@@ -201,7 +200,7 @@ const Home = (props) => {
                     <div className="dataFrame">
                         <p>Size</p>
                         <div className="sizeBox">
-                            <div className="sizeSmall-aktiv">S</div>
+                            <div className="sizeSmall">S</div>
                             <div className="sizeMiddle">M</div>
                             <div className="sizeLarge">L</div>
                         </div>
@@ -225,6 +224,8 @@ const Home = (props) => {
                     </Typography> */}
                 </Box>
             </Modal>
+
+
         </div>
 
     );

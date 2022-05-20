@@ -186,7 +186,7 @@ const Home = (props) => {
                     <div className="dataFrame">
                         <p>Size</p>
                         <div className="sizeBox">
-                            <div className="sizeSmall-aktiv" onClick={handleChangeSize}>S</div>
+                            <div className="sizeSmall">S</div>
                             <div className="sizeMiddle">M</div>
                             <div className="sizeLarge">L</div>
                         </div>
