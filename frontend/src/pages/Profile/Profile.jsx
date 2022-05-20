@@ -352,6 +352,7 @@ const Profile = (props) => {
                 </button>
 
                 <AlertDialog token={props.token} />
+
                 {/* <button className="buttonDeleteAccount" onClick={handleDelete}>
                     Delete Account
                 </button> */}
