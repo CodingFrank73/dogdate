@@ -6,11 +6,18 @@ const dotenv = require("dotenv");
 
 const { userRouter } = require("./routes/user-router");
 const { suggestionRouter } = require("./routes/suggestion-router");
+//Socket.io:
+const { Server } = require("socket.io"); //
+const http = require("http")
 
 dotenv.config()
 
 const PORT = process.env.PORT || 9000;
 const app = express();
+
+//Socket.io:
+const server = http.createServer(app); //
+//const io = require("socket.io")(server)
 
 app.use(cors({ origin: true, credentials: true }))
 // app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }))
@@ -43,7 +50,34 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRouter)
 app.use("/api/suggestion", suggestionRouter)
 
+//##Socket.io - start:
+const io = new Server(server, { //server initialization as io variable
+  cors: { //to solve cors issue
+    origin: "http://localhost:3000", // frontend server
+    methods: ["GET", "POST"] //accepts GET and POST requests
+  },
+});
 
-app.listen(PORT, () => { console.log("Server listen on Port:", PORT) })
+
+io.on("connection", (socket) => { //we listen on event with this id 
+  console.log(`USER CONNECTED: ${socket.id}`);   // should be shown whenever frontend is refreshed - DOES NOT WORK!!!
+  
+
+  socket.on("join_room", (data) => { //data from frontend, like room id
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`); //socket.id is user id, data: data that has been sent from frontend
+  });
+
+  socket.on("send_message", (data) => {
+   console.log(data) //event Send Message receives data sent from frontend
+    socket.to(data.room).emit("receive_message", data); //emits event to be listened in frontend
+  }); /// data.room: restricts emit event to room that was passed in as data
+
+  socket.on("disconnect", () => {  //disconnects from server
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+server.listen(PORT, () => { console.log("Server listen on Port:", PORT) })  //###Socket.io - end
 
 

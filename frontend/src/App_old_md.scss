@@ -1,0 +1,665 @@
+@font-face {
+    font-family: "Poppins";
+    src: url(assets/fonts/Poppins/Poppins-Regular.ttf);
+  }
+@font-face {
+    font-family: "PoppinsBold";
+    src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    background: #efefef;
+    color: #303030;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 100%;
+}
+
+h2{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 33px;
+    color: #303030;
+    text-align: center;
+}
+h3{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #000;
+}
+
+.loadingIndicator{
+    height: 100vh;
+    overflow: hidden;
+    
+    img{
+        margin-top: 50%;
+    }
+}
+.killDog{
+    color: tomato !important;
+}
+
+// ================================================
+// SPLASH
+// ================================================
+.splash{
+    background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+    height: 100vh;
+
+    .dd-logo-wrapper{
+        display: flex;
+        padding-top: 30%;
+        justify-content: center;
+    }
+    .dd-logo{
+        display: flex;
+        width: 144px;
+        background: #fff;
+        border: 10px solid #fff;
+        border-radius: 50%;
+    }
+    h1{
+        font-size: 50px;
+        color: #fff;
+        font-weight: 100;
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-bottom: 6rem;
+    }
+    button{
+        display: flex;
+        width: 86%;
+        margin: 5% 7%;
+        position: relative; 
+        padding: 0.8rem;
+        background: #fff;
+        border: 1px solid #fff;
+        border-radius: 22px;
+        cursor: pointer;
+        .wbLogo{
+            position: absolute;
+            left: 18px; 
+            top: 3px;
+            width: 35px;
+        }
+        .wbLogoAT{
+            position: absolute;
+            left: 22px; 
+            top: 7px;
+            width: 27px;
+        }
+        .wbText{
+            color: #373737;
+            width: 100%;
+            text-align: center;
+            top: 5px;
+        }
+    }
+    .wText{
+        width: 70%;
+        color: #fff;
+        font-size: 0.7rem;
+        line-height: 19px;
+        text-align: center;
+        margin: 0 auto;
+
+        a{
+            font-family: "PoppinsBold";
+            color: #fff;
+            text-decoration: underline;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+    }
+
+    .signUpfooter{
+        position: absolute;
+        bottom: 2rem;
+        width: 100%;
+        p{
+            color: #fff;
+            font-size: 0.8rem;
+            text-align: center;
+
+            a{
+                font-family: "PoppinsBold";
+                color: #fff;
+                text-decoration: none;
+            }
+            a:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+        .splashFooter {
+        position: fixed;
+        bottom: 2px;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 10px;
+        color: #fff;
+        display: flex;
+        justify-content: space-evenly;
+
+        .iconDog{
+            width: 11px;
+        }
+        .iconVegan{
+            width: 8px;
+        }
+    }
+}
+
+
+
+// ================================================
+// PROFILE -- SignUp -- LogIn
+// ================================================
+.profile{
+
+    .profile-header{
+        width: 100%;
+        position: fixed;
+        top: 0;
+        padding-top: 50px;
+        padding-bottom: 6px;
+        background: #fff;
+        text-align: center;
+        z-index: 2;
+        border-bottom: 2px solid #efefef;
+        .profile-arrow-back{
+            position: fixed;
+            top: 57px;
+            left: 16px;
+            width: 26px;
+            cursor:pointer;
+        }
+    }
+
+    //  SIGNUP PAGE
+    // ---------------------------------
+    .signup-box{
+        width: 90%;
+        padding-top: 140px;
+        margin: 0px 5% 0px 5%;
+
+        input, select{
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #8e8e8e;
+            background: #efefef;
+            padding: 2px 2px 4px 2px;
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            margin-bottom: 12px;
+        }
+        input:focus,  select:focus,{
+            border: none;
+            border: 0;
+            outline: none;
+            border-bottom: 1px solid #555;
+        }
+        option{
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+        }
+
+        button{
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            color: #fff;
+            letter-spacing: 0.05em;
+            text-align: center;
+            padding: 15px 0;
+            margin: 34px 10% 0 10%;
+            width: 80%;
+            background: #5A1AED;
+            border: 0;
+            border-radius: 24px;
+            cursor: pointer;
+        }
+        .saveButton{
+            margin-bottom: 120px;
+            letter-spacing: 0.05em;
+        }
+    }
+
+
+    //  PROFILE PAGE :: Edit Avatar
+    // ---------------------------------
+    .editAvatarBody{
+        margin: 130px 5% 0 5%;
+    }
+
+    //  PROFILE PAGE
+    // ---------------------------------
+
+    .profileBody{
+        width: 90%;
+        margin: 0 5% 100px 5%;
+
+        .profilePic{
+            position: relative;
+            width: 50%;
+            margin: 114px 25% 0 25%;
+            border-radius: 50%;
+
+            img {
+                border-radius: 50%;
+            }
+            .editProfilepic{
+                position: absolute;
+                bottom:3px;
+                right:3px;
+                width: 36px;
+                height: 36px;
+                background: #fff;
+                border-radius: 50%;
+                padding: 6px;
+                box-shadow: 0 0 4px #666;
+                cursor:pointer;
+            }
+        }
+        .headlineFrame{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 8px 0px;
+            margin: 8px 0;
+
+        
+            h2{
+                width: 100%;
+                justify-content: flex-start;
+
+            }
+            .headlineButton{
+                font-size: 16px;
+                display: flex;
+                justify-content: flex-end;
+                color: #ff5870;
+                border: 0;
+                cursor: pointer;
+            }
+        }
+        .dataFrame{
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+            padding: 8px 8px;
+            margin: 8px 0;
+        
+            .dataLable{
+                width: 100%;
+                font-size: 14px;
+                display: flex;
+                justify-content: flex-start;
+                color: #2d2d2d;
+            }
+            .dataData{
+                width: 100%;
+                font-size: 16px;
+                display: flex;
+                justify-content: flex-end;
+                color: #413f3f;
+            }
+            .colorHighlight{
+                color: #ff5870;
+            }
+            
+        }
+    
+        .buttonLogout{
+            width: 100%;
+            margin: 36px 0 0 0;
+            background: #fff;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            color: #ff5870;
+            text-align: center;
+            padding: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 24px;
+            cursor:pointer;
+        }
+        .buttonDeleteAccount{
+            width: 100%;
+            font-family: "Poppins";
+            font-weight: 100;
+            letter-spacing: 0.05em;
+            text-transform: none;
+            margin: 12px 0;
+            background: #5A1AED;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            border: 0;
+            border-radius: 24px;
+            cursor:pointer;
+        }
+    }
+}
+
+// ================================================
+// HOME -- SWIPE like/unlike 
+// ================================================
+.css-hogos2 {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    outline: none;
+}
+.dataFrame {
+    padding: 12px 0 12px 0;
+
+    .rangeHL{
+        margin: 0px 0 32px 0;
+    }
+    .optionBox{
+        display: flex;
+        width: 100%;
+
+
+         // G e n d e r B o x  ------------------------------
+        .genderLeft{
+            width: 50%;
+            border: 1px solid #CACACA;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            text-align: center;
+            color: #CACACA;
+            padding: 4px 0;
+        } 
+        .genderLeft:hover, .genderLeft-aktiv{
+            border: 1px solid #CACACA;
+            text-align: center;
+            color: #fff;
+            background: #1769aa;
+        } 
+    
+        .genderRight{
+            width: 50%;
+            border: 1px solid #CACACA;
+            color: #CACACA;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            text-align: center;
+            padding: 4px 0;
+        } 
+        .genderRight:hover, .genderRight-aktiv{
+            border: 1px solid #CACACA;
+            color: #fff;
+            background: #1769aa;
+            text-align: center;
+        } 
+        // S i z e B o x  ------------------------------
+        .sizeSmall{
+            width: 33%;
+            border: 1px solid #CACACA;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            font-family: "PoppinsBold";
+            text-align: center;
+            color: #CACACA;
+            padding: 4px 0;
+        } 
+        .sizeSmall:hover, .sizeSmall-aktiv{
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            color: #fff;
+            background: #1769aa;
+        } 
+        .sizeMiddle{
+            width: 34%;
+            border: 1px solid #CACACA;
+            font-family: "PoppinsBold";
+            color: #CACACA;
+            text-align: center;
+            padding: 4px 0;
+        } 
+        .sizeMiddle:hover, .sizeMiddle-aktiv{
+            color: #fff;
+            background: #1769aa;
+        } 
+        .sizeLarge{
+            width: 33%;
+            border: 1px solid #CACACA;
+            font-family: "PoppinsBold";
+            color: #CACACA;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            text-align: center;
+            padding: 4px 0;
+        } 
+        .sizeLarge:hover, .sizeLarge-aktiv{
+            width: 33%;
+            border: 1px solid #CACACA;
+            color: #fff;
+            background: #1769aa;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            text-align: center;
+        } 
+
+    }
+}
+
+
+
+.home{
+    // background: #f7f7f7;  
+    background-image: linear-gradient(0deg, #e9e9e9 , #f7f7f7);    
+    height: 100vh;
+
+    .home-header{
+        position: absolute;
+        top: 54px;
+        width: 100%;
+        display: flex;
+        .home-dd-logo{
+            width: 80px;
+            padding: 0 12px 0 18px;
+        }
+        h2{
+            font-size: 30px;
+            color: #ff5870;
+        }
+        .home-filter{
+            position: absolute;
+            right: 12px;
+            width: 28px;
+            padding-top: 11px;
+            cursor: pointer;
+        }
+    }
+    .home-doggy-bigpic{
+        position: relative;
+        top: 120px;
+        width: 90%;
+        margin: 0% 5%;
+        line-height: 0;
+        border-radius: 28px;
+        box-shadow: 0px 4px 8px 4px #ccc;
+        overflow: hidden;
+        .dog-wrapper01{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            // height: 120px;
+            line-height: 0;
+            z-index: 11;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        .dog-wrapper02{
+            // position: absolute;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 12;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        .dog-wrapper03{
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 13;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+        .dog-wrapper04{
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            line-height: 0;
+            z-index: 14;
+
+            .dogName{
+                position: absolute;
+                bottom: 50px;
+                left: 16px;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+            .distanceKM{
+                position: absolute;
+                bottom: 24px;
+                left: 16px;
+                font-size: 18px;
+                color: #fff;
+                text-shadow: 0 0 1px #333;
+            }
+        }
+    }
+    .home-like-wrapper{
+        position: absolute;
+        bottom: 85px;
+        left: 25%;
+        right: 25%;
+        width: 50%;
+
+        .home-like-buttons{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20%;
+            justify-items: center;
+            justify-content: center;
+            align-content: center;
+            cursor: pointer;
+            
+            .home-dislike{
+                width: 66px;
+                height: 66px;
+                background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+                border-radius: 50%;
+                padding: 17px;
+            }
+            .home-like{
+                width: 66px;
+                height: 66px;
+                background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+                border-radius: 50%;
+                padding: 15px;
+            }
+            .home-dislike img{
+                width: 32px;
+                height: 32px;
+            }
+            .home-like img{
+                margin-top: 2px;
+            }
+        }
+    }
+
+
+}
+
+footer{
+    position: absolute;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 58px;
+    background: #fff;
+    border-top: 2px solid #efefef;
+    .nav{
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+
+        div{
+            width: 42px;
+            padding: 12px 8px;
+            img{
+                height: 34px;
+                width: 34px;
+            }
+        }
+    }
+}

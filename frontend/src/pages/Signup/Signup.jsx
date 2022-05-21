@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
-
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import backarrow from '../../assets/icons/arrow-back.svg';
+import InputLabel from '@mui/material/InputLabel';
 
 const Signup = () => {
     const [dogName, setDogName] = useState('');
@@ -15,6 +17,7 @@ const Signup = () => {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [bigImage, setBigImage] = useState();
     const [error, setError] = useState('');
+    const [size, setSize] = useState("")
     const navigate = useNavigate();
 
     const doSignUp = async (e) => {
@@ -26,6 +29,7 @@ const Signup = () => {
         formData.set("dateOfBirth", dateOfBirth)
         formData.set("email", email)
         formData.set("password", password)
+        formData.set("size", size)
         // formData.set("bigImage", bigImage, bigImage.name)
 
         try {
@@ -70,6 +74,23 @@ const Signup = () => {
                 <input type="text" value={gender} placeholder="Gender" onChange={(e) => setGender(e.target.value)}></input>
                 <input type="date" value={dateOfBirth} placeholder="DD/MM/YYYY" onChange={(e) => setDateOfBirth(e.target.value)}></input>
                 <input type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
+        <div className="dataFrame">
+          <div className="dataLable">
+            <InputLabel id="labelLanguage"> Size</InputLabel></div>
+          <div className="dataData">
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={size}
+              label="Size"
+              onChange={(e) => { setSize(e.target.value) }}
+            >
+              <MenuItem value="s">Small</MenuItem>
+              <MenuItem value="m">Medium</MenuItem>
+              <MenuItem value="l">Large</MenuItem>
+            </Select>
+          </div>
+        </div>
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <input type="password" value={passwordConfirm} placeholder="Repeat Password" onChange={(e) => setPasswordConfirm(e.target.value)}></input>
                 <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />

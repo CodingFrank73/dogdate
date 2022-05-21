@@ -1,6 +1,11 @@
+import io from "socket.io-client"
 import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import "./Chat.css"
+import ChatRoom from "./ChatRoom";
+
+
 
 //  BILDER-IMPORT
 
@@ -14,11 +19,25 @@ import iconLike from '../../assets/icons/like.svg';
 import iconChataktiv from '../../assets/icons/chat-aktiv.svg';
 import iconProfile from '../../assets/icons/profile.svg';
 
-const Home = () => {
+//const socket = io.connect("http://localhost:3000/chat")
+const socket = io.connect("http://localhost:9000")
 
-    useEffect(() => {
+const Chat = () => {
 
-    }, []);
+    const [username, setUsername] = useState("")
+    const [room, setRoom] = useState("")
+    const [showChat, setShowChat] = useState(false)
+   
+    const joinRoom = () => {
+    if (username !== "" && room !== "" ) {
+      socket.emit("join_room", room)
+        ///this will be submitted to backend as data
+        setShowChat(true)
+    }
+
+  }
+
+   
 
     return (
         <div>
@@ -29,7 +48,28 @@ const Home = () => {
                     <h2>Chat</h2>
                 </div>
 
-                <h1>Chat</h1>
+               
+                 <div >
+      {!showChat ? (
+       <div style={{margin: "200px"}}>
+      <h4>Join Chat</h4>
+      
+      <input type="text" 
+      placeholder="my Name" 
+      onChange={(event) => (setUsername(event.target.value))}/>
+      
+      <input type="text" 
+      placeholder='Room ID'
+      onChange={(event) => (setRoom(event.target.value))}/>
+      
+      <button 
+      onClick={joinRoom}>Join a Chat</button>
+      </div>
+      )
+: (
+      <ChatRoom socket={socket} username={username} room={room} />
+      )}
+    </div>
 
 
                 <footer>
@@ -48,4 +88,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Chat;
