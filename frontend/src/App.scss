@@ -228,7 +228,7 @@ h3 {
         }
 
 
-        button{
+        button {
             font-family: "Poppins", Arial, Helvetica, sans-serif;
             color: #fff;
             letter-spacing: 0.05em;
@@ -239,194 +239,196 @@ h3 {
             background: #5A1AED;
             border: 0;
             border-radius: 24px;
-            cursor:pointer;
+            cursor: pointer;
         }
-        .saveButton{
+
+        .saveButton {
             margin-bottom: 120px;
             letter-spacing: 0.05em;
         }
 
         input:focus,
-        select:focus
-        {
-        border: none;
-        border: 0;
-        outline: none;
-        border-bottom: 1px solid #555;
+        select:focus {
+            border: none;
+            border: 0;
+            outline: none;
+            border-bottom: 1px solid #555;
 
-    }
-
-    option {
-        font-family: "Poppins", Arial, Helvetica, sans-serif;
-    }
-
-    button {
-        font-family: "Poppins", Arial, Helvetica, sans-serif;
-        color: #fff;
-        text-align: center;
-        padding: 15px 0;
-        margin: 34px 10% 0 10%;
-        width: 80%;
-        background: #5A1AED;
-        border: 0;
-        border-radius: 24px;
-        cursor: pointer;
-    }
-}
-
-
-//  PROFILE PAGE :: Edit Avatar
-// ---------------------------------
-.editAvatarBody {
-    margin: 130px 5% 0 5%;
-}
-
-//  PROFILE PAGE
-// ---------------------------------
-
-.profileBody {
-    width: 90%;
-    margin: 0 5% 100px 5%;
-
-    .profilePic {
-        position: relative;
-        width: 50%;
-        margin: 114px 25% 0 25%;
-        border-radius: 50%;
-
-        img {
-            border-radius: 50%;
         }
 
-        .editProfilepic {
-            position: absolute;
-            bottom: 3px;
-            right: 3px;
-            width: 36px;
-            height: 36px;
-            background: #fff;
-            border-radius: 50%;
-            padding: 6px;
-            box-shadow: 0 0 4px #666;
+        option {
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+        }
+
+        button {
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin: 34px 10% 0 10%;
+            width: 80%;
+            background: #5A1AED;
+            border: 0;
+            border-radius: 24px;
             cursor: pointer;
         }
     }
 
-    .headlineFrame {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        padding: 8px 0px;
-        margin: 8px 0;
 
+    //  PROFILE PAGE :: Edit Avatar
+    // ---------------------------------
+    .editAvatarBody {
+        margin: 130px 5% 0 5%;
+    }
 
-        h2 {
-            width: 100%;
-            justify-content: flex-start;
+    //  PROFILE PAGE
+    // ---------------------------------
 
+    .profileBody {
+        width: 90%;
+        margin: 0 5% 100px 5%;
+
+        .profilePic {
+            position: relative;
+            width: 50%;
+            margin: 114px 25% 0 25%;
+            border-radius: 50%;
+
+            img {
+                border-radius: 50%;
+            }
+
+            .editProfilepic {
+                position: absolute;
+                bottom: 3px;
+                right: 3px;
+                width: 36px;
+                height: 36px;
+                background: #fff;
+                border-radius: 50%;
+                padding: 6px;
+                box-shadow: 0 0 4px #666;
+                cursor: pointer;
+            }
         }
 
-        .headlineButton {
-            font-size: 16px;
+        .headlineFrame {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 8px 0px;
+            margin: 8px 0;
 
+
+            h2 {
+                width: 100%;
+                justify-content: flex-start;
+
+            }
+
+            .headlineButton {
+                font-size: 16px;
+                display: flex;
+
+                justify-content: space-around;
+                border: 1px solid #dbdbdb;
+                width: 100%;
+                padding: 8px 8px;
+                margin: 8px 0;
+
+                .dataLable {
+                    width: 100%;
+                    font-size: 14px;
+                    display: flex;
+                    justify-content: flex-start;
+                    color: #2d2d2d;
+                }
+
+                .dataData {
+                    width: 100%;
+                    font-size: 16px;
+                    display: flex;
+                    justify-content: flex-end;
+                    color: #413f3f;
+                }
+
+                .colorHighlight {
+                    color: #ff5870;
+                }
+
+            }
+
+            .buttonLogout {
+
+                justify-content: flex-end;
+                color: #ff5870;
+                border: 0;
+                cursor: pointer;
+            }
+        }
+
+        .dataFrame {
+            display: flex;
             justify-content: space-around;
             border: 1px solid #dbdbdb;
             width: 100%;
             padding: 8px 8px;
             margin: 8px 0;
-        
-            .dataLable{
+
+            .dataLable {
+
                 width: 100%;
                 font-size: 14px;
                 display: flex;
                 justify-content: flex-start;
                 color: #2d2d2d;
             }
-            .dataData{
+
+            .dataData {
                 width: 100%;
                 font-size: 16px;
                 display: flex;
                 justify-content: flex-end;
                 color: #413f3f;
             }
-            .colorHighlight{
+
+            .colorHighlight {
                 color: #ff5870;
             }
-            
         }
-    
-        .buttonLogout{
 
-            justify-content: flex-end;
+        .buttonLogout {
+            width: 100%;
+            margin: 36px 0 0 0;
+            background: #fff;
+            font-size: 14px;
+            letter-spacing: 0.05em;
             color: #ff5870;
+            text-align: center;
+            padding: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 24px;
+            cursor: pointer;
+        }
+
+        .buttonDeleteAccount {
+            width: 100%;
+            font-family: "Poppins";
+            font-weight: 100;
+            letter-spacing: 0.05em;
+            text-transform: none;
+            margin: 12px 0;
+            background: #5A1AED;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
             border: 0;
+            border-radius: 24px;
             cursor: pointer;
         }
     }
-
-    .dataFrame {
-        display: flex;
-        justify-content: space-around;
-        border: 1px solid #dbdbdb;
-        width: 100%;
-        padding: 8px 8px;
-        margin: 8px 0;
-
-        .dataLable {
-
-            width: 100%;
-            font-size: 14px;
-            display: flex;
-            justify-content: flex-start;
-            color: #2d2d2d;
-        }
-
-        .dataData {
-            width: 100%;
-            font-size: 16px;
-            display: flex;
-            justify-content: flex-end;
-            color: #413f3f;
-        }
-
-        .colorHighlight {
-            color: #ff5870;
-        }
-    }
-
-    .buttonLogout {
-        width: 100%;
-        margin: 36px 0 0 0;
-        background: #fff;
-        font-size: 14px;
-        letter-spacing: 0.05em;
-        color: #ff5870;
-        text-align: center;
-        padding: 15px 0;
-        border: 1px solid #ccc;
-        border-radius: 24px;
-        cursor: pointer;
-    }
-
-    .buttonDeleteAccount {
-        width: 100%;
-        font-family: "Poppins";
-        font-weight: 100;
-        letter-spacing: 0.05em;
-        text-transform: none;
-        margin: 12px 0;
-        background: #5A1AED;
-        font-size: 14px;
-        color: #fff;
-        text-align: center;
-        padding: 15px 0;
-        border: 0;
-        border-radius: 24px;
-        cursor: pointer;
-    }
-}
 }
 
 // ================================================
@@ -444,17 +446,19 @@ h3 {
 
     padding: 12px 0 12px 0;
 
-    .rangeHL{
+    .rangeHL {
         margin: 0px 0 32px 0;
     }
-    .optionBox{
+
+    .optionBox {
         display: flex;
         width: 100%;
+    }
+}
 
-
-         // G e n d e r B o x  ------------------------------
-        .genderLeft{
-            width: 50%;
+// G e n d e r B o x  ------------------------------
+.genderLeft {
+    width: 50%;
 
     padding: 24px 0 12px 0;
 
@@ -474,15 +478,17 @@ h3 {
             color: #CACACA;
             padding: 4px 0;
 
-        } 
-        .genderLeft:hover, .genderLeft-aktiv{
+        }
+
+        .genderLeft:hover,
+        .genderLeft-aktiv {
             border: 1px solid #CACACA;
             text-align: center;
             color: #fff;
             background: #1769aa;
-        } 
-    
-        .genderRight{
+        }
+
+        .genderRight {
             width: 50%;
             border: 1px solid #CACACA;
             color: #CACACA;
@@ -490,21 +496,18 @@ h3 {
             border-bottom-right-radius: 12px;
             text-align: center;
             padding: 4px 0;
-        } 
-        .genderRight:hover, .genderRight-aktiv{
+        }
+
+        .genderRight:hover,
+        .genderRight-aktiv {
             border: 1px solid #CACACA;
             color: #fff;
             background: #1769aa;
             text-align: center;
-        } 
-        // S i z e B o x  ------------------------------
-        .sizeSmall{
-
         }
 
-        .sizeSmall:hover,
-        .sizeSmall-aktiv {
-
+        // S i z e B o x  ------------------------------
+        .sizeSmall {
             width: 33%;
             border: 1px solid #CACACA;
             border-top-left-radius: 12px;
@@ -513,41 +516,24 @@ h3 {
             text-align: center;
             color: #CACACA;
             padding: 4px 0;
-        } 
-        .sizeSmall:hover, .sizeSmall-aktiv{
-           
-         
+        }
+
+        .sizeSmall:hover,
+        .sizeSmall-aktiv {
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
-            
-         
             color: #fff;
             background: #1769aa;
 
-        } 
-        .sizeMiddle{
-
-            padding: 4px 0;
         }
 
         .sizeMiddle {
-
             width: 34%;
             border: 1px solid #CACACA;
             font-family: "PoppinsBold";
             color: #CACACA;
             text-align: center;
             padding: 4px 0;
-
-        } 
-        .sizeMiddle:hover, .sizeMiddle-aktiv{
-           
-           
-            color: #fff;
-            background: #1769aa;
-          
-        } 
-        .sizeLarge{
 
         }
 
@@ -562,7 +548,6 @@ h3 {
         }
 
         .sizeLarge {
-
             width: 33%;
             border: 1px solid #CACACA;
             font-family: "PoppinsBold";
