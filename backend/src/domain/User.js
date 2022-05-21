@@ -5,7 +5,7 @@ function makeUser({
     bigImage,
     dogName,
     gender = "",
-    dateOfBirth,
+    dateOfBirth = new Date(dateOfBirth).toISOString(),
     size = "m",
     email,
     phone,

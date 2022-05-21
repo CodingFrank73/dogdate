@@ -9,7 +9,7 @@ import backarrow from '../../assets/icons/arrow-back.svg';
 const Signup = () => {
     const [dogName, setDogName] = useState('');
     const [gender, setGender] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');

@@ -7,8 +7,6 @@ const listByFilter = async ({ userId }) => {
 
     const foundUser = await UserDAO.findById(userId)
 
-    console.log("foundUser: ", foundUser);
-
     if (!foundUser) {
         throw new Error("User doas not exists")
     }
@@ -17,21 +15,30 @@ const listByFilter = async ({ userId }) => {
 
     const { maxDistance, filterGender, ageRange, filterSize } = user
 
-    const minAgeAsDate = AgeCalc.subtractYears(ageRange[0])
-    const maxAgeAsDate = AgeCalc.subtractYears(ageRange[1])
+    const minAgeAsDate = subtractYears(ageRange[0])
+    const maxAgeAsDate = subtractYears(ageRange[1])
+
+    console.log("minAgeAsDate in listByFilter:", minAgeAsDate);
+    console.log("maxAgeAsDate in listByFilter:", maxAgeAsDate);
 
     const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
-    console.log("Users in use-case:", users);
+
+    // console.log("users:", users);
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
         // bigImage: u.bigImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
-        maxDistance: u.maxDistance
+        maxDistance: u.maxDistance,
     }))
+    // console.log("listOfUsers", listOfUsers);
+    return ({ listOfUsers, foundUser })
+}
 
-    return listOfUsers
+function subtractYears(numOfYears, date = new Date()) {
+    date.setFullYear(date.getFullYear() - numOfYears);
+    return date;
 }
 
 module.exports = {

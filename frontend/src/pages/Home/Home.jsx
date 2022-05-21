@@ -55,6 +55,55 @@ const Home = (props) => {
 
     const [open, setOpen] = useState(false);
 
+    useEffect(() => {
+        fetchSuggestions()
+
+    }, [])
+
+    const fetchSuggestions = async () => {
+        try {
+            const response = await fetch(apiBaseUrl + `/api/suggestion/allwithfilter`, {
+                headers: {
+                    token: "JWT " + props.token
+                }
+            })
+
+            const data = await response.json();
+            console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
+            console.log("Suggestions with default filter for foundUser:", data.foundUser);
+            // setSuggestions(data.listOfUsers)
+            // setFilteredAgeRange(data.ageRange);
+
+        } catch (error) {
+
+        }
+    }
+
+    const fetchSuggestionsWithTempFilter = async () => {
+        try {
+            console.log("filtered Value im MaxDistance:", filteredMaxDistance);
+            console.log("filtered Value im AgeRang:", filteredAgeRange);
+            console.log("filtered Value im Size:", filteredSize);
+            console.log("filtered Value for Gender: ", filteredGender);
+
+            const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
+                method: "POST",
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance, gender: filteredGender, size: filteredSize })
+            })
+
+            const data = await response.json()
+            console.log("suggestions with Temp Filter: ", data);
+            setSuggestions(data)
+
+
+        } catch (error) {
+
+        }
+    }
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
@@ -111,21 +160,6 @@ const Home = (props) => {
             document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
         }
 
-        // {
-        //     setIsSizeSClicked(true)
-        //     
-        // } else {
-        //     setIsSizeSClicked(false)
-        //     document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
-        // }
-
-        // if (document.getElementById("sizeSmall").classList.contains("hidden-phone")) {
-        //     document.getElementById("sizeSmall").classList.remove("hidden-phone")
-        // } else {
-        //     document.getElementById("sizeSmall").classList.add("hidden-phone")
-        // }
-        // document.getElementById("sizeSmall").classList.toggle("hidden-phone")
-
     }
 
     const handleChangeSizeM = async (event) => {
@@ -154,52 +188,6 @@ const Home = (props) => {
 
 
 
-    useEffect(() => {
-        fetchSuggestions()
-
-    }, [])
-
-    const fetchSuggestions = async () => {
-        try {
-            const response = await fetch(apiBaseUrl + `/api/suggestion/allwithfilter`, {
-                headers: {
-                    token: "JWT " + props.token
-                }
-            })
-
-            const data = await response.json()
-            console.log("Suggestions with default filter:", data);
-            setSuggestions(data)
-
-        } catch (error) {
-
-        }
-    }
-
-    const fetchSuggestionsWithTempFilter = async () => {
-        try {
-            console.log("filtered Value im MaxDistance:", filteredMaxDistance);
-            console.log("filtered Value im AgeRang:", filteredAgeRange);
-            console.log("filtered Value im Size:", filteredSize);
-
-            const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
-                method: "POST",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance })
-            })
-
-            const data = await response.json()
-            console.log("suggestions with Temp Filter: ", data);
-            setSuggestions(data)
-
-
-        } catch (error) {
-
-        }
-    }
 
 
     return (

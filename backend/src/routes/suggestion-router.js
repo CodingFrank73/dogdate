@@ -32,11 +32,11 @@ suggestionRouter.get("/allwithfilter",
 
         try {
             console.log("userId: ", req.userClaims.sub)
-            const suggestions = await SuggestionService.listByFilter({
+            const result = await SuggestionService.listByFilter({
                 userId: req.userClaims.sub
             })
 
-            res.status(200).json(suggestions);
+            res.status(200).json(result);
 
         } catch (error) {
             res.status(500).json({ err: error.message || "Unknown error while reading suggestions" })
@@ -52,8 +52,8 @@ suggestionRouter.post("/withTempFilter",
             const suggestions = await SuggestionService.listSuggestionByTempFilter({
                 ageRange: req.body.ageRange,
                 maxDistance: req.boby.maxDistance,
-                filterGender: ["m", "f"],
-                filterSize: ["s", "m", "l"]
+                filterGender: req.body.gender,
+                filterSize: req.body.size
             })
 
             res.status(200).json(suggestions);
