@@ -217,6 +217,7 @@ h3{
         button{
             font-family: "Poppins", Arial, Helvetica, sans-serif;
             color: #fff;
+            letter-spacing: 0.05em;
             text-align: center;
             padding: 15px 0;
             margin: 34px 10% 0 10%;
@@ -225,6 +226,10 @@ h3{
             border: 0;
             border-radius: 24px;
             cursor:pointer;
+        }
+        .saveButton{
+            margin-bottom: 120px;
+            letter-spacing: 0.05em;
         }
     }
 
@@ -312,8 +317,9 @@ h3{
             .colorHighlight{
                 color: #ff5870;
             }
+            
         }
-
+    
         .buttonLogout{
             width: 100%;
             margin: 36px 0 0 0;
@@ -356,50 +362,88 @@ h3{
     outline: none;
 }
 .dataFrame {
-    padding:24px 0 12px 0;
+    padding: 12px 0 12px 0;
 
-    .sizeBox{
+    .rangeHL{
+        margin: 0px 0 32px 0;
+    }
+    .optionBox{
         display: flex;
         width: 100%;
-        font-family: "PoppinsBold";
-        font-size: 20px;
+
+
+         // G e n d e r B o x  ------------------------------
+        .genderLeft{
+            width: 50%;
+            border: 1px solid #CACACA;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            text-align: center;
+            color: #CACACA;
+            padding: 4px 0;
+        } 
+        .genderLeft:hover, .genderLeft-aktiv{
+            border: 1px solid #CACACA;
+            text-align: center;
+            color: #fff;
+            background: #1769aa;
+        } 
+    
+        .genderRight{
+            width: 50%;
+            border: 1px solid #CACACA;
+            color: #CACACA;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            text-align: center;
+            padding: 4px 0;
+        } 
+        .genderRight:hover, .genderRight-aktiv{
+            border: 1px solid #CACACA;
+            color: #fff;
+            background: #1769aa;
+            text-align: center;
+        } 
+        // S i z e B o x  ------------------------------
         .sizeSmall{
             width: 33%;
             border: 1px solid #CACACA;
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
+            font-family: "PoppinsBold";
             text-align: center;
             color: #CACACA;
             padding: 4px 0;
         } 
         .sizeSmall:hover, .sizeSmall-aktiv{
-            width: 33%;
-            border: 1px solid #CACACA;
+           
+         
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
-            text-align: center;
+            
+         
             color: #fff;
             background: #1769aa;
-            padding: 4px 0;
         } 
         .sizeMiddle{
             width: 34%;
             border: 1px solid #CACACA;
+            font-family: "PoppinsBold";
             color: #CACACA;
             text-align: center;
             padding: 4px 0;
         } 
         .sizeMiddle:hover, .sizeMiddle-aktiv{
-            width: 34%;
-            border: 1px solid #CACACA;
+           
+           
             color: #fff;
             background: #1769aa;
-            text-align: center;
-            padding: 4px 0;
+          
         } 
         .sizeLarge{
             width: 33%;
             border: 1px solid #CACACA;
+            font-family: "PoppinsBold";
             color: #CACACA;
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
@@ -414,8 +458,8 @@ h3{
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
             text-align: center;
-            padding: 4px 0;
         } 
+
     }
 }
 

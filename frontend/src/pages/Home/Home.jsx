@@ -139,6 +139,40 @@ const Home = (props) => {
                     {/* <Button onClick={handleOpen}>Open modal</Button> */}
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
+
+                <div className="home-doggy-bigpic">
+                    <div className="dog-wrapper01">
+                        <img src={dogImage01} alt="dog pic" />
+                        <div className="dogName">Dimka, 5</div>
+                        <div className="distanceKM">4 km</div>
+                    </div>
+                    <div className="dog-wrapper02">
+                        <img src={dogImage02} alt="dog pic" />
+                        <div className="dogName">Goliath, 8</div>
+                        <div className="distanceKM">15 km</div>
+                    </div>
+                    <div className="dog-wrapper03">
+                        <img src={dogImage03} alt="dog pic" />
+                        <div className="dogName">Idefix, 12</div>
+                        <div className="distanceKM">1 km</div>
+                    </div>
+                    <div className="dog-wrapper04">
+                        <img src={dogImage04} alt="dog pic" />
+                        <div className="dogName">Sandy, 2</div>
+                        <div className="distanceKM">8 km</div>
+                    </div>
+                </div>
+
+                <div className="home-like-wrapper">
+                    <div className="home-like-buttons">
+                        <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
+                        <div className="home-like"><img src={buttonLike} alt="like" /></div>
+                    </div>
+                </div>
+
+
+
+
                 <footer>
                     <div className="nav">
                         <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
@@ -159,27 +193,15 @@ const Home = (props) => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
 
                     <div className="dataFrame">
-                        <p>Distance (in km)</p>
-                        <Slider
-                            value={filteredMaxDistance}
-                            onChangeCommitted={handleChangeDistance}
-                            valueLabelDisplay="on"
-                            min={0}
-                            max={200}
-                            step={5}
-                        />
-                    </div>
-                    <div className="dataFrame">
-                        <p>Size</p>
-                        <div className="sizeBox">
-                            <div className="sizeSmall">S</div>
-                            <div className="sizeMiddle">M</div>
-                            <div className="sizeLarge">L</div>
+                        <p>Gender</p>
+                        <div className="optionBox">
+                            <div className="genderLeft">Female</div>
+                            <div className="genderRight">Male</div>
                         </div>
                     </div>
 
                     <div className="dataFrame">
-                        <p>Age Range</p>
+                        <p className="rangeHL">Age Range</p>
                         <Slider
                             value={filteredAgeRange}
                             onChangeCommitted={handleChangeAgeRange}
@@ -187,6 +209,27 @@ const Home = (props) => {
                             min={0}
                             max={20}
                             step={1}
+                        />
+                    </div>
+
+                    <div className="dataFrame">
+                        <p>Size</p>
+                        <div className="optionBox">
+                            <div className="sizeSmall">S</div>
+                            <div className="sizeMiddle">M</div>
+                            <div className="sizeLarge">L</div>
+                        </div>
+                    </div>
+
+                    <div className="dataFrame">
+                        <p className="rangeHL">Distance (in km)</p>
+                        <Slider
+                            value={filteredMaxDistance}
+                            onChangeCommitted={handleChangeDistance}
+                            valueLabelDisplay="on"
+                            min={0}
+                            max={200}
+                            step={5}
                         />
                     </div>
 
