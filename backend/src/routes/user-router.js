@@ -85,8 +85,8 @@ userRouter.post("/myProfile/editBigImage",
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            console.log("userId aus route", userId) 
-           // console.log("bigPic", bigPicBas64)
+            console.log("userId aus route", userId)
+            // console.log("bigPic", bigPicBas64)
 
             const user = await UserService.editBigImage({
                 userId: userId,
@@ -99,7 +99,7 @@ userRouter.post("/myProfile/editBigImage",
             console.log(error)
             res.status(500).json({ err: error.message || "Error Updating Big Image." })
         }
-    })    
+    })
 
 userRouter.post("/login",
     body("email").isEmail(),
@@ -138,15 +138,15 @@ userRouter.post("/register",
         // const realDate = new Date(req.body.dateOfBirth)
 
         try {
-            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            // const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
             const user = await UserService.registerUser({
                 dogName: req.body.dogName,
                 password: req.body.password,
                 email: req.body.email,
                 gender: req.body.gender,
                 size: req.body.size,
-                dateOfBirth: req.body.dateOfBirth,
-                bigImage: bigPicBas64
+                dateOfBirth: req.body.dateOfBirth
+                // bigImage: bigPicBas64
             })
 
             res.status(201).json(user)
@@ -224,7 +224,7 @@ userRouter.put("/myProfile/editMaxDistance",
             const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
 
             res.status(200).json({ user })
-           // console.log("res.json aus route: ", { user })
+            // console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -240,7 +240,7 @@ userRouter.put("/myProfile/ageRange",
             const userId = req.userClaims.sub;
             const ageRangeArr = req.body;
             console.log("TEST AgeRangeArr in Route ", ageRangeArr);
-            const user = await UserService.editAgeRange(userId, ageRangeArr) 
+            const user = await UserService.editAgeRange(userId, ageRangeArr)
 
             res.status(200).json({ user })
             //console.log("res.json aus route: ", { user })
@@ -257,9 +257,9 @@ userRouter.delete("/myProfile/deleteAccount",
 
         try {
             const userId = req.userClaims.sub;
-           
-            console.log("TEST deleteAcc in Route ", userId, {userId});
-            const user = await UserService.deleteAccountUser(userId) 
+
+            console.log("TEST deleteAcc in Route ", userId, { userId });
+            const user = await UserService.deleteAccountUser(userId)
 
             res.status(200).json({ user })
             //console.log("res.json aus route: ", { user })

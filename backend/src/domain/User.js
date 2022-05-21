@@ -6,7 +6,7 @@ function makeUser({
     dogName,
     gender = "",
     dateOfBirth,
-    size = "",
+    size = "m",
     email,
     phone,
     pwHash,

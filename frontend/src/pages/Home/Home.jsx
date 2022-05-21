@@ -243,9 +243,6 @@ const Home = (props) => {
                     </div>
                 </div>
 
-
-
-
                 <footer>
                     <div className="nav">
                         <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
@@ -290,7 +287,7 @@ const Home = (props) => {
                     <div className="dataFrame">
                         <p>Size</p>
 
-                        <div className="optionBox">                       
+                        <div className="optionBox">
                             <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
                             <div className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
                             <div className="sizeLarge" onClick={handleChangeSizeL}>L</div>

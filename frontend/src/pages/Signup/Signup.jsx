@@ -26,7 +26,7 @@ const Signup = () => {
         formData.set("dateOfBirth", dateOfBirth)
         formData.set("email", email)
         formData.set("password", password)
-        formData.set("bigImage", bigImage, bigImage.name)
+        // formData.set("bigImage", bigImage, bigImage.name)
 
         try {
             const response = await fetch(apiBaseUrl + '/api/users/register', {
@@ -75,7 +75,7 @@ const Signup = () => {
                 <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
                 <button onClick={doSignUp} type="submit">SIGN UP</button>
             </form>
-            {error && <p>{error}</p>  }
+            {error && <p>{error}</p>}
         </div>
     );
 }
