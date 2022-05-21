@@ -13,7 +13,7 @@ async function findById(id) {
     console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
-    console.log("User in DOUser: ", user);
+  //  console.log("User in DOUser: ", user);
     return user
 }
 
