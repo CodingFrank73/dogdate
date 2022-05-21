@@ -190,7 +190,7 @@ const ProfileEditSettings = (props) => {
         <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-        <button onClick={doUpdate} type="submit">SAVE</button>
+        <button onClick={doUpdate} type="submit" className='saveButton'>SAVE</button>
       </form>
 
       <footer>
