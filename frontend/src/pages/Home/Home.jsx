@@ -45,8 +45,12 @@ const Home = (props) => {
     const [filteredAgeRange, setFilteredAgeRange] = useState([2, 4]);
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
     const [filteredSize, setFilteredSize] = useState([]);
-    const [filteredGender, setFilteredGender] = useState(["f", "m"]);
-
+    const [filteredGender, setFilteredGender] = useState([]);
+    const [isGenderMClicked, setIsGenderMClicked] = useState(false);
+    const [isGenderFClicked, setIsGenderFClicked] = useState(false);
+    const [isSizeSClicked, setIsSizeSClicked] = useState(false);
+    const [isSizeMClicked, setIsSizeMClicked] = useState(false);
+    const [isSizeLClicked, setIsSizeLClicked] = useState(false);
     const [error, setError] = useState('');
 
     const [open, setOpen] = useState(false);
@@ -72,12 +76,80 @@ const Home = (props) => {
         setFilteredMaxDistance(newValueDistance)
     }
 
-    const handleChangeGender = async (event, newValueGender) => {
+    const handleChangeGenderM = async (event) => {
+        if (!isGenderMClicked) {
+            setFilteredGender([...filteredGender, "m"])
+            setIsGenderMClicked(true)
+        } else {
+            const result = filteredGender.filter(size => size !== "m")
+            setFilteredGender(result)
+            setIsGenderMClicked(false)
+        }
+    }
+
+    const handleChangeGenderF = async (event) => {
+        if (!isGenderFClicked) {
+            setFilteredGender([...filteredGender, "f"])
+            setIsGenderFClicked(true)
+        } else {
+            const result = filteredGender.filter(size => size !== "f")
+            setFilteredGender(result)
+            setIsGenderFClicked(false)
+        }
+    }
+
+    const handleChangeSizeS = async (event) => {
+
+        if (!isSizeSClicked) {
+            setFilteredSize([...filteredSize, "s"])
+            setIsSizeSClicked(true)
+            document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
+        } else {
+            const result = filteredSize.filter(size => size !== "s")
+            setFilteredSize(result)
+            setIsSizeSClicked(false)
+            document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
+        }
+
+        // {
+        //     setIsSizeSClicked(true)
+        //     
+        // } else {
+        //     setIsSizeSClicked(false)
+        //     document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
+        // }
+
+        // if (document.getElementById("sizeSmall").classList.contains("hidden-phone")) {
+        //     document.getElementById("sizeSmall").classList.remove("hidden-phone")
+        // } else {
+        //     document.getElementById("sizeSmall").classList.add("hidden-phone")
+        // }
+        // document.getElementById("sizeSmall").classList.toggle("hidden-phone")
 
     }
 
-    const handleChangeSize = async (event, newValueSize) => {
-        console.log(event);
+    const handleChangeSizeM = async (event) => {
+
+        if (!isSizeMClicked) {
+            setFilteredSize([...filteredSize, "m"])
+            setIsSizeMClicked(true)
+        } else {
+            const result = filteredSize.filter(size => size !== "m")
+            setFilteredSize(result)
+            setIsSizeMClicked(false)
+        }
+    }
+
+    const handleChangeSizeL = async (event) => {
+
+        if (!isSizeLClicked) {
+            setFilteredSize([...filteredSize, "l"])
+            setIsSizeLClicked(true)
+        } else {
+            const result = filteredSize.filter(size => size !== "l")
+            setFilteredSize(result)
+            setIsSizeLClicked(false)
+        }
     }
 
 
@@ -108,6 +180,7 @@ const Home = (props) => {
         try {
             console.log("filtered Value im MaxDistance:", filteredMaxDistance);
             console.log("filtered Value im AgeRang:", filteredAgeRange);
+            console.log("filtered Value im Size:", filteredSize);
 
             const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
                 method: "POST",
@@ -192,6 +265,8 @@ const Home = (props) => {
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
 
+                    <div>Hallo{filteredSize}</div>
+
                     <div className="dataFrame">
                         <p>Gender</p>
                         <div className="optionBox">
@@ -214,10 +289,11 @@ const Home = (props) => {
 
                     <div className="dataFrame">
                         <p>Size</p>
-                        <div className="optionBox">
-                            <div className="sizeSmall">S</div>
-                            <div className="sizeMiddle">M</div>
-                            <div className="sizeLarge">L</div>
+
+                        <div className="optionBox">                       
+                            <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
+                            <div className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
+                            <div className="sizeLarge" onClick={handleChangeSizeL}>L</div>
                         </div>
                     </div>
 
@@ -232,11 +308,6 @@ const Home = (props) => {
                             step={5}
                         />
                     </div>
-
-
-                    {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography> */}
                 </Box>
             </Modal>
 
@@ -246,18 +317,6 @@ const Home = (props) => {
     );
 }
 
-// function Item(props) {
-//     return (
-//         <Paper>
-//             <h2>{props.item.name}</h2>
-//             <p>{props.item.description}</p>
-
-//             <Button className="CheckButton">
-//                 Check it out!
-//             </Button>
-//         </Paper>
-//     )
-// }
 
 export default Home;
 
