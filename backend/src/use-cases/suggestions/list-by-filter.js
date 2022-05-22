@@ -15,15 +15,11 @@ const listByFilter = async ({ userId }) => {
 
     const { maxDistance, filterGender, ageRange, filterSize } = user
 
-    const minAgeAsDate = subtractYears(ageRange[0])
-    const maxAgeAsDate = subtractYears(ageRange[1])
-
-    console.log("minAgeAsDate in listByFilter:", minAgeAsDate);
-    console.log("maxAgeAsDate in listByFilter:", maxAgeAsDate);
+    const minAgeAsDate = AgeCalc.subtractYears(ageRange[0])
+    const maxAgeAsDate = AgeCalc.subtractYears(ageRange[1])
 
     const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
 
-    // console.log("users:", users);
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
@@ -32,13 +28,8 @@ const listByFilter = async ({ userId }) => {
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
         maxDistance: u.maxDistance,
     }))
-    // console.log("listOfUsers", listOfUsers);
-    return ({ listOfUsers, foundUser })
-}
 
-function subtractYears(numOfYears, date = new Date()) {
-    date.setFullYear(date.getFullYear() - numOfYears);
-    return date;
+    return ({ listOfUsers, foundUser })
 }
 
 module.exports = {

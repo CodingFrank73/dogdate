@@ -23,6 +23,7 @@ import iconChat from '../../assets/icons/chat.svg';
 import iconProfile from '../../assets/icons/profile.svg';
 
 import apiBaseUrl from "../../api"
+import SuggestionsStaple from "./SuggestionsStaple";
 
 const style = {
     position: 'absolute',
@@ -42,7 +43,7 @@ const style = {
 
 const Home = (props) => {
     const [suggestions, setSuggestions] = useState([]);
-    const [filteredAgeRange, setFilteredAgeRange] = useState([2, 4]);
+    const [filteredAgeRange, setFilteredAgeRange] = useState([]);
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
     const [filteredSize, setFilteredSize] = useState([]);
     const [filteredGender, setFilteredGender] = useState([]);
@@ -71,8 +72,11 @@ const Home = (props) => {
             const data = await response.json();
             console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
             console.log("Suggestions with default filter for foundUser:", data.foundUser);
-            // setSuggestions(data.listOfUsers)
-            // setFilteredAgeRange(data.ageRange);
+            setSuggestions(data.listOfUsers)
+            setFilteredGender(data.foundUser.filterGender);
+            setFilteredAgeRange(data.foundUser.ageRange);
+            setFilteredSize(data.foundUser.filterSize);
+            setFilteredMaxDistance(data.foundUser.maxDistance);
 
         } catch (error) {
 
@@ -97,7 +101,7 @@ const Home = (props) => {
 
             const data = await response.json()
             console.log("suggestions with Temp Filter: ", data);
-            setSuggestions(data)
+            // setSuggestions(data)
 
 
         } catch (error) {
@@ -202,13 +206,15 @@ const Home = (props) => {
                 </div>
 
                 <div className="home-doggy-bigpic">
-                    <div className="dog-wrapper01">
+                    <SuggestionsStaple suggestions={suggestions} />
+
+                    {/* <div className="dog-wrapper01">
                         <img src={dogImage01} alt="dog pic" />
                         <div className="dogName">Dimka, 5</div>
                         <div className="distanceKM">4 km</div>
                     </div>
                     <div className="dog-wrapper02">
-                        <img src={dogImage02} alt="dog pic" />
+                        <img src="/dogs/balu.png" alt="dog pic" />
                         <div className="dogName">Goliath, 8</div>
                         <div className="distanceKM">15 km</div>
                     </div>
@@ -221,7 +227,8 @@ const Home = (props) => {
                         <img src={dogImage04} alt="dog pic" />
                         <div className="dogName">Sandy, 2</div>
                         <div className="distanceKM">8 km</div>
-                    </div>
+                    </div> */}
+
                 </div>
 
                 <div className="home-like-wrapper">

@@ -134,9 +134,6 @@ userRouter.post("/register",
     doValidation,
     async (req, res) => {
 
-        console.log("Datum: ", req.body.dateOfBirth,);
-        // const realDate = new Date(req.body.dateOfBirth)
-
         try {
             // const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
             const user = await UserService.registerUser({
@@ -145,7 +142,7 @@ userRouter.post("/register",
                 email: req.body.email,
                 gender: req.body.gender,
                 size: req.body.size,
-                dateOfBirth: req.body.dateOfBirth
+                dateOfBirth: new Date(req.body.dateOfBirth)
                 // bigImage: bigPicBas64
             })
 
