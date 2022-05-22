@@ -8,7 +8,8 @@ async function registerUser({ email, password, dogName, gender, dateOfBirth, siz
     const foundUser = await UserDAO.findByEmail(email)
 
     if (foundUser) {
-        throw new Error("Account with this Email already exists")
+        const errorMessage = "Account with this email already exists"
+        throw new Error(errorMessage)
     }
 
     const salt = Sercurity.createRandomSalt();

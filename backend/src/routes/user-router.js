@@ -103,6 +103,7 @@ userRouter.post("/myProfile/editBigImage",
 
 userRouter.post("/login",
     body("email").isEmail(),
+    body("password").isStrongPassword(),
     doValidation,
     async (req, res) => {
 
@@ -121,7 +122,7 @@ userRouter.post("/login",
 
         } catch (error) {
             console.log(error)
-            res.status(500).json({ err: error.message || "Unknown error while login user." })
+            res.status(500).json("Unknown error in login, try again.")
         }
     })
 
@@ -150,7 +151,7 @@ userRouter.post("/register",
 
         } catch (error) {
             console.log(error)
-            res.status(500).json({ err: error.message || "Unknown error while registering new user." })
+            res.status(500).json({ error: error.message || "Unknown error while registering new user." })
         }
     })
 

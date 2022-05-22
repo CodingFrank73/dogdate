@@ -22,7 +22,7 @@ import iconProfile from '../../assets/icons/profile.svg';
 //const socket = io.connect("http://localhost:3000/chat")
 const socket = io.connect("http://localhost:9000")
 
-const Chat = () => {
+const Chat = (props) => {
 
     const [username, setUsername] = useState("")
     const [room, setRoom] = useState("")
