@@ -34,12 +34,13 @@ const Login = (props) => {
             }
 
             if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
+                setError("Invalid error during login, try again")
+                console.log("ERROR", result.err.validationErrors)
                 return
             }
 
             setError(result.err.message)
+            console.log("ERROR", error)
 
         } catch (error) {
             console.log("Error during login");
@@ -60,6 +61,7 @@ const Login = (props) => {
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>
+            {error && <p>{error}</p>}
         </div>
     );
 }
