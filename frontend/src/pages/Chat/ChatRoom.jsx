@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react"
+import ScrollToBottom from "react-scroll-to-bottom";
 
 
 
@@ -31,19 +32,21 @@ const ChatRoom = ({ socket, username, room }) => {
       socket.on("receive_message", (data) => { //calls whenever there is a change (receives message) to the socket in backend
         console.log(data)
        // setMessageList((list) => [...list, data]) //returns the messages in the list and adds the current one
-        setMessageList([...messageList, data])
-        return () => socket.off("receive_message", data)  ///FCK !!! kommt trotzdem zweimal an...
+        setMessageList((list) => [...list, data])
+        //return () => socket.off("receive_message", data)  ///FCK !!! kommt trotzdem zweimal an...
       })
     
-  }, [])
+  }, [socket])
   
-    return ( <div style={{margin:"200px"}}>
+    return ( 
+    <>
+     <div className="chat-window"><div style={{ color: "grey"}}>
         <h2>ChatRoom</h2>
           <div className="chat-header">
         <p>Live Chat</p>
       </div>
-      <div className="chat-body">
-        <div className="message-container">
+      <div className="chat-body">  
+      <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => {
             return (
               <div
@@ -51,7 +54,7 @@ const ChatRoom = ({ socket, username, room }) => {
                 id={username === messageContent.author ? "you" : "other"}
               >
                 <div>
-                  <div className="message-content">
+                  <div className="message-content" style={{margin: "0"}}>
                     <p>{messageContent.message}</p>
                   </div>
                   <div className="message-meta">
@@ -62,6 +65,7 @@ const ChatRoom = ({ socket, username, room }) => {
               </div>
             );
           })}
+          </ScrollToBottom>
         </div>
       </div>
       <div className="chat-footer">
@@ -78,7 +82,9 @@ const ChatRoom = ({ socket, username, room }) => {
         />
         <button onClick={sendMessage}>&#9658;</button>
       </div>
-    </div> );
+   
+    </div>
+    </>);
 }
  
 export default ChatRoom;

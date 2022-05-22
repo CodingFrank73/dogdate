@@ -55,7 +55,7 @@ const Chat = () => {
       <h4>Join Chat</h4>
       
       <input type="text" 
-      placeholder="my Name" 
+      placeholder="Your Name" 
       onChange={(event) => (setUsername(event.target.value))}/>
       
       <input type="text" 
