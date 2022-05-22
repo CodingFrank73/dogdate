@@ -31,13 +31,8 @@ const style = {
     position: 'absolute',
     top: '0%',
     left: '0%',
-    // transform: 'translate(-50%, -50%)',
     width: '100%',
     bgcolor: 'background.paper',
-
-    // borderRadius: '12px',
-
-    // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
@@ -60,7 +55,6 @@ const Home = (props) => {
 
     useEffect(() => {
         fetchSuggestions()
-
     }, [])
 
     const fetchSuggestions = async () => {
@@ -75,10 +69,11 @@ const Home = (props) => {
             console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
             console.log("Suggestions with default filter for foundUser:", data.foundUser);
             setSuggestions(data.listOfUsers)
-            // setFilteredGender(data.foundUser.filterGender);
-            // setFilteredAgeRange(data.foundUser.ageRange);
-            // setFilteredSize(data.foundUser.filterSize);
-            // setFilteredMaxDistance(data.foundUser.maxDistance);
+
+            setFilteredGender(data.foundUser.filterGender);
+            setFilteredAgeRange(data.foundUser.ageRange);
+            setFilteredSize(data.foundUser.filterSize);
+            setFilteredMaxDistance(data.foundUser.maxDistance);
 
         } catch (error) {
 
@@ -87,11 +82,6 @@ const Home = (props) => {
 
     const fetchSuggestionsWithTempFilter = async () => {
         try {
-            console.log("filtered Value im MaxDistance:", filteredMaxDistance);
-            console.log("filtered Value im AgeRang:", filteredAgeRange);
-            console.log("filtered Value im Size:", filteredSize);
-            console.log("filtered Value for Gender: ", filteredGender);
-
             const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
                 method: "POST",
                 headers: {
@@ -103,7 +93,7 @@ const Home = (props) => {
 
             const data = await response.json()
             console.log("suggestions with Temp Filter: ", data);
-            // setSuggestions(data)
+            setSuggestions(data)
 
 
         } catch (error) {
@@ -112,6 +102,7 @@ const Home = (props) => {
     }
 
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => {
         setOpen(false);
         fetchSuggestionsWithTempFilter()
@@ -135,10 +126,12 @@ const Home = (props) => {
         if (!isGenderMClicked) {
             setFilteredGender([...filteredGender, "m"])
             setIsGenderMClicked(true)
+            document.getElementById("genderRight").classList.toggle("genderRight-aktiv")
         } else {
             const result = filteredGender.filter(size => size !== "m")
             setFilteredGender(result)
             setIsGenderMClicked(false)
+            document.getElementById("genderRight").classList.toggle("genderRight-aktiv")
         }
     }
 
@@ -146,15 +139,16 @@ const Home = (props) => {
         if (!isGenderFClicked) {
             setFilteredGender([...filteredGender, "f"])
             setIsGenderFClicked(true)
+            document.getElementById("genderLeft").classList.toggle("genderLeft-aktiv")
         } else {
             const result = filteredGender.filter(size => size !== "f")
             setFilteredGender(result)
             setIsGenderFClicked(false)
+            document.getElementById("genderLeft").classList.toggle("genderLeft-aktiv")
         }
     }
 
     const handleChangeSizeS = async (event) => {
-
         if (!isSizeSClicked) {
             setFilteredSize([...filteredSize, "s"])
             setIsSizeSClicked(true)
@@ -169,37 +163,31 @@ const Home = (props) => {
     }
 
     const handleChangeSizeM = async (event) => {
-
         if (!isSizeMClicked) {
             setFilteredSize([...filteredSize, "m"])
             setIsSizeMClicked(true)
-            // document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
+            document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
         } else {
             const result = filteredSize.filter(size => size !== "m")
             setFilteredSize(result)
             setIsSizeMClicked(false)
-            // document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
+            document.getElementById("sizeMiddle").classList.toogle("sizeMiddle-aktiv")
         }
     }
 
     const handleChangeSizeL = async (event) => {
-
         if (!isSizeLClicked) {
             setFilteredSize([...filteredSize, "l"])
             setIsSizeLClicked(true)
-            // document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
+            document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         } else {
             const result = filteredSize.filter(size => size !== "l")
             setFilteredSize(result)
             setIsSizeLClicked(false)
-            // document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
+            document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         }
+
     }
-
-
-
-
-
     return (
         <div>
 
@@ -207,7 +195,6 @@ const Home = (props) => {
                 <div className="home-header">
                     <img className="home-dd-logo" src={ddLogo} alt="dogdate logo" />
                     <h2>dogdate</h2>
-                    {/* <Button onClick={handleOpen}>Open modal</Button> */}
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
                 <div className="home-doggy-bigpic">
@@ -238,6 +225,7 @@ const Home = (props) => {
 
                 </div>
 
+
                 <div className="home-like-wrapper">
                     <div className="home-like-buttons">
                         <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
@@ -262,6 +250,7 @@ const Home = (props) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+
                     <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
 
                     <div>Hallo{filteredSize}</div>
@@ -269,8 +258,17 @@ const Home = (props) => {
                     <div className="dataFrame">
                         <p>Gender</p>
                         <div className="optionBox">
-                            <div className="genderLeft">Female</div>
-                            <div className="genderRight">Male</div>
+                            {filteredGender.includes("f") ?
+                                <div id="genderLeft" className="genderLeft genderLeft-aktiv" onClick={handleChangeGenderF}>Female</div>
+                                :
+                                <div id="genderLeft" className="genderLeft" onClick={handleChangeGenderF}>Female</div>
+                            }
+
+                            {filteredGender.includes("m") ?
+                                <div id="genderRight" className="genderRight genderRight-aktiv" onClick={handleChangeGenderM}>Male</div>
+                                :
+                                <div id="genderRight" className="genderRight" onClick={handleChangeGenderM}>Male</div>
+                            }
                         </div>
                     </div>
 
@@ -288,11 +286,21 @@ const Home = (props) => {
 
                     <div className="dataFrame">
                         <p>Size</p>
-
                         <div className="optionBox">
-                            <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
-                            <div className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
-                            <div className="sizeLarge" onClick={handleChangeSizeL}>L</div>
+                            {filteredSize.includes("s") ?
+                                <div id="sizeSmall" className="sizeSmall sizeSmall-aktiv" onClick={handleChangeSizeS}>S</div>
+                                : <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
+                            }
+
+                            {filteredSize.includes("m") ?
+                                < div id="sizeMiddle" className="sizeMiddle sizeMiddle-aktiv" onClick={handleChangeSizeM} > M</div>
+                                : <div id="sizeMiddle" className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
+                            }
+
+                            {filteredSize.includes("l") ?
+                                <div id="sizeLarge" className="sizeLarge sizeLarge-aktiv" onClick={handleChangeSizeL}>L</div>
+                                : <div id="sizeLarge" className="sizeLarge" onClick={handleChangeSizeL}>L</div>
+                            }
                         </div>
                     </div>
 
@@ -309,10 +317,7 @@ const Home = (props) => {
                     </div>
                 </Box>
             </Modal>
-
-
         </div >
-
     );
 }
 

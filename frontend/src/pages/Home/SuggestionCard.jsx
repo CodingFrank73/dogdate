@@ -1,11 +1,9 @@
 
 const SuggestionCard = (props) => {
-    console.log("Propos in SuggestionCard: ", props)
     const x = props.wert + 2
 
     return (
-
-        <div id={`dog-id${x}`} className={`dog-wrapper0${x}`} style={{ zIndex: `${x}` }}>
+        <div id={`dog-id${x}`} className={`dog-wrapper01`} style={{ zIndex: `${x}` }}>
             <img src={`dogs/${props.suggestion.dogName}.png`} alt="dog pic" />
             <div className="dogName">{props.suggestion.dogName}, {props.suggestion.age}</div>
             <div className="distanceKM">{props.suggestion.maxDistance} km</div>

@@ -11,14 +11,14 @@ const listSuggestionByTempFilter = async ({ maxDistance, filterGender, ageRange,
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
-        bigImage: u.bigImage,
+        dogName: u.dogName,
+        // bigImage: u.bigImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
         maxDistance: u.maxDistance
     }))
 
     return listOfUsers
 }
-
 
 module.exports = {
     listSuggestionByTempFilter
