@@ -210,17 +210,17 @@ const Home = (props) => {
                     {/* <Button onClick={handleOpen}>Open modal</Button> */}
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
+                <div className="home-doggy-bigpic">
 
-                {/* <div className="home-doggy-bigpic"> */}
-                {/* <div className="dog-wrapperBackground">
+                    <div className="dog-wrapperBackground">
                         <img src={noMore} alt="dog pic" />
                         <div className="textL1">Sorry, no more</div>
                         <div className="textL2">suggestions available.</div>
-                    </div> */}
+                    </div>
 
-                <SuggestionsStaple suggestions={suggestions} />
+                    <SuggestionsStaple suggestions={suggestions} />
 
-                {/* <div className="dog-wrapper01">
+                    {/* <div className="dog-wrapper01">
                         <img src={dogImage01} alt="dog pic" />
                         <div className="dogName">Dimka, 5</div>
                         <div className="distanceKM">4 km</div>
@@ -236,7 +236,7 @@ const Home = (props) => {
                         <div className="distanceKM">8 km</div>
                     </div> */}
 
-                {/* </div> */}
+                </div>
 
                 <div className="home-like-wrapper">
                     <div className="home-like-buttons">

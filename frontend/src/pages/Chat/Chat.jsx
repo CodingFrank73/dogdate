@@ -27,17 +27,17 @@ const Chat = () => {
     const [username, setUsername] = useState("")
     const [room, setRoom] = useState("")
     const [showChat, setShowChat] = useState(false)
-   
+
     const joinRoom = () => {
-    if (username !== "" && room !== "" ) {
-      socket.emit("join_room", room)
-        ///this will be submitted to backend as data
-        setShowChat(true)
+        if (username !== "" && room !== "") {
+            socket.emit("join_room", room)
+            ///this will be submitted to backend as data
+            setShowChat(true)
+        }
+
     }
 
-  }
 
-   
 
     return (
         <div>
@@ -48,28 +48,28 @@ const Chat = () => {
                     <h2>Chat</h2>
                 </div>
 
-               
-                 <div >
-      {!showChat ? (
-       <div style={{margin: "200px"}}>
-      <h4>Join Chat</h4>
-      
-      <input type="text" 
-      placeholder="Your Name" 
-      onChange={(event) => (setUsername(event.target.value))}/>
-      
-      <input type="text" 
-      placeholder='Room ID'
-      onChange={(event) => (setRoom(event.target.value))}/>
-      
-      <button 
-      onClick={joinRoom}>Join a Chat</button>
-      </div>
-      )
-: (
-      <ChatRoom socket={socket} username={username} room={room} />
-      )}
-    </div>
+
+                <div >
+                    {!showChat ? (
+                        <div style={{ margin: "200px" }}>
+                            <h4>Join Chat</h4>
+
+                            <input type="text"
+                                placeholder="Your Name"
+                                onChange={(event) => (setUsername(event.target.value))} />
+
+                            <input type="text"
+                                placeholder='Room ID'
+                                onChange={(event) => (setRoom(event.target.value))} />
+
+                            <button
+                                onClick={joinRoom}>Join a Chat</button>
+                        </div>
+                    )
+                        : (
+                            <ChatRoom socket={socket} username={username} room={room} />
+                        )}
+                </div>
 
 
                 <footer>
