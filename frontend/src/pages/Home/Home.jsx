@@ -197,8 +197,34 @@ const Home = (props) => {
                     <h2>dogdate</h2>
                     <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
                 </div>
+                <div className="home-doggy-bigpic">
 
-                <SuggestionsStaple suggestions={suggestions} />
+                    <div className="dog-wrapperBackground">
+                        <img src={noMore} alt="dog pic" />
+                        <div className="textL1">Sorry, no more</div>
+                        <div className="textL2">suggestions available.</div>
+                    </div>
+
+                    <SuggestionsStaple suggestions={suggestions} />
+
+                    {/* <div className="dog-wrapper01">
+                        <img src={dogImage01} alt="dog pic" />
+                        <div className="dogName">Dimka, 5</div>
+                        <div className="distanceKM">4 km</div>
+                    </div>
+                    <div className="dog-wrapper02">
+                        <img src="/dogs/balu.png" alt="dog pic" />
+                        <div className="dogName">Goliath, 8</div>
+                        <div className="distanceKM">15 km</div>
+                    </div>
+                    <div className="dog-wrapper04">
+                        <img src="dogs/balu.png" alt="dog pic" />
+                        <div className="dogName">Sandy, 2</div>
+                        <div className="distanceKM">8 km</div>
+                    </div> */}
+
+                </div>
+
 
                 <div className="home-like-wrapper">
                     <div className="home-like-buttons">
