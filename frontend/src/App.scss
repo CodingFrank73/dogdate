@@ -6,6 +6,10 @@
     font-family: "PoppinsBold";
     src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
 }
+@font-face {
+    font-family: "GloriaHallelujah";
+    src: url(assets/fonts/GloriaHallelujah-Regular.ttf);
+}
 
 *{
     margin: 0;
@@ -483,7 +487,7 @@ h3{
     }
 
 
-     // D i e   W i s c h - B o x ------------------------------
+     // D i e   S W I P E - B o x ------------------------------
     .home-doggy-bigpic{
         position: relative;
         top: 120px;
@@ -495,6 +499,41 @@ h3{
         overflow: hidden;
         img{
             border-radius: 28px;
+        }
+
+        .dog-wrapperBackground{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            
+            line-height: 0;
+            z-index: 1;
+
+            .textL1{
+                font-family: "GloriaHallelujah";
+                position: absolute;
+                background: coral;
+                bottom: 75px;
+                width: 100%;
+                padding: 0 12px;
+                text-align: center;
+                font-size: 24px;
+                color: #333;
+                text-shadow: 0 0 2px #666;
+            }
+            .textL2{
+                font-family: "GloriaHallelujah";
+                position: absolute;
+                background: coral;
+                bottom: 45px;
+                width: 100%;
+                padding: 0 12px;
+                text-align: center;
+                font-size: 24px;
+                color: #333;
+                text-shadow: 0 0 2px #666;
+            }
         }
 
         .dog-wrapper01{
@@ -610,12 +649,12 @@ h3{
         @keyframes slideRight {
             
             0%{ transform: translate(0px, 0px)  }
-            25%{ transform: translate(270px, 0px) }
-            100%{ transform: translate(270px, 0px) }
+            25%{ transform: translate(360px, 0px) }
+            100%{ transform: translate(360px, 0px) }
         }
         @keyframes slideLeft {
             0%{ transform: translate(0px, 0px)  }
-            100%{ transform: translate(-270px, 0px)  }
+            100%{ transform: translate(-360px, 0px)  }
         }
     }
     .home-like-wrapper{
