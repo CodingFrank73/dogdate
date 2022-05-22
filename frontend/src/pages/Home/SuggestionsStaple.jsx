@@ -1,4 +1,4 @@
-import { keys } from "@mui/system";
+
 import SuggestionCard from "./SuggestionCard";
 
 const SuggestionsStaple = (props) => {

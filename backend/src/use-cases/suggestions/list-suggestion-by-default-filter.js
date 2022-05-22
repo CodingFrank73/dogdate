@@ -3,7 +3,7 @@ const { SuggestionDAO, UserDAO } = require("../../db-access")
 const { makeUser } = require("../../domain/User")
 const AgeCalc = require("../../utils/ageCalc");
 
-const listByFilter = async ({ userId }) => {
+const listSuggestionByDefaultFilter = async ({ userId }) => {
 
     const foundUser = await UserDAO.findById(userId)
 
@@ -20,7 +20,6 @@ const listByFilter = async ({ userId }) => {
 
     const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
 
-
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
@@ -33,5 +32,5 @@ const listByFilter = async ({ userId }) => {
 }
 
 module.exports = {
-    listByFilter
+    listSuggestionByDefaultFilter
 }

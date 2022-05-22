@@ -14,7 +14,7 @@ const { editBigImage } = require("./users/edit-big-image")
 
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
-const { listByFilter } = require("./suggestions/list-by-filter");
+const { listSuggestionByDefaultFilter } = require("./suggestions/list-suggestion-by-default-filter");
 const { listSuggestionByTempFilter } = require("./suggestions/list-suggestion-by-temp-filter");
 
 const UserService = {
@@ -35,7 +35,7 @@ const UserService = {
 
 const SuggestionService = {
     listAllSuggestion,
-    listByFilter,
+    listSuggestionByDefaultFilter,
     listSuggestionByTempFilter
 }
 
