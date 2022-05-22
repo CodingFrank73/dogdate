@@ -75,10 +75,10 @@ const Home = (props) => {
             console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
             console.log("Suggestions with default filter for foundUser:", data.foundUser);
             setSuggestions(data.listOfUsers)
-            setFilteredGender(data.foundUser.filterGender);
-            setFilteredAgeRange(data.foundUser.ageRange);
-            setFilteredSize(data.foundUser.filterSize);
-            setFilteredMaxDistance(data.foundUser.maxDistance);
+            // setFilteredGender(data.foundUser.filterGender);
+            // setFilteredAgeRange(data.foundUser.ageRange);
+            // setFilteredSize(data.foundUser.filterSize);
+            // setFilteredMaxDistance(data.foundUser.maxDistance);
 
         } catch (error) {
 
@@ -173,10 +173,12 @@ const Home = (props) => {
         if (!isSizeMClicked) {
             setFilteredSize([...filteredSize, "m"])
             setIsSizeMClicked(true)
+            // document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
         } else {
             const result = filteredSize.filter(size => size !== "m")
             setFilteredSize(result)
             setIsSizeMClicked(false)
+            // document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
         }
     }
 
@@ -185,10 +187,12 @@ const Home = (props) => {
         if (!isSizeLClicked) {
             setFilteredSize([...filteredSize, "l"])
             setIsSizeLClicked(true)
+            // document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         } else {
             const result = filteredSize.filter(size => size !== "l")
             setFilteredSize(result)
             setIsSizeLClicked(false)
+            // document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         }
     }
 
