@@ -34,7 +34,7 @@ const Signup = () => {
         const formData = new FormData()
         formData.set("dogName", dogName)
         formData.set("gender", gender)
-        formData.set("dateOfBirth", new Date(dateOfBirth).toLocaleDateString('en-CA'))
+        formData.set("dateOfBirth", dateOfBirth)
         formData.set("email", email)
         formData.set("password", password)
         formData.set("size", size)
