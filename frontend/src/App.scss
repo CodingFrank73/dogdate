@@ -1,79 +1,86 @@
 @font-face {
     font-family: "Poppins";
     src: url(assets/fonts/Poppins/Poppins-Regular.ttf);
-  }
+}
+
 @font-face {
     font-family: "PoppinsBold";
     src: url(assets/fonts/Poppins/Poppins-Bold.ttf);
 }
+
 @font-face {
     font-family: "GloriaHallelujah";
     src: url(assets/fonts/GloriaHallelujah-Regular.ttf);
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     background: #efefef;
     color: #303030;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-img{
+img {
     width: 100%;
 }
 
-h2{
+h2 {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     font-size: 33px;
     color: #303030;
     text-align: center;
 }
-h3{
+
+h3 {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     font-size: 24px;
     color: #000;
 }
 
-.loadingIndicator{
+.loadingIndicator {
     height: 100vh;
     overflow: hidden;
-    
-    img{
+
+    img {
         margin-top: 50%;
     }
 }
-.killDog{
+
+.killDog {
     color: tomato !important;
 }
 
 // ================================================
 // SPLASH
 // ================================================
-.splash{
-    background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+.splash {
+    background-image: linear-gradient(0deg, #FF5870, #5A1AED);
     height: 100vh;
 
-    .dd-logo-wrapper{
+    .dd-logo-wrapper {
         display: flex;
         padding-top: 30%;
         justify-content: center;
     }
-    .dd-logo{
+
+    .dd-logo {
         display: flex;
         width: 144px;
         background: #fff;
         border: 10px solid #fff;
         border-radius: 50%;
     }
-    h1{
+
+    h1 {
         font-size: 50px;
         color: #fff;
         font-weight: 100;
@@ -81,36 +88,41 @@ h3{
         margin-top: 0.5rem;
         margin-bottom: 6rem;
     }
-    button{
+
+    button {
         display: flex;
         width: 86%;
         margin: 5% 7%;
-        position: relative; 
+        position: relative;
         padding: 0.8rem;
         background: #fff;
         border: 1px solid #fff;
         border-radius: 22px;
         cursor: pointer;
-        .wbLogo{
+
+        .wbLogo {
             position: absolute;
-            left: 18px; 
+            left: 18px;
             top: 3px;
             width: 35px;
         }
-        .wbLogoAT{
+
+        .wbLogoAT {
             position: absolute;
-            left: 22px; 
+            left: 22px;
             top: 7px;
             width: 27px;
         }
-        .wbText{
+
+        .wbText {
             color: #373737;
             width: 100%;
             text-align: center;
             top: 5px;
         }
     }
-    .wText{
+
+    .wText {
         width: 70%;
         color: #fff;
         font-size: 0.7rem;
@@ -118,36 +130,40 @@ h3{
         text-align: center;
         margin: 0 auto;
 
-        a{
+        a {
             font-family: "PoppinsBold";
             color: #fff;
             text-decoration: underline;
         }
-        a:hover{
+
+        a:hover {
             text-decoration: none;
         }
     }
 
-    .signUpfooter{
+    .signUpfooter {
         position: absolute;
         bottom: 2rem;
         width: 100%;
-        p{
+
+        p {
             color: #fff;
             font-size: 0.8rem;
             text-align: center;
 
-            a{
+            a {
                 font-family: "PoppinsBold";
                 color: #fff;
                 text-decoration: none;
             }
-            a:hover{
+
+            a:hover {
                 text-decoration: underline;
             }
         }
     }
-        .splashFooter {
+
+    .splashFooter {
         position: fixed;
         bottom: 2px;
         width: 100%;
@@ -157,10 +173,11 @@ h3{
         display: flex;
         justify-content: space-evenly;
 
-        .iconDog{
+        .iconDog {
             width: 11px;
         }
-        .iconVegan{
+
+        .iconVegan {
             width: 8px;
         }
     }
@@ -171,9 +188,9 @@ h3{
 // ================================================
 // PROFILE -- SignUp -- LogIn
 // ================================================
-.profile{
+.profile {
 
-    .profile-header{
+    .profile-header {
         width: 100%;
         position: fixed;
         top: 0;
@@ -183,23 +200,25 @@ h3{
         text-align: center;
         z-index: 2;
         border-bottom: 2px solid #efefef;
-        .profile-arrow-back{
+
+        .profile-arrow-back {
             position: fixed;
             top: 57px;
             left: 16px;
             width: 26px;
-            cursor:pointer;
+            cursor: pointer;
         }
     }
 
     //  SIGNUP PAGE
     // ---------------------------------
-    .signup-box{
+    .signup-box {
         width: 90%;
         padding-top: 140px;
         margin: 0px 5% 0px 5%;
 
-        input, select{
+        input,
+        select {
             width: 100%;
             border: none;
             border-bottom: 1px solid #8e8e8e;
@@ -208,17 +227,19 @@ h3{
             font-family: "Poppins", Arial, Helvetica, sans-serif;
             margin-bottom: 12px;
         }
+      
         input:focus,  select:focus{
             border: none;
             border: 0;
             outline: none;
             border-bottom: 1px solid #555;
         }
-        option{
+
+        option {
             font-family: "Poppins", Arial, Helvetica, sans-serif;
         }
 
-        button{
+        button {
             font-family: "Poppins", Arial, Helvetica, sans-serif;
             color: #fff;
             letter-spacing: 0.05em;
@@ -231,7 +252,8 @@ h3{
             border-radius: 24px;
             cursor: pointer;
         }
-        .saveButton{
+
+        .saveButton {
             margin-bottom: 120px;
             letter-spacing: 0.05em;
         }
@@ -240,18 +262,18 @@ h3{
 
     //  PROFILE PAGE :: Edit Avatar
     // ---------------------------------
-    .editAvatarBody{
+    .editAvatarBody {
         margin: 130px 5% 0 5%;
     }
 
     //  PROFILE PAGE
     // ---------------------------------
 
-    .profileBody{
+    .profileBody {
         width: 90%;
         margin: 0 5% 100px 5%;
 
-        .profilePic{
+        .profilePic {
             position: relative;
             width: 50%;
             margin: 114px 25% 0 25%;
@@ -260,20 +282,22 @@ h3{
             img {
                 border-radius: 50%;
             }
-            .editProfilepic{
+
+            .editProfilepic {
                 position: absolute;
-                bottom:3px;
-                right:3px;
+                bottom: 3px;
+                right: 3px;
                 width: 36px;
                 height: 36px;
                 background: #fff;
                 border-radius: 50%;
                 padding: 6px;
                 box-shadow: 0 0 4px #666;
-                cursor:pointer;
+                cursor: pointer;
             }
         }
-        .headlineFrame{
+
+        .headlineFrame {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -281,12 +305,13 @@ h3{
             padding: 8px 0px;
             margin: 8px 0;
 
-            h2{
+            h2 {
                 width: 100%;
                 justify-content: flex-start;
 
             }
-            .headlineButton{
+
+            .headlineButton {
                 font-size: 16px;
                 display: flex;
                 justify-content: flex-end;
@@ -295,34 +320,37 @@ h3{
                 cursor: pointer;
             }
         }
-        .dataFrame{
+
+        .dataFrame {
             display: flex;
             justify-content: space-around;
             border: 1px solid #dbdbdb;
             width: 100%;
             padding: 8px 8px;
             margin: 8px 0;
-        
-            .dataLable{
+
+            .dataLable {
                 width: 100%;
                 font-size: 14px;
                 display: flex;
                 justify-content: flex-start;
                 color: #2d2d2d;
             }
-            .dataData{
+
+            .dataData {
                 width: 100%;
                 font-size: 16px;
                 display: flex;
                 justify-content: flex-end;
                 color: #413f3f;
             }
-            .colorHighlight{
+
+            .colorHighlight {
                 color: #ff5870;
             }
         }
-    
-        .buttonLogout{
+
+        .buttonLogout {
             width: 100%;
             margin: 36px 0 0 0;
             background: #fff;
@@ -333,9 +361,10 @@ h3{
             padding: 15px 0;
             border: 1px solid #ccc;
             border-radius: 24px;
-            cursor:pointer;
+            cursor: pointer;
         }
-        .buttonDeleteAccount{
+
+        .buttonDeleteAccount {
             width: 100%;
             font-family: "Poppins";
             font-weight: 100;
@@ -349,7 +378,7 @@ h3{
             padding: 15px 0;
             border: 0;
             border-radius: 24px;
-            cursor:pointer;
+            cursor: pointer;
         }
     }
 }
@@ -364,19 +393,21 @@ h3{
     border-bottom-right-radius: 22px;
     outline: none;
 }
+
 .dataFrame {
     padding: 12px 0 12px 0;
 
-    .rangeHL{
+    .rangeHL {
         margin: 0px 0 32px 0;
     }
-    .optionBox{
+
+    .optionBox {
         display: flex;
         width: 100%;
 
 
-         // G e n d e r B o x  ------------------------------
-        .genderLeft{
+        // G e n d e r B o x  ------------------------------
+        .genderLeft {
             width: 50%;
             border: 1px solid #CACACA;
             border-top-left-radius: 12px;
@@ -384,15 +415,17 @@ h3{
             text-align: center;
             color: #CACACA;
             padding: 4px 0;
-        } 
-        .genderLeft:hover, .genderLeft-aktiv{
+        }
+
+        .genderLeft:hover,
+        .genderLeft-aktiv {
             border: 1px solid #CACACA;
             text-align: center;
             color: #fff;
             background: #1769aa;
-        } 
-    
-        .genderRight{
+        }
+
+        .genderRight {
             width: 50%;
             border: 1px solid #CACACA;
             color: #CACACA;
@@ -400,15 +433,18 @@ h3{
             border-bottom-right-radius: 12px;
             text-align: center;
             padding: 4px 0;
-        } 
-        .genderRight:hover, .genderRight-aktiv{
+        }
+
+        .genderRight:hover,
+        .genderRight-aktiv {
             border: 1px solid #CACACA;
             color: #fff;
             background: #1769aa;
             text-align: center;
-        } 
+        }
+
         // S i z e B o x  ------------------------------
-        .sizeSmall{
+        .sizeSmall {
             width: 33%;
             border: 1px solid #CACACA;
             border-top-left-radius: 12px;
@@ -417,26 +453,32 @@ h3{
             text-align: center;
             color: #CACACA;
             padding: 4px 0;
-        } 
-        .sizeSmall:hover, .sizeSmall-aktiv{
+        }
+
+        .sizeSmall:hover,
+        .sizeSmall-aktiv {
             border-top-left-radius: 12px;
             border-bottom-left-radius: 12px;
             color: #fff;
             background: #1769aa;
-        } 
-        .sizeMiddle{
+        }
+
+        .sizeMiddle {
             width: 34%;
             border: 1px solid #CACACA;
             font-family: "PoppinsBold";
             color: #CACACA;
             text-align: center;
             padding: 4px 0;
-        } 
-        .sizeMiddle:hover, .sizeMiddle-aktiv{
+        }
+
+        .sizeMiddle:hover,
+        .sizeMiddle-aktiv {
             color: #fff;
             background: #1769aa;
-        } 
-        .sizeLarge{
+        }
+
+        .sizeLarge {
             width: 33%;
             border: 1px solid #CACACA;
             font-family: "PoppinsBold";
@@ -445,8 +487,10 @@ h3{
             border-bottom-right-radius: 12px;
             text-align: center;
             padding: 4px 0;
-        } 
-        .sizeLarge:hover, .sizeLarge-aktiv{
+        }
+
+        .sizeLarge:hover,
+        .sizeLarge-aktiv {
             width: 33%;
             border: 1px solid #CACACA;
             color: #fff;
@@ -454,30 +498,33 @@ h3{
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
             text-align: center;
-        } 
+        }
 
     }
 }
 
-.home{
+.home {
     // background: #f7f7f7;  
-    background-image: linear-gradient(0deg, #e9e9e9 , #f7f7f7);    
+    background-image: linear-gradient(0deg, #e9e9e9, #f7f7f7);
     height: 100vh;
 
-    .home-header{
+    .home-header {
         position: absolute;
         top: 54px;
         width: 100%;
         display: flex;
-        .home-dd-logo{
+
+        .home-dd-logo {
             width: 80px;
             padding: 0 12px 0 18px;
         }
-        h2{
+
+        h2 {
             font-size: 30px;
             color: #ff5870;
         }
-        .home-filter{
+
+        .home-filter {
             position: absolute;
             right: 12px;
             width: 28px;
@@ -487,8 +534,8 @@ h3{
     }
 
 
-     // D i e   S W I P E - B o x ------------------------------
-    .home-doggy-bigpic{
+    // D i e   S W I P E - B o x ------------------------------
+    .home-doggy-bigpic {
         position: relative;
         top: 120px;
         width: 90%;
@@ -497,20 +544,21 @@ h3{
         border-radius: 28px;
         box-shadow: 0px 4px 8px 4px #ccc;
         overflow: hidden;
-        img{
+
+        img {
             border-radius: 28px;
         }
 
-        .dog-wrapperBackground{
+        .dog-wrapperBackground {
             position: absolute;
             top: 0px;
             left: 0px;
             width: 100%;
-            
+
             line-height: 0;
             z-index: 1;
 
-            .textL1{
+            .textL1 {
                 font-family: "GloriaHallelujah";
                 position: absolute;
                 background: coral;
@@ -522,7 +570,8 @@ h3{
                 color: #333;
                 text-shadow: 0 0 2px #666;
             }
-            .textL2{
+
+            .textL2 {
                 font-family: "GloriaHallelujah";
                 position: absolute;
                 background: coral;
@@ -536,7 +585,7 @@ h3{
             }
         }
 
-        .dog-wrapper01{
+        .dog-wrapper01 {
             position: absolute;
             top: 0px;
             left: 0px;
@@ -544,7 +593,7 @@ h3{
             // height: 120px;
             line-height: 0;
 
-            .dogName{
+            .dogName {
                 position: absolute;
                 bottom: 50px;
                 left: 16px;
@@ -552,7 +601,8 @@ h3{
                 color: #fff;
                 text-shadow: 0 0 1px #333;
             }
-            .distanceKM{
+
+            .distanceKM {
                 position: absolute;
                 bottom: 24px;
                 left: 16px;
@@ -561,14 +611,15 @@ h3{
                 text-shadow: 0 0 1px #333;
             }
         }
-        .dog-wrapper02{
+
+        .dog-wrapper02 {
             // position: absolute;
             top: 0px;
             width: 100%;
             line-height: 0;
             // z-index: 12;
 
-            .dogName{
+            .dogName {
                 position: absolute;
                 bottom: 50px;
                 left: 16px;
@@ -576,7 +627,8 @@ h3{
                 color: #fff;
                 text-shadow: 0 0 1px #333;
             }
-            .distanceKM{
+
+            .distanceKM {
                 position: absolute;
                 bottom: 24px;
                 left: 16px;
@@ -585,7 +637,8 @@ h3{
                 text-shadow: 0 0 1px #333;
             }
         }
-        .dog-wrapper03{
+
+        .dog-wrapper03 {
             position: absolute;
             top: 0px;
             width: 100%;
@@ -595,9 +648,9 @@ h3{
             animation-duration: 2s;
             animation-delay: 6s;
             animation-iteration-count: infinite;
-            transition-timing-function: ease-in; 
+            transition-timing-function: ease-in;
 
-            .dogName{
+            .dogName {
                 position: absolute;
                 bottom: 50px;
                 left: 16px;
@@ -605,7 +658,8 @@ h3{
                 color: #fff;
                 text-shadow: 0 0 2px #333;
             }
-            .distanceKM{
+
+            .distanceKM {
                 position: absolute;
                 bottom: 24px;
                 left: 16px;
@@ -614,20 +668,19 @@ h3{
                 text-shadow: 0 0 2px #333;
             }
         }
-        .dog-wrapper04{
+
+        .dog-wrapper04 {
             position: absolute;
             top: 0px;
             width: 100%;
             line-height: 0;
-            
-            // z-index: 14;
             animation-name: slideRight;
             animation-duration: 10s;
             animation-delay: 2s;
             animation-iteration-count: infinite;
-            transition-timing-function: ease-in; 
+            transition-timing-function: ease-in;
 
-            .dogName{
+            .dogName {
                 position: absolute;
                 bottom: 50px;
                 left: 16px;
@@ -635,7 +688,8 @@ h3{
                 color: #fff;
                 text-shadow: 0 0 1px #333;
             }
-            .distanceKM{
+
+            .distanceKM {
                 position: absolute;
                 bottom: 24px;
                 left: 16px;
@@ -646,24 +700,39 @@ h3{
         }
 
         @keyframes slideRight {
-            
-            0%{ transform: translate(0px, 0px)  }
-            25%{ transform: translate(360px, 0px) }
-            100%{ transform: translate(360px, 0px) }
+
+            0% {
+                transform: translate(0px, 0px)
+            }
+
+            25% {
+                transform: translate(360px, 0px)
+            }
+
+            100% {
+                transform: translate(360px, 0px)
+            }
         }
+
         @keyframes slideLeft {
-            0%{ transform: translate(0px, 0px)  }
-            100%{ transform: translate(-360px, 0px)  }
+            0% {
+                transform: translate(0px, 0px)
+            }
+
+            100% {
+                transform: translate(-360px, 0px)
+            }
         }
     }
-    .home-like-wrapper{
+
+    .home-like-wrapper {
         position: absolute;
         bottom: 85px;
         left: 25%;
         right: 25%;
         width: 50%;
 
-        .home-like-buttons{
+        .home-like-buttons {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20%;
@@ -671,26 +740,29 @@ h3{
             justify-content: center;
             align-content: center;
             cursor: pointer;
-            
-            .home-dislike{
+
+            .home-dislike {
                 width: 66px;
                 height: 66px;
-                background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+                background-image: linear-gradient(0deg, #FF5870, #5A1AED);
                 border-radius: 50%;
                 padding: 17px;
             }
-            .home-like{
+
+            .home-like {
                 width: 66px;
                 height: 66px;
-                background-image: linear-gradient(0deg, #FF5870 , #5A1AED);    
+                background-image: linear-gradient(0deg, #FF5870, #5A1AED);
                 border-radius: 50%;
                 padding: 15px;
             }
-            .home-dislike img{
+
+            .home-dislike img {
                 width: 32px;
                 height: 32px;
             }
-            .home-like img{
+
+            .home-like img {
                 margin-top: 2px;
             }
         }
@@ -699,7 +771,7 @@ h3{
 
 }
 
-footer{
+footer {
     position: absolute;
     position: fixed;
     bottom: 0px;
@@ -707,7 +779,8 @@ footer{
     height: 58px;
     background: #fff;
     border-top: 2px solid #efefef;
-    .nav{
+
+    .nav {
         width: 90%;
         margin: 0 auto;
         display: grid;
@@ -716,10 +789,11 @@ footer{
         justify-content: space-between;
         gap: 0.5rem;
 
-        div{
+        div {
             width: 42px;
             padding: 12px 8px;
-            img{
+
+            img {
                 height: 34px;
                 width: 34px;
             }
