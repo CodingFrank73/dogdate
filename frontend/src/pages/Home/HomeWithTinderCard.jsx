@@ -228,7 +228,9 @@ const HomeWithTinderCard = (props) => {
                                 {/* {setTempID(character._id)} */}
                                 <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
-                                    <h3>{character.dogName}, {character._id}</h3>
+                                    <div className="dogName">{character.dogName}, {character.age}</div>
+                                    <div className="distanceKM">{character.maxDistance} km</div>
+                                    {/* <h3>{character.dogName}, {character._id}</h3> */}
                                 </div>
                             </TinderCard>
 
