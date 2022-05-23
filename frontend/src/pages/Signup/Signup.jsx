@@ -62,11 +62,12 @@ const Signup = () => {
                 console.log("Hat geklappt..........");
                 setPassword("")
                 setError("")
-                setSuccess("All done - please login now and enjoy using this app!")
 
+                setSuccess(`A very warm welcome ${dogName} to the DogDate community! We will now direct you to the login section - please sign in with your credentials and enjoy using Dogdate!`)
+   
                 setTimeout(() => {
                     navigate("/login")
-                }, 2000)
+                    }, 4500)
 
                 return
             }

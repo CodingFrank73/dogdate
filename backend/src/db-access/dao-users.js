@@ -10,12 +10,19 @@ async function findAll() {
 }
 
 async function findById(id) {
-    console.log("id in DAOUser: ", id);
+    // console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
     //  console.log("User in DOUser: ", user);
     return user
 }
+
+async function findByIdList(idList) {
+    const db = await getDB();
+    const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
+    return foundList
+}
+
 
 async function findByEmail(email) {
     const db = await getDB();
@@ -43,7 +50,7 @@ async function update(userId, updatedInfo) {
 
 
 async function updateAvatar({ userId, profileImage }) {
-    console.log("userId aus DAO", userId)
+    // console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
@@ -61,13 +68,13 @@ async function updateBigImage({ userId, bigImage }) {
         { _id: new ObjectId(userId) },
         { $set: { bigImage: bigImage } }
     )
-    console.log("IDtest", userId)
-    console.log("updated user aus DAO", updatedUser)
+    // console.log("IDtest", userId)
+    // console.log("updated user aus DAO", updatedUser)
     return updatedUser
 }
 
 async function findLikesById({ userId }) {
-    console.log(userId);
+    // console.log(userId);
     const db = await getDB();
     const likes = await db.collection("likes").find({ likedId: userId }).toArray();
     return likes
@@ -76,7 +83,7 @@ async function findLikesById({ userId }) {
 async function findMatches({ myId, likedId }) {
     console.log("Suche Match...");
     const db = await getDB();
-    const foundLike = await db.collection("likeStatus").findOne(
+    const foundLike = await db.collection("likes").findOne(
         {
             // myId: myId,
             // idILiked: likedId
@@ -91,7 +98,7 @@ async function findMatches({ myId, likedId }) {
 async function insertLike({ myId, likedId }) {
     console.log("Insert like......");
     const db = await getDB();
-    const like = await db.collection("likeStatus").insertOne(
+    const like = await db.collection("likes").insertOne(
         {
             myId: myId,
             idILiked: likedId,
@@ -104,7 +111,7 @@ async function insertLike({ myId, likedId }) {
 async function updateLikeToMatch(likeId) {
     console.log("Update like mit der ID: " + likeId + " to match.......");
     const db = await getDB();
-    const like = await db.collection("likeStatus").updateOne(
+    const like = await db.collection("likes").updateOne(
         { _id: likeId },
         { $set: { match: true } }
     );
@@ -118,7 +125,7 @@ async function updateLanguage({ userId, language }) {
         { _id: new ObjectId(userId) },
         { $set: { language: language } }
     )
-    console.log("IDtest", userId)
+    // console.log("IDtest", userId)
     return updatedUser
 }
 
@@ -128,28 +135,28 @@ async function updateMaxDistance({ userId, maxDistance }) {
         { _id: new ObjectId(userId) },
         { $set: { maxDistance: maxDistance } }
     )
-    console.log("IDtest", userId)
+    // console.log("IDtest", userId)
     return insertResult
 }
 
 async function updateAgeRange({ userId, ageRange }) {
     const db = await getDB();
-    console.log("id, ageRange from DAO ", userId, ageRange)
+    // console.log("id, ageRange from DAO ", userId, ageRange)
     const insertResult = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { ageRange: ageRange } }
     )
-    console.log("IDtest", userId)
+    // console.log("IDtest", userId)
     return insertResult
 }
 
 async function deleteUser(userId) {
     const db = await getDB();
-    console.log("id, ageRange from DAO ", userId)
+    // console.log("id, ageRange from DAO ", userId)
     const insertResult = await db.collection(collectionName).deleteOne(
         { _id: new ObjectId(userId) },
     )
-    console.log("IDtest", userId)
+    // console.log("IDtest", userId)
     return insertResult
 }
 
@@ -161,6 +168,7 @@ async function deleteUser(userId) {
 module.exports = {
     findAll,
     findById,
+    findByIdList,
     findByEmail,
     insert,
     update,

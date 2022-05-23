@@ -41,7 +41,7 @@ userRouter.get("/myProfile",
 
         try {
             const userId = req.userClaims.sub;
-            console.log("USER-ID:", userId);
+            // console.log("USER-ID:", userId);
             const user = await UserService.showMyProfile({ userId })
 
             res.status(200).json(user);
@@ -56,12 +56,12 @@ userRouter.post("/myProfile/editAvatar",
     avatarUploadMiddleware,
     doAuthMiddleware,
     async (req, res) => {
-        console.log("Hier ist ein Test:", req.file);
+        // console.log("Hier ist ein Test:", req.file);
 
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            console.log("userId aus route", userId) //klappt
+            // console.log("userId aus route", userId) //klappt
 
             const user = await UserService.editAvatar({
                 userId: userId,
@@ -85,7 +85,7 @@ userRouter.post("/myProfile/editBigImage",
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            console.log("userId aus route", userId)
+            // console.log("userId aus route", userId)
             // console.log("bigPic", bigPicBas64)
 
             const user = await UserService.editBigImage({
@@ -179,12 +179,12 @@ userRouter.put("/myProfile/profileEditSettings",
         try {
             const userId = req.userClaims.sub;
             //  const userId = req.body._id - ohne Middleware und damit OK in ThunderClient
-            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body)
+            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body)
 
             const user = await UserService.editProfileSettings(req.body)
 
             res.status(200).json({ user })
-            console.log("res.json aus route: ", { user })
+            // console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -198,12 +198,12 @@ userRouter.put("/myProfile/editLanguage",
 
         try {
             const userId = req.userClaims.sub;
-            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.language)
+            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.language)
 
             const user = await UserService.editLanguage(userId, req.body.language)
 
             res.status(200).json({ user })
-            console.log("res.json aus route: ", { user })
+            // console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -217,7 +217,7 @@ userRouter.put("/myProfile/editMaxDistance",
 
         try {
             const userId = req.userClaims.sub;
-            console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.maxDistance)
+            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.maxDistance)
 
             const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
 
@@ -237,7 +237,7 @@ userRouter.put("/myProfile/ageRange",
         try {
             const userId = req.userClaims.sub;
             const ageRangeArr = req.body;
-            console.log("TEST AgeRangeArr in Route ", ageRangeArr);
+            // console.log("TEST AgeRangeArr in Route ", ageRangeArr);
             const user = await UserService.editAgeRange(userId, ageRangeArr)
 
             res.status(200).json({ user })
@@ -256,7 +256,7 @@ userRouter.delete("/myProfile/deleteAccount",
         try {
             const userId = req.userClaims.sub;
 
-            console.log("TEST deleteAcc in Route ", userId, { userId });
+            // console.log("TEST deleteAcc in Route ", userId, { userId });
             const user = await UserService.deleteAccountUser(userId)
 
             res.status(200).json({ user })
@@ -288,21 +288,22 @@ userRouter.get("/showMyLikes",
         }
     })
 
-userRouter.post("/like",
+userRouter.post("/likeone",
+    doAuthMiddleware,
     async (req, res) => {
 
         try {
             const response = await UserService.likeOne(
                 {
-                    // myId: req.userClaims.sub,
-                    myId: req.body.myId,
+                    myId: req.userClaims.sub,
                     likedId: req.body.likedId
                 })
 
             res.status(201).json(response)
 
         } catch (error) {
-
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during inserting likes." })
         }
     })
 

@@ -31,7 +31,7 @@ suggestionRouter.get("/allwithfilter",
     async (req, res) => {
 
         try {
-            console.log("userId: ", req.userClaims.sub)
+            // console.log("userId: ", req.userClaims.sub)
             const result = await SuggestionService.listSuggestionByDefaultFilter({
                 userId: req.userClaims.sub
             })
@@ -49,6 +49,7 @@ suggestionRouter.post("/withTempFilter",
 
         try {
             const suggestions = await SuggestionService.listSuggestionByTempFilter({
+                _id: req.userClaims.sub,
                 ageRange: req.body.ageRange,
                 maxDistance: req.body.maxDistance,
                 filterGender: req.body.gender,
