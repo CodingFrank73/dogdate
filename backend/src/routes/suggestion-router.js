@@ -50,6 +50,7 @@ suggestionRouter.post("/withTempFilter",
         try {
             const suggestions = await SuggestionService.listSuggestionByTempFilter({
                 _id: req.userClaims.sub,
+                match: req.body.match,
                 ageRange: req.body.ageRange,
                 maxDistance: req.body.maxDistance,
                 filterGender: req.body.gender,

@@ -17,11 +17,7 @@ async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, min
 
     const users = await db.collection("users").find(
         {
-            // _id: { $ne: ObjectId("628b518a76240635fcfb8f55") },
-            // _id: { $nin: [ObjectId("6288b25cfabd112d5193d88f"), ObjectId("628b518a76240635fcfb8f55")] },
             _id: { $nin: exIDs },
-            // _id: { $ne: ObjectId(match) },
-            // _id: { $ne: ObjectId("628b518a76240635fcfb8f55") },
             dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
             gender: { $in: filterGender },
             size: { $in: filterSize },

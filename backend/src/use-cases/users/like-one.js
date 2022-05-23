@@ -31,8 +31,8 @@ const likeOne = async ({ myId, likedId }) => {
    }
 
    console.log("like:", like);
-   const setMatch = await UserDAO.updateLikeToMatch(like._id)
-
+   // const setMatch = await UserDAO.updateLikeToMatch(like._id)
+   const setMatch = await UserDAO.updateLikeToMatch(like)
    console.log(setMatch);
 }
 
