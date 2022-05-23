@@ -27,19 +27,6 @@ const ChatRoom = ({ socket, username, room }) => {
     }
   };
 
-//   useEffect(() => {
-//       socket.on("receive_message", (data) => { //calls whenever there is a change (receives message) to the socket in backend
-//         console.log(data)
-//        // setMessageList((list) => [...list, data]) //returns the messages in the list and adds the current one
-//         setMessageList((list) => [...list, data])
-//         return (() => { 
-//             setMessageList([]);
-//             socket.disconnect()
-//             })  ///FCK !!! kommt trotzdem zweimal an...
-//       })
-    
-//   }, [socket])
-
 useEffect(() => {
     socket.off("receive_message").on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
