@@ -13,7 +13,7 @@ async function findById(id) {
     console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
-  //  console.log("User in DOUser: ", user);
+    //  console.log("User in DOUser: ", user);
     return user
 }
 
@@ -64,6 +64,13 @@ async function updateBigImage({ userId, bigImage }) {
     console.log("IDtest", userId)
     console.log("updated user aus DAO", updatedUser)
     return updatedUser
+}
+
+async function findLikesById({ userId }) {
+    console.log(userId);
+    const db = await getDB();
+    const likes = await db.collection("likes").find({ likedId: userId }).toArray();
+    return likes
 }
 
 async function findMatches({ myId, likedId }) {
@@ -159,6 +166,7 @@ module.exports = {
     update,
     updateAvatar,
     findMatches,
+    findLikesById,
     insertLike,
     updateLikeToMatch,
     updateLanguage,

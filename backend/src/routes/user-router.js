@@ -102,9 +102,9 @@ userRouter.post("/myProfile/editBigImage",
     })
 
 userRouter.post("/login",
-    body("email").isEmail(),
-    body("password").isStrongPassword(),
-    doValidation,
+    // body("email").isEmail(),
+    // body("password").isStrongPassword(),
+    // doValidation,
     async (req, res) => {
 
         console.log(req.headers);
@@ -122,7 +122,7 @@ userRouter.post("/login",
 
         } catch (error) {
             console.log(error)
-            res.status(500).json("Unknown error in login, try again.")
+            res.status(500).json({ err: error.message || "Unknown error in login, try again." })
         }
     })
 
@@ -269,29 +269,24 @@ userRouter.delete("/myProfile/deleteAccount",
     })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ++++++++++++++++++++ Frank ++++++++++++++++++++++++++
+
+userRouter.get("/showMyLikes",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const result = await UserService.listAllLikes({
+                userId: req.userClaims.sub
+            })
+
+            res.status(200).json(result)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during finding likes." })
+        }
+    })
 
 userRouter.post("/like",
     async (req, res) => {

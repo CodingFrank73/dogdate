@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
+import apiBaseUrl from "../../api"
 
 //  BILDER-IMPORT
 
@@ -14,12 +14,28 @@ import iconLikeaktiv from '../../assets/icons/like-aktiv.svg';
 import iconChat from '../../assets/icons/chat.svg';
 import iconProfile from '../../assets/icons/profile.svg';
 
-const Home = () => {
+const Home = (props) => {
 
     useEffect(() => {
-
+        console.log("Like.........");
+        fetchLikes()
     }, []);
 
+    const fetchLikes = async () => {
+        try {
+            const response = await fetch(apiBaseUrl + `/api/users/showMyLikes`, {
+                headers: {
+                    token: "JWT " + props.token
+                }
+            })
+
+            const data = await response.json();
+            console.log("Likes:", data);
+
+        } catch (error) {
+
+        }
+    }
     return (
         <div>
 

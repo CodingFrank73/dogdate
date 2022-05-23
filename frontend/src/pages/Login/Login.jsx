@@ -7,8 +7,8 @@ import apiBaseUrl from '../../api';
 import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
-    const [email, setEmail] = useState('balto@gmx.de');
-    const [password, setPassword] = useState('Brille123!');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const doLogin = async (e) => {
@@ -34,13 +34,14 @@ const Login = (props) => {
             }
 
             if (result.err.validationErrors) {
-                setError("Invalid error during login, try again")
-                console.log("ERROR", result.err.validationErrors)
+                const firstError = result.err.validationErrors[0]
+                setError(firstError.msg + ": " + "Login ist schief gelaufen")
+
                 return
             }
 
-            setError(result.err.message)
-            console.log("ERROR", error)
+            setError(result.err)
+
 
         } catch (error) {
             console.log("Error during login");
@@ -56,8 +57,8 @@ const Login = (props) => {
                 <h2>Login</h2>
             </div>
             <form className='signup-box'>
-                <input type="text" name="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="email" name="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>
