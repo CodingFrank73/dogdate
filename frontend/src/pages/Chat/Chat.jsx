@@ -45,7 +45,7 @@ const Chat = (props) => {
             <div className="profile">
                 <div className="profile-header">
                     <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
-                    <h2>Chat</h2>
+                    <h2>Live-Chat</h2>
                 </div>
 
 

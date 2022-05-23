@@ -59,8 +59,8 @@ const Signup = () => {
                 setPassword("")
                 setError("")
                 setSuccess("All done - please login now and enjoy using this app!")
-               // const myTimeout = setTimeout(navigate("/login"), 5000)
-               // myTimeout()
+                // const myTimeout = setTimeout(navigate("/login"), 5000)
+                // myTimeout()
                 return
             }
 
@@ -93,31 +93,31 @@ const Signup = () => {
                 <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
                     >
-                    <FormControlLabel value="f" control={<Radio />} label="Female" />
-                    <FormControlLabel value="m" control={<Radio />} label="Male" />
+                        <FormControlLabel value="f" control={<Radio />} label="Female" />
+                        <FormControlLabel value="m" control={<Radio />} label="Male" />
                     </RadioGroup>
                 </FormControl>
                 <input type="date" value={dateOfBirth} placeholder="DD/MM/YYYY" onChange={(e) => setDateOfBirth(e.target.value)}></input>
                 <input type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
-               
-                 <FormControl>
+
+                <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">Size</FormLabel>
                     <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    value={size}
-                    onChange={(e) => setSize(e.target.value)}
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        value={size}
+                        onChange={(e) => setSize(e.target.value)}
                     >
-                    <FormControlLabel value="s" control={<Radio />} label="Small" />
-                    <FormControlLabel value="m" control={<Radio />} label="Medium" />
-                    <FormControlLabel value="l" control={<Radio />} label="Large" />
+                        <FormControlLabel value="s" control={<Radio />} label="Small" />
+                        <FormControlLabel value="m" control={<Radio />} label="Medium" />
+                        <FormControlLabel value="l" control={<Radio />} label="Large" />
                     </RadioGroup>
                 </FormControl>
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
@@ -125,7 +125,7 @@ const Signup = () => {
                 <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
                 <button onClick={doSignUp} type="submit">SIGN UP</button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p className="errorText">{error}</p>}
             {success && <p>{success}</p>}
         </div>
     );

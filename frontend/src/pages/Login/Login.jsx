@@ -61,7 +61,7 @@ const Login = (props) => {
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p className='errorText'>{error}</p>}
         </div>
     );
 }
