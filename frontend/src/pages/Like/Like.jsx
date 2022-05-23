@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiBaseUrl from "../../api"
+import LikesList from "./LikesList";
 
 //  BILDER-IMPORT
 
@@ -16,6 +17,8 @@ import iconProfile from '../../assets/icons/profile.svg';
 
 const Home = (props) => {
 
+    const [likesArr, setLikesArr] = useState([])
+
     useEffect(() => {
         fetchLikes()
     }, []);
@@ -30,6 +33,8 @@ const Home = (props) => {
 
             const data = await response.json();
             console.log("Likes:", data);
+            setLikesArr(data)
+            console.log(likesArr)
 
         } catch (error) {
 
@@ -44,7 +49,12 @@ const Home = (props) => {
                     <h2>Likes</h2>
                 </div>
 
+               
+
                 <h3>5 Likes</h3>
+                <LikesList likesArr={likesArr}  />
+                
+                
 
 
                 <footer>
