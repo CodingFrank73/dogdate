@@ -67,6 +67,23 @@ h3 {
     border-radius: 8px;
 }
 
+.successText{
+    position: absolute;
+    top: 30%;
+    width: 90%;
+    color: #efefef;
+    font-size: 18px;
+    text-align: center;
+    margin: 36px 5% 0px 5%;
+    padding: 24px 52px;
+    background: rgb(112, 146, 84);
+    border: 1px solid #666;
+    box-shadow: 2px 2px 8px 3px #8b8b8b;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+
 .killDog {
     color: tomato !important;
 }
@@ -216,7 +233,7 @@ h3 {
 
         .profile-arrow-back {
             position: fixed;
-            top: 57px;
+            top: 60px;
             left: 16px;
             width: 26px;
             cursor: pointer;
@@ -608,23 +625,23 @@ h3 {
             // height: 120px;
             line-height: 0;
 
-            .dogName {
-                position: absolute;
-                bottom: 50px;
-                left: 16px;
-                font-size: 36px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
+            // .dogName {
+            //     position: absolute;
+            //     bottom: 50px;
+            //     left: 16px;
+            //     font-size: 36px;
+            //     color: #fff;
+            //     text-shadow: 0 0 1px #333;
+            // }
 
-            .distanceKM {
-                position: absolute;
-                bottom: 24px;
-                left: 16px;
-                font-size: 18px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
+            // .distanceKM {
+            //     position: absolute;
+            //     bottom: 24px;
+            //     left: 16px;
+            //     font-size: 18px;
+            //     color: #fff;
+            //     text-shadow: 0 0 1px #333;
+            // }
         }
 
         .dog-wrapper01 {
@@ -634,23 +651,23 @@ h3 {
             line-height: 0;
         }  
 
-            .dogName {
-                position: absolute;
-                bottom: 50px;
-                left: 16px;
-                font-size: 36px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
+            // .dogName {
+            //     position: absolute;
+            //     bottom: 50px;
+            //     left: 16px;
+            //     font-size: 36px;
+            //     color: #fff;
+            //     text-shadow: 0 0 1px #333;
+            // }
 
-            .distanceKM {
-                position: absolute;
-                bottom: 24px;
-                left: 16px;
-                font-size: 18px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
+            // .distanceKM {
+            //     position: absolute;
+            //     bottom: 24px;
+            //     left: 16px;
+            //     font-size: 18px;
+            //     color: #fff;
+            //     text-shadow: 0 0 1px #333;
+            // }
         
 
         // .dog-wrapper03 {

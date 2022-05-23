@@ -62,12 +62,13 @@ const Signup = () => {
                 console.log("Hat geklappt..........");
                 setPassword("")
                 setError("")
+
                 setSuccess(`A very warm welcome ${dogName} to the DogDate community! We will now direct you to the login section - please sign in with your credentials and enjoy using Dogdate!`)
    
                 setTimeout(() => {
                     navigate("/login")
                     }, 4500)
-                                
+
                 return
             }
 
@@ -88,9 +89,10 @@ const Signup = () => {
     useEffect(() => {
         return () => clearTimeout(timerRef.current)
     })
-    
+
 
     return (
+
         <div className="profile">
             <div className="profile-header">
                 <Link to={-1}>
@@ -99,9 +101,10 @@ const Signup = () => {
                 <h2>Sign Up</h2>
 
             </div>
+            {/* <div className="successText">All done - please login now and enjoy using this app!</div> */}
             <form className="signup-box">
                 <input type="text" value={dogName} placeholder="Dog Name" onChange={(e) => setDogName(e.target.value)}></input>
-                
+
                 <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
