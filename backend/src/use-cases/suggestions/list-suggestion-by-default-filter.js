@@ -15,8 +15,6 @@ const listSuggestionByDefaultFilter = async ({ userId }) => {
 
     const { maxDistance, filterGender, ageRange, filterSize, _id, match } = user
 
-    // console.log("User in listSuggestionByDefaultFilter:", user);
-
     const minAgeAsDate = AgeCalc.subtractYears(ageRange[0])
     const maxAgeAsDate = AgeCalc.subtractYears(ageRange[1])
 

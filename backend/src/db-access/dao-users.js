@@ -109,12 +109,23 @@ async function insertLike({ myId, likedId }) {
 }
 
 async function updateLikeToMatch(likeId) {
+
+    const { _id, myId, likedId } = like
+
     console.log("Update like mit der ID: " + likeId + " to match.......");
     const db = await getDB();
-    const like = await db.collection("likes").updateOne(
-        { _id: likeId },
+    const updatelike = await db.collection("likes").updateOne(
+        { _id: _id },
         { $set: { match: true } }
     );
+
+    const updateUserOne = await db.collection(collectionName).updateOne(
+        { _id: myId },
+        { $push: { match: likedId } }
+    )
+
+    // Beide User müssen jetzt geupdated werden.
+    // Im Feld Match mus jeweils die andere ID gespeichert werden.
 
     return like
 }

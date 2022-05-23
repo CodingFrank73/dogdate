@@ -53,6 +53,7 @@ const HomeWithTinderCard = (props) => {
     const [isSizeSClicked, setIsSizeSClicked] = useState(false);
     const [isSizeMClicked, setIsSizeMClicked] = useState(false);
     const [isSizeLClicked, setIsSizeLClicked] = useState(false);
+    const [matches, setMatches] = useState([]);
     const [error, setError] = useState('');
 
     const [open, setOpen] = useState(false);
@@ -64,7 +65,7 @@ const HomeWithTinderCard = (props) => {
         setLastDirection(direction)
 
         if (direction === "right") {
-            doLike(swipedId)
+            // doLike(swipedId)
         } else {
             console.log("Kein like");
         }
@@ -97,6 +98,7 @@ const HomeWithTinderCard = (props) => {
             setFilteredAgeRange(data.foundUser.ageRange);
             setFilteredSize(data.foundUser.filterSize);
             setFilteredMaxDistance(data.foundUser.maxDistance);
+            setMatches(data.foundUser.match);
 
         } catch (error) {
 
@@ -111,7 +113,7 @@ const HomeWithTinderCard = (props) => {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance, gender: filteredGender, size: filteredSize })
+                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance, gender: filteredGender, size: filteredSize, match: matches })
             })
 
             const data = await response.json()
@@ -252,7 +254,6 @@ const HomeWithTinderCard = (props) => {
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
-                                    <h3>{character.dogName}, {character._id}</h3>
                                 </div>
                             </TinderCard>
 
@@ -266,7 +267,7 @@ const HomeWithTinderCard = (props) => {
 
                 <div className="home-like-wrapper">
                     <div className="home-like-buttons">
-                        <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
+                        <div className="home-dislike" onClick={() => swiped("left", "", "")}><img src={buttonDislike} alt="dislike" /> </div>
                         <div className="home-like"><img src={buttonLike} alt="like" /></div>
                     </div>
                 </div>
