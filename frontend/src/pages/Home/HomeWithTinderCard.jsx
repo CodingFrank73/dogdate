@@ -59,13 +59,19 @@ const HomeWithTinderCard = (props) => {
 
     const [lastDirection, setLastDirection] = useState()
 
-    const swiped = (direction, nameToDelete) => {
+    const swiped = (direction, nameToDelete, swipedId) => {
         console.log('removing: ' + nameToDelete)
         setLastDirection(direction)
+
+        if (direction === "right") {
+            doLike(swipedId)
+        } else {
+            console.log("Kein like");
+        }
     }
 
     const outOfFrame = (name) => {
-        console.log(name + ' left the screen!')
+        console.log(name + ' left the screen...!')
     }
 
 
@@ -206,10 +212,29 @@ const HomeWithTinderCard = (props) => {
 
     }
 
-    const [tempID, setTempID] = useState('');
+    const doLike = async (likedId) => {
+        console.log("Geliked:...:", likedId);
+
+        try {
+            const response = await fetch(apiBaseUrl + `/api/users/likeone`, {
+                method: "POST",
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ likedId: likedId })
+            })
+
+            const data = await response.json()
+            // console.log("suggestions with Temp Filter: ", data);
+            // setSuggestions(data)
+
+        } catch (error) {
+
+        }
+    }
 
     return (
-
         <div>
 
             <div className="home">
@@ -224,8 +249,7 @@ const HomeWithTinderCard = (props) => {
                     <div className='cardContainer'>
                         {suggestions.map((character) =>
 
-                            <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName)} onCardLeftScreen={() => outOfFrame(character.dogName)}>
-                                {/* {setTempID(character._id)} */}
+                            <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
                                     <div className="dogName">{character.dogName}, {character.age}</div>
@@ -237,8 +261,8 @@ const HomeWithTinderCard = (props) => {
                         )}
                     </div>
                     {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
-                    {console.log(lastDirection)}
-                    {/* {lastDirection === "right" ? console.log(tempID) : console.log("dislike")} */}
+
+                    {/* {lastDirection === "right" ? doLike : console.log("dislike")} */}
                 </div>
 
 

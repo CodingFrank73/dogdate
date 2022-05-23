@@ -4,18 +4,18 @@ const listAllLikes = async (userId) => {
 
     const foundLikes = await UserDAO.findLikesById(userId);
 
-    console.log("FoundUser: ", foundLikes);
+    const userWhoLikesMe = foundLikes.map(like => like.myId)
 
-    // const listOfUsers = users.map(u => ({
-    //     _id: u._id,
-    //     dogName: u.dogName,
-    //     gender: u.gender,
-    //     email: u.email,
+    const usersList = await UserDAO.findByIdList(userWhoLikesMe)
 
+    const listOfUsersWhoLikesMe = usersList.map(u => ({
+        _id: u._id,
+        bigImage: u.bigImage,
+        dogName: u.dogName,
+        gender: u.gender
+    }))
 
-    // }))
-
-    return foundLikes
+    return listOfUsersWhoLikesMe
 }
 
 module.exports = {

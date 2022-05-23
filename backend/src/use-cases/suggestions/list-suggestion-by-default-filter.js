@@ -13,12 +13,14 @@ const listSuggestionByDefaultFilter = async ({ userId }) => {
 
     const user = makeUser(foundUser)
 
-    const { maxDistance, filterGender, ageRange, filterSize } = user
+    const { maxDistance, filterGender, ageRange, filterSize, _id, match } = user
+
+    // console.log("User in listSuggestionByDefaultFilter:", user);
 
     const minAgeAsDate = AgeCalc.subtractYears(ageRange[0])
     const maxAgeAsDate = AgeCalc.subtractYears(ageRange[1])
 
-    const users = await SuggestionDAO.findAllByFilter({ maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate })
+    const users = await SuggestionDAO.findAllByFilter({ _id, maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match })
 
     const listOfUsers = users.map(u => ({
         _id: u._id,
