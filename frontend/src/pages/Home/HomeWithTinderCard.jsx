@@ -64,7 +64,7 @@ const HomeWithTinderCard = (props) => {
         setLastDirection(direction)
 
         if (direction === "right") {
-            doLike(swipedId)
+            // doLike(swipedId)
         } else {
             console.log("Kein like");
         }
@@ -245,20 +245,21 @@ const HomeWithTinderCard = (props) => {
                 </div>
                 <div className="home-doggy-bigpic">
 
-                    <h1>Dog Date</h1>
                     <div className='cardContainer'>
                         {suggestions.map((character) =>
 
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
-                                <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+                                {/* <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'> */}
+                                <div className='card'>
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
-                                    <h3>{character.dogName}, {character._id}</h3>
+                                    <div className="dogName">{character.dogName}, {character.age}</div>
+                                    <div className="distanceKM">{character.maxDistance} km</div>
                                 </div>
                             </TinderCard>
 
                         )}
                     </div>
-                    {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+                    {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
 
                     {/* {lastDirection === "right" ? doLike : console.log("dislike")} */}
                 </div>
