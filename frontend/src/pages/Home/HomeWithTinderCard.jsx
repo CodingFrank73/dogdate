@@ -64,7 +64,7 @@ const HomeWithTinderCard = (props) => {
         setLastDirection(direction)
 
         if (direction === "right") {
-            doLike(swipedId)
+            //doLike(swipedId)
         } else {
             console.log("Kein like");
         }
@@ -252,7 +252,6 @@ const HomeWithTinderCard = (props) => {
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
-                                    <h3>{character.dogName}, {character._id}</h3>
                                 </div>
                             </TinderCard>
 
