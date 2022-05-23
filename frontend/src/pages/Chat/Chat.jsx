@@ -7,6 +7,7 @@ import ChatRoom from "./ChatRoom";
 
 
 
+
 //  BILDER-IMPORT
 
 import ddLogo from '../../assets/icons/logo.svg';
@@ -18,9 +19,11 @@ import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
 import iconChataktiv from '../../assets/icons/chat-aktiv.svg';
 import iconProfile from '../../assets/icons/profile.svg';
+import apiBaseUrl from "../../api";
 
-//const socket = io.connect("http://localhost:3000/chat")
-const socket = io.connect("http://localhost:9000")
+
+//const socket = io.connect("http://localhost:9000")
+const socket = io.connect(apiBaseUrl)
 
 const Chat = (props) => {
 

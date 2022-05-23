@@ -53,7 +53,7 @@ app.use("/api/suggestion", suggestionRouter)
 //##Socket.io - start:
 const io = new Server(server, { //server initialization as io variable
   cors: { //to solve cors issue
-    origin: "http://localhost:3000", // frontend server
+    origin: true,//"http://localhost:3000", // frontend server
     methods: ["GET", "POST"] //accepts GET and POST requests
   },
 });
