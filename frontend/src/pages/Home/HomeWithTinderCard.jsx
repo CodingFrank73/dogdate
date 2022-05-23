@@ -65,7 +65,8 @@ const HomeWithTinderCard = (props) => {
         setLastDirection(direction)
 
         if (direction === "right") {
-            // doLike(swipedId)
+            //doLike(swipedId)
+
         } else {
             console.log("Kein like");
         }
