@@ -55,6 +55,18 @@ h3 {
     }
 }
 
+.errorText{
+    width: 90%;
+    color: tomato;
+    font-size: 18px;
+    text-align: center;
+    margin: 36px 5% 0px 5%;
+    padding: 24px 52px;
+    background: #fff;
+    border: 1px solid #666;
+    border-radius: 8px;
+}
+
 .killDog {
     color: tomato !important;
 }
@@ -547,6 +559,8 @@ h3 {
         overflow: hidden;
 
         img {
+            width: 351px;
+            height: 540px;
             border-radius: 28px;
         }
 
@@ -586,7 +600,7 @@ h3 {
             }
         }
 
-        .dog-wrapper01 {
+        .dog-wrapper00 {
             position: absolute;
             top: 0px;
             left: 0px;
@@ -613,73 +627,12 @@ h3 {
             }
         }
 
-        .dog-wrapper02 {
-            // position: absolute;
-            top: 0px;
-            width: 100%;
-            line-height: 0;
-            // z-index: 12;
-
-            .dogName {
-                position: absolute;
-                bottom: 50px;
-                left: 16px;
-                font-size: 36px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
-
-            .distanceKM {
-                position: absolute;
-                bottom: 24px;
-                left: 16px;
-                font-size: 18px;
-                color: #fff;
-                text-shadow: 0 0 1px #333;
-            }
-        }
-
-        .dog-wrapper03 {
+        .dog-wrapper01 {
             position: absolute;
             top: 0px;
             width: 100%;
             line-height: 0;
-            // z-index: 13;
-            animation-name: slideLeft;
-            animation-duration: 2s;
-            animation-delay: 6s;
-            animation-iteration-count: infinite;
-            transition-timing-function: ease-in;
-
-            .dogName {
-                position: absolute;
-                bottom: 50px;
-                left: 16px;
-                font-size: 36px;
-                color: #fff;
-                text-shadow: 0 0 2px #333;
-            }
-
-            .distanceKM {
-                position: absolute;
-                bottom: 24px;
-                left: 16px;
-                font-size: 18px;
-                color: #fff;
-                text-shadow: 0 0 2px #333;
-            }
-        }
-
-        .dog-wrapper04 {
-            position: absolute;
-            top: 0px;
-            width: 100%;
-            line-height: 0;
-            animation-name: slideRight;
-            animation-duration: 10s;
-            animation-delay: 2s;
-            animation-iteration-count: infinite;
-            transition-timing-function: ease-in;
+        }  
 
             .dogName {
                 position: absolute;
@@ -698,7 +651,68 @@ h3 {
                 color: #fff;
                 text-shadow: 0 0 1px #333;
             }
-        }
+        
+
+        // .dog-wrapper03 {
+        //     position: absolute;
+        //     top: 0px;
+        //     width: 100%;
+        //     line-height: 0;
+        //     // z-index: 13;
+        //     animation-name: slideLeft;
+        //     animation-duration: 2s;
+        //     animation-delay: 6s;
+        //     animation-iteration-count: infinite;
+        //     transition-timing-function: ease-in;
+
+        //     .dogName {
+        //         position: absolute;
+        //         bottom: 50px;
+        //         left: 16px;
+        //         font-size: 36px;
+        //         color: #fff;
+        //         text-shadow: 0 0 2px #333;
+        //     }
+
+        //     .distanceKM {
+        //         position: absolute;
+        //         bottom: 24px;
+        //         left: 16px;
+        //         font-size: 18px;
+        //         color: #fff;
+        //         text-shadow: 0 0 2px #333;
+        //     }
+        // }
+
+        // .dog-wrapper05 {
+        //     position: absolute;
+        //     top: 0px;
+        //     width: 100%;
+        //     line-height: 0;
+        //     animation-name: slideRight;
+        //     animation-duration: 10s;
+        //     animation-delay: 2s;
+        //     animation-iteration-count: infinite;
+        //     transition-timing-function: ease-in;
+
+        //     .dogName {
+        //         position: absolute;
+        //         bottom: 50px;
+        //         left: 16px;
+        //         font-size: 36px;
+        //         color: #fff;
+        //         text-shadow: 0 0 1px #333;
+        //     }
+
+        //     .distanceKM {
+        //         position: absolute;
+        //         bottom: 24px;
+        //         left: 16px;
+        //         font-size: 18px;
+        //         color: #fff;
+        //         text-shadow: 0 0 1px #333;
+        //     }
+        // }
 
         @keyframes slideRight {
 
