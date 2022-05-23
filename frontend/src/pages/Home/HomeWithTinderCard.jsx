@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import "./Card.css"
+
+import TinderCard from 'react-tinder-card';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -38,7 +42,7 @@ const style = {
 };
 
 
-const Home = (props) => {
+const HomeWithTinderCard = (props) => {
     const [suggestions, setSuggestions] = useState([]);
     const [filteredAgeRange, setFilteredAgeRange] = useState([]);
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
@@ -52,6 +56,19 @@ const Home = (props) => {
     const [error, setError] = useState('');
 
     const [open, setOpen] = useState(false);
+
+    const [lastDirection, setLastDirection] = useState()
+
+    const swiped = (direction, nameToDelete) => {
+        console.log('removing: ' + nameToDelete)
+        setLastDirection(direction)
+    }
+
+    const outOfFrame = (name) => {
+        console.log(name + ' left the screen!')
+    }
+
+
 
     useEffect(() => {
         fetchSuggestions()
@@ -188,7 +205,11 @@ const Home = (props) => {
         }
 
     }
+
+    const [tempID, setTempID] = useState('');
+
     return (
+
         <div>
 
             <div className="home">
@@ -199,30 +220,23 @@ const Home = (props) => {
                 </div>
                 <div className="home-doggy-bigpic">
 
-                    <div className="dog-wrapperBackground">
-                        <img src={noMore} alt="dog pic" />
-                        <div className="textL1">Sorry, no more</div>
-                        <div className="textL2">suggestions available.</div>
-                    </div>
+                    <h1>Dog Date</h1>
+                    <div className='cardContainer'>
+                        {suggestions.map((character) =>
 
-                    <SuggestionsStaple suggestions={suggestions} />
+                            <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName)} onCardLeftScreen={() => outOfFrame(character.dogName)}>
+                                {/* {setTempID(character._id)} */}
+                                <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+                                    <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
+                                    <h3>{character.dogName}, {character._id}</h3>
+                                </div>
+                            </TinderCard>
 
-                    {/* <div className="dog-wrapper01">
-                        <img src={dogImage01} alt="dog pic" />
-                        <div className="dogName">Dimka, 5</div>
-                        <div className="distanceKM">4 km</div>
+                        )}
                     </div>
-                    <div className="dog-wrapper02">
-                        <img src="/dogs/balu.png" alt="dog pic" />
-                        <div className="dogName">Goliath, 8</div>
-                        <div className="distanceKM">15 km</div>
-                    </div>
-                    <div className="dog-wrapper04">
-                        <img src="dogs/balu.png" alt="dog pic" />
-                        <div className="dogName">Sandy, 2</div>
-                        <div className="distanceKM">8 km</div>
-                    </div> */}
-
+                    {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+                    {console.log(lastDirection)}
+                    {/* {lastDirection === "right" ? console.log(tempID) : console.log("dislike")} */}
                 </div>
 
 
@@ -322,5 +336,137 @@ const Home = (props) => {
 }
 
 
-export default Home;
+export default HomeWithTinderCard;
 
+
+
+
+{/* <div>
+
+    <div className="home">
+        <div className="home-header">
+            <img className="home-dd-logo" src={ddLogo} alt="dogdate logo" />
+            <h2>dogdate</h2>
+            <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
+        </div>
+        <div className="home-doggy-bigpic">
+
+            <div className="dog-wrapperBackground">
+                <img src={noMore} alt="dog pic" />
+                <div className="textL1">Sorry, no more</div>
+                <div className="textL2">suggestions available.</div>
+            </div>
+
+            <div>
+                <h1>Dog Date</h1>
+                <div className='cardContainer'>
+                    {suggestions.map((character) =>
+                        <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName)} onCardLeftScreen={() => outOfFrame(character.dogName)}>
+
+                            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+                                <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
+                                <h3>{character.dogName}</h3>
+                            </div>
+                        </TinderCard>
+                    )}
+                </div>
+                {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+            </div>
+
+
+
+        </div>
+
+
+        <div className="home-like-wrapper">
+            <div className="home-like-buttons">
+                <div className="home-dislike"><img src={buttonDislike} alt="dislike" /> </div>
+                <div className="home-like"><img src={buttonLike} alt="like" /></div>
+            </div>
+        </div>
+
+        <footer>
+            <div className="nav">
+                <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
+                <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
+                <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
+                <div><Link to="/profile" ><img src={iconProfile} alt="profile" /></Link></div>
+            </div>
+        </footer>
+    </div>
+
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+    >
+        <Box sx={style}>
+
+            <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
+
+            <div>Hallo{filteredSize}</div>
+
+            <div className="dataFrame">
+                <p>Gender</p>
+                <div className="optionBox">
+                    {filteredGender.includes("f") ?
+                        <div id="genderLeft" className="genderLeft genderLeft-aktiv" onClick={handleChangeGenderF}>Female</div>
+                        :
+                        <div id="genderLeft" className="genderLeft" onClick={handleChangeGenderF}>Female</div>
+                    }
+
+                    {filteredGender.includes("m") ?
+                        <div id="genderRight" className="genderRight genderRight-aktiv" onClick={handleChangeGenderM}>Male</div>
+                        :
+                        <div id="genderRight" className="genderRight" onClick={handleChangeGenderM}>Male</div>
+                    }
+                </div>
+            </div>
+
+            <div className="dataFrame">
+                <p className="rangeHL">Age Range</p>
+                <Slider
+                    value={filteredAgeRange}
+                    onChangeCommitted={handleChangeAgeRange}
+                    valueLabelDisplay="on"
+                    min={0}
+                    max={20}
+                    step={1}
+                />
+            </div>
+
+            <div className="dataFrame">
+                <p>Size</p>
+                <div className="optionBox">
+                    {filteredSize.includes("s") ?
+                        <div id="sizeSmall" className="sizeSmall sizeSmall-aktiv" onClick={handleChangeSizeS}>S</div>
+                        : <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
+                    }
+
+                    {filteredSize.includes("m") ?
+                        < div id="sizeMiddle" className="sizeMiddle sizeMiddle-aktiv" onClick={handleChangeSizeM} > M</div>
+                        : <div id="sizeMiddle" className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
+                    }
+
+                    {filteredSize.includes("l") ?
+                        <div id="sizeLarge" className="sizeLarge sizeLarge-aktiv" onClick={handleChangeSizeL}>L</div>
+                        : <div id="sizeLarge" className="sizeLarge" onClick={handleChangeSizeL}>L</div>
+                    }
+                </div>
+            </div>
+
+            <div className="dataFrame">
+                <p className="rangeHL">Distance (in km)</p>
+                <Slider
+                    value={filteredMaxDistance}
+                    onChangeCommitted={handleChangeDistance}
+                    valueLabelDisplay="on"
+                    min={0}
+                    max={200}
+                    step={5}
+                />
+            </div>
+        </Box>
+    </Modal>
+</div > */}

@@ -17,7 +17,6 @@ import iconProfile from '../../assets/icons/profile.svg';
 const Home = (props) => {
 
     useEffect(() => {
-        console.log("Like.........");
         fetchLikes()
     }, []);
 
