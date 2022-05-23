@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
@@ -12,6 +12,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+
+//TESTTESTTEST
 
 
 const Signup = () => {
@@ -27,6 +29,8 @@ const Signup = () => {
     const [success, setSuccess] = useState("")
 
     const navigate = useNavigate();
+
+    const timerRef = useRef(null)
 
     const doSignUp = async (e) => {
         e.preventDefault();
@@ -59,8 +63,11 @@ const Signup = () => {
                 setPassword("")
                 setError("")
                 setSuccess("All done - please login now and enjoy using this app!")
-               // const myTimeout = setTimeout(navigate("/login"), 5000)
-               // myTimeout()
+               
+                setTimeout(() => {
+                    navigate("/login")
+                    }, 2000)
+                                
                 return
             }
 
@@ -78,6 +85,11 @@ const Signup = () => {
         }
     }
 
+    useEffect(() => {
+        return () => clearTimeout(timerRef.current)
+    })
+    
+
     return (
         <div className="profile">
             <div className="profile-header">
@@ -89,7 +101,7 @@ const Signup = () => {
             </div>
             <form className="signup-box">
                 <input type="text" value={dogName} placeholder="Dog Name" onChange={(e) => setDogName(e.target.value)}></input>
-                {/* <input type="text" value={gender} placeholder="Gender" onChange={(e) => setGender(e.target.value)}></input> */}
+                
                 <FormControl>
                     <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
@@ -103,6 +115,7 @@ const Signup = () => {
                     <FormControlLabel value="m" control={<Radio />} label="Male" />
                     </RadioGroup>
                 </FormControl>
+
                 <input type="date" value={dateOfBirth} placeholder="DD/MM/YYYY" onChange={(e) => setDateOfBirth(e.target.value)}></input>
                 <input type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
                
