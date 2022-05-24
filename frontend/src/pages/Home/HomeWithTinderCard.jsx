@@ -254,7 +254,8 @@ const HomeWithTinderCard = (props) => {
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 {/* <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'> */}
                                 <div className='card'>
-                                    <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
+                                    <img src={bigImage} alt="dog pic" />
+                                    {/* <img src={`dogs/${character.dogName}.png`} alt="dog pic" /> */}
                                     <div className="dogName">{character.dogName}, {character.age}</div>
                                     <div className="distanceKM">{character.maxDistance} km</div>
                                 </div>
