@@ -7,8 +7,8 @@ import apiBaseUrl from '../../api';
 import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
-    const [email, setEmail] = useState('balto@gmx.de');
-    const [password, setPassword] = useState('Brille123!');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const doLogin = async (e) => {
@@ -58,7 +58,7 @@ const Login = (props) => {
             </div>
             <form className='signup-box'>
                 <input type="email" name="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <button onClick={doLogin} type="submit">Login</button>
             </form>

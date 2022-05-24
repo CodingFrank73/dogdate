@@ -307,6 +307,25 @@ userRouter.post("/likeone",
         }
     })
 
+userRouter.post("/match",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const response = await UserService.likeOne(
+                {
+                    myId: req.userClaims.sub,
+                    likedId: req.body.likedId
+                })
+
+            res.status(201).json(response)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during inserting likes." })
+        }
+    })
+
 module.exports = {
     userRouter
 }

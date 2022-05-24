@@ -74,9 +74,8 @@ async function updateBigImage({ userId, bigImage }) {
 }
 
 async function findLikesById({ userId }) {
-    // console.log(userId);
     const db = await getDB();
-    const likes = await db.collection("likes").find({ likedId: userId }).toArray();
+    const likes = await db.collection("likes").find({ idILiked: new ObjectId(userId) }).toArray();
     return likes
 }
 
@@ -85,10 +84,8 @@ async function findMatches({ myId, likedId }) {
     const db = await getDB();
     const foundLike = await db.collection("likes").findOne(
         {
-            // myId: myId,
-            // idILiked: likedId
-            idILiked: myId,
-            myId: likedId
+            idILiked: new ObjectId(myId),
+            myId: new ObjectId(likedId)
         }
     );
 
@@ -100,41 +97,33 @@ async function insertLike({ myId, likedId }) {
     const db = await getDB();
     const like = await db.collection("likes").insertOne(
         {
-            myId: myId,
-            idILiked: likedId,
+            myId: new ObjectId(myId),
+            idILiked: new ObjectId(likedId),
             match: false,
             notification: false
         });
     return like
 }
 
-async function updateLikeToMatch(likeId, myId, likedId) {
-
-    // const user = makeUser(foundUser)
-    // const { maxDistance, filterGender, ageRange, filterSize, _id, match } = user
-
-    // const { _id, myId, likedId } = like
-
-    console.log("Update like mit der ID: " + likeId + " to match.......");
+async function updateLikeToMatch(likeId, myId, idILiked) {
+    // console.log("Update like mit der ID: " + likeId + " to match.......");
     const db = await getDB();
     const updatelike = await db.collection("likes").updateOne(
         { _id: likeId },
         { $set: { match: true } }
     );
 
-    console.log("MyId in DAO-User: ", myId);
     const updateUserOne = await db.collection("users").updateOne(
         { _id: myId },
-        // { $push: { match: likedId } }
-        { $push: { match: { $each: "Hallo Welt" } } }
+        { $push: { "match": idILiked } }
     );
 
     const updateUserTwo = await db.collection(collectionName).updateOne(
-        { _id: likedId },
-        { $push: { sub_node: { match: myId } } }
+        { _id: idILiked },
+        { $push: { "match": myId } }
     )
 
-    return ({ updatelike, updateUserOne, updateUserTwo })
+    return (true)
 }
 
 async function updateLanguage({ userId, language }) {

@@ -60,7 +60,7 @@ const ProfileEditSettings = (props) => {
     e.preventDefault();
     console.log(props.token)
 
-    const dataToUpdate = { userId, dogName, gender, dateOfBirth: new Date(dateOfBirth), size, email, phone }
+    const dataToUpdate = { userId, dogName, gender, dateOfBirth: new Date(dateOfBirth).toISOString(), size, email, phone }
 
     try {
       const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
@@ -94,12 +94,12 @@ const ProfileEditSettings = (props) => {
 
   const doUpload = async (e) => {
     e.preventDefault();
-    console.log("TEST", bigImage)
+    // console.log("TEST", bigImage)
 
     const formData = new FormData()
     formData.set("bigImage", bigImage) ///kommt ich hier an???
 
-    console.log("TEST2", formData.entries())
+    // console.log("TEST2", formData.entries())
 
     try {
       const response = await fetch(apiBaseUrl + '/api/users/myProfile/editBigImage', {
