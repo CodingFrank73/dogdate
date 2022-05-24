@@ -10,56 +10,56 @@ import vegan from "../../assets/img/icon-vegan.png";
 
 const SplashStart = () => {
   return (
-    <div>
-      <div className="splash">
-        <div className="dd-logo-wrapper">
-          <img className="dd-logo" src={ddLogo} alt="dogdate logo" />
+
+    <div className="splash">
+      <div className="dd-logo-wrapper">
+        <img className="dd-logo" src={ddLogo} alt="dogdate logo" />
+      </div>
+      <h1>dogdate</h1>
+      <button>
+        <div className="wbLogo">
+          <img src={googleLogo} alt="Google" />
         </div>
-        <h1>dogdate</h1>
-        <button>
-          <div className="wbLogo">
-            <img src={googleLogo} alt="Google" />
-          </div>
-          <div className="wbText">LOGIN WITH GOOGLE</div>
-        </button>
+        <div className="wbText">LOGIN WITH GOOGLE</div>
+      </button>
 
-         <Link to="/login">
+      <Link to="/login">
         <a href="login">
-            <button>
-              <div className="wbLogoAT">
-                <img src={klammerAffe} alt="Klammeraffe" />
-              </div>
-              <div className="wbText">LOGIN WITH EMAIL</div>
-            </button>         
+          <button>
+            <div className="wbLogoAT">
+              <img src={klammerAffe} alt="Klammeraffe" />
+            </div>
+            <div className="wbText">LOGIN WITH EMAIL</div>
+          </button>
         </a>
-         </Link>
+      </Link>
 
-        <p className="wText">
-          By clicking Log In, you agree with our <a href="#">Terms</a>. Learn
-          how we process your data in our <a href="#">Privacy Policy</a> and{" "}
-          <a href="#">Cookies Policy</a>.
-        </p>
-        <Link to="/signup">
+      <p className="wText">
+        By clicking Log In, you agree with our <a href="#">Terms</a>. Learn
+        how we process your data in our <a href="#">Privacy Policy</a> and{" "}
+        <a href="#">Cookies Policy</a>.
+      </p>
+      <Link to="/signup">
         <div className="signUpfooter">
           <p>
             Don't have account? <a href="signup">Signup</a>
           </p>
         </div>
-        </Link>
-        <div className="splashFooter">
-          <div>
-            <img className="iconDog" src={dog} alt="dog" /> &copy; 2022 by MFG
-          </div>
-          <div>
-            <img className="iconVegan" src={heart} alt="love" /> Created with
-            Love
-          </div>
-          <div>
-            <img className="iconVegan" src={vegan} alt="vegan" /> 1oo% vegan
-          </div>
+      </Link>
+      <div className="splashFooter">
+        <div>
+          <img className="iconDog" src={dog} alt="dog" /> &copy; 2022 by MFG
+        </div>
+        <div>
+          <img className="iconVegan" src={heart} alt="love" /> Created with
+          Love
+        </div>
+        <div>
+          <img className="iconVegan" src={vegan} alt="vegan" /> 1oo% vegan
         </div>
       </div>
     </div>
+
   );
 };
 

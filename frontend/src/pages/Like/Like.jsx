@@ -47,11 +47,11 @@ const Home = (props) => {
                 <div className="profile-header">
                     <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
                     <h2>Likes</h2>
+
                 </div>               
 
                 <h3>5 Likes</h3>
                 <LikesList likesArr={likesArr}  />
-                               
 
                 <footer>
                     <div className="nav">
