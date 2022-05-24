@@ -72,6 +72,7 @@ const ChatStatic = (props) => {
                         </div>
                     )
                         : (
+
                             <ChatRoom socket={socket} username={'Balto'} room={room} />
                         )}
                 </div>
