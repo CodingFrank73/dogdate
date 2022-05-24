@@ -23,7 +23,7 @@ const listSuggestionByDefaultFilter = async ({ userId }) => {
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
-        // bigImage: u.bigImage,
+        bigImage: u.bigImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
         maxDistance: u.maxDistance,
     }))
