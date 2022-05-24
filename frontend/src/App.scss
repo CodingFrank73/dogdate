@@ -25,6 +25,10 @@ body {
     color: #303030;
 }
 
+#root>div {
+width: 390px;
+height: 844px;
+}
 a {
     text-decoration: none;
 }
@@ -122,6 +126,7 @@ h3 {
     button {
         display: flex;
         width: 86%;
+        letter-spacing: 0.05em;
         margin: 5% 7%;
         position: relative;
         padding: 0.8rem;
@@ -257,7 +262,7 @@ h3 {
             font-family: "Poppins", Arial, Helvetica, sans-serif;
             margin-bottom: 12px;
         }
-      
+
         input:focus,  select:focus{
             border: none;
             border: 0;
@@ -568,8 +573,8 @@ h3 {
     .home-doggy-bigpic {
         position: relative;
         top: 120px;
-        width: 90%;
-        margin: 0% 5%;
+        width: 351px;
+        margin: 0% 19px;
         line-height: 0;
         border-radius: 28px;
         box-shadow: 0px 4px 8px 4px #ccc;
@@ -800,8 +805,49 @@ h3 {
         }
     }
 
+}
+.matchMatch{
+    background-image: linear-gradient(0deg, #FF5870, #5A1AED);
+    height: 100vh;
+    color: #fff;
+
+    h1{
+        font-family: "PoppinsBold";
+        color: #fff;
+        font-size: 42px;
+        text-align: center;
+        padding-top: 200px;
+    }
+    p{
+        text-align: center;
+        font-size: 18px;
+    }
+    .buttonMatchChat{
+        background: #fff;
+        color: #FF5870;
+        letter-spacing: 0.05em;
+        text-align: center;
+        width: 90%;
+        padding: 12px;
+        margin: 10% 5%;
+        border-radius: 22px;
+        cursor: pointer;
+    }
+    .buttonMatchSwipe{
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-align: center;
+        width: 90%;
+        border: 3px solid #fff;
+        padding: 10px;
+        margin: 10% 5%;
+        border-radius: 22px;
+        cursor: pointer;
+    }
+
 
 }
+
 
 footer {
     position: absolute;

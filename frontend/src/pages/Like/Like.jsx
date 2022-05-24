@@ -49,12 +49,13 @@ const Home = (props) => {
                     <h2>Likes</h2>
                 </div>
 
-               
+
 
                 <h3>5 Likes</h3>
-                <LikesList likesArr={likesArr}  />
-                
-                
+
+                <LikesList likesArr={likesArr} />
+
+
 
 
                 <footer>
