@@ -46,7 +46,7 @@ const LikesCard = (props) => {
               <div className="likeDogleft"><img src="dogs/balto-profil.png" alt="dog pic"></img></div>
               <div className="likeDogright"><img src={`dogs/${props.like.dogName}-profil.png`} alt="dog pic" /></div>
             </div>
-            <Link to="/chat" ><div className="buttonMatchChat">SEND A MESSAGE</div></Link>
+            <Link to="/chatstatic" ><div className="buttonMatchChat">SEND A MESSAGE</div></Link>
             <Link to="/home" ><div className="buttonMatchSwipe">KEEP SWIPING</div></Link>
           </div>
         </Box>
