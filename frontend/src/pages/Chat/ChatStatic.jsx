@@ -25,10 +25,10 @@ import apiBaseUrl from "../../api";
 //const socket = io.connect("http://localhost:9000")
 const socket = io.connect(apiBaseUrl)
 
-const Chat = (props) => {
+const ChatStatic = (props) => {
 
     const [username, setUsername] = useState("")
-    const [room, setRoom] = useState("")
+    const [room, setRoom] = useState("1")
     const [showChat, setShowChat] = useState(true)
 
 
@@ -72,7 +72,7 @@ const Chat = (props) => {
                         </div>
                     )
                         : (
-                            <ChatRoom socket={socket} username={'Balto'} room={'1'} />
+                            <ChatRoom socket={socket} username={'Balto'} room={room} />
                         )}
                 </div>
 
@@ -93,4 +93,4 @@ const Chat = (props) => {
     );
 }
 
-export default Chat;
+export default ChatStatic;

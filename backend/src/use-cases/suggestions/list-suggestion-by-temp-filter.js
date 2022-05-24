@@ -14,7 +14,7 @@ const listSuggestionByTempFilter = async ({ _id, maxDistance, filterGender, ageR
         dogName: u.dogName,
         bigImage: u.bigImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
-        maxDistance: u.maxDistance
+        location: u.location
     }))
 
     return listOfUsers
