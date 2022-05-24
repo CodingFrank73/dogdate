@@ -12,7 +12,7 @@ const listSuggestionByTempFilter = async ({ _id, maxDistance, filterGender, ageR
     const listOfUsers = users.map(u => ({
         _id: u._id,
         dogName: u.dogName,
-        bigImage: u.bigImage,
+        // bigImage: u.bigImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
         maxDistance: u.maxDistance
     }))

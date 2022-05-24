@@ -17,6 +17,7 @@ import ProfileEditAvatar from './pages/Profile/ProfileEditAvatar';
 import ProfileEditSettings from "./pages/Profile/ProfileEditSettings"
 import HomeWithTinderCard from './pages/Home/HomeWithTinderCard';
 import Match from './pages/Like/Match';
+import ChatStart from './pages/Chat/ChatStart';
 
 function AppRoutes() {
     const [token, setToken] = useState(null);
@@ -47,10 +48,6 @@ function AppRoutes() {
                 </AuthRequired>}
             />
 
-
-
-
-
             <Route path="/like" element={
                 <AuthRequired token={token} setToken={setToken}>
                     <Like token={token} />
@@ -62,6 +59,13 @@ function AppRoutes() {
                     <Chat token={token} />
                 </AuthRequired>}
             />
+
+            {/* <Route path="/chat" element={
+                <AuthRequired token={token} setToken={setToken}>
+                    <ChatStart token={token} />
+                </AuthRequired>}
+            /> */}
+
 
             <Route path="/profile" element={
                 <AuthRequired token={token} setToken={setToken}>

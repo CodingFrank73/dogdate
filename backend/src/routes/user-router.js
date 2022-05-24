@@ -276,9 +276,24 @@ userRouter.get("/showMyLikes",
     async (req, res) => {
 
         try {
-            const result = await UserService.listAllLikes({
-                userId: req.userClaims.sub
-            })
+            const userId = req.userClaims.sub;
+            const result = await UserService.listAllLikes(userId)
+
+            res.status(200).json(result)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during finding likes." })
+        }
+    })
+
+userRouter.get("/showMyMatches",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+            const result = await UserService.listAllMatches(userId)
 
             res.status(200).json(result)
 
@@ -312,7 +327,7 @@ userRouter.post("/match",
     async (req, res) => {
 
         try {
-            const response = await UserService.likeOne(
+            const response = await UserService.likeOneToo(
                 {
                     myId: req.userClaims.sub,
                     likedId: req.body.likedId

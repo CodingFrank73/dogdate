@@ -5,6 +5,7 @@ const { refreshUserToken } = require("./users/refresh-user-token");
 const { showMyProfile } = require("./users/show-profile");
 const { editAvatar } = require("./users/edit-avatar")
 const { listAllLikes } = require("./users/list-all-likes");
+const { listAllMatches } = require("./users/list-all-matches");
 const { likeOneToo } = require("./users/like-one-too");
 const { likeOne } = require("./users/like-one");
 const { editProfileSettings } = require("./users/edit-profile-settings");
@@ -28,6 +29,7 @@ const UserService = {
     editAvatar,
     likeOneToo,
     listAllLikes,
+    listAllMatches,
     likeOne,
     editProfileSettings,
     editLanguage,

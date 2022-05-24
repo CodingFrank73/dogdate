@@ -1,6 +1,6 @@
 
 //Brauche meine ID und die ID des like
-
+//Use-Case für die Like-Liste -> Wenn ein User den anderen Liked und der Like somit zum Match wird.
 
 const likeOneToo = async () => {
 
