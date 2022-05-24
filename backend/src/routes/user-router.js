@@ -136,15 +136,15 @@ userRouter.post("/register",
     async (req, res) => {
 
         try {
-            // const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
             const user = await UserService.registerUser({
                 dogName: req.body.dogName,
                 password: req.body.password,
                 email: req.body.email,
                 gender: req.body.gender,
                 size: req.body.size,
-                dateOfBirth: new Date(req.body.dateOfBirth)
-                // bigImage: bigPicBas64
+                dateOfBirth: new Date(req.body.dateOfBirth),
+                bigImage: bigPicBas64
             })
 
             res.status(201).json(user)
