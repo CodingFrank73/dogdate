@@ -17,9 +17,9 @@ const { UserDAO } = require("../../db-access")
 const likeOne = async ({ myId, likedId }) => {
 
    const like = await UserDAO.findMatches({ myId, likedId })
-   console.log("Ergebnis der Suche", like);
+   console.log("Ergebnis der Suche nach likes die matchen können:", like);
 
-   // kein Match
+   // Wenn kein Match, dann erzeuge neuen Datensatz
    if (!like) {
       console.log("kein Match");
       const insertResult = await UserDAO.insertLike({ myId, likedId })
@@ -30,10 +30,10 @@ const likeOne = async ({ myId, likedId }) => {
       return
    }
 
-   console.log("like:", like);
-   const setMatch = await UserDAO.updateLikeToMatch(like._id, like.myId, like.likedId)
-   // const setMatch = await UserDAO.updateLikeToMatch({like._id, like:})
-   console.log(setMatch);
+   // ++++ Ein Like match => update die notwendigen Felder ++++
+   // console.log("Aus diesem LIKE wird ein Match:", like);
+   const setMatch = await UserDAO.updateLikeToMatch(like._id, like.myId, like.idILiked)
+   // console.log("Welche Collections wurden geupdated: ", setMatch);
 }
 
 

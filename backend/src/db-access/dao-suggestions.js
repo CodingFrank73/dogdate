@@ -11,8 +11,6 @@ async function findAllExcept(id) {
 async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match }) {
     const db = await getDB();
 
-    console.log("Match:", match);
-
     const exIDs = [...match, _id].map(id => ObjectId(id.toString()))
 
     const users = await db.collection("users").find(

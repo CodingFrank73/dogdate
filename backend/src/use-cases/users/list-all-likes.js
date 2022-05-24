@@ -3,8 +3,10 @@ const { UserDAO } = require("../../db-access")
 const listAllLikes = async (userId) => {
 
     const foundLikes = await UserDAO.findLikesById(userId);
+    console.log("FoundLikes: ", foundLikes);
 
     const userWhoLikesMe = foundLikes.map(like => like.myId)
+    console.log("userWhoLikesMe: ", userWhoLikesMe);
 
     const usersList = await UserDAO.findByIdList(userWhoLikesMe)
 
@@ -14,6 +16,7 @@ const listAllLikes = async (userId) => {
         dogName: u.dogName,
         gender: u.gender
     }))
+    console.log(listOfUsersWhoLikesMe);
 
     return listOfUsersWhoLikesMe
 }
