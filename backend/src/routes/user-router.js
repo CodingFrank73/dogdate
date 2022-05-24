@@ -276,8 +276,9 @@ userRouter.get("/showMyLikes",
     async (req, res) => {
 
         try {
-            const userId = req.userClaims.sub;
-            const result = await UserService.listAllLikes(userId)
+            const result = await UserService.listAllLikes({
+                userId: req.userClaims.sub
+            })
 
             res.status(200).json(result)
 

@@ -7,8 +7,8 @@ import apiBaseUrl from '../../api';
 import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('balto@gmx.de');
+    const [password, setPassword] = useState('Brille123!');
     const [error, setError] = useState('');
 
     const doLogin = async (e) => {

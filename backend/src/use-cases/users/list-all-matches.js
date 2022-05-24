@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { UserDAO } = require("../../db-access")
 
 const listAllMatches = async (userId) => {
@@ -6,10 +7,10 @@ const listAllMatches = async (userId) => {
 
 
     // Finde alle ID im Array Match in der UserCollection
+    // const exIDs = [...match, _id].map(id => ObjectId(id.toString()))
+    const exIDs = foundUser.match.map(id => new ObjectId(id.match))
 
-    // const exIDs = foundUser.match.map(id => ObjectId(id.toString()))
-
-    // console.log("FoundMatchesID: ", exIDs);
+    console.log("FoundMatchesID: ", exIDs);
 
     // const userWhoLikesMe = foundLikes.map(like => like.myId)
     // console.log("userWhoLikesMe: ", userWhoLikesMe);

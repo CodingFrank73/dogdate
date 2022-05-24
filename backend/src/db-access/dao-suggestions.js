@@ -22,6 +22,7 @@ async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, min
             maxDistance: { $lte: maxDistance }
         }).toArray();
 
+    console.log("USERS:", users);
     return users
 }
 

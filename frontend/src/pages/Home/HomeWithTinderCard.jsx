@@ -252,7 +252,6 @@ const HomeWithTinderCard = (props) => {
                         {suggestions.map((character) =>
 
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
-                                {/* <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'> */}
                                 <div className='card'>
                                     {/* <img src={character.bigImage} alt="dog pic" /> */}
                                     <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
