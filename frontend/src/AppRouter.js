@@ -69,7 +69,7 @@ function AppRoutes() {
 
             <Route path="/chatstatic" element={
                 <AuthRequired token={token} setToken={setToken}>
-                    <ChatStatic token={token} />
+                    <Chat token={token} username={"Balto"} room={"1"} />
                 </AuthRequired>}
             />
 

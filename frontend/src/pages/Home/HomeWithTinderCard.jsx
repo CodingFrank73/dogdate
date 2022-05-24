@@ -253,10 +253,10 @@ const HomeWithTinderCard = (props) => {
 
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div className='card'>
-                                    {/* <img src={character.bigImage} alt="dog pic" /> */}
-                                    <img src={`dogs/${character.dogName}.png`} alt="dog pic" />
+                                    <img src={character.bigImage} alt="dog pic" />
+                                    {/* <img src={`dogs/${character.dogName}.png`} alt="dog pic" /> */}
                                     <div className="dogName">{character.dogName}, {character.age}</div>
-                                    <div className="distanceKM">{character.maxDistance} km</div>
+                                    <div className="distanceKM">{character.location} km</div>
                                 </div>
                             </TinderCard>
 
@@ -294,8 +294,6 @@ const HomeWithTinderCard = (props) => {
                 <Box sx={style}>
 
                     <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
-
-                    <div>Hallo{filteredSize}</div>
 
                     <div className="dataFrame">
                         <p>Gender</p>

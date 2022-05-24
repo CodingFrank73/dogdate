@@ -42,7 +42,7 @@ const Signup = () => {
         formData.set("email", email)
         formData.set("password", password)
         formData.set("size", size)
-        // formData.set("bigImage", bigImage, bigImage.name)
+        formData.set("bigImage", bigImage, bigImage.name)
 
         try {
             const response = await fetch(apiBaseUrl + '/api/users/register', {
@@ -64,10 +64,10 @@ const Signup = () => {
                 setError("")
 
                 setSuccess(`A very warm welcome ${dogName} to the DogDate community! We will now direct you to the login section - please sign in with your credentials and enjoy using Dogdate!`)
-   
+
                 setTimeout(() => {
                     navigate("/login")
-                    }, 4500)
+                }, 4500)
 
                 return
             }
