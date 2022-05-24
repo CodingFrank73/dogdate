@@ -144,8 +144,8 @@ const ProfileEditSettings = (props) => {
       <form className="signup-box">
         <h3>Account Settings</h3>
         <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
-
-        <div><img src={`/dogs/${dogName}.png`} alt="BigImage" /></div>
+        <div><img src={bigImage} alt="BigImage" /></div>
+        {/* <div><img src={`/dogs/${dogName}.png`} alt="BigImage" /></div> */}
         <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
         <button onClick={doUpload} type="submit">Upload</button>
 
