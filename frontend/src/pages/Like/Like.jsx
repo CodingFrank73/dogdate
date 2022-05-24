@@ -48,10 +48,10 @@ const Home = (props) => {
                     <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
                     <h2>Likes</h2>
 
-                </div>               
+                </div>
 
-                <h3>5 Likes</h3>
-                <LikesList likesArr={likesArr}  />
+                <h3>3 Likes</h3>
+                <LikesList likesArr={likesArr} />
 
                 <footer>
                     <div className="nav">

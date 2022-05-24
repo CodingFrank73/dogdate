@@ -72,7 +72,7 @@ const Chat = (props) => {
                         </div>
                     )
                         : (
-                            <ChatRoom socket={socket} username={"Balto"} room={"1"} />
+                            <ChatRoom socket={socket} username={"Balto"} room={'1'} />
                         )}
                 </div>
 
