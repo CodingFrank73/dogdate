@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import AlertDialog from './AlertDelete';
+import languagesJson from "../../assets/data/languages"
 
 //  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
@@ -201,35 +202,7 @@ const Profile = (props) => {
         console.log("You are logged out")
     }
 
-    const handleDelete = async (e) => {
-        console.log("token", props.token)
-        try {
-            const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
-                method: "DELETE",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-            })
-
-            const result = await response.json()
-
-            if (!result.err) {
-                console.log("successfully deleted!!")
-                return
-            }
-
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
-
-        } catch (error) {
-            console.log("show me an error !!!!")
-        }
-    }
-
+    
     return (
         <div className="profile">
             <div className="profile-header">
@@ -301,14 +274,17 @@ const Profile = (props) => {
                             label="PreferredLanguage"
                             defaultValue={"English"}
                             onChange={changeLanguage}
-                        >
-                            <MenuItem value="German">German</MenuItem>
-                            <MenuItem value="English">English</MenuItem>
-                            <MenuItem value="French">French</MenuItem>
-                            <MenuItem value="Arabic">Arabic</MenuItem>
-                            <MenuItem value="Spanish">Spanish</MenuItem>
-                            <MenuItem value="Chinese">Chinese</MenuItem>
-                            <MenuItem value="Polish">Polish</MenuItem>
+                        >{languagesJson.map((singleLang) => {
+                          return (
+                            <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
+                            // <MenuItem value="English">English</MenuItem>
+                            // <MenuItem value="French">French</MenuItem>
+                            // <MenuItem value="Arabic">Arabic</MenuItem>
+                            // <MenuItem value="Spanish">Spanish</MenuItem>
+                            // <MenuItem value="Chinese">Chinese</MenuItem>
+                            // <MenuItem value="Polish">Polish</MenuItem>
+                            )
+                            })}
                         </Select>
                     </div>
                 </div>
