@@ -19,6 +19,8 @@ import iconHome from '../../assets/icons/home.svg';
 import iconLike from '../../assets/icons/like.svg';
 import iconChataktiv from '../../assets/icons/chat-aktiv.svg';
 import iconProfile from '../../assets/icons/profile.svg';
+import kissJimmy from '../../assets/img/kiss-jimmy-the-bull.gif';
+
 import apiBaseUrl from "../../api";
 
 
@@ -54,21 +56,26 @@ const Chat = (props) => {
                 </div>
 
 
-                <div >
+                <div className="chatLogin">
                     {!showChat ? (
-                        <div style={{ margin: "200px" }}>
+                        <div>
+                            <div className="chatImg"><img src={kissJimmy} alt="Kiss Kiss Kiss" /></div>
                             <h4>Join Chat</h4>
+                            <div className="chatInput">
+                                <input type="text" className="chatInput"
+                                    placeholder="Your Name"
+                                    onChange={(event) => (setUsername(event.target.value))} />
+                            </div>
 
-                            <input type="text"
-                                placeholder="Your Name"
-                                onChange={(event) => (setUsername(event.target.value))} />
-
-                            <input type="text"
-                                placeholder='Room ID'
-                                onChange={(event) => (setRoom(event.target.value))} />
-
-                            <button
-                                onClick={joinRoom}>Join a Chat</button>
+                            <div>
+                                <input type="text"
+                                    placeholder='Room ID'
+                                    onChange={(event) => (setRoom(event.target.value))} />
+                            </div>
+                            <div>
+                                <button className="chatButton"
+                                    onClick={joinRoom}>Join a Chat</button>
+                            </div>
                         </div>
                     )
                         : (

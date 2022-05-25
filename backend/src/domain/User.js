@@ -12,7 +12,7 @@ function makeUser({
     pwHash,
     salt,
     plan = "free",
-    location = 33,
+    location = 98,
     postalCode,
     language = "English",
     filterGender = ["f", "m"],
