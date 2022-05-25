@@ -17,6 +17,12 @@ async function findById(id) {
     return user
 }
 
+async function findByIdForProfileImage({ userId }) {
+    const db = await getDB();
+    const fUser = await db.collection("users").findOne({ _id: new ObjectId(userId) });
+    return fUser
+}
+
 async function findByIdList(idList) {
     const db = await getDB();
     const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
@@ -177,6 +183,7 @@ module.exports = {
     findById,
     findByIdList,
     findByEmail,
+    findByIdForProfileImage,
     insert,
     update,
     updateAvatar,
