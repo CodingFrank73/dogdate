@@ -13,6 +13,7 @@ const listAllLikes = async (userId) => {
     const listOfUsersWhoLikesMe = usersList.map(u => ({
         _id: u._id,
         bigImage: u.bigImage,
+        profileImage: u.profileImage,
         dogName: u.dogName,
         gender: u.gender
     }))

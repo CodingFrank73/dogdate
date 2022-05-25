@@ -1,3 +1,43 @@
+
+
+h4{
+  font-family: "GloriaHallelujah";
+  font-size: 36px;
+  margin: 5% 5%;
+}
+
+.chatLogin{
+  margin-top:100px;
+  width: 100%;
+}
+  input{
+      width: 90%;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #8e8e8e;
+      background: #efefef;
+      padding: 2px 2px 4px 2px;
+      margin-left: 5%;
+      margin-bottom: 18px;
+  }
+
+ .chatButton{
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 15px 0;
+    margin: 34px 10% 0 10%;
+    width: 80%;
+    background: #bc1aed;
+    border: 0;
+    border-radius: 24px;
+    cursor: pointer;
+  }
+
+
+
 .App {
   width: 100vw;
   height: 100vh;

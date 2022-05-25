@@ -23,7 +23,8 @@ const LikesCard = (props) => {
   return (
     <div>
       <div onClick={handleOpen} className="likeCard">
-        <img src={`dogs/${props.like.dogName}.png`} alt="dog pic" />
+        {/* <img src={`dogs/${props.like.dogName}.png`} alt="dog pic" /> */}
+        <img src={props.like.bigImage} alt="dog pic" />
         <div className="likeDogname">{props.like.dogName}</div>
         {/* <div className="">{props.like.gender}</div> */}
       </div>
@@ -45,7 +46,6 @@ const LikesCard = (props) => {
             <p> {props.like.dogName} likes you too</p>
             <div className="loveBox">
               <div className="likeDogleft"><img src="dogs/balto-profil.png" alt="dog pic"></img></div>
-              {/* <img src={profileImage !== null ? props.like.profileImage : pic} alt="avatar" /> */}
               <div className="likeDogright"><img src={props.like.profileImage !== null ? props.like.profileImage : pic} alt="avatar" /></div>
             </div>
             <Link to="/chat" ><div className="buttonMatchChat">SEND A MESSAGE</div></Link>
@@ -55,7 +55,7 @@ const LikesCard = (props) => {
       </Modal>
 
 
-    </div>
+    </div >
   );
 }
 
