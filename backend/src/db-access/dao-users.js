@@ -10,13 +10,12 @@ async function findAll() {
 }
 
 async function findById(id) {
-    // console.log("id in DAOUser: ", id);
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ _id: new ObjectId(id) });
-    //  console.log("User in DOUser: ", user);
     return user
 }
 
+// TODO: Funktion muss überarbeitet werden, Frank
 async function findByIdForProfileImage({ userId }) {
     const db = await getDB();
     const fUser = await db.collection("users").findOne({ _id: new ObjectId(userId) });
@@ -28,7 +27,6 @@ async function findByIdList(idList) {
     const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
     return foundList
 }
-
 
 async function findByEmail(email) {
     const db = await getDB();
@@ -48,43 +46,37 @@ async function update(userId, updatedInfo) {
         { _id: userId },
         { $set: updatedInfo }
     )
-    console.log("updatedInfo from DAO:", updatedInfo, userId)
-    console.log("result from DAO", result)
-
     return result
 }
 
-
+// TODO: Diese Funktion muss auf AWS angepasst werden.....
 async function updateAvatar({ userId, profileImage }) {
-    // console.log("userId aus DAO", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
     )
-    console.log("IDtest", userId)
-    console.log("updated user aus DAO", updatedUser)
     return updatedUser
 }
 
+// TODO: Diese Funktion muss auf AWS angepasst werden......
 async function updateBigImage({ userId, bigImage }) {
-    console.log("userId aus DAO bigImage", userId)
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { bigImage: bigImage } }
     )
-    // console.log("IDtest", userId)
-    // console.log("updated user aus DAO", updatedUser)
     return updatedUser
 }
 
+// find all Users who likes a specific User based on userId
 async function findLikesById({ userId }) {
     const db = await getDB();
     const likes = await db.collection("likes").find({ idILiked: new ObjectId(userId) }).toArray();
     return likes
 }
 
+// TODO: Schauen ob diese Funktion überhaupt funktioniert bzw. benötigt wird.
 async function findMatches({ myId, likedId }) {
     console.log("Suche Matches in dao-user:...");
     const db = await getDB();
@@ -94,12 +86,10 @@ async function findMatches({ myId, likedId }) {
             myId: new ObjectId(likedId)
         }
     );
-
     return foundLike
 }
 
 async function insertLike({ myId, likedId }) {
-    console.log("Insert like......");
     const db = await getDB();
     const like = await db.collection("likes").insertOne(
         {
@@ -112,7 +102,6 @@ async function insertLike({ myId, likedId }) {
 }
 
 async function updateLikeToMatch(likeId, myId, idILiked) {
-    // console.log("Update like mit der ID: " + likeId + " to match.......");
     const db = await getDB();
     const updatelike = await db.collection("likes").updateOne(
         { _id: likeId },
@@ -127,7 +116,7 @@ async function updateLikeToMatch(likeId, myId, idILiked) {
     const updateUserTwo = await db.collection(collectionName).updateOne(
         { _id: idILiked },
         { $push: { "match": myId } }
-    )
+    );
 
     return (true)
 }
@@ -138,7 +127,6 @@ async function updateLanguage({ userId, language }) {
         { _id: new ObjectId(userId) },
         { $set: { language: language } }
     )
-    // console.log("IDtest", userId)
     return updatedUser
 }
 
@@ -147,36 +135,26 @@ async function updateMaxDistance({ userId, maxDistance }) {
     const insertResult = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { maxDistance: maxDistance } }
-    )
-    // console.log("IDtest", userId)
+    );
     return insertResult
 }
 
 async function updateAgeRange({ userId, ageRange }) {
     const db = await getDB();
-    // console.log("id, ageRange from DAO ", userId, ageRange)
     const insertResult = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { ageRange: ageRange } }
-    )
-    // console.log("IDtest", userId)
+    );
     return insertResult
 }
 
 async function deleteUser(userId) {
     const db = await getDB();
-    // console.log("id, ageRange from DAO ", userId)
     const insertResult = await db.collection(collectionName).deleteOne(
         { _id: new ObjectId(userId) },
     )
-    // console.log("IDtest", userId)
     return insertResult
 }
-
-
-
-
-
 
 module.exports = {
     findAll,
