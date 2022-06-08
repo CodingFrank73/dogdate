@@ -13,7 +13,6 @@ async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, min
 
     const exIDs = [...match, _id].map(id => ObjectId(id.toString()))
 
-    console.log("Maximale Entfernung: ", maxDistance);
     const users = await db.collection("users").find(
         {
             _id: { $nin: exIDs },
