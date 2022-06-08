@@ -52,16 +52,15 @@ userRouter.get("/myProfile",
         }
     })
 
+// TODO: Änderung möglicherweise bei Umstellung auf AWS notwendig
 userRouter.post("/myProfile/editAvatar",
     avatarUploadMiddleware,
     doAuthMiddleware,
     async (req, res) => {
-        // console.log("Hier ist ein Test:", req.file);
 
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            // console.log("userId aus route", userId) //klappt
 
             const user = await UserService.editAvatar({
                 userId: userId,
@@ -80,13 +79,10 @@ userRouter.post("/myProfile/editBigImage",
     pictureUploadMiddleware,
     doAuthMiddleware,
     async (req, res) => {
-        console.log("Route, req.file should be here:", req.file);
 
         try {
             const userId = req.userClaims.sub;
             const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-            // console.log("userId aus route", userId)
-            // console.log("bigPic", bigPicBas64)
 
             const user = await UserService.editBigImage({
                 userId: userId,
@@ -107,7 +103,6 @@ userRouter.post("/login",
     // doValidation,
     async (req, res) => {
 
-        console.log(req.headers);
         try {
             const result = await UserService.loginUser({
                 email: req.body.email,
@@ -178,13 +173,9 @@ userRouter.put("/myProfile/profileEditSettings",
 
         try {
             const userId = req.userClaims.sub;
-            //  const userId = req.body._id - ohne Middleware und damit OK in ThunderClient
-            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body)
-
             const user = await UserService.editProfileSettings(req.body)
 
             res.status(200).json({ user })
-            // console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -255,12 +246,9 @@ userRouter.delete("/myProfile/deleteAccount",
 
         try {
             const userId = req.userClaims.sub;
-
-            // console.log("TEST deleteAcc in Route ", userId, { userId });
             const user = await UserService.deleteAccountUser(userId)
 
             res.status(200).json({ user })
-            //console.log("res.json aus route: ", { user })
 
         } catch (error) {
             console.log(error)
@@ -276,11 +264,8 @@ userRouter.get("/showMyLikes",
     async (req, res) => {
 
         try {
-            const _id = req.userClaims.sub
-            const result = await UserService.listAllLikes({
-                userId: req.userClaims.sub,
-                _id
-            })
+            // const _id = req.userClaims.sub
+            const result = await UserService.listAllLikes(req.userClaims.sub)
 
             res.status(200).json(result)
 

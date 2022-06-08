@@ -1,16 +1,13 @@
 const { UserDAO } = require("../../db-access")
 
 const listAllLikes = async (userId) => {
-
-    const foundUser = await UserDAO.findByIdForProfileImage(userId)
-
-    // console.log("hallo welt:", foundUser);
+    // find Data based on UserId and create an User
+    // const foundUser = await UserDAO.findByIdForProfileImage(userId)
+    const foundUser = await UserDAO.findById(userId)
 
     const foundLikes = await UserDAO.findLikesById(userId);
-    console.log("FoundLikes: ", foundLikes);
 
     const userWhoLikesMe = foundLikes.map(like => like.myId)
-    console.log("userWhoLikesMe: ", userWhoLikesMe);
 
     const usersList = await UserDAO.findByIdList(userWhoLikesMe)
 
