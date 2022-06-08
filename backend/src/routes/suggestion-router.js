@@ -12,7 +12,6 @@ const suggestionRouter = express.Router();
 suggestionRouter.get("/all",
     // doAuthMiddleware,
     async (req, res) => {
-        console.log("ID in router:", req.body.id);
 
         try {
             const users = await SuggestionService.listAllSuggestion({
@@ -31,7 +30,6 @@ suggestionRouter.get("/allwithfilter",
     async (req, res) => {
 
         try {
-            // console.log("userId: ", req.userClaims.sub)
             const result = await SuggestionService.listSuggestionByDefaultFilter({
                 userId: req.userClaims.sub
             })

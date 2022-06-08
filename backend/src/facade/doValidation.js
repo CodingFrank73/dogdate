@@ -14,20 +14,6 @@ function doValidation(req, res, next) {
     }
 
     next()
-
-
-    // if (errors.isEmpty()) {
-    //     next()
-    // } else {
-    //     console.log("hallo"),
-    //         res.status(400).json({
-    //             err: {
-    //                 message: "There was an error with your request.",
-    //                 validationErrors: errors.array()
-    //             }
-    //         })
-    // }
-
 }
 
 module.exports = {
