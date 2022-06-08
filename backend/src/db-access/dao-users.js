@@ -18,7 +18,7 @@ async function findById(id) {
 // TODO: Funktion muss überarbeitet werden, Frank
 async function findByIdForProfileImage({ userId }) {
     const db = await getDB();
-    const fUser = await db.collection("users").findOne({ _id: new ObjectId(userId) });
+    const fUser = await db.collection(collectionName).findOne({ _id: new ObjectId(userId) });
     return fUser
 }
 
@@ -108,7 +108,7 @@ async function updateLikeToMatch(likeId, myId, idILiked) {
         { $set: { match: true } }
     );
 
-    const updateUserOne = await db.collection("users").updateOne(
+    const updateUserOne = await db.collection(collectionName).updateOne(
         { _id: myId },
         { $push: { "match": idILiked } }
     );
