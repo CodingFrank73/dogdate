@@ -32,9 +32,7 @@ const Home = (props) => {
             })
 
             const data = await response.json();
-            console.log("Likes:", data);
             setLikesArr(data)
-            console.log(likesArr)
 
         } catch (error) {
 
@@ -50,7 +48,7 @@ const Home = (props) => {
 
                 </div>
 
-                <h3>3 Likes</h3>
+                <h3>{`${likesArr.length}`} Likes</h3>
                 <LikesList likesArr={likesArr} />
 
                 <footer>
@@ -62,10 +60,7 @@ const Home = (props) => {
                     </div>
                 </footer>
             </div>
-
-
         </div>
-
     );
 }
 

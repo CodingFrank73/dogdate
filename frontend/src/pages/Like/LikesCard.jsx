@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import pic from '../../assets/img/shittingDogColor.png'
 
@@ -23,10 +22,8 @@ const LikesCard = (props) => {
   return (
     <div>
       <div onClick={handleOpen} className="likeCard">
-        {/* <img src={`dogs/${props.like.dogName}.png`} alt="dog pic" /> */}
         <img src={props.like.bigImage} alt="dog pic" />
         <div className="likeDogname">{props.like.dogName}</div>
-        {/* <div className="">{props.like.gender}</div> */}
       </div>
 
 
@@ -37,19 +34,11 @@ const LikesCard = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            Der Hund heisst:  {props.like.dogName}
-          </Typography> */}
-
           <div className="matchMatch">
             <h1>It's a Match!</h1>
             <p> {props.like.dogName} likes you too</p>
             <div className="loveBox">
-
               <div className="likeDogleft"><img src={props.like.myImage} alt="dog pic"></img></div>
-              {/* <div className="likeDogleft"><img src="dogs/balto-profil.png" alt="dog pic"></img></div> */}
-              {/* <img src={profileImage !== null ? props.like.profileImage : pic} alt="avatar" /> */}
-
               <div className="likeDogright"><img src={props.like.profileImage !== null ? props.like.profileImage : pic} alt="avatar" /></div>
             </div>
             <Link to="/chat" ><div className="buttonMatchChat">SEND A MESSAGE</div></Link>
@@ -57,8 +46,6 @@ const LikesCard = (props) => {
           </div>
         </Box>
       </Modal>
-
-
     </div >
   );
 }

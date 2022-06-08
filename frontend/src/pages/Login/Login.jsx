@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { image } from 'react';
 import apiBaseUrl from '../../api';
 
 
@@ -8,7 +7,7 @@ import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('Brille123!');
     const [error, setError] = useState('');
 
     const doLogin = async (e) => {
@@ -17,7 +16,6 @@ const Login = (props) => {
         // prüfung ob login-felder leer sind
 
         try {
-
             const response = await fetch(apiBaseUrl + '/api/users/login', {
                 method: "POST",
                 mode: "cors",
@@ -28,14 +26,16 @@ const Login = (props) => {
 
             const result = await response.json();
 
+            // login was successfull
             if (!result.err) {
                 props.loginSuccess(result.token)
                 return
             }
 
+            // login failed because of validationErrors
             if (result.err.validationErrors) {
                 const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + "Login ist schief gelaufen")
+                setError(firstError.msg + " : Login ist schief gelaufen")
 
                 return
             }
