@@ -8,9 +8,10 @@ const pw = process.env.DB_USER_PW;
 const databaseName = process.env.DB_NAME;
 
 
-//  `mongodb+srv://${user}:${pw}@cluster0.onqno.mongodb.net/${databaseName}?retryWrites=true&w=majority`
+const url = `mongodb+srv://${user}:${pw}@cluster0.onqno.mongodb.net/${databaseName}?retryWrites=true&w=majority`
 
-const url = `mongodb+srv://${user}:${pw}@cluster0.xc7s8.mongodb.net/${databaseName}?retryWrites=true&w=majority`
+// Erstaz MongoDB falls Datenbegrenzung erreicht. Frank's MongoDB
+// const url = `mongodb+srv://${user}:${pw}@cluster0.xc7s8.mongodb.net/${databaseName}?retryWrites=true&w=majority`
 
 const client = new MongoClient(url);
 
