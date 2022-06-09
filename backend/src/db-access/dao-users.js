@@ -22,11 +22,7 @@ async function findByIdForProfileImage({ userId }) {
     return fUser
 }
 
-async function findByIdList(idList) {
-    const db = await getDB();
-    const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
-    return foundList
-}
+
 
 async function findByEmail(email) {
     const db = await getDB();
@@ -69,16 +65,28 @@ async function updateBigImage({ userId, bigImage }) {
     return updatedUser
 }
 
+// ++++++ Functions for the likes +++++++++++++
+
 // find all Users who likes a specific User based on userId
-async function findLikesById({ userId }) {
+async function findLikes(userId) {
     const db = await getDB();
     const likes = await db.collection("likes").find({ idILiked: new ObjectId(userId) }).toArray();
     return likes
 }
 
+async function findByIdList(idList) {
+    const db = await getDB();
+    const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
+    return foundList
+}
+
+
+
+
+
+
 // TODO: Schauen ob diese Funktion überhaupt funktioniert bzw. benötigt wird.
 async function findMatches({ myId, likedId }) {
-    console.log("Suche Matches in dao-user:...");
     const db = await getDB();
     const foundLike = await db.collection("likes").findOne(
         {
@@ -166,7 +174,7 @@ module.exports = {
     update,
     updateAvatar,
     findMatches,
-    findLikesById,
+    findLikes,
     insertLike,
     updateLikeToMatch,
     updateLanguage,
