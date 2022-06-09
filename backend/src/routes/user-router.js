@@ -257,9 +257,9 @@ userRouter.delete("/myProfile/deleteAccount",
     })
 
 
-// ++++++++++++++++++++ Frank ++++++++++++++++++++++++++
+// ++++++++++++++++++++ Likes ++++++++++++++++++++++++++
 
-userRouter.get("/showMyLikes",
+userRouter.get("/showLikes",
     doAuthMiddleware,
     async (req, res) => {
 
@@ -275,21 +275,6 @@ userRouter.get("/showMyLikes",
         }
     })
 
-userRouter.get("/showMyMatches",
-    doAuthMiddleware,
-    async (req, res) => {
-
-        try {
-            const userId = req.userClaims.sub;
-            const result = await UserService.listAllMatches(userId)
-
-            res.status(200).json(result)
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error during finding likes." })
-        }
-    })
 
 userRouter.post("/likeone",
     doAuthMiddleware,
@@ -309,6 +294,27 @@ userRouter.post("/likeone",
             res.status(500).json({ err: error.message || "Error during inserting likes." })
         }
     })
+
+
+// ++++++++++++++++++++ Matches ++++++++++++++++++++++++++
+
+userRouter.get("/showMatches",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+            const result = await UserService.listAllMatches(userId)
+
+            res.status(200).json(result)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during finding likes." })
+        }
+    })
+
+
 
 userRouter.post("/match",
     doAuthMiddleware,

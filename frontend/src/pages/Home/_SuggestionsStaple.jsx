@@ -1,5 +1,5 @@
 
-import SuggestionCard from "./SuggestionCard";
+import SuggestionCard from "./_SuggestionCard";
 
 const SuggestionsStaple = (props) => {
     return (
