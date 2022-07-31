@@ -1,18 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 import apiBaseUrl from "../../api"
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
+import Footer from '../../components/Footer/Footer';
+
 //  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
-import iconHome from '../../assets/icons/home.svg';
-import iconLike from '../../assets/icons/like.svg';
-import iconChat from '../../assets/icons/chat.svg';
-import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
-
 
 const ProfileEditSettings = (props) => {
   const [dogName, setDogName] = useState('');
@@ -194,12 +190,7 @@ const ProfileEditSettings = (props) => {
       </form>
 
       <footer>
-        <div className="nav">
-          <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
-          <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
-          <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
-          <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
-        </div>
+        <Footer />
       </footer>
 
     </div>

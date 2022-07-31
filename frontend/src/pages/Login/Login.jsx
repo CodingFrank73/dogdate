@@ -6,7 +6,7 @@ import apiBaseUrl from '../../api';
 import backarrow from '../../assets/icons/arrow-back.svg';
 
 const Login = (props) => {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('layla@gmx.de');
     const [password, setPassword] = useState('Brille123!');
     const [error, setError] = useState('');
 
@@ -28,7 +28,7 @@ const Login = (props) => {
 
             // login was successfull
             if (!result.err) {
-                props.loginSuccess(result.token)
+                props.loginSuccess(result.token, result.profileImage)
                 return
             }
 

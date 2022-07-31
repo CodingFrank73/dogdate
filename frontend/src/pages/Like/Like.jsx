@@ -1,21 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import Footer from "../../components/Footer/Footer";
 import apiBaseUrl from "../../api"
-import LikesList from "./LikesList";
+import LikeList from "./LikeList";
 
-//  BILDER-IMPORT
-
-import ddLogo from '../../assets/icons/logo.svg';
-import filter from '../../assets/icons/filter.svg';
-import buttonDislike from '../../assets/icons/dislike-white.svg';
-import buttonLike from '../../assets/icons/like-white.svg';
 import backarrow from '../../assets/icons/arrow-back.svg';
-import iconHome from '../../assets/icons/home.svg';
-import iconLikeaktiv from '../../assets/icons/like-aktiv.svg';
-import iconChat from '../../assets/icons/chat.svg';
-import iconProfile from '../../assets/icons/profile.svg';
 
-const Home = (props) => {
+
+const Like = (props) => {
 
     const [likesArr, setLikesArr] = useState([])
 
@@ -38,30 +31,28 @@ const Home = (props) => {
 
         }
     }
+
     return (
         <div>
-
             <div className="profile">
                 <div className="profile-header">
                     <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
                     <h2>Likes</h2>
-
                 </div>
 
                 <h3>{`${likesArr.length}`} Likes</h3>
-                <LikesList likesArr={likesArr} />
+                <LikeList
+                    likesArr={likesArr}
+                    token={props.token}
+                    profileImage={props.profileImage}
+                />
 
                 <footer>
-                    <div className="nav">
-                        <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
-                        <div><Link to="/like" ><img src={iconLikeaktiv} alt="like" /></Link></div>
-                        <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
-                        <div><Link to="/profile" ><img src={iconProfile} alt="profile" /></Link></div>
-                    </div>
+                    <Footer />
                 </footer>
             </div>
         </div>
     );
 }
 
-export default Home;
+export default Like;

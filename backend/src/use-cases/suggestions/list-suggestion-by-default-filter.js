@@ -24,6 +24,7 @@ const listSuggestionByDefaultFilter = async ({ userId }) => {
         _id: u._id,
         dogName: u.dogName,
         bigImage: u.bigImage,
+        profileImage: u.profileImage,
         age: AgeCalc.getAgeByYear(u.dateOfBirth),
         location: u.location,
     }))

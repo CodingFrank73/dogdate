@@ -10,12 +10,10 @@ import Select from '@mui/material/Select';
 import AlertDialog from './AlertDelete';
 import languagesJson from "../../assets/data/languages"
 
+import Footer from '../../components/Footer/Footer';
+
 //  BILDER-IMPORT
 import backarrow from '../../assets/icons/arrow-back.svg';
-import iconHome from '../../assets/icons/home.svg';
-import iconLike from '../../assets/icons/like.svg';
-import iconChat from '../../assets/icons/chat.svg';
-import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
 import iconpen from '../../assets/icons/pen.svg';
 
 import pic from '../../assets/img/shittingDogColor.png'
@@ -202,7 +200,7 @@ const Profile = (props) => {
         console.log("You are logged out")
     }
 
-    
+
     return (
         <div className="profile">
             <div className="profile-header">
@@ -216,7 +214,7 @@ const Profile = (props) => {
                 <div className="profilePic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
                     <div className="editProfilepic">
-                        <Link to="/profile/profileEditAvatar" >
+                        <Link to="/profile/editProfileImage" >
                             <img src={iconpen} alt="home" />
                         </Link>
                     </div>
@@ -224,7 +222,7 @@ const Profile = (props) => {
 
                 <div className="headlineFrame">
                     <h3>Account Settings</h3>
-                    <Link to="/profile/profileEditSettings"><button className='headlineButton'>Edit</button></Link>
+                    <Link to="/profile/editSettings"><button className='headlineButton'>Edit</button></Link>
                 </div>
                 <div className="dataFrame">
                     <div className="dataLable">Name </div>
@@ -275,16 +273,10 @@ const Profile = (props) => {
                             defaultValue={"English"}
                             onChange={changeLanguage}
                         >{languagesJson.map((singleLang) => {
-                          return (
-                            <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
-                            // <MenuItem value="English">English</MenuItem>
-                            // <MenuItem value="French">French</MenuItem>
-                            // <MenuItem value="Arabic">Arabic</MenuItem>
-                            // <MenuItem value="Spanish">Spanish</MenuItem>
-                            // <MenuItem value="Chinese">Chinese</MenuItem>
-                            // <MenuItem value="Polish">Polish</MenuItem>
+                            return (
+                                <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
                             )
-                            })}
+                        })}
                         </Select>
                     </div>
                 </div>
@@ -333,12 +325,7 @@ const Profile = (props) => {
             </div >
 
             <footer>
-                <div className="nav">
-                    <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
-                    <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
-                    <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
-                    <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
-                </div>
+                <Footer />
             </footer>
 
 

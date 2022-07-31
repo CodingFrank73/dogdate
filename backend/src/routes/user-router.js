@@ -1,4 +1,20 @@
 
+
+// +++ for AWS-Bucket +++
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
+const uuid = require("uuid").v4;
+const path = require("path");
+// const dotenv = require('dotenv')
+
+// dotenv.config();
+
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
+
+// +++ general +++
 const express = require("express");
 const multer = require("multer");
 const { body } = require("express-validator");
@@ -11,6 +27,57 @@ const { imageBufferToBase64 } = require("../utils/converter");
 const userRouter = express.Router();
 const pictureUploadMiddleware = multer().single("bigImage")
 const avatarUploadMiddleware = multer().single("profileImage")
+
+
+
+const s3 = new aws.S3({
+    apiVersion: '2006-03-01',
+    region,
+    accessKeyId,
+    secretAccessKey
+});
+// Needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+
+const upload = multer({
+    storage: multerS3({
+        s3,
+        bucket: 'cf73-test-upload',
+        acl: 'public-read',
+        metadata: (req, file, cb) => {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: (req, file, cb) => {
+            const ext = path.extname(file.originalname);
+            cb(null, `${uuid()}${ext}`);
+        }
+    }),
+});
+
+// userRouter.use(express.static('public'))
+
+userRouter.post('/upload',
+    upload.single('avatar'),
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const uploadedFile = req.file.location;
+            const userId = req.userClaims.sub;
+
+            const user = await UserService.editAvatar({
+                userId: userId,
+                profileImage: uploadedFile
+            })
+
+            res.status(201).json(user)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Updating Avatar." })
+        }
+
+    });
+
 
 userRouter.get("/all",
     doAuthMiddleware,
@@ -283,8 +350,8 @@ userRouter.post("/likeone",
         try {
             const response = await UserService.likeOne(
                 {
-                    myId: req.userClaims.sub,
-                    likedId: req.body.likedId
+                    idUserA: req.userClaims.sub,
+                    idUserB: req.body.likedId
                 })
 
             res.status(201).json(response)
@@ -293,6 +360,25 @@ userRouter.post("/likeone",
             console.log(error)
             res.status(500).json({ err: error.message || "Error during inserting likes." })
         }
+    })
+
+userRouter.put("/likeToMatch",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const idUserB = req.userClaims.sub;
+            const idUserA = req.body.idUserA;
+
+            const response = await UserService.editLikeToMatch(idUserB, idUserA)
+
+            res.status(200).json(response)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during updating likes and users." })
+        }
+
     })
 
 
@@ -334,6 +420,13 @@ userRouter.post("/match",
             res.status(500).json({ err: error.message || "Error during inserting likes." })
         }
     })
+
+
+
+// ++++++++++++++++++++ Upload-TO-S3-Bucket ++++++++++++++++++++++++++
+
+
+
 
 module.exports = {
     userRouter

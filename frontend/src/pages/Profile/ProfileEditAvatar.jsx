@@ -1,15 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import apiBaseUrl from "../../api"
-import { useNavigate } from "react-router-dom";
 
-//  BILDER-IMPORT
+import Footer from '../../components/Footer/Footer';
+
 import backarrow from '../../assets/icons/arrow-back.svg';
-import iconHome from '../../assets/icons/home.svg';
-import iconLike from '../../assets/icons/like.svg';
-import iconChat from '../../assets/icons/chat.svg';
-import iconProfileaktiv from '../../assets/icons/profile-aktiv.svg';
-import iconpen from '../../assets/icons/pen.svg';
 
 const ProfileEditAvatar = (props) => {
 
@@ -23,16 +18,31 @@ const ProfileEditAvatar = (props) => {
         e.preventDefault();
 
         const formData = new FormData()
-        formData.set("profileImage", profileImage, profileImage.name)
+        // formData.set("profileImage", profileImage, profileImage.name)
+
+        formData.append("avatar", profileImage);
+
 
         try {
-            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editAvatar', {
+            //TODO: Ursprünglicher Code - Kann wenn alles läuft gelöscht werden
+            // const response = await fetch(apiBaseUrl + '/api/users/myProfile/editAvatar', {
+            //     method: "POST",
+            //     headers: {
+            //         token: "JWT " + props.token
+            //     },
+            //     body: formData
+            // })
+            // const result = await response.json()
+
+
+            const response = await fetch(apiBaseUrl + '/api/users/upload', {
                 method: "POST",
                 headers: {
                     token: "JWT " + props.token
                 },
                 body: formData
             })
+
             const result = await response.json()
 
             if (!result.err) {
@@ -63,7 +73,7 @@ const ProfileEditAvatar = (props) => {
             </div>
             <div className="editAvatarBody">
                 <form className="editAvatar">
-                    <input type="file" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
+                    <input type="file" name="avatar" placeholder="Picture" onChange={(e) => setProfileImage(e.target.files[0])} />
                     <button onClick={doUpload} type="submit">Upload</button>
                 </form>
 
@@ -71,12 +81,7 @@ const ProfileEditAvatar = (props) => {
                     <div><p>{error}</p></div>}
             </div>
             <footer>
-                <div className="nav">
-                    <div><Link to="/home" ><img src={iconHome} alt="home" /></Link></div>
-                    <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
-                    <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
-                    <div><Link to="/profile" ><img src={iconProfileaktiv} alt="profile" /></Link></div>
-                </div>
+                <Footer />
             </footer>
         </div>
     );

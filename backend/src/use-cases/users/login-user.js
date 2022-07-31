@@ -23,7 +23,7 @@ async function loginUser({ email, password }) {
     const token = hash.createToken(user, "access", Number(process.env.LIFETIME_TOKEN_ACCESS))
     const refreshToken = hash.createToken(user, "refresh", Number(process.env.LIFETIME_TOKEN_REFRESH))
 
-    return { token, refreshToken }
+    return { token, refreshToken, profileImage: user.profileImage }
 }
 
 module.exports = {

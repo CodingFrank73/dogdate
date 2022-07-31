@@ -1,42 +1,21 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-import "./Card.css"
-
+import { useNavigate } from "react-router-dom";
 import TinderCard from 'react-tinder-card';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Slider from '@mui/material/Slider';
-
+import "./Card.css"
+import Footer from "../../components/Footer/Footer";
+import HomeFilter from "./HomeFilter";
 
 import ddLogo from '../../assets/icons/logo.svg';
 import filter from '../../assets/icons/filter.svg';
 import buttonDislike from '../../assets/icons/dislike-white.svg';
 import buttonLike from '../../assets/icons/like-white.svg';
-import iconHomeaktiv from '../../assets/icons/home-aktiv.svg';
-import iconLike from '../../assets/icons/like.svg';
-import iconChat from '../../assets/icons/chat.svg';
-import iconProfile from '../../assets/icons/profile.svg';
-
 
 import apiBaseUrl from "../../api"
 
-const style = {
-    position: 'absolute',
-    top: '0%',
-    left: '0%',
-    width: '100%',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-};
-
-
-const HomeWithTinderCard = (props) => {
+const Home = (props) => {
     const [suggestions, setSuggestions] = useState([]);
+    const [currentUser, setCurrentUser] = useState([]);
     const [filteredAgeRange, setFilteredAgeRange] = useState([]);
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
     const [filteredSize, setFilteredSize] = useState([]);
@@ -49,31 +28,34 @@ const HomeWithTinderCard = (props) => {
     const [matches, setMatches] = useState([]);
     const [error, setError] = useState('');
 
-    const [open, setOpen] = useState(false);
+    const [filterScreenIsOpen, setFilterScreenIsOpen] = useState(false);
 
     const [lastDirection, setLastDirection] = useState()
 
-    const swiped = (direction, nameToDelete, swipedId) => {
-        console.log('removing: ' + nameToDelete)
+
+    const navigate = useNavigate();
+
+
+    const swiped = async (direction, dogName, profileImage, swipedId) => {
+
         setLastDirection(direction)
 
         if (direction === "right") {
-            doLike(swipedId)
+            doLike(swipedId, dogName, profileImage)
 
         } else {
-            console.log("Kein like");
+            // console.log("Kein like");
         }
     }
 
     const outOfFrame = (name) => {
-        console.log(name + ' left the screen...!')
+        // console.log(name + ' left the screen...!')
     }
-
-
 
     useEffect(() => {
         fetchSuggestions()
     }, [])
+
 
     const fetchSuggestions = async () => {
         try {
@@ -84,10 +66,11 @@ const HomeWithTinderCard = (props) => {
             })
 
             const data = await response.json();
-            console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
+            // console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
             console.log("Suggestions with default filter for foundUser:", data.foundUser);
-            setSuggestions(data.listOfUsers)
 
+            setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
+            setCurrentUser(data.foundUser);
             setFilteredGender(data.foundUser.filterGender);
             setFilteredAgeRange(data.foundUser.ageRange);
             setFilteredSize(data.foundUser.filterSize);
@@ -111,19 +94,15 @@ const HomeWithTinderCard = (props) => {
             })
 
             const data = await response.json()
-            console.log("suggestions with Temp Filter: ", data);
             setSuggestions(data)
-
 
         } catch (error) {
 
         }
     }
 
-    const handleOpen = () => setOpen(true);
-
     const handleClose = () => {
-        setOpen(false);
+        setFilterScreenIsOpen(false);
         fetchSuggestionsWithTempFilter()
     }
 
@@ -178,7 +157,6 @@ const HomeWithTinderCard = (props) => {
             setIsSizeSClicked(false)
             document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
         }
-
     }
 
     const handleChangeSizeM = async (event) => {
@@ -205,12 +183,9 @@ const HomeWithTinderCard = (props) => {
             setIsSizeLClicked(false)
             document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         }
-
     }
 
-    const doLike = async (likedId) => {
-        console.log("Geliked:...:", likedId);
-
+    const doLike = async (likedId, dogName, profileImage) => {
         try {
             const response = await fetch(apiBaseUrl + `/api/users/likeone`, {
                 method: "POST",
@@ -221,28 +196,48 @@ const HomeWithTinderCard = (props) => {
                 body: JSON.stringify({ likedId: likedId })
             })
 
-            const data = await response.json()
+            const result = await response.json()
+
+            if (!result.isLikeCreated) { doLikeToMatch(result.idUserA, dogName, profileImage) }
 
         } catch (error) {
 
         }
     }
 
+    const doLikeToMatch = async (idUserA, dogName, profileImage) => {
+        try {
+            const response = await fetch(apiBaseUrl + `/api/users/likeToMatch`, {
+                method: "PUT",
+                headers: {
+                    token: "JWT " + props.token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ idUserA: idUserA })
+            })
+
+            const data = await response.json()
+
+            navigate('/match', { state: { dogName: dogName, profileImage: profileImage, myImage: `${currentUser.profileImage}` } })
+
+        } catch (error) {
+
+        }
+    }
+
+
     return (
         <div>
-
             <div className="home">
                 <div className="home-header">
                     <img className="home-dd-logo" src={ddLogo} alt="dogdate logo" />
                     <h2>dogdate</h2>
-                    <img className="home-filter" src={filter} alt="filter" onClick={handleOpen} />
+                    <img className="home-filter" src={filter} alt="filter" onClick={e => setFilterScreenIsOpen(true)} />
                 </div>
                 <div className="home-doggy-bigpic">
-
                     <div className='cardContainer'>
                         {suggestions.map((character) =>
-
-                            <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
+                            <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character.profileImage, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div className='card'>
                                     <img src={character.bigImage} alt="dog pic" />
                                     <div className="dogName">{character.dogName}, {character.age}</div>
@@ -251,7 +246,6 @@ const HomeWithTinderCard = (props) => {
                             </TinderCard>
                         )}
                     </div>
-
                 </div>
 
 
@@ -263,90 +257,36 @@ const HomeWithTinderCard = (props) => {
                 </div>
 
                 <footer>
-                    <div className="nav">
-                        <div><Link to="/home" ><img src={iconHomeaktiv} alt="home" /></Link></div>
-                        <div><Link to="/like" ><img src={iconLike} alt="like" /></Link></div>
-                        <div><Link to="/chat" ><img src={iconChat} alt="chat" /></Link></div>
-                        <div><Link to="/profile" ><img src={iconProfile} alt="profile" /></Link></div>
-                    </div>
+                    <Footer />
                 </footer>
             </div>
 
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
+            {/* <MatchScreen
+                IsModalOpenend={matchScreenIsOpen}
+                dogName={likeUserName}
+                profileImage={likeUserProfileImage}
+                myImage={currentUser.profileImage}
+                handleClose={e => setMatchScreenIsOpen(false)}
+            /> */}
 
-                    <Typography id="modal-modal-title" variant="h6" component="h2">Filter</Typography>
-
-                    <div className="dataFrame">
-                        <p>Gender</p>
-                        <div className="optionBox">
-                            {filteredGender.includes("f") ?
-                                <div id="genderLeft" className="genderLeft genderLeft-aktiv" onClick={handleChangeGenderF}>Female</div>
-                                :
-                                <div id="genderLeft" className="genderLeft" onClick={handleChangeGenderF}>Female</div>
-                            }
-
-                            {filteredGender.includes("m") ?
-                                <div id="genderRight" className="genderRight genderRight-aktiv" onClick={handleChangeGenderM}>Male</div>
-                                :
-                                <div id="genderRight" className="genderRight" onClick={handleChangeGenderM}>Male</div>
-                            }
-                        </div>
-                    </div>
-
-                    <div className="dataFrame">
-                        <p className="rangeHL">Age Range</p>
-                        <Slider
-                            value={filteredAgeRange}
-                            onChangeCommitted={handleChangeAgeRange}
-                            valueLabelDisplay="on"
-                            min={0}
-                            max={20}
-                            step={1}
-                        />
-                    </div>
-
-                    <div className="dataFrame">
-                        <p>Size</p>
-                        <div className="optionBox">
-                            {filteredSize.includes("s") ?
-                                <div id="sizeSmall" className="sizeSmall sizeSmall-aktiv" onClick={handleChangeSizeS}>S</div>
-                                : <div id="sizeSmall" className="sizeSmall" onClick={handleChangeSizeS}>S</div>
-                            }
-
-                            {filteredSize.includes("m") ?
-                                < div id="sizeMiddle" className="sizeMiddle sizeMiddle-aktiv" onClick={handleChangeSizeM} > M</div>
-                                : <div id="sizeMiddle" className="sizeMiddle" onClick={handleChangeSizeM}>M</div>
-                            }
-
-                            {filteredSize.includes("l") ?
-                                <div id="sizeLarge" className="sizeLarge sizeLarge-aktiv" onClick={handleChangeSizeL}>L</div>
-                                : <div id="sizeLarge" className="sizeLarge" onClick={handleChangeSizeL}>L</div>
-                            }
-                        </div>
-                    </div>
-
-                    <div className="dataFrame">
-                        <p className="rangeHL">Distance (in km)</p>
-                        <Slider
-                            value={filteredMaxDistance}
-                            onChangeCommitted={handleChangeDistance}
-                            valueLabelDisplay="on"
-                            min={0}
-                            max={200}
-                            step={5}
-                        />
-                    </div>
-                </Box>
-            </Modal>
+            <HomeFilter
+                isFilterScreenOpenend={filterScreenIsOpen}
+                filteredGender={filteredGender}
+                filteredAgeRange={filteredAgeRange}
+                filteredSize={filteredSize}
+                filteredMaxDistance={filteredMaxDistance}
+                handleChangeGenderF={handleChangeGenderF}
+                handleChangeGenderM={handleChangeGenderM}
+                handleChangeAgeRange={handleChangeAgeRange}
+                handleChangeSizeS={handleChangeSizeS}
+                handleChangeSizeM={handleChangeSizeM}
+                handleChangeSizeL={handleChangeSizeL}
+                handleChangeDistance={handleChangeDistance}
+                handleClose={handleClose}
+            />
         </div >
     );
 }
 
 
-export default HomeWithTinderCard;
+export default Home;

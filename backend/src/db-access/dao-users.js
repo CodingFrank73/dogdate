@@ -66,68 +66,104 @@ async function updateBigImage({ userId, bigImage }) {
 }
 
 // ++++++ Functions for the likes +++++++++++++
-
-// find all Users who likes a specific User based on userId
-async function findLikes(userId) {
-    const db = await getDB();
-    const likes = await db.collection("likes").find({ idILiked: new ObjectId(userId) }).toArray();
-    return likes
-}
-
-async function findByIdList(idList) {
-    const db = await getDB();
-    const foundList = await db.collection(collectionName).find({ _id: { $in: idList.map(id => new ObjectId(id)) } }).toArray();
-    return foundList
-}
+// Hint: idUserA ist der User der einen anderen User geliked hat / idUserB ist der User der geliked wurde.
 
 
-
-
-
-
-// TODO: Schauen ob diese Funktion überhaupt funktioniert bzw. benötigt wird.
-async function findMatches({ myId, likedId }) {
+// find an l
+async function findLikeByUserIds({ idUserA, idUserB }) {
     const db = await getDB();
     const foundLike = await db.collection("likes").findOne(
         {
-            idILiked: new ObjectId(myId),
-            myId: new ObjectId(likedId)
+            idUserB: new ObjectId(idUserA),
+            idUserA: new ObjectId(idUserB)
         }
     );
     return foundLike
 }
 
-async function insertLike({ myId, likedId }) {
+// find all userIds who likes a specific User based on userId
+async function findUserIDsWholikeMe(userId) {
+    const db = await getDB();
+    const userIds = await db.collection("likes").aggregate([
+        {
+            $match: {
+                $and: [
+                    { idUserB: ObjectId(userId) },
+                    { match: false }
+                ]
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                idUserA: 1
+            }
+        }]).toArray();
+
+    return userIds
+}
+
+// find all required informations about the Users who liked a specific User
+async function findByIdList(idList) {
+    const db = await getDB();
+    const usersWhoLikeMe = await db.collection(collectionName).aggregate([
+        { $match: { _id: { $in: idList.map(item => ObjectId(item.idUserA)) } } },
+        {
+            $project: {
+                _id: 1,
+                dogName: 1,
+                profileImage: 1,
+                bigImage: 1,
+                gender: 1,
+            }
+        }]).toArray()
+
+    return usersWhoLikeMe
+}
+
+async function insertLike({ idUserA, idUserB }) {
     const db = await getDB();
     const like = await db.collection("likes").insertOne(
         {
-            myId: new ObjectId(myId),
-            idILiked: new ObjectId(likedId),
+            idUserA: new ObjectId(idUserA),
+            idUserB: new ObjectId(idUserB),
             match: false,
             notification: false
         });
     return like
 }
 
-async function updateLikeToMatch(likeId, myId, idILiked) {
+async function updateLikeToMatch(idUserB, idUserA) {
     const db = await getDB();
     const updatelike = await db.collection("likes").updateOne(
-        { _id: likeId },
+        { $and: [{ idUserA: new ObjectId(idUserA) }, { idUserB: new ObjectId(idUserB) }] },
         { $set: { match: true } }
     );
 
     const updateUserOne = await db.collection(collectionName).updateOne(
-        { _id: myId },
-        { $push: { "match": idILiked } }
+        { _id: new ObjectId(idUserA) },
+        { $push: { "match": new ObjectId(idUserB) } }
     );
 
     const updateUserTwo = await db.collection(collectionName).updateOne(
-        { _id: idILiked },
-        { $push: { "match": myId } }
+        { _id: new ObjectId(idUserB) },
+        { $push: { "match": new ObjectId(idUserA) } }
     );
 
     return (true)
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function updateLanguage({ userId, language }) {
     const db = await getDB();
@@ -173,8 +209,8 @@ module.exports = {
     insert,
     update,
     updateAvatar,
-    findMatches,
-    findLikes,
+    findLikeByUserIds,
+    findUserIDsWholikeMe,
     insertLike,
     updateLikeToMatch,
     updateLanguage,
