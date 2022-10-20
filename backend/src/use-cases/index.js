@@ -5,15 +5,16 @@ const { refreshUserToken } = require("./users/refresh-user-token");
 const { showMyProfile } = require("./users/show-profile");
 const { editAvatar } = require("./users/edit-avatar")
 const { listAllLikes } = require("./users/list-all-likes");
-const { listAllMatches } = require("./users/list-all-matches");
+const { listAllChats } = require("./users/list-all-chats");
 const { editLikeToMatch } = require("./users/edit-like-to-match");
 const { likeOne } = require("./users/like-one");
 const { editProfileSettings } = require("./users/edit-profile-settings");
+const { editSettingsDiscovery } = require("./users/edit-settings-discovery");
 const { editLanguage } = require("./users/edit-language")
 const { editMaxDistance } = require("./users/edit-max-distance")
 const { editAgeRange } = require("./users/edit-age-range")
 const { deleteAccountUser } = require("./users/delete-account");
-const { editBigImage } = require("./users/edit-big-image")
+const { editImageMain } = require("./users/edit-image-main")
 
 
 const { listAllSuggestion } = require("./suggestions/list-all-suggestion");
@@ -29,14 +30,15 @@ const UserService = {
     editAvatar,
     editLikeToMatch,
     listAllLikes,
-    listAllMatches,
+    listAllChats,
     likeOne,
     editProfileSettings,
+    editSettingsDiscovery,
     editLanguage,
     editMaxDistance,
     editAgeRange,
     deleteAccountUser,
-    editBigImage
+    editImageMain
 }
 
 const SuggestionService = {

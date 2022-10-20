@@ -26,9 +26,10 @@ body {
 }
 
 #root>div {
-width: 390px;
-height: 844px;
+    width: 390px;
+    height: 844px;
 }
+
 a {
     text-decoration: none;
 }
@@ -59,7 +60,7 @@ h3 {
     }
 }
 
-.errorText{
+.errorText {
     width: 90%;
     color: tomato;
     font-size: 18px;
@@ -71,7 +72,7 @@ h3 {
     border-radius: 8px;
 }
 
-.successText{
+.successText {
     position: absolute;
     top: 30%;
     width: 90%;
@@ -243,6 +244,19 @@ h3 {
             width: 26px;
             cursor: pointer;
         }
+
+        .profile-header-info {
+            display: flex;
+            margin-left: 100px;
+
+            img {
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                margin-right: 10px
+            }
+        }
+
     }
 
     //  SIGNUP PAGE
@@ -256,42 +270,57 @@ h3 {
         select {
             width: 100%;
             border: none;
-            border-bottom: 1px solid #8e8e8e;
+            // border-bottom: 1px solid #8e8e8e;
             background: #efefef;
             padding: 2px 2px 4px 2px;
-            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            // font-family: "Poppins", Arial, Helvetica, sans-serif;
             margin-bottom: 12px;
         }
 
-        input:focus,  select:focus{
+        input:focus,
+        select:focus {
             border: none;
             border: 0;
             outline: none;
-            border-bottom: 1px solid #555;
+            // border-bottom: 1px solid #555;
         }
 
         option {
             font-family: "Poppins", Arial, Helvetica, sans-serif;
         }
 
-        button {
-            font-family: "Poppins", Arial, Helvetica, sans-serif;
-            color: #fff;
-            letter-spacing: 0.05em;
-            text-align: center;
-            padding: 15px 0;
-            margin: 34px 10% 0 10%;
-            width: 80%;
-            background: #5A1AED;
-            border: 0;
-            border-radius: 24px;
-            cursor: pointer;
-        }
+        // button {
+        //     font-family: "Poppins", Arial, Helvetica, sans-serif;
+        //     color: #fff;
+        //     letter-spacing: 0.05em;
+        //     text-align: center;
+        //     padding: 15px 0;
+        //     margin: 34px 10% 0 10%;
+        //     width: 80%;
+        //     background: #5A1AED;
+        //     border: 0;
+        //     border-radius: 24px;
+        //     cursor: pointer;
+        // }
 
         .saveButton {
             margin-bottom: 120px;
             letter-spacing: 0.05em;
         }
+
+
+        // Frank-----------------------------------
+        #image_uploads {
+            opacity: 0;
+        }
+
+        .mainImageUpload {
+            img {
+                height: 300px;
+            }
+        }
+
+        // Frank-----------------------------------
     }
 
 
@@ -356,6 +385,16 @@ h3 {
             }
         }
 
+        .dataFrameSlider {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+            padding: 8px 8px;
+            margin: 8px 0;
+        }
+
         .dataFrame {
             display: flex;
             justify-content: space-around;
@@ -365,24 +404,37 @@ h3 {
             margin: 8px 0;
 
             .dataLable {
-                width: 100%;
+                width: 70%;
                 font-size: 14px;
                 display: flex;
                 justify-content: flex-start;
                 color: #2d2d2d;
+                // border: 1px solid red;
             }
 
             .dataData {
                 width: 100%;
                 font-size: 16px;
                 display: flex;
+                flex-wrap: no-wrap;
                 justify-content: flex-end;
                 color: #413f3f;
+            }
+
+            .dataButton {
+                font-size: 16px;
+                display: flex;
+                justify-content: flex-end;
+                color: #ff5870;
+                border: 0;
+                cursor: pointer;
             }
 
             .colorHighlight {
                 color: #ff5870;
             }
+
+
         }
 
         .buttonLogout {
@@ -655,26 +707,26 @@ h3 {
             top: 0px;
             width: 100%;
             line-height: 0;
-        }  
+        }
 
-            // .dogName {
-            //     position: absolute;
-            //     bottom: 50px;
-            //     left: 16px;
-            //     font-size: 36px;
-            //     color: #fff;
-            //     text-shadow: 0 0 1px #333;
-            // }
+        // .dogName {
+        //     position: absolute;
+        //     bottom: 50px;
+        //     left: 16px;
+        //     font-size: 36px;
+        //     color: #fff;
+        //     text-shadow: 0 0 1px #333;
+        // }
 
-            // .distanceKM {
-            //     position: absolute;
-            //     bottom: 24px;
-            //     left: 16px;
-            //     font-size: 18px;
-            //     color: #fff;
-            //     text-shadow: 0 0 1px #333;
-            // }
-        
+        // .distanceKM {
+        //     position: absolute;
+        //     bottom: 24px;
+        //     left: 16px;
+        //     font-size: 18px;
+        //     color: #fff;
+        //     text-shadow: 0 0 1px #333;
+        // }
+
 
         // .dog-wrapper03 {
         //     position: absolute;
@@ -813,7 +865,7 @@ h3 {
 // ------------------------------------------------------------
 
 
-.likeList{
+.likeList {
     margin-top: 100px;
     width: 100%;
     display: grid;
@@ -821,14 +873,16 @@ h3 {
     gap: 32px;
     padding: 0 24px;
 
-    .likeCard{
+    .likeCard {
         box-shadow: 1px 1px 5px 3px #ccc;
         border-radius: 12px;
         line-height: 0;
-        img{
-        border-radius: 12px;
+
+        img {
+            border-radius: 12px;
         }
-        .likeDogname{
+
+        .likeDogname {
             position: relative;
             bottom: 12px;
             left: 12px;
@@ -839,48 +893,53 @@ h3 {
 }
 
 
-.matchMatch{
+.matchMatch {
     background-image: linear-gradient(0deg, #FF5870, #5A1AED);
     height: 100vh;
     color: #fff;
 
-    h1{
+    h1 {
         font-family: "PoppinsBold";
         color: #fff;
         font-size: 42px;
         text-align: center;
         padding-top: 200px;
     }
-    p{
+
+    p {
         text-align: center;
         font-size: 18px;
     }
-    .loveBox{
+
+    .loveBox {
         margin-top: 34px;
         display: flex;
         justify-content: center;
-        .likeDogleft{
+
+        .likeDogleft {
             width: 160px;
             position: relative;
-            left:8px;
-            img{
+            left: 8px;
+
+            img {
                 border-radius: 50%;
-                }
+            }
         }
 
-        .likeDogright{
+        .likeDogright {
             width: 160px;
             position: relative;
-            right:8px;
+            right: 8px;
             z-index: 2;
-            img{
+
+            img {
                 border-radius: 50%;
                 border: 4px solid #ff04f2;
-                }
+            }
         }
     }
 
-    .buttonMatchChat{
+    .buttonMatchChat {
         background: #fff;
         color: #FF5870;
         letter-spacing: 0.05em;
@@ -891,7 +950,8 @@ h3 {
         border-radius: 22px;
         cursor: pointer;
     }
-    .buttonMatchSwipe{
+
+    .buttonMatchSwipe {
         color: #fff;
         letter-spacing: 0.05em;
         text-align: center;
@@ -935,4 +995,31 @@ footer {
             }
         }
     }
+}
+
+// ------------------------------------------------------------
+//  D i e   CHAT - S E I T E  -- da muss Guido noch dran-------
+// ------------------------------------------------------------
+
+.chatList {
+    margin-top: 150px;
+    width: 100%;
+    padding: 0 24px;
+
+    li {
+        list-style: none;
+    }
+
+    .chatList-Item {
+        display: flex;
+
+        img {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin-right: 10px
+        }
+
+    }
+
 }

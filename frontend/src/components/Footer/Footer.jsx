@@ -14,12 +14,14 @@ const Footer = () => {
     const path = location.pathname;
 
     return (
-        <div className="nav">
-            <div><Link to="/home" ><img src={path === '/home' ? icoHomeActiv : icoHome} alt="home" /></Link></div>
-            <div><Link to="/like" ><img src={path === '/like' ? icoLikeActiv : icoLike} alt="like" /></Link></div>
-            <div><Link to="/chat" ><img src={path === '/chat' ? icoChatActiv : icoChat} alt="chat" /></Link></div>
-            <div><Link to="/profile" ><img src={path === '/profile' ? icoProfileActiv : icoProfile} alt="profile" /></Link></div>
-        </div>
+        <footer>
+            <div className="nav">
+                <div><Link to="/home" ><img src={path === '/home' ? icoHomeActiv : icoHome} alt="home" /></Link></div>
+                <div><Link to="/like" ><img src={path === '/like' ? icoLikeActiv : icoLike} alt="like" /></Link></div>
+                <div><Link to="/chat" ><img src={path === '/chat' ? icoChatActiv : icoChat} alt="chat" /></Link></div>
+                <div><Link to="/profile" ><img src={path === '/profile' ? icoProfileActiv : icoProfile} alt="profile" /></Link></div>
+            </div>
+        </footer>
     );
 }
 

@@ -1,11 +1,19 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import {
+    IconButton,
+    InputAdornment,
+    TextField
+} from '@mui/material'
+
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import Header from '../../components/Header/Header';
+import CustomButton from '../../components/CustomButton/CustuomButton';
 import apiBaseUrl from '../../api';
 
-
-import backarrow from '../../assets/icons/arrow-back.svg';
-
 const Login = (props) => {
+    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('layla@gmx.de');
     const [password, setPassword] = useState('Brille123!');
     const [error, setError] = useState('');
@@ -13,7 +21,7 @@ const Login = (props) => {
     const doLogin = async (e) => {
         e.preventDefault();
 
-        // prüfung ob login-felder leer sind
+        // TODO: prüfung ob login-felder leer sind
 
         try {
             const response = await fetch(apiBaseUrl + '/api/users/login', {
@@ -28,7 +36,7 @@ const Login = (props) => {
 
             // login was successfull
             if (!result.err) {
-                props.loginSuccess(result.token, result.profileImage)
+                props.loginSuccess(result.token, result.currentUser)
                 return
             }
 
@@ -42,25 +50,61 @@ const Login = (props) => {
 
             setError(result.err)
 
-
         } catch (error) {
             console.log("Error during login");
         }
-
     }
 
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     return (
         <div className="profile">
-            <div className="profile-header">
-                <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
-                <h2>Login</h2>
-            </div>
-            <form className='signup-box'>
-                <input type="email" name="email" placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" name="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Header headline={"Login"}></Header>
 
-                <button onClick={doLogin} type="submit">Login</button>
+            <form className='signup-box'>
+                <TextField
+                    id="email"
+                    label="Email Address"
+                    name='email'
+                    fullWidth
+                    margin="dense"
+                    size="small"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <TextField
+                    id="password"
+                    label='Password'
+                    name='password'
+                    fullWidth
+                    size="small"
+                    margin="dense"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+
+                <CustomButton clickHandler={doLogin} buttonText="Login"></CustomButton>
             </form>
             {error && <p className='errorText'>{error}</p>}
         </div>

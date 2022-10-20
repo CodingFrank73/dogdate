@@ -1,14 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import apiBaseUrl from "../../api"
+import { useNavigate } from 'react-router-dom';
+
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
+import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-
-//  BILDER-IMPORT
-import backarrow from '../../assets/icons/arrow-back.svg';
+import CustomButton from '../../components/CustomButton/CustuomButton';
+import apiBaseUrl from "../../api"
 
 const ProfileEditSettings = (props) => {
   const [dogName, setDogName] = useState('');
@@ -52,9 +52,10 @@ const ProfileEditSettings = (props) => {
       setError("Problem fetching user data - try again")
     }
   }
+
+
   const doUpdate = async (e) => {
     e.preventDefault();
-    console.log(props.token)
 
     const dataToUpdate = { userId, dogName, gender, dateOfBirth: new Date(dateOfBirth).toISOString(), size, email, phone }
 
@@ -67,7 +68,6 @@ const ProfileEditSettings = (props) => {
         },
         body: JSON.stringify(dataToUpdate)
       })
-      console.log("data from Json.stringify -", dataToUpdate)
 
       const result = await response.json()
 
@@ -88,63 +88,52 @@ const ProfileEditSettings = (props) => {
     }
   }
 
-  const doUpload = async (e) => {
-    e.preventDefault();
-    // console.log("TEST", bigImage)
+  // const doUpload = async (e) => {
+  //   e.preventDefault();
 
-    const formData = new FormData()
-    formData.set("bigImage", bigImage) ///kommt ich hier an???
+  //   const formData = new FormData()
+  //   formData.set("bigImage", bigImage) ///kommt ich hier an???
 
-    // console.log("TEST2", formData.entries())
+  //   try {
+  //     const response = await fetch(apiBaseUrl + '/api/users/myProfile/editBigImage', {
+  //       method: "POST",
+  //       headers: {
+  //         token: "JWT " + props.token
+  //       },
+  //       body: formData
+  //     })
+  //     const result = await response.json()
 
-    try {
-      const response = await fetch(apiBaseUrl + '/api/users/myProfile/editBigImage', {
-        method: "POST",
-        headers: {
-          token: "JWT " + props.token
-        },
-        body: formData
-      })
-      const result = await response.json()
+  //     if (!result.err) {
+  //       console.log("Hat geklappt..........");
 
-      if (!result.err) {
-        console.log("Hat geklappt..........");
+  //       return
+  //     }
 
-        return
-      }
-
-      if (result.err.validationErrors) {
-        const firstError = result.err.validationErrors[0];
-        setError(firstError.msg + ":" + firstError.param);
-        return
-      }
+  //     if (result.err.validationErrors) {
+  //       const firstError = result.err.validationErrors[0];
+  //       setError(firstError.msg + ":" + firstError.param);
+  //       return
+  //     }
 
 
-    } catch (error) {
-      console.log("error..............");
-    }
-
-
-  }
+  //   } catch (error) {
+  //     console.log("error..............");
+  //   }
+  // }
 
   return (
-
     <div className="profile">
-      <div className="profile-header">
-        <Link to="/profile" ><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
-        <h2>Edit</h2>
-
-      </div>
-
+      <Header headline={"Edit"} />
 
       <form className="signup-box">
         <h3>Account Settings</h3>
-        <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
-        <div><img src={bigImage} alt="BigImage" /></div>
-        {/* <div><img src={`/dogs/${dogName}.png`} alt="BigImage" /></div> */}
-        <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
-        <button onClick={doUpload} type="submit">Upload</button>
 
+        {/* <ProfileEditMainImage token={props.token} mainImage={bigImage} /> */}
+        <input type="text" name="dogName" value={dogName} onChange={(e) => setDogName(e.target.value)} />
+        {/* <div><img src={bigImage} alt="BigImage" /></div>
+        <input type="file" placeholder="Picture" onChange={(e) => setBigImage(e.target.files[0])} />
+        <button onClick={doUpload} type="submit">Upload</button> */}
 
         <div className="dataFrame">
           <div className="dataLable">
@@ -187,11 +176,12 @@ const ProfileEditSettings = (props) => {
         <input type="text" name="phone" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
         <button onClick={doUpdate} type="submit" className='saveButton'>SAVE</button>
+        <CustomButton buttonType="submit" buttonText="SIGN UP"></CustomButton>
       </form>
 
-      <footer>
-        <Footer />
-      </footer>
+
+      <Footer />
+
 
     </div>
   );
