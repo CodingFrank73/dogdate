@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId, ObjectID } = require("mongodb");
 const { getDB } = require("./db-connector");
 
 const collectionName = "users";
@@ -52,18 +52,22 @@ async function updateAvatar({ userId, profileImage }) {
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
     )
+
     return updatedUser
 }
 
-// TODO: Diese Funktion muss auf AWS angepasst werden......
-async function updateBigImage({ userId, bigImage }) {
+async function updateImageMain(userId, bigImage) {
     const db = await getDB();
-    const updatedUser = await db.collection(collectionName).updateOne(
+    const result = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { bigImage: bigImage } }
     )
-    return updatedUser
+    return result
 }
+
+
+
+
 
 // ++++++ Functions for the likes +++++++++++++
 // Hint: idUserA ist der User der einen anderen User geliked hat / idUserB ist der User der geliked wurde.
@@ -121,6 +125,20 @@ async function findByIdList(idList) {
     return usersWhoLikeMe
 }
 
+async function findByMatchList(matchList) {
+    const db = await getDB();
+    const ll = await db.collection(collectionName).aggregate([
+        { $match: { _id: { $in: matchList.map(item => ObjectId(item.fk_id)) } } },
+        {
+            $project: {
+                _id: 1,
+                dogName: 1,
+                profileImage: 1,
+            }
+        }]).toArray()
+    return ll
+}
+
 async function insertLike({ idUserA, idUserB }) {
     const db = await getDB();
     const like = await db.collection("likes").insertOne(
@@ -133,7 +151,7 @@ async function insertLike({ idUserA, idUserB }) {
     return like
 }
 
-async function updateLikeToMatch(idUserB, idUserA) {
+async function updateLikeToMatch(idUserB, idUserA, uuid) {
     const db = await getDB();
     const updatelike = await db.collection("likes").updateOne(
         { $and: [{ idUserA: new ObjectId(idUserA) }, { idUserB: new ObjectId(idUserB) }] },
@@ -142,26 +160,18 @@ async function updateLikeToMatch(idUserB, idUserA) {
 
     const updateUserOne = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(idUserA) },
+        { $push: { "match": { "fk_id": new ObjectId(idUserB), "chatID": uuid } } },
         { $push: { "match": new ObjectId(idUserB) } }
     );
 
     const updateUserTwo = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(idUserB) },
+        { $push: { "match": { "fk_id": new ObjectId(idUserA), "chatID": uuid } } },
         { $push: { "match": new ObjectId(idUserA) } }
     );
 
     return (true)
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -200,10 +210,39 @@ async function deleteUser(userId) {
     return insertResult
 }
 
+// TODO: Schauen was diese Funktion macht und ob notwendig oder ien überbleibsel
+async function joinC() {
+    const db = await getDB();
+    const jj = await db.collection("likes").aggregate([
+        {
+            $lookup: {
+                from: "users",
+                foreignField: "_id",
+                localField: "idUserA",
+                as: "copie"
+            }
+        },
+        {
+            $project:
+            {
+                idUserA: 1,
+                match: 1,
+                dogName: "$copie.dogName",
+                profileImage: "$copie.profileImage",
+            }
+        }
+    ]
+    ).toArray()
+    console.log("jj", jj);
+    return
+}
+
 module.exports = {
+    joinC,
     findAll,
     findById,
     findByIdList,
+    findByMatchList,
     findByEmail,
     findByIdForProfileImage,
     insert,
@@ -217,5 +256,5 @@ module.exports = {
     updateMaxDistance,
     updateAgeRange,
     deleteUser,
-    updateBigImage
+    updateImageMain
 }

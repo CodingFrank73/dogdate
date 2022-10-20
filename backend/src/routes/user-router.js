@@ -53,30 +53,104 @@ const upload = multer({
     }),
 });
 
-// userRouter.use(express.static('public'))
-
-userRouter.post('/upload',
-    upload.single('avatar'),
+// Route für den AWS Upload und das Speichern des Bildpfads in MongoDB. --- PROFILE IMAGE --- 
+userRouter.post('/myProfile/editImageProfile',
+    upload.single('image'),
     doAuthMiddleware,
     async (req, res) => {
 
         try {
-            const uploadedFile = req.file.location;
+            const s3FilePath = req.file.location;
             const userId = req.userClaims.sub;
 
             const user = await UserService.editAvatar({
                 userId: userId,
-                profileImage: uploadedFile
+                profileImage: s3FilePath
             })
 
             res.status(201).json(user)
 
         } catch (error) {
             console.log(error)
-            res.status(500).json({ err: error.message || "Error Updating Avatar." })
+            res.status(500).json({ err: error.message || "Error during updating ProfileImage" })
         }
-
     });
+
+// Route für den AWS Upload und das Speichern des Bildpfads in MongoDB. --- MAIN IMAGE --- 
+userRouter.post('/myProfile/editImageMain',
+    upload.single('image'),
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const s3FilePath = req.file.location;
+            const userId = req.userClaims.sub;
+
+            const user = await UserService.editImageMain({
+                userId: userId,
+                bigImage: s3FilePath
+            })
+
+            res.status(201).json(user)
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error during updating MainImage" })
+        }
+    });
+
+userRouter.put("/myProfile/profileEditSettings",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            // const userId = req.userClaims.sub;
+            const user = await UserService.editProfileSettings(req.body)
+
+            res.status(200).json({ user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Editing Profile Settings." })
+        }
+    })
+
+userRouter.put("/myProfile/editSettingsDiscovery",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+            const user = await UserService.editSettingsDiscovery(req.body)
+
+            res.status(200).json({ user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error Editing Profile Settings." })
+        }
+    })
+
+
+userRouter.delete("/myProfile/deleteAccount",
+    doAuthMiddleware,
+    async (req, res) => {
+
+        try {
+            const userId = req.userClaims.sub;
+            const user = await UserService.deleteAccountUser(userId)
+
+            res.status(200).json({ user })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ err: error.message || "Error deleting user account." })
+        }
+    })
+
+
+
+// ----------------------------------------------------------------------------------------------
 
 
 userRouter.get("/all",
@@ -119,55 +193,11 @@ userRouter.get("/myProfile",
         }
     })
 
-// TODO: Änderung möglicherweise bei Umstellung auf AWS notwendig
-userRouter.post("/myProfile/editAvatar",
-    avatarUploadMiddleware,
-    doAuthMiddleware,
-    async (req, res) => {
 
-        try {
-            const userId = req.userClaims.sub;
-            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-
-            const user = await UserService.editAvatar({
-                userId: userId,
-                profileImage: bigPicBas64
-            })
-
-            res.status(201).json(user)
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error Updating Avatar." })
-        }
-    })
-
-userRouter.post("/myProfile/editBigImage",
-    pictureUploadMiddleware,
-    doAuthMiddleware,
-    async (req, res) => {
-
-        try {
-            const userId = req.userClaims.sub;
-            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-
-            const user = await UserService.editBigImage({
-                userId: userId,
-                bigImage: bigPicBas64
-            })
-
-            res.status(201).json(user)
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error Updating Big Image." })
-        }
-    })
 
 userRouter.post("/login",
-    // body("email").isEmail(),
-    // body("password").isStrongPassword(),
-    // doValidation,
+    body("email").isEmail(),
+    doValidation,
     async (req, res) => {
 
         try {
@@ -188,9 +218,8 @@ userRouter.post("/login",
         }
     })
 
-
 userRouter.post("/register",
-    pictureUploadMiddleware,
+    upload.single('image'),
     body("dogName").isString().isLength({ min: 2, max: 20 }),
     body("email").isEmail(),
     body("password").isStrongPassword(),
@@ -198,7 +227,7 @@ userRouter.post("/register",
     async (req, res) => {
 
         try {
-            const bigPicBas64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            const s3FilePath = req.file.location;
             const user = await UserService.registerUser({
                 dogName: req.body.dogName,
                 password: req.body.password,
@@ -206,7 +235,7 @@ userRouter.post("/register",
                 gender: req.body.gender,
                 size: req.body.size,
                 dateOfBirth: new Date(req.body.dateOfBirth),
-                bigImage: bigPicBas64
+                bigImage: s3FilePath
             })
 
             res.status(201).json(user)
@@ -232,24 +261,7 @@ userRouter.post("/refreshtoken",
         }
     })
 
-
-
-userRouter.put("/myProfile/profileEditSettings",
-    doAuthMiddleware,
-    async (req, res) => {
-
-        try {
-            const userId = req.userClaims.sub;
-            const user = await UserService.editProfileSettings(req.body)
-
-            res.status(200).json({ user })
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error Editing Profile Settings." })
-        }
-    })
-
+// kann gelöscht werden
 userRouter.put("/myProfile/editLanguage",
     doAuthMiddleware,
     async (req, res) => {
@@ -269,6 +281,7 @@ userRouter.put("/myProfile/editLanguage",
         }
     })
 
+// kann gelöscht werden
 userRouter.put("/myProfile/editMaxDistance",
     doAuthMiddleware,
     async (req, res) => {
@@ -288,6 +301,7 @@ userRouter.put("/myProfile/editMaxDistance",
         }
     })
 
+// kann gelöscht werden
 userRouter.put("/myProfile/ageRange",
     doAuthMiddleware,
     async (req, res) => {
@@ -307,21 +321,7 @@ userRouter.put("/myProfile/ageRange",
         }
     })
 
-userRouter.delete("/myProfile/deleteAccount",
-    doAuthMiddleware,
-    async (req, res) => {
 
-        try {
-            const userId = req.userClaims.sub;
-            const user = await UserService.deleteAccountUser(userId)
-
-            res.status(200).json({ user })
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error deleting user account." })
-        }
-    })
 
 
 // ++++++++++++++++++++ Likes ++++++++++++++++++++++++++
@@ -378,19 +378,16 @@ userRouter.put("/likeToMatch",
             console.log(error)
             res.status(500).json({ err: error.message || "Error during updating likes and users." })
         }
-
     })
 
 
-// ++++++++++++++++++++ Matches ++++++++++++++++++++++++++
-
-userRouter.get("/showMatches",
+userRouter.get("/showChats",
     doAuthMiddleware,
     async (req, res) => {
 
         try {
             const userId = req.userClaims.sub;
-            const result = await UserService.listAllMatches(userId)
+            const result = await UserService.listAllChats(userId)
 
             res.status(200).json(result)
 
@@ -399,34 +396,6 @@ userRouter.get("/showMatches",
             res.status(500).json({ err: error.message || "Error during finding likes." })
         }
     })
-
-
-
-userRouter.post("/match",
-    doAuthMiddleware,
-    async (req, res) => {
-
-        try {
-            const response = await UserService.likeOneToo(
-                {
-                    myId: req.userClaims.sub,
-                    likedId: req.body.likedId
-                })
-
-            res.status(201).json(response)
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error during inserting likes." })
-        }
-    })
-
-
-
-// ++++++++++++++++++++ Upload-TO-S3-Bucket ++++++++++++++++++++++++++
-
-
-
 
 module.exports = {
     userRouter

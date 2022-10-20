@@ -15,7 +15,6 @@ const style = {
 
 const HomeFilter = (props) => {
 
-    console.log(props);
     return (
         <Modal
             open={props.isFilterScreenOpenend}

@@ -8,10 +8,13 @@ async function findAllExcept(id) {
     return users
 }
 
-async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match }) {
+async function findAllByFilter({ _id, postalCodeArr, maxDistance, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match }) {
     const db = await getDB();
 
-    const exIDs = [...match, _id].map(id => ObjectId(id.toString()))
+    const matchObj = match.map(a => a.fk_id)
+    const exIDs = [...matchObj, _id].map(id => ObjectId(id.toString()))
+    console.log("TCL: findAllByFilter -> exIDs", exIDs)
+
 
     const users = await db.collection("users").find(
         {
@@ -19,9 +22,11 @@ async function findAllByFilter({ _id, maxDistance, filterGender, filterSize, min
             dateOfBirth: { $lt: new Date(minAgeAsDate), $gte: new Date(maxAgeAsDate) },
             gender: { $in: filterGender },
             size: { $in: filterSize },
-            location: { $lte: maxDistance }
+            postalCode: { $in: postalCodeArr }
+            // location: { $lte: maxDistance }
         }).toArray();
 
+    console.log("Users in dao:", users);
     return users
 }
 

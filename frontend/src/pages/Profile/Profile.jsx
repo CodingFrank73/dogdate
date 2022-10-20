@@ -1,25 +1,14 @@
-
-import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Link } from 'react-router-dom';
+
 import AlertDialog from './AlertDelete';
-import languagesJson from "../../assets/data/languages"
-
-import Footer from '../../components/Footer/Footer';
-
-//  BILDER-IMPORT
-import backarrow from '../../assets/icons/arrow-back.svg';
-import iconpen from '../../assets/icons/pen.svg';
-
-import pic from '../../assets/img/shittingDogColor.png'
 
 import apiBaseUrl from "../../api"
-//Comment for Push - git
+import iconpen from '../../assets/icons/pen.svg';
+import pic from '../../assets/img/shittingDogColor.png'
+
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const Profile = (props) => {
 
@@ -34,24 +23,11 @@ const Profile = (props) => {
     const [plan, setPlan] = useState('');
     const [location, setLocation] = useState('');
     const [language, setLanguage] = useState('English');
-    const [filterGender, setFilterGender] = useState('');
+    const [filterGender, setFilterGender] = useState([]);
     const [filterSize, setFilterSize] = useState('');
     const [profileImage, setProfileImage] = useState('');
-
+    const [bigImage, setBigImage] = useState('');
     const [error, setError] = useState("")
-
-    const navigate = useNavigate()
-
-    const languages = [
-        { value: "English" },
-        { value: "French" },
-        { value: "Spanish" },
-        { value: "Chinese" },
-        { value: "Arabic" },
-        { value: "Portuguese" },
-        { value: "Japanese" },
-        { value: "German" },
-    ]
 
     useEffect(() => {
         fetchData()
@@ -68,6 +44,7 @@ const Profile = (props) => {
             const result = await response.json()
 
             setProfileImage(result.profileImage);
+            setBigImage(result.bigImage);
             setDogname(result.dogName)
             setGender(result.gender);
             setEmail(result.email)
@@ -76,8 +53,8 @@ const Profile = (props) => {
             setPhone(result.phone)
             setLocation(result.location);
             setLanguage(result.language);
-            setFilterGender(result.filterGender);
-            setFilterSize(result.filterSize);
+            setFilterGender(result.filterGender.join(", "));
+            setFilterSize(result.filterSize.join(", "));
             setPlan(result.plan)
             setAgeRange([result.ageRange[0], result.ageRange[1]])
             setMaxDistance(result.maxDistance)
@@ -87,134 +64,25 @@ const Profile = (props) => {
         }
     }
 
-
-    const handleChange = async (event, newValueAge) => {
-        if (newValueAge[0] === ageRange[0] && newValueAge[1] === ageRange[1]) {
-            return
-        }
-        setAgeRange(newValueAge);
-
-        try {
-            const response = await fetch(apiBaseUrl + '/api/users/myProfile/ageRange', {
-                method: "PUT",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify([newValueAge[0], newValueAge[1]])
-            })
-
-            const result = await response.json()
-
-            if (!result.err) {
-                console.log("success!!")
-
-                return
-            }
-
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
-
-        } catch (error) {
-            console.log("show me an error !!!!")
-        }
-    };
-
-
-    const handleChangeDistance = async (event, newValueDistance) => {
-        if (newValueDistance === maxDistance) {
-            return  //value not changed -> cancel
-        }
-
-        setMaxDistance(newValueDistance)
-
-        try {
-            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editMaxDistance', {
-                method: "PUT",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ maxDistance: newValueDistance })
-            })
-
-            const result = await response.json()
-
-            if (!result.err) {
-                console.log("success!!")
-
-                return
-            }
-
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
-
-        } catch (error) {
-            console.log("show me an error !!!!")
-        }
-    }
-
-
-    const changeLanguage = async (e) => {
-        const updatedLanguage = e.target.value
-        setLanguage(updatedLanguage)
-
-        try {
-            const response = await fetch(apiBaseUrl + '/api/users/myProfile/editLanguage', {
-                method: "PUT",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ language: updatedLanguage })
-            })
-
-            const result = await response.json()
-
-            if (!result.err) {
-                console.log("success!!")
-
-                return
-            }
-
-            if (result.err.validationErrors) {
-                const firstError = result.err.validationErrors[0]
-                setError(firstError.msg + ": " + firstError.param)
-                return
-            }
-
-        } catch (error) {
-            console.log("show me an error !!!!")
-        }
-    }
-
-
     const logout = () => {
         props.setToken(null)
         console.log("You are logged out")
     }
 
-
     return (
         <div className="profile">
-            <div className="profile-header">
+            <Header headline={"Profile"} />
 
-                <Link to={-1}>
-                    <img className="profile-arrow-back" src={backarrow} alt="back" />
-                </Link>
-                <h2>Profile</h2>
-            </div>
             <div className="profileBody">
                 <div className="profilePic">
                     <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
                     <div className="editProfilepic">
-                        <Link to="/profile/editProfileImage" >
+                        <Link to="/profile/editImages"
+                            state={{
+                                image: profileImage,
+                                pathToEndpoint: '/api/users/myProfile/editImageProfile',
+                                headerText: 'Profile Image'
+                            }}>
                             <img src={iconpen} alt="home" />
                         </Link>
                     </div>
@@ -222,63 +90,94 @@ const Profile = (props) => {
 
                 <div className="headlineFrame">
                     <h3>Account Settings</h3>
-                    <Link to="/profile/editSettings"><button className='headlineButton'>Edit</button></Link>
+                    <Link to="/profile/editSettings">
+                        <button className='headlineButton'>Edit</button>
+                    </Link>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Name </div>
                     <div className="dataData">{dogname}</div>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Gender </div>
                     <div className="dataData">{gender}</div>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Date Of Birth </div>
                     <div className="dataData">{dateOfBirth}</div>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Size</div>
                     <div className="dataData">{size}</div>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Email</div>
                     <div className="dataData">{email}</div>
                 </div>
+
                 <div className="dataFrame">
                     <div className="dataLable">Phone number</div>
                     <div className="dataData">{phone}</div>
                 </div>
 
+                <div className="headlineFrame">
+                    <h3>Image Settings</h3>
+                </div>
+
+                <div className="dataFrame">
+                    <div className="dataLable">Profile</div>
+                    <div className="dataData">
+                        <Link to="/profile/editImages"
+                            state={{
+                                image: profileImage,
+                                pathToEndpoint: '/api/users/myProfile/editImageProfile',
+                                headerText: 'Profile Image'
+                            }}>
+                            <button className='dataData dataButton'>Edit</button>
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="dataFrame">
+                    <div className="dataLable">Main</div>
+                    <div className="dataData">
+                        <Link to="/profile/editImages"
+                            state={{
+                                image: bigImage,
+                                pathToEndpoint: '/api/users/myProfile/editImageMain',
+                                headerText: 'Main Image'
+                            }}>
+                            <button className='dataData dataButton'>Edit</button>
+                        </Link>
+                    </div>
+                </div>
 
                 <h3>Plan Settings</h3>
                 <div className="dataFrame">
                     <div className="dataLable">Current Plan</div>
                     <div className="dataData colorHighlight">{plan}</div>
                 </div>
-                <h3>Discovery Settings</h3>
-                <div className="dataFrame">
-                    <div className="dataLable">Location</div>
-                    <div className="dataData colorHighlight"><Link to="">My Current Location</Link></div>
+
+                <div className="headlineFrame">
+                    <h3>Discovery Settings</h3>
+                    <Link to="/profile/editSettingsDiscovery">
+                        <button className='headlineButton'>Edit</button>
+                    </Link>
                 </div>
 
                 <div className="dataFrame">
-                    <div className="dataLable">
-                        <InputLabel id="labelLanguage"> Preferred Language</InputLabel></div>
-                    <div className="dataData">
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={language}
-                            label="PreferredLanguage"
-                            defaultValue={"English"}
-                            onChange={changeLanguage}
-                        >{languagesJson.map((singleLang) => {
-                            return (
-                                <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
-                            )
-                        })}
-                        </Select>
-                    </div>
+                    <div className="dataLable">Location</div>
+                    <div className="dataData">{location}</div>
+                </div>
+
+                <div className="dataFrame">
+                    <div className="dataLable">Language</div>
+                    <div className="dataData">{language}</div>
                 </div>
 
                 <div className="dataFrame">
@@ -290,44 +189,24 @@ const Profile = (props) => {
                     <div className="dataData">{filterSize}</div>
                 </div>
 
-                <Box >
-                    <div className="dataFrame">
-                        <p>Age Range</p>
-                        <Slider
-                            value={ageRange}
-                            onChangeCommitted={handleChange}
-                            valueLabelDisplay="on"
-                            min={0}
-                            max={20}
-                            step={1}
-                        />
-                    </div>
+                <div className="dataFrame">
+                    <div className="dataLable">Age Range</div>
+                    <div className="dataData">{ageRange[0]} to {ageRange[1]} years</div>
+                </div>
 
-                    <div className="dataFrame">
-                        <p>Maximum Distance</p>
-                        <Slider
-                            value={maxDistance}
-                            onChangeCommitted={handleChangeDistance}
-                            valueLabelDisplay="on"
-                            min={0}
-                            max={200}
-                            step={5}
-                        />
-                    </div>
-                </Box>
+                <div className="dataFrame">
+                    <div className="dataLable">Maximum Distance</div>
+                    <div className="dataData">{maxDistance} miles</div>
+                </div>
 
                 <button onClick={logout} className="buttonLogout">
                     Logout
                 </button>
 
                 <AlertDialog token={props.token} />
-
             </div >
 
-            <footer>
-                <Footer />
-            </footer>
-
+            <Footer />
 
         </div >
     );

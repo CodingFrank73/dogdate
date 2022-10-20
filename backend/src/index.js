@@ -61,7 +61,6 @@ const io = new Server(server, { //server initialization as io variable
 io.on("connection", (socket) => { //we listen on event with this id 
   console.log(`USER CONNECTED: ${socket.id}`);   // should be shown whenever frontend is refreshed - DOES NOT WORK!!!
 
-
   socket.on("join_room", (data) => { //data from frontend, like room id
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`); //socket.id is user id, data: data that has been sent from frontend

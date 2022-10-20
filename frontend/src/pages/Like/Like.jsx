@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import apiBaseUrl from "../../api"
 import LikeList from "./LikeList";
 
-import backarrow from '../../assets/icons/arrow-back.svg';
-
+import apiBaseUrl from "../../api"
 
 const Like = (props) => {
-
     const [likesArr, setLikesArr] = useState([])
 
     useEffect(() => {
@@ -33,24 +30,17 @@ const Like = (props) => {
     }
 
     return (
-        <div>
-            <div className="profile">
-                <div className="profile-header">
-                    <Link to={-1}><img className="profile-arrow-back" src={backarrow} alt="back" /></Link>
-                    <h2>Likes</h2>
-                </div>
+        <div className="profile">
+            <Header headline={"Like"}></Header>
 
-                <h3>{`${likesArr.length}`} Likes</h3>
-                <LikeList
-                    likesArr={likesArr}
-                    token={props.token}
-                    profileImage={props.profileImage}
-                />
+            <h3>{`${likesArr.length}`} Likes</h3>
+            <LikeList
+                likesArr={likesArr}
+                token={props.token}
+                profileImage={props.profileImage}
+            />
 
-                <footer>
-                    <Footer />
-                </footer>
-            </div>
+            <Footer />
         </div>
     );
 }

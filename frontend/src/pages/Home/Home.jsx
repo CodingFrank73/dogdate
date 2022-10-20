@@ -66,10 +66,11 @@ const Home = (props) => {
             })
 
             const data = await response.json();
-            // console.log("Suggestions with default filter for listOfUsers:", data.listOfUsers);
-            console.log("Suggestions with default filter for foundUser:", data.foundUser);
+            const sortTest = data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1);
+            console.log("Suggestions with default filter for foundUser:", sortTest);
 
-            setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
+            // setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
+            setSuggestions(data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1))
             setCurrentUser(data.foundUser);
             setFilteredGender(data.foundUser.filterGender);
             setFilteredAgeRange(data.foundUser.ageRange);
@@ -248,26 +249,13 @@ const Home = (props) => {
                     </div>
                 </div>
 
-
                 <div className="home-like-wrapper">
                     <div className="home-like-buttons">
                         <div className="home-dislike" onClick={() => swiped("left", "", "")}><img src={buttonDislike} alt="dislike" /> </div>
                         <div className="home-like"><img src={buttonLike} alt="like" /></div>
                     </div>
                 </div>
-
-                <footer>
-                    <Footer />
-                </footer>
             </div>
-
-            {/* <MatchScreen
-                IsModalOpenend={matchScreenIsOpen}
-                dogName={likeUserName}
-                profileImage={likeUserProfileImage}
-                myImage={currentUser.profileImage}
-                handleClose={e => setMatchScreenIsOpen(false)}
-            /> */}
 
             <HomeFilter
                 isFilterScreenOpenend={filterScreenIsOpen}
@@ -284,6 +272,8 @@ const Home = (props) => {
                 handleChangeDistance={handleChangeDistance}
                 handleClose={handleClose}
             />
+
+            <Footer />
         </div >
     );
 }

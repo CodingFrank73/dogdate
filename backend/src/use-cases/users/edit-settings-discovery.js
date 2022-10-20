@@ -1,7 +1,7 @@
 const { UserDAO } = require("../../db-access");
 const { makeUser } = require("../../domain/User");
 
-async function editProfileSettings({ userId, ...updatedInfo }) {
+async function editSettingsDiscovery({ userId, ...updatedInfo }) {
     console.log("UpdatedInfo from usecase", updatedInfo, "userId: ", userId)
 
     const foundUser = await UserDAO.findById(userId)
@@ -24,5 +24,5 @@ async function editProfileSettings({ userId, ...updatedInfo }) {
 
 
 module.exports = {
-    editProfileSettings
+    editSettingsDiscovery
 }
