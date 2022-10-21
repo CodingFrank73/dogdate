@@ -17,7 +17,7 @@ import ChatRoom from './pages/Chat/ChatRoom';
 
 import Profile from './pages/Profile/Profile';
 import EditImages from './pages/Profile/EditImages';
-import EditSettings from './pages/Profile/EditSettings'
+import EditSettings_Account from './pages/Profile/EditSettings_Account';
 import EditSettings_Discovery from "./pages/Profile/EditSettings_Discovery";
 
 
@@ -85,7 +85,7 @@ function AppRoutes() {
 
             <Route path="/profile/editSettings" element={
                 <AuthRequired token={token} setToken={setToken}>
-                    <EditSettings token={token} />
+                    <EditSettings_Account token={token} />
                 </AuthRequired>}
             />
 

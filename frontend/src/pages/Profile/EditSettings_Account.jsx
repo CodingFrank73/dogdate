@@ -19,7 +19,7 @@ import Footer from '../../components/Footer/Footer';
 import CustomButton from '../../components/CustomButton/CustuomButton';
 import apiBaseUrl from "../../api"
 
-const ProfileEditSettings = (props) => {
+const EditSettings_Account = (props) => {
 
   const [error, setError] = useState('');
   const { control, handleSubmit, setValue } = useForm()
@@ -240,4 +240,4 @@ const ProfileEditSettings = (props) => {
   );
 }
 
-export default ProfileEditSettings;
+export default EditSettings_Account;
