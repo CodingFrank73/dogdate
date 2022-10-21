@@ -49,7 +49,7 @@ const ProfileEditSettings = (props) => {
       setValue('phone', result.phone)
 
     } catch (error) {
-      console.log("error from catch", error)
+      // console.log("error from catch", error)
       setError("Problem fetching user data - try again")
     }
   }
@@ -69,7 +69,7 @@ const ProfileEditSettings = (props) => {
       const result = await response.json()
 
       if (!result.err) {
-        console.log("success!!")
+        // console.log("success!!")
         navigate(-1)
         return
       }
@@ -133,8 +133,8 @@ const ProfileEditSettings = (props) => {
                 value={value}
                 onChange={onChange}
               >
-                <MenuItem value='f'>Female</MenuItem>
-                <MenuItem value='m'>Male</MenuItem>
+                <MenuItem value='female'>Female</MenuItem>
+                <MenuItem value='male'>Male</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -154,9 +154,9 @@ const ProfileEditSettings = (props) => {
                 value={value}
                 onChange={onChange}
               >
-                <MenuItem value='s'>Small</MenuItem>
-                <MenuItem value='m'>Medium</MenuItem>
-                <MenuItem value='l'>Large</MenuItem>
+                <MenuItem value='small'>Small</MenuItem>
+                <MenuItem value='medium'>Medium</MenuItem>
+                <MenuItem value='large'>Large</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -167,7 +167,6 @@ const ProfileEditSettings = (props) => {
           control={control}
           defaultValue={null}
           render={({ field: { onChange, value } }) => (
-
             <FormControl fullWidth margin="normal">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
