@@ -65,15 +65,9 @@ async function updateImageMain(userId, bigImage) {
     return result
 }
 
-
-
-
-
 // ++++++ Functions for the likes +++++++++++++
 // Hint: idUserA ist der User der einen anderen User geliked hat / idUserB ist der User der geliked wurde.
 
-
-// find an l
 async function findLikeByUserIds({ idUserA, idUserB }) {
     const db = await getDB();
     const foundLike = await db.collection("likes").findOne(

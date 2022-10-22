@@ -14,7 +14,7 @@ import apiBaseUrl from '../../api';
 
 const Login = (props) => {
     const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState('layla@gmx.de');
+    const [email, setEmail] = useState('@gmx.de');
     const [password, setPassword] = useState('Brille123!');
     const [error, setError] = useState('');
 
@@ -65,7 +65,11 @@ const Login = (props) => {
 
     return (
         <div className="profile">
-            <Header headline={"Login"}></Header>
+
+            <div className="profile-header">
+                <Header headline={"Login"}></Header>
+            </div>
+
 
             <form className='signup-box'>
                 <TextField
@@ -104,7 +108,10 @@ const Login = (props) => {
                     }}
                 />
 
-                <CustomButton clickHandler={doLogin} buttonText="Login"></CustomButton>
+                <div className="customButton-save">
+                    <CustomButton clickHandler={doLogin} buttonText="Login"></CustomButton>
+                </div>
+
             </form>
             {error && <p className='errorText'>{error}</p>}
         </div>

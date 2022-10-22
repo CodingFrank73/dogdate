@@ -263,8 +263,9 @@ h3 {
     // ---------------------------------
     .signup-box {
         width: 90%;
-        padding-top: 140px;
-        margin: 0px 5% 0px 5%;
+        padding-top: 120px;
+        // Frank geändert: Ursprünglich => 0px 5% 0px 5%;
+        margin: 0px 5% 0px 3%;
 
         input,
         select {
@@ -308,6 +309,13 @@ h3 {
             letter-spacing: 0.05em;
         }
 
+        .customButton-save {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2vh;
+        }
+
 
         // Frank-----------------------------------
         #image_uploads {
@@ -318,6 +326,16 @@ h3 {
             img {
                 height: 300px;
             }
+        }
+
+        .dataFrameSlider {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border: 1px solid rgba(0, 0, 0, 0.245);
+            width: 100%;
+            padding: 10px 15px;
+            margin: 10px 0;
         }
 
         // Frank-----------------------------------
@@ -335,7 +353,8 @@ h3 {
 
     .profileBody {
         width: 90%;
-        margin: 0 5% 100px 5%;
+        // Frank geändert: Ursprünglich => 0px 5% 0px 5%;
+        margin: 0 5% 100px 3%;
 
         .profilePic {
             position: relative;
@@ -365,9 +384,10 @@ h3 {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            // Frank geändert: Ursprünglich => 100%;
+            width: 98%;
             padding: 8px 0px;
-            margin: 8px 0;
+            margin: 8px 0px;
 
             h2 {
                 width: 100%;
@@ -432,6 +452,10 @@ h3 {
 
             .colorHighlight {
                 color: #ff5870;
+            }
+
+            .colorHighlightGreen {
+                color: green;
             }
 
 

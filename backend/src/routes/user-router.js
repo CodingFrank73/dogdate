@@ -230,12 +230,14 @@ userRouter.post("/register",
             const s3FilePath = req.file.location;
             const user = await UserService.registerUser({
                 dogName: req.body.dogName,
+                location: req.body.location,
+                postalCode: req.body.postalCode,
                 password: req.body.password,
                 email: req.body.email,
                 gender: req.body.gender,
                 size: req.body.size,
                 dateOfBirth: new Date(req.body.dateOfBirth),
-                bigImage: s3FilePath
+                profileImage: s3FilePath
             })
 
             res.status(201).json(user)
@@ -262,64 +264,57 @@ userRouter.post("/refreshtoken",
     })
 
 // kann gelöscht werden
-userRouter.put("/myProfile/editLanguage",
-    doAuthMiddleware,
-    async (req, res) => {
+// userRouter.put("/myProfile/editLanguage",
+//     doAuthMiddleware,
+//     async (req, res) => {
 
-        try {
-            const userId = req.userClaims.sub;
-            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.language)
+//         try {
+//             const userId = req.userClaims.sub;
+//             const user = await UserService.editLanguage(userId, req.body.language)
 
-            const user = await UserService.editLanguage(userId, req.body.language)
+//             res.status(200).json({ user })
 
-            res.status(200).json({ user })
-            // console.log("res.json aus route: ", { user })
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error editing language." })
-        }
-    })
+//         } catch (error) {
+//             console.log(error)
+//             res.status(500).json({ err: error.message || "Error editing language." })
+//         }
+//     })
 
 // kann gelöscht werden
-userRouter.put("/myProfile/editMaxDistance",
-    doAuthMiddleware,
-    async (req, res) => {
+// userRouter.put("/myProfile/editMaxDistance",
+//     doAuthMiddleware,
+//     async (req, res) => {
 
-        try {
-            const userId = req.userClaims.sub;
-            // console.log("userId aus router userClaims: " + userId, "req.body aus router:", req.body.maxDistance)
+//         try {
+//             const userId = req.userClaims.sub;
+//             const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
 
-            const user = await UserService.editMaxDistance(userId, req.body.maxDistance) //##
+//             res.status(200).json({ user })
+//             // console.log("res.json aus route: ", { user })
 
-            res.status(200).json({ user })
-            // console.log("res.json aus route: ", { user })
-
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error editing max distance." })
-        }
-    })
+//         } catch (error) {
+//             console.log(error)
+//             res.status(500).json({ err: error.message || "Error editing max distance." })
+//         }
+//     })
 
 // kann gelöscht werden
-userRouter.put("/myProfile/ageRange",
-    doAuthMiddleware,
-    async (req, res) => {
+// userRouter.put("/myProfile/ageRange",
+//     doAuthMiddleware,
+//     async (req, res) => {
 
-        try {
-            const userId = req.userClaims.sub;
-            const ageRangeArr = req.body;
-            // console.log("TEST AgeRangeArr in Route ", ageRangeArr);
-            const user = await UserService.editAgeRange(userId, ageRangeArr)
+//         try {
+//             const userId = req.userClaims.sub;
+//             const ageRangeArr = req.body;
+//             const user = await UserService.editAgeRange(userId, ageRangeArr)
 
-            res.status(200).json({ user })
-            //console.log("res.json aus route: ", { user })
+//             res.status(200).json({ user })
 
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ err: error.message || "Error editing age range." })
-        }
-    })
+//         } catch (error) {
+//             console.log(error)
+//             res.status(500).json({ err: error.message || "Error editing age range." })
+//         }
+//     })
 
 
 

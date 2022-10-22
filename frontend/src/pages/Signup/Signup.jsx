@@ -20,6 +20,7 @@ import {
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 
 import CustomButton from '../../components/CustomButton/CustuomButton';
 import Header from "../../components/Header/Header";
@@ -32,13 +33,14 @@ const Signup = () => {
     const navigate = useNavigate();
     const timerRef = useRef(null)
 
-    const { handleSubmit, control } = useForm();
+    const { handleSubmit, control, setValue } = useForm();
 
     const [showPassword, setShowPassword] = useState(false);
     const [image, setImage] = useState(null);
     const [imageForUpload, setImageForUpload] = useState('')
     const [success, setSuccess] = useState("")
     const [error, setError] = useState('');
+    const [labelMessage, setLabelMessage] = useState("Location");
 
     let successText = `A very warm welcome to the DogDate community! We will now direct you to the login section - please sign in with your credentials and enjoy using Dogdate!`;
 
@@ -54,6 +56,8 @@ const Signup = () => {
             const formData = new FormData()
 
             formData.append("dogName", data.dogName)
+            formData.append("location", data.location)
+            formData.append("postalCode", data.postalCode)
             formData.set("gender", data.gender)
             formData.set("size", data.size)
             formData.set("dateOfBirth", data.dateOfBirth)
@@ -112,6 +116,32 @@ const Signup = () => {
         event.preventDefault();
     };
 
+    const handleClickLocationSearch = () => {
+        setLabelMessage("find current Location...")
+        navigator.geolocation.getCurrentPosition(cbSuccess, cbError)
+    }
+
+    async function cbSuccess(position) {
+        const {
+            latitude,
+            longitude
+        } = position.coords;
+
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat=${latitude}&lon=${longitude}`)
+
+        const result = await response.json()
+        setLabelMessage("Location")
+        setValue('location', result.features[0].properties.geocoding.city)
+        setValue('postalCode', result.features[0].properties.geocoding.postcode)
+        console.log(result);
+
+    }
+
+    function cbError() {
+        setLabelMessage("Location")
+        console.log("onError worked...");
+    }
+
     return (
         <div className="profile">
             <Header headline={"Sign Up"} />
@@ -122,7 +152,7 @@ const Signup = () => {
                     control={control}
                     defaultValue=''
                     rules={{
-                        required: "Your Name is required!",
+                        required: "Your Name is required",
                         minLength: { value: 2, message: 'Your Name should be 2-20 characters!' },
                         maxLength: { value: 20, message: 'Your Name should be 2-20 characters!' }
                     }}
@@ -143,11 +173,49 @@ const Signup = () => {
                 />
 
                 <Controller
+                    name='location'
+                    control={control}
+                    defaultValue=''
+                    rules={{
+                        required: 'Location is required',
+                    }}
+                    render={({ field: { onChange, focus, value }, fieldState: { error } }) => (
+                        <TextField
+                            id="loaction"
+                            label={labelMessage}
+                            name='location'
+                            fullWidth
+                            size="small"
+                            margin="dense"
+                            disabled
+                            value={value}
+
+                            onBlur={() => console.log("Hallo")}
+                            onChange={onChange}
+                            error={!!error}
+                            helperText={error ? error.message : null}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            onClick={handleClickLocationSearch}
+                                            edge="end"
+                                        >
+                                            <LocationSearchingIcon />
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+                    )}
+                />
+
+                <Controller
                     name='gender'
                     control={control}
                     defaultValue=''
                     render={({ field: { onChange, value } }) => (
-                        <FormControl fullWidth margin="normal" size="small">
+                        <FormControl fullWidth margin="dense" size="small">
                             <InputLabel id="gender">Gender</InputLabel>
                             <Select
                                 id="gender"
@@ -156,8 +224,8 @@ const Signup = () => {
                                 value={value}
                                 onChange={onChange}
                             >
-                                <MenuItem value='f'>Female</MenuItem>
-                                <MenuItem value='m'>Male</MenuItem>
+                                <MenuItem value='female'>Female</MenuItem>
+                                <MenuItem value='male'>Male</MenuItem>
                             </Select>
                         </FormControl>
                     )}
@@ -177,9 +245,9 @@ const Signup = () => {
                                 value={value}
                                 onChange={onChange}
                             >
-                                <MenuItem value='s'>Small</MenuItem>
-                                <MenuItem value='m'>Medium</MenuItem>
-                                <MenuItem value='l'>Large</MenuItem>
+                                <MenuItem value='small'>Small</MenuItem>
+                                <MenuItem value='medium'>Medium</MenuItem>
+                                <MenuItem value='large'>Large</MenuItem>
                             </Select>
                         </FormControl>
                     )}
@@ -191,7 +259,7 @@ const Signup = () => {
                     defaultValue={null}
                     render={({ field: { onChange, value } }) => (
 
-                        <FormControl fullWidth margin="normal">
+                        <FormControl fullWidth margin="dense">
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                     id='dateOfBirth'
@@ -215,7 +283,7 @@ const Signup = () => {
                     control={control}
                     defaultValue=''
                     rules={{
-                        required: 'Email address is required!',
+                        required: 'Email address is required',
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                             message: "invalid email address"
@@ -279,16 +347,21 @@ const Signup = () => {
                     )}
                 />
 
-                <Box mt={2}>
+                <Box mt={1}>
                     <div className="mainImageUpload">
                         <label htmlFor="image_uploads"><img src={image !== null ? image : defaultImage} alt="mainImage" /></label>
-                        <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" onChange={(e) => handleImage(e)} />
+
+                        <div className="customButton-save">
+                            <CustomButton buttonType="submit" buttonText="SIGN UP"></CustomButton>
+                        </div>
+
+                        <input className="teste" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" onChange={(e) => handleImage(e)} />
                     </div>
                 </Box>
 
                 {error && <p>{error}</p>}
 
-                <CustomButton buttonType="submit" buttonText="SIGN UP"></CustomButton>
+
             </form >
 
             {success && <p className="successText">{success}</p>}

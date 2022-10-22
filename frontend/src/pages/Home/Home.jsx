@@ -66,11 +66,9 @@ const Home = (props) => {
             })
 
             const data = await response.json();
-            const sortTest = data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1);
-            console.log("Suggestions with default filter for foundUser:", sortTest);
 
-            // setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
-            setSuggestions(data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1))
+            setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
+            // setSuggestions(data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1))
             setCurrentUser(data.foundUser);
             setFilteredGender(data.foundUser.filterGender);
             setFilteredAgeRange(data.foundUser.ageRange);
@@ -91,7 +89,14 @@ const Home = (props) => {
                     token: "JWT " + props.token,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ageRange: filteredAgeRange, maxDistance: filteredMaxDistance, gender: filteredGender, size: filteredSize, match: matches })
+                body: JSON.stringify({
+                    ageRange: filteredAgeRange,
+                    postalCode: currentUser.postalCode,
+                    maxDistance: filteredMaxDistance,
+                    gender: filteredGender,
+                    size: filteredSize,
+                    match: matches
+                })
             })
 
             const data = await response.json()
@@ -149,11 +154,11 @@ const Home = (props) => {
 
     const handleChangeSizeS = async (event) => {
         if (!isSizeSClicked) {
-            setFilteredSize([...filteredSize, "s"])
+            setFilteredSize([...filteredSize, "small"])
             setIsSizeSClicked(true)
             document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
         } else {
-            const result = filteredSize.filter(size => size !== "s")
+            const result = filteredSize.filter(size => size !== "small")
             setFilteredSize(result)
             setIsSizeSClicked(false)
             document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
@@ -162,11 +167,11 @@ const Home = (props) => {
 
     const handleChangeSizeM = async (event) => {
         if (!isSizeMClicked) {
-            setFilteredSize([...filteredSize, "m"])
+            setFilteredSize([...filteredSize, "medium"])
             setIsSizeMClicked(true)
             document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
         } else {
-            const result = filteredSize.filter(size => size !== "m")
+            const result = filteredSize.filter(size => size !== "medium")
             setFilteredSize(result)
             setIsSizeMClicked(false)
             document.getElementById("sizeMiddle").classList.toogle("sizeMiddle-aktiv")
@@ -175,11 +180,11 @@ const Home = (props) => {
 
     const handleChangeSizeL = async (event) => {
         if (!isSizeLClicked) {
-            setFilteredSize([...filteredSize, "l"])
+            setFilteredSize([...filteredSize, "large"])
             setIsSizeLClicked(true)
             document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
         } else {
-            const result = filteredSize.filter(size => size !== "l")
+            const result = filteredSize.filter(size => size !== "large")
             setFilteredSize(result)
             setIsSizeLClicked(false)
             document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
@@ -242,19 +247,19 @@ const Home = (props) => {
                                 <div className='card'>
                                     <img src={character.bigImage} alt="dog pic" />
                                     <div className="dogName">{character.dogName}, {character.age}</div>
-                                    <div className="distanceKM">{character.location} km</div>
+                                    <div className="distanceKM">{character.distance} km</div>
                                 </div>
                             </TinderCard>
                         )}
                     </div>
                 </div>
 
-                <div className="home-like-wrapper">
+                {/* <div className="home-like-wrapper">
                     <div className="home-like-buttons">
                         <div className="home-dislike" onClick={() => swiped("left", "", "")}><img src={buttonDislike} alt="dislike" /> </div>
                         <div className="home-like"><img src={buttonLike} alt="like" /></div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <HomeFilter

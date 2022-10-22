@@ -124,7 +124,7 @@ const EditSettings_Account = (props) => {
           control={control}
           defaultValue=''
           render={({ field: { onChange, value } }) => (
-            <FormControl fullWidth margin="normal" size="small">
+            <FormControl fullWidth margin="dense" size="small">
               <InputLabel id="gender">Gender</InputLabel>
               <Select
                 id="gender"
@@ -133,8 +133,8 @@ const EditSettings_Account = (props) => {
                 value={value}
                 onChange={onChange}
               >
-                <MenuItem value='female'>Female</MenuItem>
-                <MenuItem value='male'>Male</MenuItem>
+                <MenuItem value='female'>female</MenuItem>
+                <MenuItem value='male'>male</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -154,9 +154,9 @@ const EditSettings_Account = (props) => {
                 value={value}
                 onChange={onChange}
               >
-                <MenuItem value='small'>Small</MenuItem>
-                <MenuItem value='medium'>Medium</MenuItem>
-                <MenuItem value='large'>Large</MenuItem>
+                <MenuItem value='small'>small</MenuItem>
+                <MenuItem value='medium'>medium</MenuItem>
+                <MenuItem value='large'>large</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -167,7 +167,7 @@ const EditSettings_Account = (props) => {
           control={control}
           defaultValue={null}
           render={({ field: { onChange, value } }) => (
-            <FormControl fullWidth margin="normal">
+            <FormControl fullWidth margin="dense">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   id='dateOfBirth'
@@ -231,11 +231,13 @@ const EditSettings_Account = (props) => {
           )}
         />
 
-        <CustomButton buttonType="submit" buttonText="Save"></CustomButton>
+        <div className="customButton-save">
+          <CustomButton buttonType="submit" buttonText="Save"></CustomButton>
+        </div>
+
       </form>
 
       <Footer />
-
     </div>
   );
 }

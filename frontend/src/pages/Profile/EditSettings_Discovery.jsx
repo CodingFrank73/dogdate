@@ -160,155 +160,154 @@ const EditSettings_Discovery = (props) => {
     <div className="profile">
       <Header headline={"Edit"} />
 
-      <div className="profileBody">
-        <form className="signup-box" onSubmit={handleSubmit(onSubmit)}>
-          <h3>Discovery Settings</h3>
+      {/* <div className="profileBody"> */}
+      <form className="signup-box" onSubmit={handleSubmit(onSubmit)}>
+        <h3>Discovery Settings</h3>
 
-          <Controller
-            name='location'
-            control={control}
-            defaultValue=''
-            // rules={{
-            //   required: 'Password is required',
-            //   minLength: { value: 8, message: 'Password must have at least 8 characters' },
-            //   pattern: {
-            //     value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$/,
-            //     message: "test"
-            //   }
-            // }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                id="loaction"
-                label={labelMessage}
-                name='location'
-                fullWidth
-                size="small"
-                margin="dense"
+        <Controller
+          name='location'
+          control={control}
+          defaultValue=''
+          rules={{
+            required: 'Location is required',
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+              id="loaction"
+              label={labelMessage}
+              name='location'
+              fullWidth
+              size="small"
+              margin="dense"
+              value={value}
+              onChange={onChange}
+              error={!!error}
+              helperText={error ? error.message : null}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickLocationSearch}
+                      edge="end"
+                    >
+                      <LocationSearchingIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+          )}
+        />
+
+        <Controller
+          name='language'
+          control={control}
+          defaultValue=''
+          render={({ field: { onChange, value } }) => (
+            <FormControl fullWidth margin="dense" size="small">
+              <InputLabel id="language">Language</InputLabel>
+              <Select
+                id="language"
+                label="Language"
+                name='language'
                 value={value}
                 onChange={onChange}
-                error={!!error}
-                helperText={error ? error.message : null}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleClickLocationSearch}
-                        edge="end"
-                      >
-                        <LocationSearchingIcon />
-                      </IconButton>
-                    </InputAdornment>
+              >
+                {languagesJson.map((singleLang) => {
+                  return (
+                    <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
                   )
-                }}
-              />
-            )}
-          />
+                })}
+              </Select>
+            </FormControl>
+          )}
+        />
 
-          <Controller
-            name='language'
-            control={control}
-            defaultValue=''
-            render={({ field: { onChange, value } }) => (
-              <FormControl fullWidth margin="normal" size="small">
-                <InputLabel id="language">Language</InputLabel>
-                <Select
-                  id="language"
-                  label="Language"
-                  name='language'
-                  value={value}
-                  onChange={onChange}
-                >
-                  {languagesJson.map((singleLang) => {
-                    return (
-                      <MenuItem key={singleLang.code} value={singleLang.name}>{singleLang.name}</MenuItem>
-                    )
-                  })}
-                </Select>
-              </FormControl>
-            )}
-          />
+        <Controller
+          name='filterGender'
+          control={control}
+          defaultValue={['female', 'male']}
+          render={({ field: { onChange, value } }) => (
+            <FormControl fullWidth margin="dense" size="small">
+              <InputLabel id="showGenderLabel">Show me</InputLabel>
+              <Select
+                id="filterGender"
+                multiple
+                name='filterGender'
+                value={value}
+                onChange={onChange}
+                input={<OutlinedInput id="select-multiple-chip" label="Show me" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={MenuProps}
+              >
+                {genders.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, selections, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
 
-          <Controller
-            name='filterGender'
-            control={control}
-            defaultValue={['female', 'male']}
-            render={({ field: { onChange, value } }) => (
-              <FormControl fullWidth margin="normal" size="small">
-                <InputLabel id="showGenderLabel">Show me</InputLabel>
-                <Select
-                  id="filterGender"
-                  multiple
-                  name='filterGender'
-                  value={value}
-                  onChange={onChange}
-                  input={<OutlinedInput id="select-multiple-chip" label="Show me" />}
-                  renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={MenuProps}
-                >
-                  {genders.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, selections, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            )}
-          />
+        <Controller
+          name='filterSize'
+          control={control}
+          defaultValue={[]}
+          render={({ field: { onChange, value } }) => (
+            <FormControl fullWidth margin='dense' size='small'>
+              <InputLabel id='size'>Size</InputLabel>
+              <Select
+                id='filterSize'
+                multiple
+                name='filterSize'
+                value={value}
+                onChange={onChange}
+                input={<OutlinedInput id="select-multiple" label="Size" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+                MenuProps={MenuProps}
+              >
+                {sizes.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, selections, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
 
-          <Controller
-            name='filterSize'
-            control={control}
-            defaultValue={[]}
-            render={({ field: { onChange, value } }) => (
-              <FormControl fullWidth margin='dense' size='small'>
-                <InputLabel id='size'>Size</InputLabel>
-                <Select
-                  id='filterSize'
-                  multiple
-                  name='filterSize'
-                  value={value}
-                  onChange={onChange}
-                  input={<OutlinedInput id="select-multiple" label="Size" />}
-                  renderValue={(selected) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={MenuProps}
-                >
-                  {sizes.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, selections, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            )}
-          />
-
-          <div className="dataFrameSlider">
-            <label>Maximum Distance</label>
+        <div className="dataFrameSlider">
+          <label>Maximum Distance</label>
+          <Box
+            sx={{ mb: 3 }}>
             <Controller
               name="maxDistance"
               control={control}
               defaultValue={15}
+
               render={({ field: { onChange, value } }) => (
+
                 <Slider
                   id='maxDistance'
                   name='maxDistance'
@@ -323,34 +322,37 @@ const EditSettings_Discovery = (props) => {
                 />
               )}
             />
+          </Box>
 
-            <label>Age Range</label>
-            <Controller
-              name="ageRange"
-              control={control}
-              defaultValue={[0, 20]}
-              render={({ field: { onChange, value } }) => (
-                <Slider
-                  id='ageRange'
-                  name='ageRange'
-                  value={value}
-                  onChange={onChange}
-                  size='small'
-                  valueLabelDisplay="auto"
-                  min={0}
-                  max={20}
-                  step={1}
-                  marks={marksAge}
-                />
-              )}
-            />
-          </div>
 
+          <label>Age Range</label>
+          <Controller
+            name="ageRange"
+            control={control}
+            defaultValue={[0, 20]}
+            render={({ field: { onChange, value } }) => (
+              <Slider
+                id='ageRange'
+                name='ageRange'
+                value={value}
+                onChange={onChange}
+                size='small'
+                valueLabelDisplay="auto"
+                min={0}
+                max={20}
+                step={1}
+                marks={marksAge}
+              />
+            )}
+          />
+        </div>
+
+        <div className="customButton-save">
           <CustomButton buttonType="submit" buttonText="Save"></CustomButton>
-        </form>
+        </div>
+      </form>
 
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

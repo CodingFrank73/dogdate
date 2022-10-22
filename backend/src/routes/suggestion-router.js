@@ -1,11 +1,6 @@
 const express = require("express");
-const multer = require("multer");
-const { body } = require("express-validator");
-
 const { SuggestionService } = require("../use-cases");
 const { doAuthMiddleware } = require("../auth/auth-middleware");
-const { doValidation } = require("../facade/doValidation");
-const { imageBufferToBase64 } = require("../utils/converter");
 
 const suggestionRouter = express.Router();
 
@@ -15,7 +10,7 @@ suggestionRouter.get("/all",
 
         try {
             const users = await SuggestionService.listAllSuggestion({
-                id: req.body.id
+                id: req.userClaims.sub
             })
 
             res.status(200).json(users);
@@ -50,6 +45,7 @@ suggestionRouter.post("/withTempFilter",
                 _id: req.userClaims.sub,
                 match: req.body.match,
                 ageRange: req.body.ageRange,
+                postalCode: req.body.postalCode,
                 maxDistance: req.body.maxDistance,
                 filterGender: req.body.gender,
                 filterSize: req.body.size

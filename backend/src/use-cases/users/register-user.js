@@ -3,7 +3,7 @@ const { makeUser } = require("../../domain/User");
 
 const Sercurity = require("../../utils/security");
 
-async function registerUser({ email, password, dogName, gender, dateOfBirth, size, bigImage }) {
+async function registerUser({ email, password, dogName, location, postalCode, gender, dateOfBirth, size, profileImage }) {
 
     const foundUser = await UserDAO.findByEmail(email)
 
@@ -16,7 +16,7 @@ async function registerUser({ email, password, dogName, gender, dateOfBirth, siz
     const pwHash = Sercurity.createHashedPasswort(password, salt);
     const verifyCode = Sercurity.generateRandomSixDigitCode();
 
-    const user = await makeUser({ dogName, email, pwHash, salt, gender, dateOfBirth, size, bigImage, sixDigitVerificationCode: verifyCode });
+    const user = await makeUser({ dogName, location, postalCode, email, pwHash, salt, gender, dateOfBirth, size, profileImage, sixDigitVerificationCode: verifyCode });
 
     const insertResult = await UserDAO.insert(user);
 

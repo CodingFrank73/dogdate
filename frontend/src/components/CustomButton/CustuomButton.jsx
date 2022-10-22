@@ -22,7 +22,8 @@ const CustomButton = (props) => {
                             lg: 400, // theme.breakpoints.up('lg')
                             xl: 500 // theme.breakpoints.up('xl')
                         },
-                        m: 4,
+                        // mt: 2,
+                        // ml: 3,
                         backgroundColor: '#5A1AED',
                         borderRadius: '24px',
                     }

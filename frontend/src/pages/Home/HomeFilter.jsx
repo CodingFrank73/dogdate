@@ -26,13 +26,13 @@ const HomeFilter = (props) => {
                 <div className="dataFrame">
                     <p>Gender</p>
                     <div className="optionBox">
-                        {props.filteredGender.includes("f") ?
+                        {props.filteredGender.includes("female") ?
                             <div id="genderLeft" className="genderLeft genderLeft-aktiv" onClick={props.handleChangeGenderF}>Female</div>
                             :
                             <div id="genderLeft" className="genderLeft" onClick={props.handleChangeGenderF}>Female</div>
                         }
 
-                        {props.filteredGender.includes("m") ?
+                        {props.filteredGender.includes("male") ?
                             <div id="genderRight" className="genderRight genderRight-aktiv" onClick={props.handleChangeGenderM}>Male</div>
                             :
                             <div id="genderRight" className="genderRight" onClick={props.handleChangeGenderM}>Male</div>
@@ -55,17 +55,17 @@ const HomeFilter = (props) => {
                 <div className="dataFrame">
                     <p>Size</p>
                     <div className="optionBox">
-                        {props.filteredSize.includes("s") ?
+                        {props.filteredSize.includes("small") ?
                             <div id="sizeSmall" className="sizeSmall sizeSmall-aktiv" onClick={props.handleChangeSizeS}>S</div>
                             : <div id="sizeSmall" className="sizeSmall" onClick={props.handleChangeSizeS}>S</div>
                         }
 
-                        {props.filteredSize.includes("m") ?
+                        {props.filteredSize.includes("medium") ?
                             < div id="sizeMiddle" className="sizeMiddle sizeMiddle-aktiv" onClick={props.handleChangeSizeM} > M</div>
                             : <div id="sizeMiddle" className="sizeMiddle" onClick={props.handleChangeSizeM}>M</div>
                         }
 
-                        {props.filteredSize.includes("l") ?
+                        {props.filteredSize.includes("large") ?
                             <div id="sizeLarge" className="sizeLarge sizeLarge-aktiv" onClick={props.handleChangeSizeL}>L</div>
                             : <div id="sizeLarge" className="sizeLarge" onClick={props.handleChangeSizeL}>L</div>
                         }
@@ -79,7 +79,7 @@ const HomeFilter = (props) => {
                         onChangeCommitted={props.handleChangeDistance}
                         valueLabelDisplay="on"
                         min={0}
-                        max={200}
+                        max={30}
                         step={5}
                     />
                 </div>

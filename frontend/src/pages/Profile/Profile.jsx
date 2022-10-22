@@ -30,9 +30,17 @@ const Profile = (props) => {
     const [error, setError] = useState("")
 
     useEffect(() => {
+        scrollToTop();
         fetchData()
             .then(console.log())
     }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
 
     const fetchData = async () => {
         try {
@@ -160,7 +168,7 @@ const Profile = (props) => {
                 <h3>Plan Settings</h3>
                 <div className="dataFrame">
                     <div className="dataLable">Current Plan</div>
-                    <div className="dataData colorHighlight">{plan}</div>
+                    <div className="dataData colorHighlightGreen">{plan}</div>
                 </div>
 
                 <div className="headlineFrame">
