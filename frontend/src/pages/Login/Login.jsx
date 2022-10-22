@@ -66,9 +66,9 @@ const Login = (props) => {
     return (
         <div className="profile">
 
-            <div className="profile-header">
-                <Header headline={"Login"}></Header>
-            </div>
+            {/* <div className="profile-header"> */}
+            <Header headline={"Login"}></Header>
+            {/* </div> */}
 
 
             <form className='signup-box'>
