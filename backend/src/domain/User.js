@@ -19,7 +19,8 @@ function makeUser({
     filterSize = ["small", "medium", "large"],
     ageRange = [0, 20],
     maxDistance = 30,
-    match = []
+    match = [],
+    pastLikes = []
 }) {
 
     if (typeof dogName !== "string" || dogName.trim().length === 0) {
@@ -55,7 +56,8 @@ function makeUser({
         filterSize,
         ageRange,
         maxDistance,
-        match
+        match,
+        pastLikes
     }
 }
 

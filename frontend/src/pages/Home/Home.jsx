@@ -4,7 +4,7 @@ import TinderCard from 'react-tinder-card';
 
 import "./Card.css"
 import Footer from "../../components/Footer/Footer";
-import HomeFilter from "./HomeFilter";
+import Filter from "./Filter";
 
 import ddLogo from '../../assets/icons/logo.svg';
 import filter from '../../assets/icons/filter.svg';
@@ -20,11 +20,6 @@ const Home = (props) => {
     const [filteredMaxDistance, setFilteredMaxDistance] = useState(0);
     const [filteredSize, setFilteredSize] = useState([]);
     const [filteredGender, setFilteredGender] = useState([]);
-    const [isGenderMClicked, setIsGenderMClicked] = useState(false);
-    const [isGenderFClicked, setIsGenderFClicked] = useState(false);
-    const [isSizeSClicked, setIsSizeSClicked] = useState(false);
-    const [isSizeMClicked, setIsSizeMClicked] = useState(false);
-    const [isSizeLClicked, setIsSizeLClicked] = useState(false);
     const [matches, setMatches] = useState([]);
     const [error, setError] = useState('');
 
@@ -41,7 +36,7 @@ const Home = (props) => {
         setLastDirection(direction)
 
         if (direction === "right") {
-            doLike(swipedId, dogName, profileImage)
+            handleLike(swipedId, dogName, profileImage)
 
         } else {
             // console.log("Kein like");
@@ -59,7 +54,7 @@ const Home = (props) => {
 
     const fetchSuggestions = async () => {
         try {
-            const response = await fetch(apiBaseUrl + `/api/suggestion/allwithfilter`, {
+            const response = await fetch(apiBaseUrl + `/api/suggestion/getSuggestionsByFilter`, {
                 headers: {
                     token: "JWT " + props.token
                 }
@@ -67,14 +62,16 @@ const Home = (props) => {
 
             const data = await response.json();
 
-            setSuggestions(data.listOfUsers.sort(function () { return Math.random() - 0.5 }))
+            console.log(data);
+
+            setSuggestions(data.suggestionsList.sort(function () { return Math.random() - 0.5 }))
             // setSuggestions(data.listOfUsers.sort((a, b) => (a.dogName < b.dogName) ? 1 : -1))
-            setCurrentUser(data.foundUser);
-            setFilteredGender(data.foundUser.filterGender);
-            setFilteredAgeRange(data.foundUser.ageRange);
-            setFilteredSize(data.foundUser.filterSize);
-            setFilteredMaxDistance(data.foundUser.maxDistance);
-            setMatches(data.foundUser.match);
+            setCurrentUser(data.currentUser);
+            setFilteredGender(data.currentUser.filterGender);
+            setFilteredAgeRange(data.currentUser.ageRange);
+            setFilteredSize(data.currentUser.filterSize);
+            setFilteredMaxDistance(data.currentUser.maxDistance);
+            setMatches(data.currentUser.match);
 
         } catch (error) {
 
@@ -83,23 +80,19 @@ const Home = (props) => {
 
     const fetchSuggestionsWithTempFilter = async () => {
         try {
-            const response = await fetch(apiBaseUrl + `/api/suggestion/withTempFilter`, {
-                method: "POST",
-                headers: {
-                    token: "JWT " + props.token,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    ageRange: filteredAgeRange,
-                    postalCode: currentUser.postalCode,
-                    maxDistance: filteredMaxDistance,
-                    gender: filteredGender,
-                    size: filteredSize,
-                    match: matches
+            const response = await fetch(apiBaseUrl +
+                `/api/suggestion/getSuggestionsByTempFilter?maxDistance=${filteredMaxDistance}&gender=${filteredGender}&ageRange=${filteredAgeRange}&size=${filteredSize}`,
+                {
+                    method: "GET",
+                    headers: {
+                        token: "JWT " + props.token,
+                        Accept: 'application/json',
+                        "Content-Type": "application/json"
+                    }
                 })
-            })
 
             const data = await response.json()
+            console.log(data);
             setSuggestions(data)
 
         } catch (error) {
@@ -112,88 +105,35 @@ const Home = (props) => {
         fetchSuggestionsWithTempFilter()
     }
 
-    const handleChangeAgeRange = async (event, newValueAge) => {
-        if (newValueAge[0] === filteredAgeRange[0] && newValueAge[1] === filteredAgeRange[1]) {
-            return
-        }
-        setFilteredAgeRange(newValueAge);
-    }
-
-    const handleChangeDistance = async (event, newValueDistance) => {
-        if (newValueDistance === filteredMaxDistance) {
-            return
-        }
-        setFilteredMaxDistance(newValueDistance)
-    }
-
-    const handleChangeGenderM = async (event) => {
-        if (!isGenderMClicked) {
-            setFilteredGender([...filteredGender, "m"])
-            setIsGenderMClicked(true)
-            document.getElementById("genderRight").classList.toggle("genderRight-aktiv")
-        } else {
-            const result = filteredGender.filter(size => size !== "m")
-            setFilteredGender(result)
-            setIsGenderMClicked(false)
-            document.getElementById("genderRight").classList.toggle("genderRight-aktiv")
-        }
-    }
-
-    const handleChangeGenderF = async (event) => {
-        if (!isGenderFClicked) {
-            setFilteredGender([...filteredGender, "f"])
-            setIsGenderFClicked(true)
-            document.getElementById("genderLeft").classList.toggle("genderLeft-aktiv")
-        } else {
-            const result = filteredGender.filter(size => size !== "f")
-            setFilteredGender(result)
-            setIsGenderFClicked(false)
-            document.getElementById("genderLeft").classList.toggle("genderLeft-aktiv")
-        }
-    }
-
-    const handleChangeSizeS = async (event) => {
-        if (!isSizeSClicked) {
-            setFilteredSize([...filteredSize, "small"])
-            setIsSizeSClicked(true)
-            document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
-        } else {
-            const result = filteredSize.filter(size => size !== "small")
-            setFilteredSize(result)
-            setIsSizeSClicked(false)
-            document.getElementById("sizeSmall").classList.toggle("sizeSmall-aktiv")
-        }
-    }
-
-    const handleChangeSizeM = async (event) => {
-        if (!isSizeMClicked) {
-            setFilteredSize([...filteredSize, "medium"])
-            setIsSizeMClicked(true)
-            document.getElementById("sizeMiddle").classList.toggle("sizeMiddle-aktiv")
-        } else {
-            const result = filteredSize.filter(size => size !== "medium")
-            setFilteredSize(result)
-            setIsSizeMClicked(false)
-            document.getElementById("sizeMiddle").classList.toogle("sizeMiddle-aktiv")
-        }
-    }
-
-    const handleChangeSizeL = async (event) => {
-        if (!isSizeLClicked) {
-            setFilteredSize([...filteredSize, "large"])
-            setIsSizeLClicked(true)
-            document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
-        } else {
-            const result = filteredSize.filter(size => size !== "large")
-            setFilteredSize(result)
-            setIsSizeLClicked(false)
-            document.getElementById("sizeLarge").classList.toggle("sizeLarge-aktiv")
-        }
-    }
-
-    const doLike = async (likedId, dogName, profileImage) => {
+    const handleLike = async (likedId, dogName, profileImage) => {
         try {
-            const response = await fetch(apiBaseUrl + `/api/users/likeone`, {
+            const response = await fetch(apiBaseUrl + '/api/like/getLikeByID/' + likedId, {
+                method: "GET",
+                headers: {
+                    token: "JWT " + props.token
+                }
+            })
+
+            const result = await response.json()
+
+            // If NO like was found => create a new Like
+            if (!result) {
+                makeLike(likedId)
+                return
+            }
+
+            // Like was found  => update Like to match
+            makeLikeToMatch(result.idUserA, dogName, profileImage)
+
+
+        } catch (error) {
+
+        }
+    }
+
+    const makeLike = async (likedId) => {
+        try {
+            const response = await fetch(apiBaseUrl + `/api/like/createLike`, {
                 method: "POST",
                 headers: {
                     token: "JWT " + props.token,
@@ -204,16 +144,14 @@ const Home = (props) => {
 
             const result = await response.json()
 
-            if (!result.isLikeCreated) { doLikeToMatch(result.idUserA, dogName, profileImage) }
-
         } catch (error) {
 
         }
     }
 
-    const doLikeToMatch = async (idUserA, dogName, profileImage) => {
+    const makeLikeToMatch = async (idUserA, dogName, profileImage) => {
         try {
-            const response = await fetch(apiBaseUrl + `/api/users/likeToMatch`, {
+            const response = await fetch(apiBaseUrl + `/api/like/updateLikeToMatch`, {
                 method: "PUT",
                 headers: {
                     token: "JWT " + props.token,
@@ -245,7 +183,7 @@ const Home = (props) => {
                         {suggestions.map((character) =>
                             <TinderCard className='swipe' key={character.dogName} onSwipe={(dir) => swiped(dir, character.dogName, character.profileImage, character._id)} onCardLeftScreen={() => outOfFrame(character._id)}>
                                 <div className='card'>
-                                    <img src={character.bigImage} alt="dog pic" />
+                                    {/* <img src={character.bigImage} alt="dog pic" /> */}
                                     <div className="dogName">{character.dogName}, {character.age}</div>
                                     <div className="distanceKM">{character.distance} km</div>
                                 </div>
@@ -262,19 +200,16 @@ const Home = (props) => {
                 </div> */}
             </div>
 
-            <HomeFilter
+            <Filter
                 isFilterScreenOpenend={filterScreenIsOpen}
                 filteredGender={filteredGender}
-                filteredAgeRange={filteredAgeRange}
+                setFilteredGender={setFilteredGender}
                 filteredSize={filteredSize}
+                setFilteredSize={setFilteredSize}
                 filteredMaxDistance={filteredMaxDistance}
-                handleChangeGenderF={handleChangeGenderF}
-                handleChangeGenderM={handleChangeGenderM}
-                handleChangeAgeRange={handleChangeAgeRange}
-                handleChangeSizeS={handleChangeSizeS}
-                handleChangeSizeM={handleChangeSizeM}
-                handleChangeSizeL={handleChangeSizeL}
-                handleChangeDistance={handleChangeDistance}
+                setFilteredMaxDistance={setFilteredMaxDistance}
+                filteredAgeRange={filteredAgeRange}
+                setFilteredAgeRange={setFilteredAgeRange}
                 handleClose={handleClose}
             />
 
@@ -282,6 +217,5 @@ const Home = (props) => {
         </div >
     );
 }
-
 
 export default Home;

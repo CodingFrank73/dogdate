@@ -22,8 +22,6 @@ async function findByIdForProfileImage({ userId }) {
     return fUser
 }
 
-
-
 async function findByEmail(email) {
     const db = await getDB();
     const user = await db.collection(collectionName).findOne({ email: email });
@@ -39,24 +37,22 @@ async function insert(user) {
 async function update(userId, updatedInfo) {
     const db = await getDB();
     const result = await db.collection(collectionName).updateOne(
-        { _id: userId },
+        { _id: new ObjectId(userId) },
         { $set: updatedInfo }
     )
     return result
 }
 
-// TODO: Diese Funktion muss auf AWS angepasst werden.....
-async function updateAvatar({ userId, profileImage }) {
+async function updateProfileImage(userId, profileImage) {
     const db = await getDB();
     const updatedUser = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
         { $set: { profileImage: profileImage } }
     )
-
     return updatedUser
 }
 
-async function updateImageMain(userId, bigImage) {
+async function updateMainImage(userId, bigImage) {
     const db = await getDB();
     const result = await db.collection(collectionName).updateOne(
         { _id: new ObjectId(userId) },
@@ -68,12 +64,12 @@ async function updateImageMain(userId, bigImage) {
 // ++++++ Functions for the likes +++++++++++++
 // Hint: idUserA ist der User der einen anderen User geliked hat / idUserB ist der User der geliked wurde.
 
-async function findLikeByUserIds({ idUserA, idUserB }) {
+async function findLikeByUserIds({ idUserA, id }) {
     const db = await getDB();
     const foundLike = await db.collection("likes").findOne(
         {
             idUserB: new ObjectId(idUserA),
-            idUserA: new ObjectId(idUserB)
+            idUserA: new ObjectId(id)
         }
     );
     return foundLike
@@ -135,6 +131,12 @@ async function findByMatchList(matchList) {
 
 async function insertLike({ idUserA, idUserB }) {
     const db = await getDB();
+
+    const updatePastLikes = await db.collection(collectionName).updateOne(
+        { _id: new ObjectId(idUserA) },
+        { $push: { pastLikes: idUserB } }
+    )
+
     const like = await db.collection("likes").insertOne(
         {
             idUserA: new ObjectId(idUserA),
@@ -142,6 +144,7 @@ async function insertLike({ idUserA, idUserB }) {
             match: false,
             notification: false
         });
+
     return like
 }
 
@@ -165,35 +168,6 @@ async function updateLikeToMatch(idUserB, idUserA, uuid) {
     );
 
     return (true)
-}
-
-
-
-async function updateLanguage({ userId, language }) {
-    const db = await getDB();
-    const updatedUser = await db.collection(collectionName).updateOne(
-        { _id: new ObjectId(userId) },
-        { $set: { language: language } }
-    )
-    return updatedUser
-}
-
-async function updateMaxDistance({ userId, maxDistance }) {
-    const db = await getDB();
-    const insertResult = await db.collection(collectionName).updateOne(
-        { _id: new ObjectId(userId) },
-        { $set: { maxDistance: maxDistance } }
-    );
-    return insertResult
-}
-
-async function updateAgeRange({ userId, ageRange }) {
-    const db = await getDB();
-    const insertResult = await db.collection(collectionName).updateOne(
-        { _id: new ObjectId(userId) },
-        { $set: { ageRange: ageRange } }
-    );
-    return insertResult
 }
 
 async function deleteUser(userId) {
@@ -241,14 +215,11 @@ module.exports = {
     findByIdForProfileImage,
     insert,
     update,
-    updateAvatar,
+    updateProfileImage,
+    updateMainImage,
     findLikeByUserIds,
     findUserIDsWholikeMe,
     insertLike,
     updateLikeToMatch,
-    updateLanguage,
-    updateMaxDistance,
-    updateAgeRange,
     deleteUser,
-    updateImageMain
 }

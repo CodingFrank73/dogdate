@@ -11,7 +11,7 @@ const Chat = (props) => {
     useEffect(() => {
         const fetchChat = async () => {
             try {
-                const response = await fetch(apiBaseUrl + `/api/users/showChats`, {
+                const response = await fetch(apiBaseUrl + `/api/chat/getChats`, {
                     headers: {
                         token: "JWT " + props.token
                     }

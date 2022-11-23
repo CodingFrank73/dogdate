@@ -83,7 +83,7 @@ const Profile = (props) => {
 
             <div className="profileBody">
                 <div className="profilePic">
-                    <img src={profileImage !== null ? profileImage : pic} alt="avatar" />
+                    {/* <img src={profileImage !== null ? profileImage : pic} alt="avatar" /> */}
                     <div className="editProfilepic">
                         <Link to="/profile/editImages"
                             state={{

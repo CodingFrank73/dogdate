@@ -27,7 +27,7 @@ export default function AlertDialog(props) {
   const handleDelete = async (e) => {
     console.log("token", props.token)
     try {
-      const response = await fetch(apiBaseUrl + "/api/users/myProfile/deleteAccount/", {
+      const response = await fetch(apiBaseUrl + "/api/users/deleteAccount/", {
         method: "DELETE",
         headers: {
           token: "JWT " + props.token,

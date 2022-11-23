@@ -38,7 +38,7 @@ const EditImages = (props) => {
 
         try {
             const response = await fetch(apiBaseUrl + `${endpointPath}`, {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     token: "JWT " + props.token
                 },

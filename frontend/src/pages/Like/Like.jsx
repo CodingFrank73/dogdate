@@ -15,7 +15,7 @@ const Like = (props) => {
 
     const fetchLikes = async () => {
         try {
-            const response = await fetch(apiBaseUrl + `/api/users/showLikes`, {
+            const response = await fetch(apiBaseUrl + `/api/like/getLikes`, {
                 headers: {
                     token: "JWT " + props.token
                 }

@@ -9,7 +9,7 @@ const LikesCard = (props) => {
 
   const makeLikeToMatch = async (idUserA) => {
     try {
-      const response = await fetch(apiBaseUrl + '/api/users/likeToMatch', {
+      const response = await fetch(apiBaseUrl + '/api/like/updateLikeToMatch', {
         method: "PUT",
         headers: {
           token: "JWT " + props.token,

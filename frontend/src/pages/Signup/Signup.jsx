@@ -86,12 +86,11 @@ const Signup = () => {
             if (result.err.validationErrors) {
                 const firstError = result.err.validationErrors[0];
                 setError(`The ${firstError.param} field has an ${firstError.msg}`)
-
                 return
             }
 
             // sonstige Fehler die vom Backend kommen
-            setError(result.err.message);
+            setError('ERROR aus Backend: ', result.err.message);
 
         } catch (e) {
             setError(e.message)
@@ -100,7 +99,6 @@ const Signup = () => {
 
 
     const handleImage = (e) => {
-        console.log("Hallo world");
         if (e.target.files[0]) {
             setError('')
             setImage(URL.createObjectURL(e.target.files[0]))
@@ -108,13 +106,9 @@ const Signup = () => {
         }
     }
 
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword)
-    };
+    const handleClickShowPassword = () => { setShowPassword(!showPassword) };
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const handleMouseDownPassword = (event) => { event.preventDefault() };
 
     const handleClickLocationSearch = () => {
         setLabelMessage("find current Location...")
@@ -133,13 +127,10 @@ const Signup = () => {
         setLabelMessage("Location")
         setValue('location', result.features[0].properties.geocoding.city)
         setValue('postalCode', result.features[0].properties.geocoding.postcode)
-        console.log(result);
-
     }
 
     function cbError() {
         setLabelMessage("Location")
-        console.log("onError worked...");
     }
 
     return (
@@ -360,7 +351,6 @@ const Signup = () => {
                 </Box>
 
                 {error && <p>{error}</p>}
-
 
             </form >
 

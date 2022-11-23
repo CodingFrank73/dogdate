@@ -2,17 +2,15 @@ const { ObjectId } = require("mongodb");
 const { getDB } = require("./db-connector");
 
 async function findAllExcept(id) {
+    // const db = await getDB();
+    // const users = await db.collection("users").find({ _id: { $ne: ObjectId(id) } }).toArray();
 
-    const db = await getDB();
-    const users = await db.collection("users").find({ _id: { $ne: ObjectId(id) } }).toArray();
-
-    return users
+    // return users
 }
 
-async function findAllByFilter({ _id, postalCodeArr, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match }) {
-
+async function findAllByFilter({ _id, postalCodeArr, filterGender, filterSize, minAgeAsDate, maxAgeAsDate, match, pastLikes }) {
     const matchObj = match.map(a => a.fk_id)
-    const exIDs = [...matchObj, _id].map(id => ObjectId(id.toString()))
+    const exIDs = [...matchObj, ...pastLikes, _id].map(item => ObjectId(item.toString()));
 
     const db = await getDB();
     const users = await db.collection("users").find(

@@ -4,26 +4,30 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const dotenv = require("dotenv").config();
 
+const { chatRouter } = require("./routes/chat-router");
+const { likeRouter } = require("./routes/like-router");
 const { userRouter } = require("./routes/user-router");
 const { suggestionRouter } = require("./routes/suggestion-router");
 
 //Socket.io:
-const { Server } = require("socket.io"); //
+const { Server } = require("socket.io");
 const http = require("http")
+const server = http.createServer(app); //
+//const io = require("socket.io")(server)
+
 
 const PORT = process.env.PORT || 9000;
 const app = express();
 
-//Socket.io:
-const server = http.createServer(app); //
-//const io = require("socket.io")(server)
-
+app.use(morgan("dev"));
+app.use(express.json());
 app.use(cors({ origin: true, credentials: true }))
 // app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }))
 
 console.log(
   "Frontend_URL:", process.env.FRONTEND_URL
 );
+
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const isLocalHost = process.env.FRONTEND_URL === 'http://localhost:3000';
 
@@ -39,15 +43,17 @@ app.use(
   })
 )
 
-app.use(morgan("dev"));
-app.use(express.json());
+// +++++++++++ Routes ++++++++++
+app.use("/api/chat", chatRouter)
+app.use("/api/like", likeRouter)
+app.use("/api/users", userRouter)
+app.use("/api/suggestion", suggestionRouter)
 
 app.get("/", (req, res) => {
   res.send("server works...")
 })
 
-app.use("/api/users", userRouter)
-app.use("/api/suggestion", suggestionRouter)
+
 
 //##Socket.io - start:
 const io = new Server(server, { //server initialization as io variable
@@ -76,6 +82,6 @@ io.on("connection", (socket) => { //we listen on event with this id
   });
 });
 
-server.listen(PORT, () => { console.log("Server listen on Port:", PORT) })  //###Socket.io - end
+server.listen(PORT, () => { console.log("Server listen on Port:", PORT) })
 
 

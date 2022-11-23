@@ -127,7 +127,7 @@ const EditSettings_Discovery = (props) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(apiBaseUrl + "/api/users/myProfile/editSettingsDiscovery", {
+      const response = await fetch(apiBaseUrl + "/api/users/updateUserSettings", {
         method: "PUT",
         headers: {
           token: "JWT " + props.token,
@@ -323,7 +323,6 @@ const EditSettings_Discovery = (props) => {
               )}
             />
           </Box>
-
 
           <label>Age Range</label>
           <Controller

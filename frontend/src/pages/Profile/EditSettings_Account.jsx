@@ -44,7 +44,8 @@ const EditSettings_Account = (props) => {
       setValue('dogName', result.dogName)
       setValue('gender', result.gender)
       setValue('size', result.size)
-      setValue('dateOfBirth', new Date(result.dateOfBirth).toLocaleDateString('en-CA'))
+      // setValue('dateOfBirth', new Date(result.dateOfBirth).toLocaleDateString('en-CA'))
+      setValue('dateOfBirth', result.dateOfBirth)
       setValue('email', result.email)
       setValue('phone', result.phone)
 
@@ -55,9 +56,8 @@ const EditSettings_Account = (props) => {
   }
 
   const onSubmit = async (data) => {
-
     try {
-      const response = await fetch(apiBaseUrl + "/api/users/myProfile/profileEditSettings", {
+      const response = await fetch(apiBaseUrl + "/api/users/updateUserSettings", {
         method: "PUT",
         headers: {
           token: "JWT " + props.token,
@@ -81,7 +81,7 @@ const EditSettings_Account = (props) => {
       }
 
     } catch (error) {
-      console.log("show me an error !!!!")
+      console.log(error.message)
     }
 
   }
